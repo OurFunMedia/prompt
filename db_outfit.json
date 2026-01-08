@@ -368,6 +368,17 @@
                 { "label": "女僕裝 (短裙)", "value": "sexy french maid outfit with short skirt", "tags": ["nsfw"] },
                 { "label": "性感水手服 (露腰)", "value": "cropped sailor uniform top" }
             ]
+        },
+        {
+            "group": "特色服裝 (Special)",
+            "options": [
+                { "label": "傳統和服", "value": "traditional japanese kimono, ornate silk fabric, obi sash" },
+                { "label": "傳統韓服", "value": "traditional korean hanbok, high-waisted skirt, jeogori jacket" },
+                { "label": "傳統泰服", "value": "traditional thai outfit, chut thai, sabai shawl, wrapped skirt" },
+                { "label": "中式旗袍", "value": "elegant chinese qipao, cheongsam, high-side slit, mandarin collar" },
+                { "label": "中式齊胸襦裙 (漢服)", "value": "chinese ancient hanfu, ruqun style, flowing sleeves, traditional embroidery" },
+                { "label": "越南奧黛", "value": "vietnamese ao dai, long tunic with high slits over trousers" }
+            ]
         }
     ],
     "outfitBottom": [
