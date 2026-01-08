@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardrobe Master Pro - Tag Filter UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Chiron GoRound TC', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1f2937; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #ec4899; border-radius: 3px; }
+        .tab-active { border-bottom: 2px solid #ec4899; color: #ec4899; background: rgba(236, 72, 153, 0.1); }
+        .tab-inactive { color: #9ca3af; }
+        select { 
+            appearance: none; 
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ec4899' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); 
+            background-repeat: no-repeat; background-position: right 0.5rem center; background-size: 1em; 
+        }
+        .modal { transition: opacity 0.25s ease; }
+        body.modal-active { overflow-x: hidden; overflow-y: visible !important; }
+        
+        .mode-btn { transition: all 0.2s; border: 1px solid transparent; opacity: 0.6; }
+        .mode-btn:hover { opacity: 0.9; }
+        .mode-active { opacity: 1 !important; border-color: white !important; box-shadow: 0 0 10px rgba(255,255,255,0.3); transform: scale(1.05); }
+        
+        .field-label { font-size: 10px; color: #9ca3af; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; display: block; }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen p-4 flex flex-col items-center">
+
+    <div class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <div class="lg:col-span-12 flex flex-col md:flex-row justify-between items-center border-b border-gray-800 pb-4 gap-4">
+            <div class="flex items-center gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-pink-500 tracking-tight">WARDROBE <span class="text-white">MASTER PRO</span></h1>
+                    <p class="text-gray-500 text-xs tracking-widest mt-1">TAG-BASED FILTER SYSTEM</p>
+                </div>
+                <button onclick="toggleModal()" class="hidden md:block ml-4 text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1 rounded-full border border-gray-600 transition">
+                    <i class="fas fa-info-circle mr-1"></i> 平台指南
+                </button>
+            </div>
+            
+            <div class="flex bg-gray-900 p-1 rounded-lg border border-gray-700">
+                <button onclick="setMode('clean')" id="btn-clean" class="mode-btn bg-green-800 text-green-100 text-xs font-bold px-4 py-2 rounded-l flex items-center gap-2">
+                    <i class="fas fa-leaf"></i>
+                    <div class="text-left leading-tight">
+                        <div>清純版</div>
+                        <div class="text-[9px] font-normal opacity-75">Gemini / Meta AI</div>
+                    </div>
+                </button>
+                <button onclick="setMode('sexy')" id="btn-sexy" class="mode-btn bg-purple-800 text-purple-100 text-xs font-bold px-4 py-2 flex items-center gap-2 border-l border-r border-gray-800">
+                    <i class="fas fa-heart"></i>
+                    <div class="text-left leading-tight">
+                        <div>性感版</div>
+                        <div class="text-[9px] font-normal opacity-75">誘惑不裸露</div>
+                    </div>
+                </button>
+                <button onclick="setMode('nsfw')" id="btn-nsfw" class="mode-btn bg-red-900 text-red-100 text-xs font-bold px-4 py-2 rounded-r flex items-center gap-2">
+                    <i class="fas fa-fire"></i>
+                    <div class="text-left leading-tight">
+                        <div>NSFW版</div>
+                        <div class="text-[9px] font-normal opacity-75">無限制模式</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-gray-900 rounded-xl border border-gray-800 overflow-hidden shadow-2xl flex flex-col h-[780px]">
+            <div class="flex border-b border-gray-800 bg-gray-900 sticky top-0 z-10">
+                <button onclick="switchTab('tab-identity')" id="btn-tab-identity" class="flex-1 py-4 text-sm font-bold tab-active">角色設定</button>
+                <button onclick="switchTab('tab-outfit')" id="btn-tab-outfit" class="flex-1 py-4 text-sm font-bold tab-inactive">服裝穿搭</button>
+                <button onclick="switchTab('tab-scene')" id="btn-tab-scene" class="flex-1 py-4 text-sm font-bold tab-inactive">場景與鏡頭</button>
+            </div>
+
+            <div class="p-5 overflow-y-auto custom-scrollbar flex-grow">
+                <div id="tab-identity" class="space-y-5">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="field-label">角色名稱 (Name)</label><input type="text" id="char-name" value="MyModel" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-pink-400 font-mono text-sm"></div>
+                        <div><label class="field-label">種族 / 國籍 (Race)</label><select id="race" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="field-label">年齡 (Age)</label><select id="char-age" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                        <div><label class="field-label">身高體型 (Height)</label><select id="body-height" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                    </div>
+                    <div id="bust-container" class="bg-gray-800/40 p-3 rounded border border-gray-700/50">
+                        <div class="flex justify-between mb-1">
+                            <label class="field-label text-pink-300">三圍數據 (Body Measurements)</label>
+                            <span id="bust-warn" class="text-[9px] text-green-400 font-bold hidden"><i class="fas fa-check-circle"></i> 清純模式已停用</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div><label class="text-[9px] text-gray-500 block mb-1">胸圍 (Bust)</label><select id="body-bust" class="w-full bg-gray-900 border border-gray-600 rounded px-2 py-2 text-xs"></select></div>
+                            <div><label class="text-[9px] text-gray-500 block mb-1">腰圍 (Waist)</label><select id="body-waist" class="w-full bg-gray-900 border border-gray-600 rounded px-2 py-2 text-xs"></select></div>
+                            <div><label class="text-[9px] text-gray-500 block mb-1">臀圍 (Hip)</label><select id="body-hip" class="w-full bg-gray-900 border border-gray-600 rounded px-2 py-2 text-xs"></select></div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <div><label class="field-label">髮型 (Hair Style)</label><select id="hair-style" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                        <div><label class="field-label">髮色 (Hair Color)</label><select id="hair-color" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                        <div><label class="field-label">瞳孔顏色 (Eyes)</label><select id="eye-color" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                        <div><label class="field-label">臉型輪廓 (Face)</label><select id="face-shape" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                        <div><label class="field-label">皮膚質感 (Skin)</label><select id="skin-type" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                        <div class="bg-pink-900/10 border border-pink-900/30 p-2 rounded">
+                            <label class="field-label text-pink-400">底妝風格 (Base Makeup)</label>
+                            <select id="makeup-base" class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs mb-2"></select>
+                            <label class="field-label text-pink-400">妝容細節 (Detail)</label>
+                            <select id="makeup-detail" class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-outfit" class="space-y-4 hidden">
+                    <div><label class="field-label text-pink-400">整體穿搭風格 (Outfit Theme)</label><select id="outfit-theme" class="w-full bg-gray-900 border border-pink-900/50 rounded px-3 py-3 text-sm font-medium text-pink-100"></select></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="field-label">頭飾 (Headwear)</label><select id="outfit-head" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                        <div></div>
+                        <div><label class="field-label">飾品配件 (Main Acc)</label><select id="outfit-acc" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                        <div><label class="field-label">飾品細節 (Acc Detail)</label><select id="outfit-acc-detail" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                    </div>
+                    <div class="bg-gray-800/40 p-4 rounded-lg border border-gray-700/50 space-y-4">
+                        <div><label class="field-label text-gray-300">外套 / 罩衫 (Outerwear)</label><select id="outfit-outer" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm"></select></div>
+                        <div>
+                            <label class="field-label text-gray-300">上衣 (Top)</label>
+                            <select id="outfit-top" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm mb-2"></select>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div><label class="text-[9px] text-gray-500 block text-center">顏色</label><select id="top-color" class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs"></select></div>
+                                <div><label class="text-[9px] text-gray-500 block text-center">材質</label><select id="top-mat" class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs"></select></div>
+                                <div><label class="text-[9px] text-gray-500 block text-center">花紋</label><select id="top-pat" class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs"></select></div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="field-label text-gray-300">下著 (Bottom)</label>
+                            <select id="outfit-bottom" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm mb-2"></select>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div><label class="text-[9px] text-gray-500 block text-center">顏色</label><select id="bottom-color" class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs"></select></div>
+                                <div><label class="text-[9px] text-gray-500 block text-center">材質</label><select id="bottom-mat" class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs"></select></div>
+                                <div><label class="text-[9px] text-gray-500 block text-center">花紋</label><select id="bottom-pat" class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs"></select></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="field-label">襪子 / 絲襪 (Socks)</label><select id="outfit-sock" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                        <div><label class="field-label">鞋履 (Shoes)</label><select id="outfit-shoe" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
+                    </div>
+                </div>
+
+                <div id="tab-scene" class="space-y-5 hidden">
+                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-4 rounded-lg border border-pink-500/30">
+                        <p class="text-xs text-pink-300 font-bold uppercase mb-3 border-b border-pink-500/30 pb-2"><i class="fas fa-running mr-1"></i> 動作與表情 (Action & Expression)</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><label class="field-label">1. 基礎姿勢 (Pose)</label><select id="action-pose" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm"></select></div>
+                            <div><label class="field-label">2. 互動行為 (Activity)</label><select id="action-activity" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm"></select></div>
+                        </div>
+                        <div class="mt-3"><label class="field-label">臉部表情 (Expression)</label><select id="action-expression" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm"></select></div>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-4 rounded-lg border border-blue-500/30">
+                        <p class="text-xs text-blue-300 font-bold uppercase mb-3 border-b border-blue-500/30 pb-2"><i class="fas fa-image mr-1"></i> 環境與氛圍</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><label class="field-label">主要地點 (Location)</label><select id="scene-loc" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm"></select></div>
+                            <div></div>
+                            <div><label class="field-label">環境裝飾 (Main Props)</label><select id="scene-props" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm"></select></div>
+                            <div><label class="field-label">裝飾細節 (Props Detail)</label><select id="scene-props-detail" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm"></select></div>
+                            <div><label class="field-label">時間 (Time)</label><select id="scene-time" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm"></select></div>
+                            <div><label class="field-label">天氣 (Weather)</label><select id="scene-weather" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm"></select></div>
+                            <div class="col-span-2"><label class="field-label">光影效果 (Lighting)</label><select id="scene-lighting" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm"></select></div>
+                        </div>
+                    </div>
+                    <div class="pt-2 border-t border-gray-800">
+                        <p class="text-xs text-gray-500 font-bold uppercase mb-3"><i class="fas fa-camera-retro mr-1"></i> 攝影機設定</p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                            <div><label class="field-label">視角 (Angle)</label><select id="cam-angle" class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs"></select></div>
+                            <div><label class="field-label">景別 (Shot)</label><select id="cam-shot" class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs"></select></div>
+                            <div><label class="field-label">焦段 (Lens)</label><select id="cam-lens" class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs"></select></div>
+                            <div><label class="field-label">風格 (Style)</label><select id="scene-style" class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs"></select></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col gap-4 h-[780px]">
+            <div>
+                <button onclick="randomAll()" class="w-full bg-gray-800 hover:bg-gray-700 text-sm font-bold py-3 rounded border border-gray-700 flex justify-center items-center gap-2 transition hover:border-pink-500 hover:text-pink-400 shadow-md group">
+                    <i class="fas fa-magic text-lg group-hover:rotate-12 transition-transform"></i>
+                    智慧隨機生成 (Smart Random)
+                </button>
+            </div>
+
+            <div class="bg-black p-5 rounded-xl border border-pink-600/30 flex-grow flex flex-col shadow-lg relative">
+                <div class="flex justify-between items-center mb-2">
+                    <label class="text-sm font-bold text-pink-500 tracking-wider">POSITIVE PROMPT</label>
+                    <span id="mode-status" class="text-xs font-bold px-2 py-0.5 rounded bg-gray-800 text-gray-400">模式未定</span>
+                </div>
+                <textarea id="output-text" readonly class="flex-grow bg-gray-900/50 text-gray-300 text-sm p-4 rounded-lg border border-gray-800 font-mono resize-none outline-none leading-relaxed"></textarea>
+                <button onclick="copyPrompt('output-text')" class="mt-3 w-full bg-pink-700 hover:bg-pink-600 py-3 rounded-lg font-bold text-sm transition-all text-white shadow-lg">
+                    <i class="fas fa-copy mr-2"></i> 複製提示詞
+                </button>
+            </div>
+
+            <div class="bg-black p-4 rounded-xl border border-gray-800 h-1/4 flex flex-col">
+                <label class="text-xs font-bold text-gray-500 mb-2 uppercase">Negative Prompt</label>
+                <textarea id="negative-text" class="flex-grow bg-gray-900/50 text-gray-500 text-xs p-3 rounded-lg border border-gray-800 font-mono resize-none outline-none">low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+        <div class="modal-overlay absolute w-full h-full bg-black opacity-75" onclick="toggleModal()"></div>
+        <div class="modal-container bg-gray-900 w-11/12 md:max-w-lg mx-auto rounded-xl shadow-2xl border border-pink-500 z-50 overflow-y-auto max-h-[90vh]">
+            <div class="modal-content py-6 text-left px-8">
+                <div class="flex justify-between items-center pb-3 border-b border-gray-700">
+                    <p class="text-2xl font-bold text-pink-500">平台與模型推薦指南</p>
+                    <div class="modal-close cursor-pointer z-50" onclick="toggleModal()">
+                        <i class="fas fa-times text-gray-400 hover:text-white text-xl"></i>
+                    </div>
+                </div>
+                <div class="space-y-6 text-sm text-gray-300 mt-4">
+                    <div>
+                        <h3 class="text-white font-bold text-lg mb-2 flex items-center"><i class="fas fa-globe mr-2 text-blue-400"></i>網上使用</h3>
+                        <p class="mb-3 text-gray-400">大廠 AI (Gemini/Meta AI) 審查極嚴，請務必使用本工具的 <span class="text-green-400 font-bold">✅ 清純版</span> 模式。</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="bg-gray-800/50 p-3 rounded border border-green-600/50">
+                                <span class="text-green-400 font-bold block mb-1">✅ 寬鬆平台 (推薦)</span>
+                                <ul class="list-disc pl-4 text-xs space-y-1">
+                                    <li><strong>Civitai / Tensor.art / SeaArt</strong></li>
+                                    <li><strong>Grok (xAI)</strong></li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-800/50 p-3 rounded border border-red-600/50">
+                                <span class="text-red-400 font-bold block mb-1">⚠️ 嚴格平台</span>
+                                <ul class="list-disc pl-4 text-xs space-y-1">
+                                    <li><strong>Google Gemini / Meta AI</strong>：禁止「Tight」、「Latex」、「Bust」等。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-3 border-t border-gray-700 flex justify-end">
+                    <button class="bg-pink-600 hover:bg-pink-500 text-white font-bold py-2 px-6 rounded text-xs transition shadow-lg" onclick="toggleModal()">我了解了 (Close)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let db = {};
+        let currentMode = 'sexy';
+
+        const v = (id) => document.getElementById(id)?.value || "";
+        
+        async function init() {
+            try {
+                const [charRes, outfitRes, sceneRes] = await Promise.all([
+                    fetch('db_character.json'), fetch('db_outfit.json'), fetch('db_scene_camera.json')
+                ]);
+                const d1 = await charRes.json();
+                const d2 = await outfitRes.json();
+                const d3 = await sceneRes.json();
+                db = { ...d1, ...d2, ...d3 };
+                setMode('sexy');
+                //randomAll();
+            } catch (err) {
+                alert("錯誤：無法載入資料庫。請確保三個 JSON 檔案正確存在。");
+            }
+        }
+
+        function isAllowed(item, mode) {
+            // 標籤層級過濾系統
+            if (item.tags) {
+                // nsfw 標籤：僅 NSFW 版可見
+                if (item.tags.includes('nsfw') && mode !== 'nsfw') return false;
+                // sexy 標籤：清純版不可見
+                if (item.tags.includes('sexy') && mode === 'clean') return false;
+            }
+
+            // 清純版的額外文字過濾
+            if (mode === 'clean') {
+                const cleanBanned = ['lingerie', 'bra', 'panties', 'thong', 'bikini', 'swimsuit', 'cleavage', 'bust', 'chest'];
+                const text = (item.value + " " + (item.label || "")).toLowerCase();
+                return !cleanBanned.some(k => text.includes(k));
+            }
+            return true;
+        }
+
+        function populateAllMenus() {
+            // Identity
+            populate('race', db.race); populate('char-age', db.charAge);
+            populate('body-height', db.bodyHeight); populate('body-bust', db.bodyBust);
+            populate('body-waist', db.bodyWaist); populate('body-hip', db.bodyHip);
+            populate('hair-style', db.hairStyle); populate('hair-color', db.hairColor);
+            populate('eye-color', db.eyeColor); populate('face-shape', db.faceShape);
+            populate('skin-type', db.skinType); 
+            // 妝容雙重欄位
+            populate('makeup-base', db.makeupBase); populate('makeup-detail', db.makeupDetail);
+
+            // Outfit
+            populate('outfit-theme', db.outfitTheme); populate('outfit-head', db.outfitHead);
+            populate('outfit-acc', db.outfitAcc); populate('outfit-acc-detail', db.outfitAccDetail);
+            populate('outfit-outer', db.outfitOuter);
+            populate('outfit-top', db.outfitTop); populate('outfit-bottom', db.outfitBottom);
+            populate('outfit-sock', db.outfitSock); populate('outfit-shoe', db.outfitShoe);
+            ['top-color','bottom-color'].forEach(id=>populate(id, db.itemColors));
+            ['top-mat','bottom-mat'].forEach(id=>populate(id, db.itemMaterials));
+            ['top-pat','bottom-pat'].forEach(id=>populate(id, db.itemPatterns));
+
+            // Scene
+            populate('action-pose', db.actionPose); populate('action-activity', db.actionActivity);
+            populate('action-expression', db.actionExpression); populate('scene-loc', db.sceneLoc);
+            populate('scene-props', db.sceneProps); populate('scene-props-detail', db.scenePropsDetail);
+            populate('scene-lighting', db.sceneLighting);
+            populate('scene-time', db.sceneTime); populate('scene-weather', db.sceneWeather);
+            populate('cam-angle', db.camAngle); populate('cam-shot', db.camShot);
+            populate('cam-lens', db.camLens); populate('scene-style', db.sceneStyle);
+        }
+
+        function populate(id, data) {
+            const el = document.getElementById(id);
+            if (!el || !data) return;
+            const currentVal = el.value;
+            el.innerHTML = '<option value="">-- 隨機/無 --</option>';
+            data.forEach(item => {
+                if (item.group) {
+                    const validOptions = item.options.filter(opt => isAllowed(opt, currentMode));
+                    if (validOptions.length > 0) {
+                        const group = document.createElement('optgroup');
+                        group.label = item.group;
+                        validOptions.forEach(sub => {
+                            const opt = document.createElement('option');
+                            opt.value = sub.value; opt.innerText = sub.label;
+                            group.appendChild(opt);
+                        });
+                        el.appendChild(group);
+                    }
+                } else if (isAllowed(item, currentMode)) {
+                    const opt = document.createElement('option');
+                    opt.value = item.value; opt.innerText = item.label;
+                    el.appendChild(opt);
+                }
+            });
+            const exists = Array.from(el.options).some(o => o.value === currentVal);
+            el.value = exists ? currentVal : "";
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            ['clean', 'sexy', 'nsfw'].forEach(m => {
+                document.getElementById(`btn-${m}`).classList.toggle('mode-active', m === mode);
+            });
+            const statusEl = document.getElementById('mode-status');
+            const bustWarn = document.getElementById('bust-warn');
+            const bustContainer = document.getElementById('bust-container');
+            
+            if (mode === 'clean') {
+                statusEl.innerText = "✅ 清純版 (Gemini Safe)";
+                statusEl.className = "text-xs font-bold px-2 py-0.5 rounded bg-green-900 text-green-300";
+                bustWarn.classList.remove('hidden');
+                bustContainer.classList.add('opacity-50', 'pointer-events-none');
+            } else {
+                statusEl.innerText = mode === 'sexy' ? "💜 性感版 (Standard)" : "🔞 NSFW版 (Uncensored)";
+                statusEl.className = `text-xs font-bold px-2 py-0.5 rounded ${mode === 'sexy' ? 'bg-purple-900 text-purple-300' : 'bg-red-900 text-red-300'}`;
+                bustWarn.classList.add('hidden');
+                bustContainer.classList.remove('opacity-50', 'pointer-events-none');
+            }
+            populateAllMenus();
+            generatePrompt();
+        }
+
+        function generatePrompt() {
+            let prompts = [];
+            let charDesc = `Photorealistic portrait of ${v('char-name')}`;
+            if (v('char-age') || v('race')) charDesc += `, a ${v('char-age')} ${v('race')} female`;
+            prompts.push(charDesc);
+
+            // 妝容雙重輸出
+            let mkBase = v('makeup-base');
+            let mkDetail = v('makeup-detail');
+            let combinedMakeup = [mkBase, mkDetail].filter(Boolean).join(", ");
+
+            let feats = [
+                v('hair-color') + ' ' + v('hair-style'), 
+                v('eye-color') + ' eyes', 
+                v('face-shape'), 
+                v('skin-type'), 
+                combinedMakeup, // 妝容整合
+                v('body-height')
+            ].filter(s => s.trim().length > 1);
+            
+            if (currentMode !== 'clean' && v('body-bust')) feats.push(`body: ${v('body-bust')}, ${v('body-waist')}, ${v('body-hip')}`);
+            if (feats.length) prompts.push(feats.join(", "));
+
+            // 服裝邏輯
+            let outfit = [];
+            if(v('outfit-theme')) outfit.push(`Style: ${v('outfit-theme')}`);
+            if(v('outfit-head')) outfit.push(v('outfit-head'));
+            if(v('outfit-acc')) outfit.push(v('outfit-acc'));
+            if(v('outfit-acc-detail')) outfit.push(v('outfit-acc-detail'));
+            let top = v('outfit-top');
+            if(top) {
+                let attr = [v('top-color'), v('top-pat'), v('top-mat')].filter(Boolean).join(" ");
+                outfit.push(attr ? top.replace("wearing a", `wearing a ${attr}`) : top);
+            }
+            let btm = v('outfit-bottom');
+            if(btm) {
+                let attr = [v('bottom-color'), v('bottom-pat'), v('bottom-mat')].filter(Boolean).join(" ");
+                outfit.push(attr ? `${btm} (${attr})` : btm);
+            }
+            if(v('outfit-outer')) outfit.push(v('outfit-outer'));
+            if(v('outfit-sock')) outfit.push(v('outfit-sock'));
+            if(v('outfit-shoe')) outfit.push(v('outfit-shoe'));
+            let outfitStr = outfit.join(", ");
+            if (currentMode === 'clean') {
+                const banned = [/latex/gi, /busty/gi, /cleavage/gi, /see-through/gi, /sheer/gi, /bra/gi, /panties/gi, /lingerie/gi, /thong/gi, /naked/gi, /bikini/gi, /nude/gi, /topless/gi];
+                banned.forEach(regex => { outfitStr = outfitStr.replace(regex, ""); });
+            }
+            if (outfitStr.trim()) prompts.push(outfitStr);
+
+            // 行動與場景
+            let pose = v('action-pose'); let activity = v('action-activity'); let expr = v('action-expression');
+            let act = (pose && activity) ? `She is ${pose} while ${activity}` : (pose || activity || "");
+            if(expr) act = act ? `${act}, with ${expr}` : `She has ${expr}`;
+            if(act) prompts.push(act);
+
+            let loc = v('scene-loc');
+            let props = v('scene-props');
+            let propsDetail = v('scene-props-detail');
+            let env = [v('scene-time'), v('scene-weather'), v('scene-lighting')].filter(Boolean);
+            let sceneStr = loc ? `Location: ${loc}` : "";
+            if(props) sceneStr += (sceneStr ? ", " : "") + props;
+            if(propsDetail) sceneStr += (sceneStr ? ", " : "") + propsDetail;
+            if(env.length) sceneStr += (sceneStr ? ". " : "") + `Environment: ${env.join(", ")}`;
+            if(sceneStr) prompts.push(sceneStr);
+
+            let cam = [v('cam-angle'), v('cam-shot'), v('cam-lens'), v('scene-style')].filter(Boolean);
+            if(cam.length) prompts.push(cam.join(", "));
+
+            if (currentMode === 'nsfw') prompts.push("NSFW, detailed skin, mature female");
+            document.getElementById('output-text').value = prompts.join(". ");
+        }
+
+        function switchTab(id) {
+            ['tab-identity', 'tab-outfit', 'tab-scene'].forEach(t => document.getElementById(t).classList.toggle('hidden', t !== id));
+            ['btn-tab-identity', 'btn-tab-outfit', 'btn-tab-scene'].forEach(b => {
+                document.getElementById(b).className = b.includes(id) ? "flex-1 py-4 text-sm font-bold tab-active" : "flex-1 py-4 text-sm font-bold tab-inactive";
+            });
+        }
+
+        function toggleModal() {
+            const m = document.querySelector('.modal');
+            m.classList.toggle('opacity-0');
+            m.classList.toggle('pointer-events-none');
+        }
+
+        function copyPrompt(id) {
+            const t = document.getElementById(id); t.select();
+            navigator.clipboard.writeText(t.value).then(() => alert("已複製提示詞！"));
+        }
+
+        function randomAll() {
+            document.querySelectorAll('select').forEach(s => {
+                if(!s.disabled && !s.closest('.pointer-events-none')) {
+                    if (s.options.length > 1) s.selectedIndex = Math.floor(Math.random() * (s.options.length - 1)) + 1;
+                }
+            });
+            generatePrompt();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('select, input').forEach(el => {
+                el.addEventListener('change', generatePrompt);
+                el.addEventListener('input', generatePrompt);
+            });
+            init();
+        });
+    </script>
+
+    <br>
+    
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
+        data-name="bmc-button" 
+        data-slug="on9ai" 
+        data-color="#ec4899" 
+        data-emoji=""  
+        data-font="Lato" 
+        data-text="贊助下一套新衣服" 
+        data-outline-color="#000000" 
+        data-font-color="#ffffff" 
+        data-coffee-color="#ffffff" >
+    </script>
+    
+</body>
+
+</html>
+

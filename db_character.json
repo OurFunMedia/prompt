@@ -1,0 +1,214 @@
+{
+    "race": [
+        {
+            "group": "亞洲",
+            "options": [
+                { "label": "東亞 (East Asian)", "value": "East Asian" },
+                { "label": "香港", "value": "from Hong Kong" },
+                { "label": "台灣", "value": "Taiwanese" },
+                { "label": "中國", "value": "Chinese" },
+                { "label": "日本", "value": "Japanese" },
+                { "label": "韓國", "value": "Korean" },
+                { "label": "泰國", "value": "Thai" },
+                { "label": "混血", "value": "mixed Asian/Caucasian" }
+            ]
+        },
+        {
+            "group": "歐美",
+            "options": [
+                { "label": "美國(白人)", "value": "American (Caucasian)" },
+                { "label": "英國", "value": "British" },
+                { "label": "法國", "value": "French" },
+                { "label": "俄羅斯", "value": "Russian" },
+                { "label": "德國", "value": "German" },
+                { "label": "義大利", "value": "Italian" },
+                { "label": "拉丁裔", "value": "Latina" },
+                { "label": "非裔", "value": "Black/African American" }
+            ]
+        }
+    ],
+    "charAge": [
+        { "label": "18歲", "value": "18 years old" },
+        { "label": "20歲初", "value": "in her early 20s" },
+        { "label": "22歲 (大學生)", "value": "22 years old" },
+        { "label": "25歲左右", "value": "in her mid 20s" },
+        { "label": "28-30歲", "value": "in her late 20s" },
+        { "label": "30+ 輕熟女", "value": "in her early 30s, mature woman" }
+    ],
+    "bodyHeight": [
+        { "label": "標準身高 (Average)", "value": "average height" },
+        { "label": "嬌小可愛 (Petite)", "value": "petite and cute stature" },
+        { "label": "高挑模特 (Tall)", "value": "tall and slender model-like figure" },
+        { "label": "175cm (大長腿)", "value": "175cm tall, long legs" },
+        { "label": "極高 (Towering)", "value": "statuesque and towering figure" }
+    ],
+    "bodyBust": [
+        { "label": "適中 (Balanced)", "value": "a balanced bust" },
+        { "label": "纖細 (Petite)", "value": "a petite bust" },
+        { "label": "豐滿 (Voluptuous)", "value": "a voluptuous bust" },
+        { "label": "35E (傲人)", "value": "voluptuous 35E bust", "tags": ["sexy"] },
+        { "label": "巨乳 (Large)", "value": "a large bust", "tags": ["sexy"] },
+        { 
+            "label": "極度豐滿 (XXL)", 
+            "value": "hyper-voluptuous female figure, exceptionally voluminous and three-dimensional bust, natural gravitational drop, palpable sense of physical weight, dramatic contrast with a slender waist, exceeding standard gravure proportions, anatomically realistic", 
+            "tags": ["sexy"] 
+        }
+    ],
+    "bodyWaist": [
+        { "label": "標準 (Natural)", "value": "a natural waist" },
+        { "label": "馬甲線 (Toned)", "value": "a toned waist" },
+        { "label": "21吋 (Slender)", "value": "tiny 21-inch waist" },
+        { "label": "螞蟻腰 (Wasp)", "value": "an extremely tiny waist" },
+        { "label": "水桶腰 (Thick)", "value": "a thick waist" }
+    ],
+    "bodyHip": [
+        { "label": "標準 (Proportional)", "value": "proportional hips" },
+        { "label": "S型曲線 (Curvy)", "value": "curvy S-shape hips" },
+        { "label": "蜜大腿 (Thick)", "value": "thick thighs" },
+        { "label": "寬臀 (Wide)", "value": "wide, curvy hips" }
+    ],
+    "hairColor": [
+        { "label": "黑", "value": "black" },
+        { "label": "深棕", "value": "dark brown" },
+        { "label": "淺棕 (Light Brown)", "value": "light brown" },
+        { "label": "淺金灰 (Ash Blonde)", "value": "ash blonde" },
+        { "label": "紅棕色", "value": "red-brown" },
+        { "label": "金", "value": "blonde" },
+        { "label": "白金", "value": "platinum blonde" },
+        { "label": "紅", "value": "red" },
+        { "label": "粉紅", "value": "pink" },
+        { "label": "銀灰", "value": "silver" },
+        { "label": "漸層藍", "value": "blue ombre" }
+    ],
+    "hairStyle": [
+        {
+            "group": "長髮系列",
+            "options": [
+                { "label": "長直髮 (一般)", "value": "long straight hair" },
+                { "label": "微波浪長髮", "value": "long hair with messy waves" },
+                { "label": "黑長直", "value": "classic long straight hair" },
+                { "label": "柔亮大波浪", "value": "glossy long wavy hair" },
+                { "label": "直順長髮+齊瀏海", "value": "sleek long hair with blunt bangs" },
+                { "label": "華麗側分復古波浪", "value": "glamourous side-parted vintage waves" }
+            ]
+        },
+        {
+            "group": "中長髮系列",
+            "options": [
+                { "label": "中長層次+自然中分", "value": "medium layered hair with center part" },
+                { "label": "中長直髮+齊瀏海", "value": "medium straight hair with bangs" },
+                { "label": "狼尾層次中長髮", "value": "medium length wolf cut" },
+                { "label": "法式中長微亂捲", "value": "French style medium length messy curls" },
+                { "label": "自然層次剪裁", "value": "medium length natural layered cut" }
+            ]
+        },
+        {
+            "group": "短髮系列",
+            "options": [
+                { "label": "空氣感短鮑伯頭", "value": "airy short bob cut" },
+                { "label": "黑色短直髮", "value": "short straight black hair" },
+                { "label": "深側分直短髮", "value": "deep side part short straight hair" },
+                { "label": "齊劉海短髮妹妹頭", "value": "short hair with blunt bangs" },
+                { "label": "碎層蓬鬆短髮", "value": "fluffy layered short hair" },
+                { "label": "精靈短髮", "value": "pixie cut" }
+            ]
+        },
+        {
+            "group": "綁髮/編髮",
+            "options": [
+                { "label": "高馬尾 (High Ponytail)", "value": "high ponytail" },
+                { "label": "低馬尾 (Low Ponytail)", "value": "low ponytail with loose strands" },
+                { "label": "黑色盤髮 (Updo)", "value": "black hair styled in an elegant updo" },
+                { "label": "高緊馬尾", "value": "high tight ponytail" },
+                { "label": "低髮髻馬尾", "value": "low bun ponytail" },
+                { "label": "雙馬尾 (Twintails)", "value": "twintails" },
+                { "label": "丸子頭", "value": "single hair bun" }
+            ]
+        },
+        {
+            "group": "瀏海/其他",
+            "options": [
+                { "label": "薄瀏海", "value": "thin see-through bangs" },
+                { "label": "齊薄瀏海", "value": "thin blunt bangs" },
+                { "label": "姬髮式", "value": "hime cut" }
+            ]
+        }
+    ],
+    "eyeColor": [
+        { "label": "深褐", "value": "dark brown" },
+        { "label": "黑", "value": "black" },
+        { "label": "琥珀", "value": "amber" },
+        { "label": "藍", "value": "blue" },
+        { "label": "綠", "value": "green" },
+        { "label": "灰", "value": "grey" },
+        { "label": "榛果色", "value": "hazel" }
+    ],
+    "faceShape": [
+        { "label": "鵝蛋臉", "value": "an oval face" },
+        { "label": "V型臉", "value": "a V-shaped face" },
+        { "label": "圓臉", "value": "a round face" },
+        { "label": "高顴骨", "value": "defined cheekbones and sharp features" }
+    ],
+    "skinType": [
+        { "label": "雪白肌膚", "value": "snow-white skin" },
+        { "label": "白皙自然", "value": "fair natural skin, detailed skin texture" },
+        { "label": "小麥色 (光澤)", "value": "sun-kissed tan skin, shiny skin" },
+        { "label": "真實毛孔感", "value": "highly detailed skin, visible pores, natural imperfections" },
+        { "label": "自然膚色", "value": "natural skin tone" }
+    ],
+    "makeupBase": [
+        {
+            "group": "區域風格底妝",
+            "options": [
+                { "label": "日式風格 (Igari)", "value": "Japanese style base makeup, igari blush" },
+                { "label": "韓式水光 (K-Beauty)", "value": "Korean style makeup, glass skin finish" },
+                { "label": "美式修容 (Western)", "value": "American style makeup, sharp contour, matte finish" },
+                { "label": "法式自然 (French)", "value": "French style makeup, effortless minimal skin" },
+                { "label": "中式陶瓷 (Chinese)", "value": "Chinese style makeup, porcelain skin finish" },
+                { "label": "泰式野性 (Thai)", "value": "Thai style makeup, matte finish, sharp contour" }
+            ]
+        },
+        {
+            "group": "質感與濃度",
+            "options": [
+                { "label": "偽素顏 (No-Makeup)", "value": "natural no-makeup look, bare face style" },
+                { "label": "清透裸妝 (Light)", "value": "light natural dewy makeup" },
+                { "label": "全妝 (Full Glam)", "value": "heavy makeup, full glam look" },
+                { "label": "霧面妝效 (Matte)", "value": "matte finish makeup" },
+                { "label": "哥德底妝 (Pale)", "value": "gothic pale skin makeup" }
+            ]
+        }
+    ],
+    "makeupDetail": [
+        {
+            "group": "唇妝細節",
+            "options": [
+                { "label": "經典紅唇", "value": "classic red lips" },
+                { "label": "水光唇釉", "value": "glossy lips" },
+                { "label": "霧面裸唇", "value": "matte nude lips" },
+                { "label": "咬唇妝", "value": "gradient lips" },
+                { "label": "深色/黑唇", "value": "dark gothic lips" }
+            ]
+        },
+        {
+            "group": "眼妝細節",
+            "options": [
+                { "label": "貓眼眼線", "value": "sharp winged eyeliner, cat eye makeup" },
+                { "label": "濃密睫毛", "value": "long voluminous eyelashes" },
+                { "label": "煙燻眼妝", "value": "dark smoky eye makeup" },
+                { "label": "亮片眼影", "value": "shimmering glitter eyeshadow" },
+                { "label": "彩色眼線", "value": "colorful eyeliner" }
+            ]
+        },
+        {
+            "group": "特殊特徵",
+            "options": [
+                { "label": "雀斑妝", "value": "faux freckles across nose and cheeks" },
+                { "label": "曬傷妝", "value": "sunburned blush effect" },
+                { "label": "愛心眼 (瞳孔)", "value": "heart-shaped pupils", "tags": ["sexy"] },
+                { "label": "宿醉妝", "value": "heavy under-eye blush" },
+                { "label": "髒汙/戰損", "value": "slightly dirty face, smudge makeup" }
+            ]
+        }
+    ]
+}
