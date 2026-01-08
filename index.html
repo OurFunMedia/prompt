@@ -105,11 +105,36 @@
                         <div><label class="field-label">瞳孔顏色 (Eyes)</label><select id="eye-color" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
                         <div><label class="field-label">臉型輪廓 (Face)</label><select id="face-shape" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
                         <div><label class="field-label">皮膚質感 (Skin)</label><select id="skin-type" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm"></select></div>
-                        <div class="bg-pink-900/10 border border-pink-900/30 p-2 rounded">
-                            <label class="field-label text-pink-400">底妝風格 (Base Makeup)</label>
-                            <select id="makeup-base" class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs mb-2"></select>
-                            <label class="field-label text-pink-400">妝容細節 (Detail)</label>
-                            <select id="makeup-detail" class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs"></select>
+                        <div class="col-span-2 md:col-span-3 bg-blue-900/20 border border-blue-500/30 p-2 rounded mt-2">
+                            <label class="field-label text-blue-300 mb-2">✨ 特殊質感疊加 (Effects Layer)</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                <label class="flex items-center space-x-2 cursor-pointer bg-gray-800 px-2 py-1 rounded hover:bg-gray-700 transition">
+                                    <input type="checkbox" id="effect-damp-hair" value="noticeably damp hair, glistening wet hair texture" class="accent-pink-500 w-4 h-4" onchange="generatePrompt()">
+                                    <span class="text-xs text-gray-300">💧 頭髮微濕 (Damp Hair)</span>
+                                </label>
+                                
+                                <label class="flex items-center space-x-2 cursor-pointer bg-gray-800 px-2 py-1 rounded hover:bg-gray-700 transition">
+                                    <input type="checkbox" id="effect-wet-skin" value="wet skin, sweating, glistening skin" class="accent-pink-500 w-4 h-4" onchange="generatePrompt()">
+                                    <span class="text-xs text-gray-300">💦 濕身/汗水 (Wet Skin)</span>
+                                </label>
+
+                                <label class="flex items-center space-x-2 cursor-pointer bg-gray-800 px-2 py-1 rounded hover:bg-gray-700 transition">
+                                    <input type="checkbox" id="effect-oily" value="oiled skin, shiny skin" class="accent-pink-500 w-4 h-4" onchange="generatePrompt()">
+                                    <span class="text-xs text-gray-300">🧴 油光 (Oily)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="bg-pink-900/10 border border-pink-900/30 p-2 rounded col-span-2 md:col-span-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="field-label text-pink-400">底妝風格 (Base Makeup)</label>
+                                    <select id="makeup-base" class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs"></select>
+                                </div>
+                                <div>
+                                    <label class="field-label text-pink-400">妝容細節 (Detail)</label>
+                                    <select id="makeup-detail" class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs"></select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -348,24 +373,55 @@
 
         function setMode(mode) {
             currentMode = mode;
+            
+            // 1. 切換上方按鈕樣式
             ['clean', 'sexy', 'nsfw'].forEach(m => {
                 document.getElementById(`btn-${m}`).classList.toggle('mode-active', m === mode);
             });
+
             const statusEl = document.getElementById('mode-status');
             const bustWarn = document.getElementById('bust-warn');
             const bustContainer = document.getElementById('bust-container');
             
+            // 定義哪些特效在清純版需要隱藏 (頭髮微濕通常是安全的，所以不放在這裡)
+            const nsfwEffects = ['effect-wet-skin', 'effect-oily'];
+
             if (mode === 'clean') {
+                // --- 設定為清純版 ---
                 statusEl.innerText = "✅ 清純版 (Gemini Safe)";
                 statusEl.className = "text-xs font-bold px-2 py-0.5 rounded bg-green-900 text-green-300";
+                
+                // 隱藏/禁用三圍設定
                 bustWarn.classList.remove('hidden');
                 bustContainer.classList.add('opacity-50', 'pointer-events-none');
+
+                // [新增] 隱藏敏感特效按鈕並取消勾選
+                nsfwEffects.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.checked = false; // 強制取消勾選
+                        el.parentElement.classList.add('hidden'); // 隱藏整個按鈕 (Label)
+                    }
+                });
+
             } else {
+                // --- 設定為性感/NSFW版 ---
                 statusEl.innerText = mode === 'sexy' ? "💜 性感版 (Standard)" : "🔞 NSFW版 (Uncensored)";
                 statusEl.className = `text-xs font-bold px-2 py-0.5 rounded ${mode === 'sexy' ? 'bg-purple-900 text-purple-300' : 'bg-red-900 text-red-300'}`;
+                
+                // 恢復三圍設定
                 bustWarn.classList.add('hidden');
                 bustContainer.classList.remove('opacity-50', 'pointer-events-none');
+
+                // [新增] 顯示敏感特效按鈕
+                nsfwEffects.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.parentElement.classList.remove('hidden'); // 恢復顯示
+                    }
+                });
             }
+
             populateAllMenus();
             generatePrompt();
         }
@@ -381,8 +437,20 @@
             let mkDetail = v('makeup-detail');
             let combinedMakeup = [mkBase, mkDetail].filter(Boolean).join(", ");
 
+            // 角色特徵
+            let specialEffects = [];
+            const checkboxes = ['effect-damp-hair', 'effect-wet-skin', 'effect-oily'];
+            
+            checkboxes.forEach(id => {
+                const el = document.getElementById(id);
+                // 檢查元素是否存在 (避免報錯) 且 已被勾選
+                if (el && el.checked) {
+                    specialEffects.push(el.value);
+                }
+            });
             let feats = [
                 v('hair-color') + ' ' + v('hair-style'), 
+                ...specialEffects,
                 v('eye-color') + ' eyes', 
                 v('face-shape'), 
                 v('skin-type'), 
