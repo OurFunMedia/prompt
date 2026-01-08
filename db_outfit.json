@@ -13,8 +13,10 @@
         { "label": "OL/秘書 (Office)", "value": "tight office lady professional attire" },
         { "label": "女僕 (Maid)", "value": "french maid costume theme", "tags": ["sexy"] },
         { "label": "晚宴 (Evening)", "value": "elegant evening formal wear" },
-        { "label": "運動 (Sporty)", "value": "sexy sportswear style" },
+        { "label": "運動 (性感Sporty)", "value": "sexy sportswear style" },
         { "label": "街頭 (Street)", "value": "trendy streetwear" },
+        { "label": "泳裝 (Swim)", "value": "swimwear style" },
+        { "label": "角色扮演 (Cosplay)", "value": "cosplay outfit style" },
         { "label": "睡衣 (Sleep)", "value": "cozy loungewear" }
     ],
     "outfitHead": [
@@ -420,7 +422,7 @@
                 { "label": "蕾絲內褲", "value": "lace panties", "tags": ["nsfw"] },
                 { "label": "開檔內褲", "value": "crotchless panties", "tags": ["nsfw"] },
                 { "label": "僅吊帶襪", "value": "wearing only a garter belt and stockings, no panties", "tags": ["nsfw"] },
-                { "label": "女裝平腳內褲", "value": "Women's Boxer Briefs" }
+                { "label": "女裝平腳內褲", "value": "Women's Boxer Briefs", "tags": ["sexy"] }
             ]
         }
     ],
