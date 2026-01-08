@@ -17,7 +17,8 @@
         { "label": "街頭 (Street)", "value": "trendy streetwear" },
         { "label": "泳裝 (Swim)", "value": "swimwear style" },
         { "label": "角色扮演 (Cosplay)", "value": "cosplay outfit style" },
-        { "label": "睡衣 (Sleep)", "value": "cozy loungewear" }
+        { "label": "舒適睡衣 (Sleep)", "value": "cozy loungewear" },
+        { "label": "維秘風/性感睡衣", "value": "Victoria's Secret style, seductive intimate wear", "tags": ["sexy"] }
     ],
     "outfitHead": [
         { "label": "無", "value": "" },
@@ -210,17 +211,46 @@
         {
             "group": "赤裸/限制級 (NSFW)",
             "options": [
-                { "label": "上身赤裸 (Topless)", "value": "topless, bare chest, no top, nipples visible", "tags": ["nsfw"] },
-                { "label": "僅胸貼 (Pasties)", "value": "wearing only nipple pasties", "tags": ["nsfw"] }
+                { "label": "上身赤裸 (Topless)", "value": "topless, bare chest, no top, nipples visible", "tags": ["nsfw"] }
             ]
         },
         {
             "group": "內衣/胸罩 (Bras)",
             "options": [
+                { "label": "1/2杯內衣 (半罩)", "value": "demi-cup bra, uplifting", "tags": ["nsfw"] },
+                { "label": "運動內衣", "value": "a sports bra" },
                 { "label": "深V蕾絲胸罩", "value": "deep-V lace bra", "tags": ["nsfw"] },
                 { "label": "透明蕾絲胸罩", "value": "sheer lace bra, see-through", "tags": ["nsfw"] },
-                { "label": "1/2杯內衣 (半罩)", "value": "demi-cup bra, uplifting", "tags": ["nsfw"] },
-                { "label": "運動內衣", "value": "a sports bra" }
+                { "label": "僅胸貼 (Pasties)", "value": "wearing only nipple pasties", "tags": ["nsfw"] }
+            ]
+        },
+        {
+            "group": "泳裝/比基尼 (Swimwear)",
+            "options": [
+                { "label": "三點式比基尼上衣", "value": "wearing a classic triangle string bikini top, non-NSFW", "tags": ["sexy"] },
+                { "label": "深V掛脖泳裝", "value": "deep-V halter neck swimsuit", "tags": ["nsfw"] },
+                { "label": "側空連身泳衣", "value": "high-cut bodysuit revealing sideboob", "tags": ["nsfw"] }
+            ]
+        },
+        {
+            "group": "睡衣/居家 (Sleepwear)",
+            "options": [
+                { "label": "居家連身服 (Onesie)", "value": "wearing a cute animal onesie" },
+                { "label": "寬鬆白襯衫 (BF風)", "value": "wearing an oversized white shirt" },
+                { "label": "超深V高衩連身睡衣", "value": "wearing a Victoria's Secret style seductive teddy lingerie, deep V-neck, high-cut leg, lace details", "tags": ["sexy"] },
+                { "label": "吊帶露背絲綢睡裙", "value": "wearing a sexy spaghetti strap nightgown, deep V-neckline, backless design, silky fabric", "tags": ["sexy"] }
+            ]
+        },
+        {
+            "group": "性感時裝 (Sexy Fashion)",
+            "options": [
+                { "label": "超深V高貴華麗晚裝", "value": "wearing a luxurious and elegant evening gown, extremely deep plunging V-neckline, high-end fashion", "tags": ["sexy"] },
+                { "label": "深V開胸上衣", "value": "top with plunging neckline, deep cleavage", "tags": ["sexy"] },
+                { "label": "綁帶露背上衣", "value": "backless top with criss-cross straps", "tags": ["sexy"] },
+                { "label": "綁帶露胸上衣", "value": "front-tie crop top, revealing cleavage", "tags": ["nsfw"] },
+                { "label": "側開高領毛衣", "value": "high-neck sleeveless sweater with open sides", "tags": ["nsfw"] },
+                { "label": "殺死處男毛衣", "value": "virgin killer sweater, open back", "tags": ["sexy"] },
+                { "label": "現代和服連身裙", "value": "modern kimono style mini dress" }
             ]
         },
         {
@@ -235,7 +265,9 @@
                 { "label": "短版運動背心", "value": "cropped athletic tank top" },
                 { "label": "緞面內搭背心", "value": "satin camisole worn under jacket" },
                 { "label": "露肚臍吊帶背心", "value": "spaghetti strap camisole showing belly button" },
-                { "label": "露肚臍吊帶背心 (短)", "value": "short spaghetti strap camisole showing belly button" }
+                { "label": "露肚臍吊帶背心 (短)", "value": "short spaghetti strap camisole showing belly button" },
+                { "label": "大袖口背心 (側乳)", "value": "tank top with large armholes revealing sideboob", "tags": ["nsfw"] },
+                { "label": "露肚肚吊帶背心 (側乳)", "value": "spaghetti strap camisole with sideboob", "tags": ["nsfw"] }
             ]
         },
         {
@@ -246,6 +278,26 @@
                 { "label": "Oversize T恤", "value": "oversized boyfriend style t-shirt" },
                 { "label": "連帽衛衣 (Hoodie)", "value": "comfortable hoodie" },
                 { "label": "格子襯衫", "value": "plaid flannel shirt" }
+            ]
+        },
+        {
+            "group": "日常/質感 (Daily Fashion)",
+            "options": [
+                { "label": "羅紋針織開襟衫 (粉)", "value": "pink ribbed knit cardigan" },
+                { "label": "肩帶滑落上衣", "value": "spaghetti strap top with one strap slipping off shoulder" },
+                { "label": "蕾絲長袖襯衫", "value": "lace long-sleeve blouse" },
+                { "label": "寬鬆垂領上衣", "value": "loose cowl neck top" },
+                { "label": "露肩針織衫", "value": "off-shoulder knitted sweater" },
+                { "label": "短版小可愛", "value": "tiny crop top" },
+                { "label": "短版立領襯衫", "value": "crop top with mandarin collar" },
+                { "label": "高領無袖上衣", "value": "sleeveless turtleneck top" }
+            ]
+        },
+        {
+            "group": "冬季/毛衣 (Winter)",
+            "options": [
+                { "label": "高領厚毛衣 (Turtleneck)", "value": "wearing a chunky turtleneck cable-knit sweater" },
+                { "label": "毛絨抓絨上衣 (Fleece)", "value": "wearing a fuzzy sherpa fleece pullover" }
             ]
         },
         {
@@ -260,23 +312,6 @@
             ]
         },
         {
-            "group": "冬季/毛衣",
-            "options": [
-                { "label": "高領厚毛衣 (Turtleneck)", "value": "wearing a chunky turtleneck cable-knit sweater" },
-                { "label": "毛絨抓絨上衣 (Fleece)", "value": "wearing a fuzzy sherpa fleece pullover" }
-            ]
-        },
-        {
-            "group": "工作/居家 (Work & Home)",
-            "options": [
-                { "label": "職人工作圍裙 (Canvas)", "value": "wearing a heavy-duty canvas work apron" },
-                { "label": "可愛廚房圍裙 (Frilly)", "value": "wearing a cute frilly kitchen apron" },
-                { "label": "工裝連身服 (Boilersuit)", "value": "wearing a utility boiler suit" },
-                { "label": "居家連身服 (Onesie)", "value": "wearing a cute animal onesie" },
-                { "label": "寬鬆白襯衫 (BF風)", "value": "wearing an oversized white shirt" }
-            ]
-        },
-        {
             "group": "職場/行政 (Executive)",
             "options": [
                 { "label": "修身西裝外套 (Blazer)", "value": "tailored black blazer" },
@@ -288,35 +323,11 @@
             ]
         },
         {
-            "group": "日常/質感",
+            "group": "工作/制服 (Work & Uniforms)",
             "options": [
-                { "label": "羅紋針織開襟衫 (粉)", "value": "pink ribbed knit cardigan" },
-                { "label": "肩帶滑落上衣", "value": "spaghetti strap top with one strap slipping off shoulder" },
-                { "label": "蕾絲長袖襯衫", "value": "lace long-sleeve blouse" },
-                { "label": "寬鬆垂領上衣", "value": "loose cowl neck top" },
-                { "label": "殺死處男毛衣", "value": "virgin killer sweater, open back", "tags": ["nsfw"] },
-                { "label": "露肩針織衫", "value": "off-shoulder knitted sweater" },
-                { "label": "短版小可愛", "value": "tiny crop top" },
-                { "label": "短版立領襯衫", "value": "crop top with mandarin collar" },
-                { "label": "高領無袖上衣", "value": "sleeveless turtleneck top" }
-            ]
-        },
-        {
-            "group": "特殊/性感 (Sexy)",
-            "options": [
-                { "label": "三點式比基尼上衣", "value": "wearing a classic triangle string bikini top, non-NSFW", "tags": ["sexy"] },
-                { "label": "深V掛脖泳裝", "value": "deep-V halter neck swimsuit", "tags": ["nsfw"] },
-                { "label": "大袖口背心 (側乳)", "value": "tank top with large armholes revealing sideboob", "tags": ["nsfw"] },
-                { "label": "側空連身衣", "value": "high-cut bodysuit revealing sideboob", "tags": ["nsfw"] },
-                { "label": "側開高領毛衣", "value": "high-neck sleeveless sweater with open sides", "tags": ["nsfw"] },
-                { "label": "現代和服連身裙", "value": "modern kimono style mini dress" },
-                { "label": "乳膠緊身衣 (上身)", "value": "tight shiny latex bodysuit top", "tags": ["nsfw"] },
-                { "label": "深V開胸上衣", "value": "top with plunging neckline, deep cleavage", "tags": ["nsfw"] },
-                { "label": "透視薄紗襯衫", "value": "completely see-through chiffon blouse", "tags": ["nsfw"] },
-                { "label": "網狀上衣", "value": "fishnet top, bare skin underneath", "tags": ["nsfw"] },
-                { "label": "開襟透視上衣", "value": "open-front sheer blouse, revealing bra", "tags": ["nsfw"] },
-                { "label": "綁帶露背上衣", "value": "backless top with criss-cross straps", "tags": ["nsfw"] },
-                { "label": "綁帶露胸上衣", "value": "front-tie crop top, revealing cleavage", "tags": ["nsfw"] }
+                { "label": "職人工作圍裙 (Canvas)", "value": "wearing a heavy-duty canvas work apron" },
+                { "label": "可愛廚房圍裙 (Frilly)", "value": "wearing a cute frilly kitchen apron" },
+                { "label": "工裝連身服 (Boilersuit)", "value": "wearing a utility boiler suit" }
             ]
         },
         {
@@ -334,14 +345,28 @@
             ]
         },
         {
+            "group": "性感/情趣 (Sexy Lingerie & Fetish)",
+            "options": [
+                { "label": "乳膠緊身衣 (上身)", "value": "tight shiny latex bodysuit top", "tags": ["nsfw"] },
+                { "label": "透視薄紗襯衫", "value": "completely see-through chiffon blouse", "tags": ["nsfw"] },
+                { "label": "網狀上衣 (Fishnet)", "value": "fishnet top, bare skin underneath", "tags": ["nsfw"] },
+                { "label": "開襟透視上衣", "value": "open-front sheer blouse, revealing bra", "tags": ["nsfw"] },
+                { "label": "兔女郎馬甲", "value": "satin bunny girl corset bodysuit", "tags": ["nsfw"] }
+            ]
+        },
+        {
             "group": "制服/Cosplay",
             "options": [
                 { "label": "爆扣襯衫", "value": "tight shirt with buttons straining", "tags": ["nsfw"] },
                 { "label": "濕透襯衫", "value": "wet shirt, clinging to skin, translucent", "tags": ["nsfw"] },
-                { "label": "裸體圍裙 (Naked Apron)", "value": "wearing only an apron, naked apron", "tags": ["nsfw"] },                
-                { "label": "護士服 (拉鍊)", "value": "tight nurse tunic with zipper down" },
-                { "label": "水手服 (露腰)", "value": "cropped sailor uniform top" },
-                { "label": "兔女郎馬甲", "value": "satin bunny girl corset bodysuit", "tags": ["nsfw"] }
+                { "label": "裸體圍裙 (Naked Apron)", "value": "wearing only an apron, naked apron", "tags": ["nsfw"] },
+                { "label": "護士服", "value": "classic nurse uniform" },
+                { "label": "護士服 (拉鍊)", "value": "tight nurse tunic with zipper down", "tags": ["nsfw"] },
+                { "label": "護士服 (開胸)", "value": "sexy nurse uniform with open chest", "tags": ["nsfw"] },
+                { "label": "女僕裝", "value": "classic french maid outfit" },
+                { "label": "女僕裝 (低胸)", "value": "sexy french maid outfit with low-cut neckline", "tags": ["nsfw"] },
+                { "label": "女僕裝 (短裙)", "value": "sexy french maid outfit with short skirt", "tags": ["nsfw"] },
+                { "label": "性感水手服 (露腰)", "value": "cropped sailor uniform top" }
             ]
         }
     ],
