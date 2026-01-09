@@ -221,6 +221,7 @@
                 { "label": "運動內衣", "value": "a sports bra" },
                 { "label": "深V蕾絲胸罩", "value": "deep-V lace bra", "tags": ["nsfw"] },
                 { "label": "透明蕾絲胸罩", "value": "sheer lace bra, see-through", "tags": ["nsfw"] },
+                { "label": "超深V高衩連身睡衣", "value": "wearing a Victoria's Secret style seductive teddy lingerie, deep V-neck, high-cut leg, lace sheer sexy bodysuit", "tags": ["sexy"] },
                 { "label": "僅胸貼 (Pasties)", "value": "wearing only nipple pasties", "tags": ["nsfw"] }
             ]
         },
@@ -237,8 +238,7 @@
             "options": [
                 { "label": "居家連身服 (Onesie)", "value": "wearing a cute animal onesie" },
                 { "label": "寬鬆白襯衫 (BF風)", "value": "wearing an oversized white shirt" },
-                { "label": "超深V高衩連身睡衣", "value": "wearing a Victoria's Secret style seductive teddy lingerie, deep V-neck, high-cut leg, lace details", "tags": ["sexy"] },
-                { "label": "吊帶露背絲綢睡裙", "value": "wearing a sexy spaghetti strap nightgown, deep V-neckline, backless design, silky fabric", "tags": ["sexy"] }
+                { "label": "吊帶露背絲綢睡裙", "value": "wearing a sexy spaghetti strap nightgown, deep V-neckline with large armholes revealing sideboob, backless to hip design, silky fabric", "tags": ["sexy"] }
             ]
         },
         {
