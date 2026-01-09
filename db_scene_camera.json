@@ -13,19 +13,25 @@
                 { "label": "四肢著地 (爬行)", "value": "crawling on all fours towards camera", "tags": ["sexy"] },
                 { "label": "抬腿靠牆", "value": "one leg lifted high against the wall", "tags": ["sexy"] },
                 { "label": "張開雙腿坐", "value": "sitting with legs spread open (M-shape)", "tags": ["nsfw"] },
-                { "label": "雙手被縛身後", "value": "hands tied behind back", "tags": ["nsfw"] }
+                { "label": "雙手被縛身後", "value": "hands tied behind back", "tags": ["nsfw"] },
+                { "label": "Jack-o pose", "value": "posing with arms raised and bent, hands near head like pumpkin", "tags": ["sexy"] }
             ]
         },
         {
             "group": "靜態/姿勢 (Static)",
             "options": [
+                { "label": "模特姿勢", "value": "modeling pose" },
                 { "label": "自然站立", "value": "standing naturally" },
+                { "label": "內八站立", "value": "standing with pigeon-toed posture" },
                 { "label": "靠牆站立", "value": "leaning against a wall casually" },
                 { "label": "單腳站立", "value": "standing on one leg gracefully" },
+                { "label": "雙腿交叉站立", "value": "standing with legs crossed elegantly" },
                 { "label": "S型站姿", "value": "standing with exaggerated S-curve pose" },
+                { "label": "雙腳張開站立", "value": "standing with feet apart confidently" },
                 { "label": "雙手放在背後", "value": "standing with hands behind back" },
                 { "label": "雙手抱頭", "value": "hands behind head, elbows out, chest out" },
                 { "label": "雙手插口袋", "value": "standing with hands inside jacket pockets" },
+                { "label": "坐在椅子上", "value": "sitting on a chair" },
                 { "label": "挺胸坐著 (莊嚴)", "value": "sitting upright with chest out, dignified and confident" },
                 { "label": "優閒坐著", "value": "sitting comfortably and relaxed" },
                 { "label": "坐椅子翹腳", "value": "sitting on chair with one leg crossed over the other" },
@@ -44,6 +50,17 @@
         {
             "group": "生活動態 (Life Activities)",
             "options": [
+                { "label": "動態姿勢 (動態)", "value": "dynamic pose, moving" },
+                { "label": "伸手", "value": "reaching out with one hand" },
+                { "label": "走路", "value": "walking towards camera" },
+                { "label": "跳躍", "value": "jumping up and down" },
+                { "label": "拍照", "value": "taking a photo with a camera" },
+                { "label": "錄影", "value": "recording a video with a camcorder" },
+                { "label": "做飯", "value": "cooking in the kitchen" },
+                { "label": "洗碗", "value": "washing dishes at the sink" },
+                { "label": "掃地", "value": "sweeping the floor with a broom" },
+                { "label": "拖地", "value": "mopping the floor with a mop" },
+                { "label": "澆花", "value": "watering plants with a watering can" },
                 { "label": "喝飲料", "value": "drinking a beverage" },
                 { "label": "吃東西", "value": "eating food, holding a fork" },
                 { "label": "滑手機", "value": "browsing on smartphone" },
@@ -63,7 +80,6 @@
                 { "label": "整理衣服", "value": "adjusting clothing with hands" },
                 { "label": "拍拍頭", "value": "slapping own head" },
                 { "label": "拍拍肚子", "value": "slapping own stomach" },
-                { "label": "走路", "value": "walking towards camera" },
                 { "label": "騎機車", "value": "riding a motorcycle or scooter" },
                 { "label": "撐傘走路", "value": "walking while holding an umbrella" }
             ]
@@ -78,6 +94,8 @@
                 { "label": "舞台表演", "value": "performing on stage" },
                 { "label": "指揮動作", "value": "conducting with arms raised" },
                 { "label": "歌唱中", "value": "singing with microphone" },
+                { "label": "彈鋼琴", "value": "playing piano" },
+                { "label": "彈吉他", "value": "playing guitar" },
                 { "label": "模特兒台步", "value": "walking down a runway" }
             ]
         },
@@ -88,11 +106,14 @@
                 { "label": "伸展運動", "value": "doing stretching exercises" },
                 { "label": "瑜伽姿勢", "value": "in yoga pose" },
                 { "label": "健身訓練", "value": "working out with exercise equipment" },
-                { "label": "跳躍", "value": "jumping in mid-air" },
                 { "label": "騎腳踏車", "value": "riding a bicycle" },
                 { "label": "游泳", "value": "swimming in water" },
                 { "label": "滑雪中", "value": "skiing down a slope" },
-                { "label": "打網球", "value": "playing tennis" }
+                { "label": "打網球", "value": "playing tennis" },
+                { "label": "打籃球", "value": "playing basketball" },
+                { "label": "打排球", "value": "playing volleyball" },
+                { "label": "打羽毛球", "value": "playing badminton" },
+                { "label": "打高爾夫球", "value": "swinging a golf club" }
             ]
         },
         {
@@ -445,8 +466,9 @@
             "group": "特殊效果",
             "options": [
                 { "label": "柔和夢幻 (Soft)", "value": "soft focus, dreamy atmosphere" },
-                { "label": "濕身 (Wet)", "value": "wet skin, sweating, glistening", "tags": ["sexy"] },
-                { "label": "油光 (Oily)", "value": "oiled skin, shiny skin", "tags": ["sexy"] },
+                { "label": "膠片顆粒 (Film Grain)", "value": "film grain, vintage film look" },
+                { "label": "光暈效果 (Glow)", "value": "glow effect, ethereal lighting" },
+                { "label": "霧氣瀰漫 (Foggy)", "value": "foggy atmosphere, misty background" },
                 { "label": "高對比", "value": "high contrast, dramatic shadows" }
             ]
         }

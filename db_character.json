@@ -36,17 +36,15 @@
         { "label": "30+ 輕熟女", "value": "in her early 30s, mature woman" }
     ],
     "bodyHeight": [
-        { "label": "標準身高 (Average)", "value": "average height" },
-        { "label": "嬌小可愛 (Petite)", "value": "petite and cute stature" },
-        { "label": "高挑模特 (Tall)", "value": "tall and slender model-like figure" },
-        { "label": "175cm (大長腿)", "value": "175cm tall, long legs" },
+        { "label": "標準身高 (Average)", "value": "average height, short torso" },
+        { "label": "嬌小可愛 (Petite)", "value": "petite and cute stature, short torso" },
+        { "label": "高挑長腿模特 (Tall)", "value": "tall and slender model-like figure, endless and slender legs, model proportions" },
         { "label": "極高 (Towering)", "value": "statuesque and towering figure" }
     ],
     "bodyBust": [
         { "label": "適中 (Balanced)", "value": "a balanced bust" },
         { "label": "纖細 (Petite)", "value": "a petite bust" },
         { "label": "豐滿 (Voluptuous)", "value": "a voluptuous bust" },
-        { "label": "35E (傲人)", "value": "voluptuous 35E bust", "tags": ["sexy"] },
         { "label": "巨乳 (Large)", "value": "a large bust", "tags": ["sexy"] },
         { 
             "label": "極度豐滿 (XXL)", 
@@ -57,12 +55,12 @@
     "bodyWaist": [
         { "label": "標準 (Natural)", "value": "a natural waist" },
         { "label": "馬甲線 (Toned)", "value": "a toned waist" },
-        { "label": "21吋 (Slender)", "value": "tiny 21-inch waist" },
         { "label": "螞蟻腰 (Wasp)", "value": "an extremely tiny waist" },
         { "label": "水桶腰 (Thick)", "value": "a thick waist" }
     ],
     "bodyHip": [
         { "label": "標準 (Proportional)", "value": "proportional hips" },
+        { "label": "窄臀 (Narrow)", "value": "narrow hips" },
         { "label": "S型曲線 (Curvy)", "value": "curvy S-shape hips" },
         { "label": "蜜大腿 (Thick)", "value": "thick thighs" },
         { "label": "寬臀 (Wide)", "value": "wide, curvy hips" }
@@ -106,7 +104,7 @@
             "group": "短髮系列",
             "options": [
                 { "label": "空氣感短鮑伯頭", "value": "airy short bob cut" },
-                { "label": "黑色短直髮", "value": "short straight black hair" },
+                { "label": "短直髮", "value": "short straight hair" },
                 { "label": "深側分直短髮", "value": "deep side part short straight hair" },
                 { "label": "齊劉海短髮妹妹頭", "value": "short hair with blunt bangs" },
                 { "label": "碎層蓬鬆短髮", "value": "fluffy layered short hair" },
@@ -135,18 +133,21 @@
         }
     ],
     "eyeColor": [
-        { "label": "深褐", "value": "dark brown" },
-        { "label": "黑", "value": "black" },
-        { "label": "琥珀", "value": "amber" },
-        { "label": "藍", "value": "blue" },
-        { "label": "綠", "value": "green" },
-        { "label": "灰", "value": "grey" },
-        { "label": "榛果色", "value": "hazel" }
+        { "label": "淺棕", "value": "light brown eyes" },
+        { "label": "深褐", "value": "dark brown eyes" },
+        { "label": "黑", "value": "black eyes" },
+        { "label": "琥珀", "value": "amber eyes" },
+        { "label": "藍", "value": "blue eyes" },
+        { "label": "綠", "value": "green eyes" },
+        { "label": "灰", "value": "grey eyes" },
+        { "label": "榛果色", "value": "hazel eyes" }
     ],
     "faceShape": [
-        { "label": "鵝蛋臉", "value": "an oval face" },
+        { "label": "鵝蛋臉", "value": "an oval face, big round eyes" },
+        { "label": "心形臉", "value": "heart-shaped face, big round eyes" },
         { "label": "V型臉", "value": "a V-shaped face" },
-        { "label": "圓臉", "value": "a round face" },
+        { "label": "圓臉", "value": "a round face, big round eyes" },
+        { "label": "娃娃臉", "value": "a baby face" },
         { "label": "高顴骨", "value": "defined cheekbones and sharp features" }
     ],
     "skinType": [
