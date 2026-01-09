@@ -304,7 +304,7 @@
             "options": [
                 { "label": "古典長旗袍 (優雅)", "value": "wearing a traditional elegant silk cheongsam, high collar" },
                 { "label": "高衩旗袍 (露腿)", "value": "wearing a high-slit cheongsam revealing thighs", "tags": ["nsfw"] },
-                { "label": "開胸旗袍 (挖空)", "value": "wearing a modified cheongsam with keyhole chest cut-out", "tags": ["nsfw"] },
+                { "label": "開胸旗袍 (挖空)", "value": "wearing a modified cheongsam with a deep V-neck and high slit, the open neckline reveals her ample cleavage and skin", "tags": ["sexy"] },
                 { "label": "入膊旗袍 (削肩)", "value": "wearing a halter-neck sleeveless cheongsam" },
                 { "label": "短裙改良旗袍 (Mini)", "value": "wearing a modern tight mini cheongsam" },
                 { "label": "蕾絲透視旗袍", "value": "wearing a sheer lace cheongsam style lingerie", "tags": ["nsfw"] }
@@ -372,15 +372,15 @@
             "group": "特色服裝 (Special)",
             "options": [
                 { "label": "傳統和服", "value": "traditional japanese kimono, ornate silk fabric, obi sash" },
-                { "label": "現代和服", "value": "modern kimono-style outfit, short skirt, wide obi belt" },
+                { "label": "性感和服", "value": "modified sexy japanese kimono, ornate silk fabric, obi sash", "tags": ["sexy"]},
                 { "label": "傳統韓服", "value": "traditional korean hanbok, high-waisted skirt, jeogori jacket" },
-                { "label": "現代韓服", "value": "modern korean hanbok, high-waisted skirt, jacket with lapels" },
+                { "label": "性感韓服", "value": "modified sexy korean hanbok, high-waisted skirt, jeogori jacket", "tags":["sexy"] },
                 { "label": "傳統泰服", "value": "traditional thai outfit, chut thai, sabai shawl, wrapped skirt" },
-                { "label": "現代泰服", "value": "modern thai outfit, chut thai, sabai shawl, fitted skirt" },
-                { "label": "中式齊胸襦裙 (漢服)", "value": "chinese ancient hanfu, ruqun style, flowing sleeves, traditional embroidery" },
-                { "label": "現代中式齊胸襦裙 (漢服)", "value": "modern chinese hanfu, ruqun style, flowing sleeves, traditional embroidery" },
+                { "label": "性感泰服", "value": "modified sexy thai outfit, chut thai, sabai shawl, wrapped skirt", "tags": ["sexy"]},
+                { "label": "中式漢服", "value": "chinese ancient hanfu, ruqun style, flowing sleeves, traditional embroidery" },
+                { "label": "性感漢服", "value": "modified deep V-neck, high-slit embroidered tulle Hanfu, the open collar reveals her skin and cleavage, exuding both coolness and sexiness while maintaining elegance", "tags": ["sexy"]},
                 { "label": "越南奧黛", "value": "vietnamese ao dai, long tunic with high slits over trousers" },
-                { "label": "現代越南奧黛", "value": "modern vietnamese ao dai, long tunic with high slits over trousers" }
+                { "label": "性感奧黛", "value": "modified sexy vietnamese ao dai with a deep V-neck and high slit, the open neckline reveals her ample cleavage and skin, long tunic with high slits over trousers", "tags": ["sexy"]}
             ]
         }
     ],
@@ -545,6 +545,7 @@
         { "label": "花紋(無)", "value": "" },
         { "label": "碎花", "value": "small floral print" },
         { "label": "和風花紋", "value": "traditional japanese patterns" },
+        { "label": "幾何圖案", "value": "geometric patterns" },
         { "label": "豹紋", "value": "leopard print" },
         { "label": "蛇紋", "value": "snakeskin print" },
         { "label": "格紋", "value": "plaid" },
