@@ -26,7 +26,7 @@
             "group": "日常帽款 (Hats)",
             "options": [
                 { "label": "棒球帽 (反戴)", "value": "wearing a baseball cap backwards" },
-                { "label": "棒球帽 (正戴)", "value": "wearing a baseball cap" },
+                { "label": "棒球帽 (Cap)", "value": "wearing a baseball cap" },
                 { "label": "針織毛帽 (Pompom)", "value": "wearing a thick cable-knit beanie with a pompom" },
                 { "label": "毛線帽 (Beanie)", "value": "wearing a knitted beanie" },
                 { "label": "毛絨護耳罩 (Earmuffs)", "value": "wearing fluffy winter earmuffs" },
@@ -125,7 +125,7 @@
                 { "label": "腿環 (Garter)", "value": "wearing a leather thigh garter" },
                 { "label": "聽診器", "value": "wearing a stethoscope" },
                 { "label": "紋身 (手臂)", "value": "with tattoos on arms" },
-                { "label": "手袋 (手袋)", "value": "wearing a handbag" }
+                { "label": "手袋 (Handbag)", "value": "wearing a handbag" }
             ]
         },
         {
@@ -196,12 +196,20 @@
             "group": "日常/時尚",
             "options": [
                 { "label": "牛仔外套 (Denim)", "value": "wearing a classic denim jacket" },
+                { "label": "敞開的牛仔外套 (Open)", "value": "wearing an unbuttoned denim jacket" },
                 { "label": "飛行夾克 (Bomber)", "value": "wearing a bomber jacket" },
+                { "label": "敞開的飛行夾克", "value": "wearing an unzipped bomber jacket" },
                 { "label": "皮革騎士夾克 (Leather)", "value": "wearing a black leather biker jacket" },
+                { "label": "敞開的皮衣 (Open)", "value": "wearing an open leather biker jacket" },
+                { "label": "運動風褸 (Windbreaker)", "value": "wearing a lightweight sports windbreaker" },
+                { "label": "敞開的運動風褸", "value": "wearing an open lightweight sports windbreaker, revealing inner clothing" },
+                { "label": "連帽外套 (Zip Hoodie)", "value": "wearing a zip-up hoodie" },
+                { "label": "敞開的連帽外套", "value": "wearing an unzipped hoodie jacket" },
                 { "label": "針織開襟衫 (Cardigan)", "value": "wearing a cozy knit cardigan" },
                 { "label": "棒球褸 (Varsity)", "value": "wearing a classic varsity jacket with contrast sleeves" },
                 { "label": "敞開的棒球褸 (Open)", "value": "wearing an unbuttoned varsity jacket, revealing inner wear" },
                 { "label": "風衣 (Trench)", "value": "wearing a beige trench coat" },
+                { "label": "敞開的風衣", "value": "wearing an open trench coat" },
                 { "label": "披肩 (Shawl)", "value": "wearing a knitted shawl draped over shoulders" }
             ]
         }
@@ -264,7 +272,6 @@
                 { "label": "短版運動背心", "value": "cropped athletic tank top" },
                 { "label": "緞面內搭背心", "value": "satin camisole worn under jacket" },
                 { "label": "露肚臍吊帶背心", "value": "spaghetti strap camisole showing belly button" },
-                { "label": "露肚臍吊帶背心 (短)", "value": "short spaghetti strap camisole showing belly button" },
                 { "label": "大袖口背心 (側乳)", "value": "tank top with large armholes revealing sideboob", "tags": ["nsfw"] },
                 { "label": "露肚肚吊帶背心 (側乳)", "value": "spaghetti strap camisole with sideboob", "tags": ["nsfw"] }
             ]
@@ -480,7 +487,7 @@
                 { "label": "黑絲襪 (Pantyhose)", "value": "black sheer pantyhose" },
                 { "label": "網襪 (Fishnet)", "value": "black fishnet stockings" },
                 { "label": "吊帶襪 (Garter)", "value": "sexy garter belt and stockings", "tags": ["nsfw"] },
-                { "label": "絲襪", "value": "silk stockings" }
+                { "label": "絲襪 (Stockings)", "value": "silk stockings" }
             ]
         }
     ],

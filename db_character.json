@@ -66,25 +66,27 @@
         { "label": "寬臀 (Wide)", "value": "wide, curvy hips" }
     ],
     "hairColor": [
-        { "label": "黑", "value": "black" },
-        { "label": "深棕", "value": "dark brown" },
+        { "label": "黑色 (Black)", "value": "black" },
+        { "label": "深棕 (Dark Brown)", "value": "dark brown" },
         { "label": "淺棕 (Light Brown)", "value": "light brown" },
         { "label": "淺金灰 (Ash Blonde)", "value": "ash blonde" },
-        { "label": "紅棕色", "value": "red-brown" },
-        { "label": "金", "value": "blonde" },
-        { "label": "白金", "value": "platinum blonde" },
-        { "label": "紅", "value": "red" },
-        { "label": "粉紅", "value": "pink" },
-        { "label": "銀灰", "value": "silver" },
-        { "label": "漸層藍", "value": "blue ombre" }
+        { "label": "金色 (Blonde)", "value": "blonde" },
+        { "label": "白金 (Platinum)", "value": "platinum blonde" },
+        { "label": "銀色 (Silver)", "value": "silver" },
+        { "label": "白色 (White)", "value": "white" },
+        { "label": "紅色 (Red)", "value": "red" },
+        { "label": "粉紅 (Pink)", "value": "pink" },
+        { "label": "紫色 (Purple)", "value": "purple" },
+        { "label": "藍色 (Blue)", "value": "blue" },
+        { "label": "漸層挑染 (Ombre)", "value": "ombre hair" },
+        { "label": "多色挑染 (Streaked)", "value": "streaked hair, multicolored" }
     ],
     "hairStyle": [
         {
             "group": "長髮系列",
             "options": [
-                { "label": "長直髮 (一般)", "value": "long straight hair" },
+                { "label": "長直髮", "value": "long straight hair" },
                 { "label": "微波浪長髮", "value": "long hair with messy waves" },
-                { "label": "黑長直", "value": "classic long straight hair" },
                 { "label": "柔亮大波浪", "value": "glossy long wavy hair" },
                 { "label": "直順長髮+齊瀏海", "value": "sleek long hair with blunt bangs" },
                 { "label": "華麗側分復古波浪", "value": "glamourous side-parted vintage waves" }
@@ -116,11 +118,11 @@
             "options": [
                 { "label": "高馬尾 (High Ponytail)", "value": "high ponytail" },
                 { "label": "低馬尾 (Low Ponytail)", "value": "low ponytail with loose strands" },
-                { "label": "黑色盤髮 (Updo)", "value": "black hair styled in an elegant updo" },
-                { "label": "高緊馬尾", "value": "high tight ponytail" },
-                { "label": "低髮髻馬尾", "value": "low bun ponytail" },
+                { "label": "優雅盤髮 (Updo)", "value": "hair styled in an elegant updo" },
+                { "label": "側馬尾 (Side Ponytail)", "value": "side ponytail" },
                 { "label": "雙馬尾 (Twintails)", "value": "twintails" },
-                { "label": "丸子頭", "value": "single hair bun" }
+                { "label": "麻花辮 (Braids)", "value": "braided hair, twin braids" },
+                { "label": "丸子頭 (Bun)", "value": "single hair bun" }
             ]
         },
         {
@@ -128,7 +130,8 @@
             "options": [
                 { "label": "薄瀏海", "value": "thin see-through bangs" },
                 { "label": "齊薄瀏海", "value": "thin blunt bangs" },
-                { "label": "姬髮式", "value": "hime cut" }
+                { "label": "姬髮式", "value": "hime cut" },
+                { "label": "遮眼瀏海", "value": "hair over eyes" }
             ]
         }
     ],

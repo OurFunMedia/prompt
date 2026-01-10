@@ -1,6 +1,35 @@
 {
     "actionPose": [
         {
+            "group": "靜態/姿勢 (Static)",
+            "options": [
+                { "label": "自然站立 (Standing)", "value": "standing naturally, posing" },
+                { "label": "優閒坐著 (Sitting)", "value": "sitting comfortably" },
+                { "label": "蹲著 (Squat)", "value": "squatting down on heels" },
+                { "label": "趴著/伏著 (Prone)", "value": "lying on stomach, prone position, legs up" },
+                { "label": "跪姿 (Kneeling)", "value": "kneeling on floor" },
+                { "label": "回眸 (Looking Back)", "value": "looking back over shoulder" },
+                { "label": "雙手托腮", "value": "resting chin in hands, looking cute" },
+                { "label": "雙手抱頭", "value": "hands behind head, elbows out, chest out" },
+                { "label": "彎腰", "value": "bending over forward" },
+                { "label": "靠牆", "value": "leaning against a wall" }
+            ]
+        },
+        {
+            "group": "生活動態 (Life Activities)",
+            "options": [
+                { "label": "動態姿勢 (動態)", "value": "dynamic pose, moving" },
+                { "label": "走路/跑步", "value": "walking towards camera, running" },
+                { "label": "梳妝/整理儀容", "value": "applying makeup, tying hair, adjusting clothes" },
+                { "label": "自拍/拍照", "value": "taking a mirror selfie, holding a camera" },
+                { "label": "伸懶腰/打哈欠", "value": "stretching arms overhead, yawning" },
+                { "label": "睡覺/休息", "value": "sleeping, resting" },
+                { "label": "做家務 (烹飪/打掃)", "value": "cooking, cleaning, doing chores" },
+                { "label": "運動/健身", "value": "exercising, working out, yoga pose" },
+                { "label": "跳舞/表演", "value": "dancing, performing on stage" }
+            ]
+        },
+        {
             "group": "極致誘惑 (Sexy)",
             "options": [
                 { "label": "前傾 (擠溝)", "value": "leaning forward, elbows on table, cleavage focus", "tags": ["sexy"] },
@@ -16,134 +45,19 @@
                 { "label": "雙手被縛身後", "value": "hands tied behind back", "tags": ["nsfw"] },
                 { "label": "Jack-o pose", "value": "posing with arms raised and bent, hands near head like pumpkin", "tags": ["sexy"] }
             ]
-        },
-        {
-            "group": "靜態/姿勢 (Static)",
-            "options": [
-                { "label": "模特姿勢", "value": "modeling pose" },
-                { "label": "自然站立", "value": "standing naturally" },
-                { "label": "內八站立", "value": "standing with pigeon-toed posture" },
-                { "label": "靠牆站立", "value": "leaning against a wall casually" },
-                { "label": "單腳站立", "value": "standing on one leg gracefully" },
-                { "label": "雙腿交叉站立", "value": "standing with legs crossed elegantly" },
-                { "label": "S型站姿", "value": "standing with exaggerated S-curve pose" },
-                { "label": "雙腳張開站立", "value": "standing with feet apart confidently" },
-                { "label": "雙手放在背後", "value": "standing with hands behind back" },
-                { "label": "雙手抱頭", "value": "hands behind head, elbows out, chest out" },
-                { "label": "雙手插口袋", "value": "standing with hands inside jacket pockets" },
-                { "label": "坐在椅子上", "value": "sitting on a chair" },
-                { "label": "挺胸坐著 (莊嚴)", "value": "sitting upright with chest out, dignified and confident" },
-                { "label": "優閒坐著", "value": "sitting comfortably and relaxed" },
-                { "label": "坐椅子翹腳", "value": "sitting on chair with one leg crossed over the other" },
-                { "label": "抱膝坐", "value": "sitting on floor hugging knees to chest" },
-                { "label": "雙腿交疊 (翹腳)", "value": "legs crossed elegantly" },
-                { "label": "雙手托腮", "value": "resting chin in hands, looking cute" },
-                { "label": "蹲著 (Squat)", "value": "squatting down on heels" },
-                { "label": "趴著/伏著 (Prone)", "value": "lying on stomach, prone position, legs up" },
-                { "label": "跪姿後仰", "value": "kneeling and arching back significantly" },
-                { "label": "縮著肩膀 (寒冷)", "value": "shrugging shoulders and trembling slightly from the cold" },
-                { "label": "單手心形手勢", "value": "making a half-heart gesture with one hand towards camera" },
-                { "label": "彎腰", "value": "bending over forward" },
-                { "label": "回眸 (背殺)", "value": "looking back over shoulder, emphasizing buttocks" }
-            ]
-        },
-        {
-            "group": "生活動態 (Life Activities)",
-            "options": [
-                { "label": "動態姿勢 (動態)", "value": "dynamic pose, moving" },
-                { "label": "伸手", "value": "reaching out with one hand" },
-                { "label": "走路", "value": "walking towards camera" },
-                { "label": "跳躍", "value": "jumping up and down" },
-                { "label": "拍照", "value": "taking a photo with a camera" },
-                { "label": "錄影", "value": "recording a video with a camcorder" },
-                { "label": "做飯", "value": "cooking in the kitchen" },
-                { "label": "洗碗", "value": "washing dishes at the sink" },
-                { "label": "掃地", "value": "sweeping the floor with a broom" },
-                { "label": "拖地", "value": "mopping the floor with a mop" },
-                { "label": "澆花", "value": "watering plants with a watering can" },
-                { "label": "喝飲料", "value": "drinking a beverage" },
-                { "label": "吃東西", "value": "eating food, holding a fork" },
-                { "label": "滑手機", "value": "browsing on smartphone" },
-                { "label": "打電腦", "value": "typing on laptop" },
-                { "label": "閱讀", "value": "reading a book" },
-                { "label": "書寫", "value": "writing notes in a notebook with a pen" },
-                { "label": "畫畫", "value": "drawing a sketch on a sketchbook" },
-                { "label": "梳妝", "value": "applying makeup in a mirror" },
-                { "label": "組裝模型", "value": "building a plastic model kit at desk" },
-                { "label": "綁馬尾", "value": "tying hair up with both hands" },
-                { "label": "撩髮", "value": "running fingers through hair" },
-                { "label": "自拍", "value": "taking a mirror selfie" },
-                { "label": "伸懶腰", "value": "stretching arms overhead, yawning" },
-                { "label": "打哈欠", "value": "yawning widely" },
-                { "label": "揉眼睛", "value": "rubbing eyes sleepily" },
-                { "label": "睡覺", "value": "sleeping" },
-                { "label": "整理衣服", "value": "adjusting clothing with hands" },
-                { "label": "拍拍頭", "value": "slapping own head" },
-                { "label": "拍拍肚子", "value": "slapping own stomach" },
-                { "label": "騎機車", "value": "riding a motorcycle or scooter" },
-                { "label": "撐傘走路", "value": "walking while holding an umbrella" }
-            ]
-        },
-        {
-            "group": "舞蹈/表演 (Performance)",
-            "options": [
-                { "label": "跳舞", "value": "dancing with dynamic pose" },
-                { "label": "K-pop舞蹈姿勢", "value": "striking a K-pop dance pose" },
-                { "label": "芭蕾舞姿", "value": "in ballet dance pose, graceful" },
-                { "label": "街舞姿勢", "value": "breakdancing pose, urban style" },
-                { "label": "舞台表演", "value": "performing on stage" },
-                { "label": "指揮動作", "value": "conducting with arms raised" },
-                { "label": "歌唱中", "value": "singing with microphone" },
-                { "label": "彈鋼琴", "value": "playing piano" },
-                { "label": "彈吉他", "value": "playing guitar" },
-                { "label": "模特兒台步", "value": "walking down a runway" }
-            ]
-        },
-        {
-            "group": "運動/健身 (Sports)",
-            "options": [
-                { "label": "跑步", "value": "jogging or running" },
-                { "label": "伸展運動", "value": "doing stretching exercises" },
-                { "label": "瑜伽姿勢", "value": "in yoga pose" },
-                { "label": "健身訓練", "value": "working out with exercise equipment" },
-                { "label": "騎腳踏車", "value": "riding a bicycle" },
-                { "label": "游泳", "value": "swimming in water" },
-                { "label": "滑雪中", "value": "skiing down a slope" },
-                { "label": "打網球", "value": "playing tennis" },
-                { "label": "打籃球", "value": "playing basketball" },
-                { "label": "打排球", "value": "playing volleyball" },
-                { "label": "打羽毛球", "value": "playing badminton" },
-                { "label": "打高爾夫球", "value": "swinging a golf club" }
-            ]
-        },
-        {
-            "group": "戶外活動 (Outdoor Activities)",
-            "options": [
-                { "label": "登山", "value": "hiking up a mountain trail" },
-                { "label": "騎馬", "value": "riding a horse" },
-                { "label": "衝浪", "value": "surfing on a wave" },
-                { "label": "滑板", "value": "skateboarding" },
-                { "label": "露營活動", "value": "setting up a tent" },
-                { "label": "野餐", "value": "having a picnic outdoors" }
-            ]
         }
     ],
     "actionActivity": [
         { "label": "無特定動作", "value": "" },
-        { "label": "正在看書", "value": "reading an old book" },
-        { "label": "手持熱咖啡", "value": "holding a steaming cup of coffee" },
-        { "label": "滑手機", "value": "browsing on a smartphone" },
-        { "label": "摸貓", "value": "petting a fluffy cat" },
-        { "label": "梳頭", "value": "combing her hair" },
-        { "label": "畫畫", "value": "sketching in a notebook" },
-        { "label": "吃東西", "value": "eating a snack" },
+        { "label": "閱讀/書寫", "value": "reading a book, writing notes" },
+        { "label": "飲食/喝咖啡", "value": "eating food, drinking beverage" },
+        { "label": "使用手機/電腦", "value": "using smartphone, working on laptop" },
         { "label": "聽音樂", "value": "listening to music with headphones" }
     ],
     "actionExpression": [
         { "label": "--- 無特定表情 ---", "value": "" },
         { "label": "羞澀靦腆笑容", "value": "shy and bashful smile, slight blush, looking at viewer shyly, sweet demeanor" },
         { "label": "臉部凍紅", "value": "cheeks and nose tip blushing red from the cold" },
-        { "label": "嘴部吐氣 (白煙)", "value": "exhaling visible white mist breath in the cold air" },
         { "label": "明亮眼神直視", "value": "bright eyes looking directly at camera" },
         { "label": "眼神離開鏡頭", "value": "looking away from camera" },
         { "label": "微張嘴 (Surprised)", "value": "mouth slightly open" },
@@ -159,219 +73,51 @@
     ],
     "sceneLoc": [
         {
-            "group": "冬季/戶外 (Winter)",
-            "options": [
-                { "label": "滑雪場 (Ski Resort)", "value": "at a snowy ski resort with mountains in background" },
-                { "label": "雪山頂", "value": "on a snow-capped mountain peak" },
-                { "label": "冬季街道", "value": "standing on a snow-covered city street" },
-                { "label": "針葉林 (雪地)", "value": "in a dense pine forest covered in heavy snow" }
-            ]
-        },
-        {
             "group": "私密/居家 (Home & Private)",
             "options": [
-                { "label": "客廳梳化 (Sofa)", "value": "lounging on a soft sofa in a modern living room" },
-                { "label": "壁爐前 (地毯)", "value": "sitting on a fur rug in front of a burning fireplace" },
-                { "label": "雪景窗邊", "value": "sitting by a window looking out at heavy snow" },
-                { "label": "臥室書桌", "value": "at a bedroom desk with personal items" },
-                { "label": "梳妝台前", "value": "sitting at a makeup vanity table with a large mirror" },
-                { "label": "衣櫃", "value": "in a clothes cabinet with a mirror" },
-                { "label": "凌亂的臥室", "value": "in a messy bedroom with clothes on floor" },
-                { "label": "浴缸邊", "value": "sitting on the edge of a large bathtub" },
-                { "label": "浴室洗手盆", "value": "leaning against a bathroom sink, mirror selfie view" },
-                { "label": "馬桶上", "value": "sitting on a toilet in a white tiled bathroom" },
-                { "label": "浴室 (濕身)", "value": "in a steamy shower with glass walls" },
-                { "label": "浴室 (洗澡)", "value": "in a hot tub with a large bathtub" },
-                { "label": "廚房流理台", "value": "sitting on a kitchen counter" },
-            { "label": "自家陽台", "value": "standing on a balcony with city view" },
-            { "label": "落地窗前", "value": "sitting by a large floor-to-ceiling window" },
-            { "label": "大床", "value": "on a large bed with blankets" },
-            { "label": "日式溫泉旅館", "value": "in a traditional Japanese onsen inn" },
-            { "label": "豪華飯店房", "value": "in a luxurious hotel room with a king-size bed" },
-            { "label": "愛情賓館圓床", "value": "on a round red bed in a love hotel", "tags": ["sexy"] },
-            { "label": "充滿鏡子的房間", "value": "in a room full of mirrors", "tags": ["sexy"] },
-            { "label": "地牢 (Dungeon)", "value": "in a dimly lit dungeon with chains", "tags": ["nsfw"] }
+                { "label": "客廳 (Living Room)", "value": "in a modern living room, sofa" },
+                { "label": "臥室 (Bedroom)", "value": "in a cozy bedroom, bed" },
+                { "label": "浴室 (Bathroom)", "value": "in a bathroom, tiled walls" },
+                { "label": "廚房 (Kitchen)", "value": "in a kitchen, counter" },
+                { "label": "陽台 (Balcony)", "value": "standing on a balcony with city view" },
+                { "label": "飯店/旅館 (Hotel)", "value": "in a luxurious hotel room" }
             ]
         },
         {
-            "group": "交通運輸 (Transport)",
+            "group": "都市/交通 (City & Transport)",
             "options": [
-                { "label": "車內副駕位", "value": "sitting in the passenger seat of a luxury car" },
-                { "label": "飛機場 (大廳)", "value": "walking in a busy airport terminal" },
-                { "label": "飛機內 (機艙)", "value": "sitting in an airplane cabin seat (economy class)" },
-                { "label": "鐵路車廂內 (地鐵)", "value": "inside a crowded commuter train carriage" },
-                { "label": "無人電車 (空)", "value": "in an empty subway train car" },
-                { "label": "巴士車廂內", "value": "sitting inside a moving city bus" },
-                { "label": "巴士站", "value": "waiting at a bus stop on the street" },
-                { "label": "豪車後座", "value": "in the back seat of a luxury limousine" }
+                { "label": "街道/路口", "value": "on a busy city street, intersection" },
+                { "label": "公園/廣場", "value": "in a public park, outdoor plaza" },
+                { "label": "商店/商場", "value": "inside a shopping mall, boutique" },
+                { "label": "咖啡廳/餐廳", "value": "in a cozy coffee shop, restaurant" },
+                { "label": "大眾運輸 (地鐵/巴士)", "value": "inside a subway train, bus" },
+                { "label": "車內 (Car)", "value": "sitting inside a luxury car" },
+                { "label": "圖書館/書店", "value": "in a library, bookstore" },
+                { "label": "娛樂場所 (電影/KTV)", "value": "in a movie theater, karaoke room" },
+                { "label": "夜店/酒吧", "value": "in a nightclub, bar" }
             ]
         },
         {
-            "group": "都市日常 (City Life)",
+            "group": "戶外/自然 (Outdoor)",
             "options": [
-                { "label": "休憩公園 (長木凳)", "value": "sitting on a long wooden bench in a peaceful park" },
-                { "label": "圖書館", "value": "in a quiet public library with rows of bookshelves" },
-                { "label": "網吧 (Internet Cafe)", "value": "in a dimly lit internet cafe (PC bang) with neon lights" },
-                { "label": "補習社/教室", "value": "in a cramped cram school classroom with desks" },
-                { "label": "遊樂場 (公園)", "value": "at a public playground with slides and swings" },
-                { "label": "垃圾站", "value": "standing near a dirty urban garbage collection station" },
-                { "label": "服裝店", "value": "browsing clothes in a fashion boutique store" },
-                { "label": "更衣室 (試身間)", "value": "inside a small clothing store fitting room with mirrors" },
-                { "label": "手搖飲品店", "value": "inside a trendy bubble tea shop" },
-                { "label": "美容/髮廊", "value": "sitting in a hair salon chair" },
-                { "label": "便利商店", "value": "inside a brightly lit convenience store" },
-                { "label": "電影院 (內)", "value": "sitting in a movie theater seat" },
-                { "label": "電影院 (外)", "value": "standing outside a movie theater entrance" },
-                { "label": "遊戲中心", "value": "in a video game arcade with neon lights" },
-                { "label": "咖啡店 (連鎖)", "value": "inside a popular chain coffee shop" },
-                { "label": "書店", "value": "browsing books in a cozy bookstore" },
-                { "label": "美術館/博物館", "value": "in an art gallery with paintings on walls" },
-                { "label": "音樂教室", "value": "in a music classroom with instruments" },
-                { "label": "健身房", "value": "in a gym with a variety of exercise equipment" },
-                { "label": "網球場", "value": "sitting on a bench in a tennis court" },
-                { "label": "游泳池", "value": "in a swimming pool with other swimmers" },
-                { "label": "游泳池 (漂浮)", "value": "lying on water surface in a swimming pool" },
-                { "label": "電梯內", "value": "inside a modern glass elevator" },
-                { "label": "自動販賣機", "value": "standing in front of a vending machine" },
-                { "label": "街頭巷尾", "value": "standing on a busy city street with buildings" },
-                { "label": "十字路口", "value": "at a busy city intersection with traffic lights" },
-                { "label": "地鐵站月台", "value": "on a subway station platform with train tracks" },
-                { "label": "夜店 (室內)", "value": "in a trendy nightclub with dance floor" },
-                { "label": "夜店 (外觀)", "value": "outside a flashy nightclub entrance at night" }
+                { "label": "海灘 (Beach)", "value": "on a sandy beach, ocean view" },
+                { "label": "森林/樹林", "value": "in a dense forest, trees" },
+                { "label": "山頂/高處", "value": "on a mountain peak, scenic view" },
+                { "label": "花園/草地", "value": "in a flower garden, grassy field" },
+                { "label": "泳池", "value": "in a swimming pool" },
+                { "label": "溫泉", "value": "in a hot spring" },
+                { "label": "雪地/冬季", "value": "in a snowy landscape, winter" }
             ]
         },
         {
-            "group": "校園生活 (School Life)",
+            "group": "特殊/職場 (Special & Work)",
             "options": [
-                { "label": "教室 (窗邊座位)", "value": "sitting at a school desk by the window, sunlight streaming in, classroom background" },
-                { "label": "教室 (黑板前)", "value": "standing in front of a green chalkboard in a classroom" },
-                { "label": "放學後的教室 (夕陽)", "value": "in an empty classroom at sunset, golden hour lighting, shadows" },
-                { "label": "學校走廊 (Lockers)", "value": "standing in a long school hallway with lockers on sides" },
-                { "label": "學校頂樓 (鐵網)", "value": "on the school rooftop with chain-link fence, blue sky background" },
-                { "label": "保健室 (病床)", "value": "sitting on a bed in the school infirmary (nurse's office), white curtains" },
-                { "label": "體育器材室", "value": "inside a gym equipment storage room, sports mats and balls" },
-                { "label": "室內體育館", "value": "inside a school gymnasium, basketball court lines, polished wood floor" },
-                { "label": "鞋櫃區 (玄關)", "value": "at the school entrance area with rows of shoe lockers (getabako)" },
-                { "label": "樓梯間 (轉角)", "value": "on the school staircase landing area" },
-                { "label": "操場 (跑道)", "value": "on the school running track field, outdoors" },
-                { "label": "圖書室 (書架)", "value": "in a quiet school library between bookshelves" },
-                { "label": "更衣室 (Locker Room)", "value": "inside a school locker room, changing clothes" }
-            ]
-        },
-        {
-            "group": "餐飲美食 (Food & Dining)",
-            "options": [
-                { "label": "高級餐廳", "value": "at a table in a luxury fine dining restaurant with candlelight" },
-                { "label": "自助餐 (Buffet)", "value": "eating at a buffet with a variety of dishes" },
-                { "label": "餐廳 (室內)", "value": "at a table in a cozy restaurant with wooden counter" },
-                { "label": "餐廳 (外觀)", "value": "at a table in a restaurant with a modern, minimalist design" },
-                { "label": "快餐店", "value": "inside a bright fast food restaurant booth" },
-                { "label": "咖啡廳", "value": "in a cozy coffee shop with wooden counter" },
-                { "label": "夜市", "value": "in a bustling night market with street food stalls" },
-                { "label": "路邊小食檔", "value": "standing in front of a street food stall" },
-                { "label": "酒吧", "value": "sitting at a dimly lit bar counter" }
-            ]
-        },
-        {
-            "group": "職場/工業 (Work & Industry)",
-            "options": [
-                { "label": "醫院 (室內)", "value": "sitting in a modern hospital room with glass walls" },
-                { "label": "診所 (候診室)", "value": "in a small clinic waiting room with chairs" },
-                { "label": "教室 (講台)", "value": "standing at the teacher's podium in a classroom" },
-                { "label": "實驗室", "value": "in a scientific laboratory with equipment" },
-                { "label": "辦公室 (室內)", "value": "sitting in a modern office with glass walls" },
-                { "label": "老闆辦公室", "value": "standing in the boss's luxury office with a large desk" },
-                { "label": "會議室", "value": "sitting in a corporate meeting room with glass walls" },
-                { "label": "辦公桌 (工作)", "value": "working at a cluttered office desk" },
-                { "label": "工廠 (運作中)", "value": "inside a busy manufacturing factory floor" },
-                { "label": "廢棄工廠", "value": "in an abandoned industrial factory with rust" },
-                { "label": "倉庫 (貨架)", "value": "in a large warehouse with tall shelves of boxes" },
-                { "label": "建築工地", "value": "at a construction site with scaffolding" },
-                { "label": "加油站", "value": "at a gas station with fuel pumps" },
-                { "label": "超市貨倉", "value": "in a supermarket stockroom with shelves of products" },
-                { "label": "汽車維修廠", "value": "in a car repair shop with tools and machinery" },
-                { "label": "洗車場", "value": "at a car wash station with water sprays" },
-                { "label": "農場 (田野)", "value": "in a rural farm field with crops" }
-            ]
-        },
-        {
-            "group": "戶外/其他",
-            "options": [
-                { "label": "溫泉 (泡湯)", "value": "sitting on a hot tub in the sun" },
-                { "label": "滑雪 (雪橇)", "value": "sitting on a snowboard in the snow" },
-                { "label": "滑雪 (滑道)", "value": "skiing down a mountain slope with a snowboard" },
-                { "label": "滑雪 (雪橢)", "value": "sitting on a snow sled in the snow" },
-                { "label": "營地 (露營)", "value": "camping in a tent under the stars" },
-                { "label": "露營區", "value": "in a camping area with tents and fire pits" },
-                { "label": "燒烤場地", "value": "grilling food on a barbecue pit" },
-                { "label": "山徑 (徒步)", "value": "hiking on a mountain trail with a backpack" },
-                { "label": "遊樂園 (旋轉木馬)", "value": "at an amusement park with carousel in background" },
-                { "label": "海灘", "value": "on a sandy beach under the sun" },
-                { "label": "戶外廣場", "value": "in a busy outdoor plaza with people" },
-                { "label": "公園", "value": "in a park with trees and flowers" },
-                { "label": "森林", "value": "in a dense forest with tall trees" },
-                { "label": "山頂", "value": "on a mountain peak with scenic view" },
-                { "label": "河邊", "value": "by a calm riverside with rocks" },
-                { "label": "櫻花樹下", "value": "under blooming cherry blossom trees" },
-                { "label": "煙火下", "value": "under colorful fireworks in the night sky" },
-                { "label": "城市天台", "value": "on a city rooftop with skyline view" },
-                { "label": "夜晚街頭", "value": "neon city street at night under rain" },
-                { "label": "沙漠", "value": "in a vast desert with sand dunes" },
-                { "label": "草原", "value": "in a green grassland with flowers" },
-                { "label": "竹林", "value": "in a bamboo forest" },
-                { "label": "湖畔", "value": "by a peaceful lake surrounded by trees" },
-                { "label": "懸崖邊", "value": "standing on a cliff edge overlooking the sea" },
-                { "label": "稻田", "value": "in a rice field with golden stalks" },
-                { "label": "墓園", "value": "in a cemetery with tombstones and autumn leaves" }
-            ]
-        },
-        {
-            "group": "傢俱/擺設 (Furniture)",
-            "options": [
-                { "label": "單人椅 (Armchair)", "value": "sitting in a comfortable armchair" },
-                { "label": "搖椅 (Rocking Chair)", "value": "sitting in a wooden rocking chair" },
-                { "label": "吧檯椅 (Bar Stool)", "value": "sitting on a bar stool" },
-                { "label": "辦公椅 (Office Chair)", "value": "sitting in a modern office chair" },
-                { "label": "書桌椅", "value": "sitting at a study desk" },
-                { "label": "地毯 (Rug)", "value": "kneeling on a soft rug" },
-                { "label": "地墊 (Floor Mat)", "value": "sitting on a floor mat" },
-                { "label": "餐桌", "value": "sitting at a dining table" },
-                { "label": "床邊", "value": "sitting on the edge of a bed" },
-                { "label": "窗台", "value": "sitting on a window sill" },
-                { "label": "階梯", "value": "sitting on stairs" },
-                { "label": "樓梯扶手", "value": "leaning on a stair railing" }
-            ]
-        },
-        {
-            "group": "電器/設備 (Electronics)",
-            "options": [
-                { "label": "電腦桌前", "value": "sitting at a computer desk" },
-                { "label": "電視機前", "value": "sitting in front of a TV" },
-                { "label": "遊戲機前", "value": "sitting playing on a gaming console" },
-                { "label": "洗衣機旁", "value": "leaning on a washing machine" },
-                { "label": "冷氣機前", "value": "sitting in front of an air conditioner" },
-                { "label": "廚房爐台", "value": "sitting on a kitchen counter near the stove" },
-                { "label": "洗衣房", "value": "in a laundry room with washing machines" },
-                { "label": "音響設備前", "value": "sitting in front of audio equipment" }
-            ]
-        },
-        {
-            "group": "特殊場景 (Special Locations)",
-            "options": [
-                { "label": "教堂 (Church)", "value": "inside a beautiful church with stained glass windows" },
-                { "label": "古堡 (Castle)", "value": "inside an old stone castle" },
-                { "label": "天文台", "value": "in an observatory looking at stars" },
-                { "label": "博物館", "value": "in a grand museum with exhibits" },
-                { "label": "歌劇院", "value": "inside an elegant opera theater" },
-                { "label": "圖書館 (大型)", "value": "in a grand library with tall bookshelves" },
-                { "label": "地下鐵 (通道)", "value": "walking in a subway tunnel" },
-                { "label": "停車場 (地下)", "value": "in an underground parking garage" },
-                { "label": "消防梯", "value": "sitting on a fire escape ladder" },
-                { "label": "天橋", "value": "on a pedestrian bridge" },
-                { "label": "地下街", "value": "walking in an underground shopping arcade" },
-                { "label": "花店", "value": "inside a flower shop with colorful blooms" },
-                { "label": "麵包店", "value": "inside a bakery with fresh pastries" },
-                { "label": "菜市場", "value": "in a busy wet market" }
+                { "label": "辦公室 (Office)", "value": "in a modern office" },
+                { "label": "教室 (Classroom)", "value": "in a school classroom" },
+                { "label": "醫院/診所", "value": "in a hospital room" },
+                { "label": "健身房 (Gym)", "value": "in a fitness gym" },
+                { "label": "工廠/倉庫", "value": "in an industrial factory, warehouse" },
+                { "label": "攝影棚 (Studio)", "value": "in a professional photo studio" }
             ]
         }
     ],
@@ -379,28 +125,29 @@
         { "label": "無裝飾", "value": "" },
         { "label": "大量室內植物", "value": "surrounded by lush green indoor plants" },
         { "label": "書架與雜物", "value": "background filled with bookshelves and vintage items" },
-        { "label": "窗外雪景", "value": "with a view of falling snow through the window" },
         { "label": "凌亂衣物", "value": "with clothes scattered on the floor" },
         { "label": "霓虹燈飾", "value": "decorated with colorful neon lights" },
-        { "label": "復古家具", "value": "furnished with antique wooden furniture" }
+        { "label": "復古家具", "value": "furnished with antique wooden furniture" },
+        { "label": "奢華裝飾 (Luxury)", "value": "luxurious chandelier, gold accents, marble texture" },
+        { "label": "工業/科幻細節", "value": "exposed pipes, wires, futuristic panels" }
     ],
     "scenePropsDetail": [
         { "label": "無額外細節", "value": "" },
-        { "label": "咖啡杯與雜誌", "value": "with coffee cup and magazines on nearby table" },
-        { "label": "手機充電中", "value": "with phone charging on desk" },
+        { "label": "飲食/下午茶", "value": "coffee cup, dessert, snacks on table" },
+        { "label": "數位產品 (筆電/手機)", "value": "laptop open, smartphone nearby, gadgets" },
         { "label": "毛毯與抱枕", "value": "with soft blanket and decorative pillows" },
         { "label": "鏡子裝飾", "value": "with multiple mirrors reflecting the scene" },
         { "label": "燭光點綴", "value": "with scattered candlelight creating warm glow" },
         { "label": "花卉擺設", "value": "with fresh flower arrangements" },
-        { "label": "零食與飲品", "value": "with snacks and drinks nearby" },
         { "label": "書籍堆疊", "value": "with stacks of books scattered around" },
-        { "label": "音響設備", "value": "with music speakers and audio equipment" },
-        { "label": "相機與腳架", "value": "with camera on tripod visible in frame" },
-        { "label": "筆記本電腦", "value": "with laptop open displaying work" }
+        { "label": "影音設備 (相機/音響)", "value": "music speakers, camera on tripod" },
+        { "label": "遊戲設備 (Gaming)", "value": "gaming console, RGB lighting, controller" },
+        { "label": "旅行裝備 (Luggage)", "value": "suitcase, travel bag" },
+        { "label": "文具/書包", "value": "school bag, stationery, open notebook" }
     ],
     "sceneTime": [
         { "label": "時間(不限)", "value": "" },
-        { "label": "夏日午後", "value": "summer afternoon" },
+        { "label": "夏日午後(熱)", "value": "summer afternoon" },
         { "label": "清晨", "value": "at sunrise" },
         { "label": "白天", "value": "daylight" },
         { "label": "黃昏", "value": "at sunset" },
@@ -436,7 +183,7 @@
             { "label": "日系寫真 (Photobook)", "value": "Japanese photobook style, natural and fresh" },
             { "label": "日系甜美寫真", "value": "high visual richness, detailed texture, cinematic lighting, Japanese gravure photography style, sweet and clean aesthetic, high quality, soft focus, non-erotic" },
             { "label": "電影感", "value": "cinematic lighting" },
-            { "label": "私房寫真", "value": "intimate boudoir photography", "tags": ["sexy"] },
+            { "label": "私房寫真", "value": "ultimate seduction and sexiness, intimate boudoir photography", "tags": ["sexy"] },
             { "label": "拍立得", "value": "polaroid style, flash photography" },
             { "label": "賽博龐克", "value": "cyberpunk neon style" }
             ]
@@ -497,11 +244,10 @@
     ],
     "camLens": [
         { "label": "焦段(預設)", "value": "" },
-        { "label": "手機前鏡頭 (自拍)", "value": "wide angle selfie lens, slight distortion, phone camera front lens" },
-        { "label": "35mm (人文)", "value": "35mm lens" },
-        { "label": "50mm (標準)", "value": "50mm standard lens" },
-        { "label": "85mm (人像)", "value": "85mm portrait lens" },
-        { "label": "廣角", "value": "wide angle lens" }
+        { "label": "廣角 (風景/張力)", "value": "wide angle lens" },
+        { "label": "標準 (50mm)", "value": "50mm standard lens" },
+        { "label": "人像 (85mm)", "value": "85mm portrait lens" },
+        { "label": "自拍 (手機鏡頭)", "value": "wide angle selfie lens, slight distortion" }
     ],
     "camAperture": [
         { "label": "光圈(預設)", "value": "" },

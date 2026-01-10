@@ -213,10 +213,20 @@
                     <div>
                         <label class="field-label text-theme"><i class="fas fa-layer-group"></i> 整體風格 (Outfit Theme)</label>
                         <select id="outfit-theme" class="w-full bg-gray-900 border-theme border rounded px-3 py-3 text-sm font-medium text-gray-100 focus:outline-none"></select>
+                        <input type="text" id="outfit-theme-custom" placeholder="自訂服裝風格或特定服飾 (e.g. wearing a kimono)..." class="mt-1 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
                     </div>
                     <div class="grid grid-cols-2 gap-3">
-                        <div><label class="field-label"><i class="fas fa-hat-cowboy"></i> 頭飾 (Headwear)</label><select id="outfit-head" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
-                        <div></div> <div><label class="field-label"><i class="fas fa-gem"></i> 主飾品 (Acc)</label><select id="outfit-acc" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
+                        <div>
+                            <label class="field-label"><i class="fas fa-hat-cowboy"></i> 頭飾 (Headwear)</label>
+                            <select id="outfit-head" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                            <input type="text" id="outfit-head-custom" placeholder="自訂頭飾..." class="mt-1 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
+                        </div>
+                        <div></div> 
+                        <div>
+                            <label class="field-label"><i class="fas fa-gem"></i> 主飾品 (Acc)</label>
+                            <select id="outfit-acc" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                            <input type="text" id="outfit-acc-custom" placeholder="自訂飾品..." class="mt-1 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
+                        </div>
                         <div><label class="field-label"><i class="fas fa-ring"></i> 飾品細節 (Detail)</label><select id="outfit-acc-detail" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
                     </div>
                     
@@ -225,10 +235,12 @@
                         <div>
                             <label class="field-label text-gray-300"><i class="fas fa-vest"></i> 外套 / 罩衫 (Outerwear)</label>
                             <select id="outfit-outer" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                            <input type="text" id="outfit-outer-custom" placeholder="自訂外套..." class="mt-1 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
                         </div>
                         <div>
                             <label class="field-label text-gray-300"><i class="fas fa-shirt"></i> 上衣 (Top)</label>
                             <select id="outfit-top" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm mb-2 focus:outline-none"></select>
+                            <input type="text" id="outfit-top-custom" placeholder="自訂上衣..." class="mb-2 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
                             <div class="grid grid-cols-3 gap-2">
                                 <div><label class="text-[9px] text-gray-500 block text-center">顏色</label><select id="top-color" class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs focus:outline-none"></select></div>
                                 <div><label class="text-[9px] text-gray-500 block text-center">材質</label><select id="top-mat" class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs focus:outline-none"></select></div>
@@ -238,6 +250,7 @@
                         <div>
                             <label class="field-label text-gray-300"><i class="fas fa-user-tag"></i> 下著 (Bottom)</label>
                             <select id="outfit-bottom" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm mb-2 focus:outline-none"></select>
+                            <input type="text" id="outfit-bottom-custom" placeholder="自訂下著..." class="mb-2 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
                             <div class="grid grid-cols-3 gap-2">
                                 <div><label class="text-[9px] text-gray-500 block text-center">顏色</label><select id="bottom-color" class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs focus:outline-none"></select></div>
                                 <div><label class="text-[9px] text-gray-500 block text-center">材質</label><select id="bottom-mat" class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs focus:outline-none"></select></div>
@@ -247,8 +260,16 @@
                     </div>
                     
                     <div class="grid grid-cols-2 gap-3">
-                        <div><label class="field-label"><i class="fas fa-socks"></i> 襪子 (Socks)</label><select id="outfit-sock" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
-                        <div><label class="field-label"><i class="fas fa-shoe-prints"></i> 鞋履 (Shoes)</label><select id="outfit-shoe" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
+                        <div>
+                            <label class="field-label"><i class="fas fa-socks"></i> 襪子 (Socks)</label>
+                            <select id="outfit-sock" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                            <input type="text" id="outfit-sock-custom" placeholder="自訂襪子..." class="mt-1 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
+                        </div>
+                        <div>
+                            <label class="field-label"><i class="fas fa-shoe-prints"></i> 鞋履 (Shoes)</label>
+                            <select id="outfit-shoe" class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                            <input type="text" id="outfit-shoe-custom" placeholder="自訂鞋履..." class="mt-1 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
+                        </div>
                     </div>
                 </div>
 
@@ -256,7 +277,11 @@
                     <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-4 rounded-lg border border-theme border-opacity-30">
                         <p class="text-xs text-theme font-bold uppercase mb-3 border-b border-theme border-opacity-30 pb-2"><i class="fas fa-running mr-1"></i> 動作與表情 (Action)</p>
                         <div class="grid grid-cols-2 gap-4">
-                            <div><label class="field-label"><i class="fas fa-child"></i> 基礎姿勢 (Pose)</label><select id="action-pose" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
+                            <div>
+                                <label class="field-label"><i class="fas fa-child"></i> 基礎姿勢 (Pose)</label>
+                                <select id="action-pose" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                                <input type="text" id="action-pose-custom" placeholder="自訂姿勢細節..." class="mt-1 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
+                            </div>
                             <div><label class="field-label"><i class="fas fa-skating"></i> 互動行為 (Activity)</label><select id="action-activity" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
                         </div>
                         <div class="mt-3"><label class="field-label"><i class="fas fa-laugh"></i> 臉部表情 (Expression)</label><select id="action-expression" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
@@ -266,7 +291,11 @@
                         <p class="text-xs text-blue-300 font-bold uppercase mb-3 border-b border-blue-500/30 pb-2"><i class="fas fa-image mr-1"></i> 環境與氛圍 (Atmosphere)</p>
                         <div class="grid grid-cols-2 gap-4">
                             <div><label class="field-label"><i class="fas fa-clock"></i> 時間 (Time)</label><select id="scene-time" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
-                            <div><label class="field-label"><i class="fas fa-map-marked-alt"></i> 地點 (Location)</label><select id="scene-loc" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
+                            <div>
+                                <label class="field-label"><i class="fas fa-map-marked-alt"></i> 地點 (Location)</label>
+                                <select id="scene-loc" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                                <input type="text" id="scene-loc-custom" placeholder="自訂地點細節..." class="mt-1 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
+                            </div>
                             
                             <div><label class="field-label"><i class="fas fa-box-open"></i> 環境裝飾 (Props)</label><select id="scene-props" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
                             <div><label class="field-label"><i class="fas fa-search-plus"></i> 裝飾細節 (Detail)</label><select id="scene-props-detail" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select></div>
@@ -534,22 +563,51 @@
 
             let outfit = [];
             if(v('outfit-theme')) outfit.push(`Style: ${v('outfit-theme')}`);
-            if(v('outfit-head')) outfit.push(v('outfit-head'));
-            if(v('outfit-acc')) outfit.push(v('outfit-acc'));
+            let themeCustom = v('outfit-theme-custom');
+            if(themeCustom) outfit.push(themeCustom);
+            
+            let head = v('outfit-head');
+            let headCustom = v('outfit-head-custom');
+            let fullHead = [head, headCustom].filter(Boolean).join(", ");
+            if(fullHead) outfit.push(fullHead);
+
+            let acc = v('outfit-acc');
+            let accCustom = v('outfit-acc-custom');
+            let fullAcc = [acc, accCustom].filter(Boolean).join(", ");
+            if(fullAcc) outfit.push(fullAcc);
+
             if(v('outfit-acc-detail')) outfit.push(v('outfit-acc-detail'));
             let top = v('outfit-top');
             if(top) {
                 let attr = [v('top-color'), v('top-pat'), v('top-mat')].filter(Boolean).join(" ");
                 outfit.push(attr ? top.replace("wearing a", `wearing a ${attr}`) : top);
             }
+            let topCustom = v('outfit-top-custom');
+            if(topCustom) outfit.push(topCustom);
+
             let btm = v('outfit-bottom');
             if(btm) {
                 let attr = [v('bottom-color'), v('bottom-pat'), v('bottom-mat')].filter(Boolean).join(" ");
                 outfit.push(attr ? `${btm} (${attr})` : btm);
             }
-            if(v('outfit-outer')) outfit.push(v('outfit-outer'));
-            if(v('outfit-sock')) outfit.push(v('outfit-sock'));
-            if(v('outfit-shoe')) outfit.push(v('outfit-shoe'));
+            let btmCustom = v('outfit-bottom-custom');
+            if(btmCustom) outfit.push(btmCustom);
+
+            let outer = v('outfit-outer');
+            let outerCustom = v('outfit-outer-custom');
+            let fullOuter = [outer, outerCustom].filter(Boolean).join(", ");
+            if(fullOuter) outfit.push(fullOuter);
+
+            let sock = v('outfit-sock');
+            let sockCustom = v('outfit-sock-custom');
+            let fullSock = [sock, sockCustom].filter(Boolean).join(", ");
+            if(fullSock) outfit.push(fullSock);
+
+            let shoe = v('outfit-shoe');
+            let shoeCustom = v('outfit-shoe-custom');
+            let fullShoe = [shoe, shoeCustom].filter(Boolean).join(", ");
+            if(fullShoe) outfit.push(fullShoe);
+
             let outfitStr = outfit.join(", ");
             if (currentMode === 'clean') {
                 const banned = [/latex/gi, /busty/gi, /cleavage/gi, /see-through/gi, /sheer/gi, /bra/gi, /panties/gi, /lingerie/gi, /thong/gi, /naked/gi, /bikini/gi, /nude/gi, /topless/gi];
@@ -557,16 +615,23 @@
             }
             if (outfitStr.trim()) prompts.push(outfitStr);
 
-            let pose = v('action-pose'); let activity = v('action-activity'); let expr = v('action-expression');
-            let act = (pose && activity) ? `She is ${pose} while ${activity}` : (pose || activity || "");
+            let pose = v('action-pose'); 
+            let poseCustom = v('action-pose-custom');
+            let fullPose = [pose, poseCustom].filter(Boolean).join(", ");
+            
+            let activity = v('action-activity'); let expr = v('action-expression');
+            let act = (fullPose && activity) ? `She is ${fullPose} while ${activity}` : (fullPose || activity || "");
             if(expr) act = act ? `${act}, with ${expr}` : `She has ${expr}`;
             if(act) prompts.push(act);
 
             let loc = v('scene-loc');
+            let locCustom = v('scene-loc-custom');
+            let fullLoc = [loc, locCustom].filter(Boolean).join(", ");
+            
             let props = v('scene-props');
             let propsDetail = v('scene-props-detail');
             let env = [v('scene-time'), v('scene-weather'), v('scene-lighting')].filter(Boolean);
-            let sceneStr = loc ? `Location: ${loc}` : "";
+            let sceneStr = fullLoc ? `Location: ${fullLoc}` : "";
             if(props) sceneStr += (sceneStr ? ", " : "") + props;
             if(propsDetail) sceneStr += (sceneStr ? ", " : "") + propsDetail;
             if(env.length) sceneStr += (sceneStr ? ". " : "") + `Environment: ${env.join(", ")}`;
