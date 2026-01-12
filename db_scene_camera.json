@@ -177,7 +177,7 @@
         {
             "group": "寫實風格 (Realistic)",
             "options": [
-            { "label": "寫實 (Realism)", "value": "photorealistic, 8k, raw photo" },
+            { "label": "寫實 (Realism)", "value": "photorealistic, 8k resolution, highly detailed, masterpiece, raw photo" },
             { "label": "iPhone 攝影 (IG風)", "value": "shot on iPhone, instagram style, phone photography, raw photo, hard flash, amateur, candid" }, 
             { "label": "網紅自拍 (Influencer)", "value": "influencer selfie, ring light, beauty filter, tiktok style, uploaded to snapchat" },
             { "label": "日系寫真 (Photobook)", "value": "Japanese photobook style, natural and fresh" },

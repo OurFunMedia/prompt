@@ -146,10 +146,10 @@
         { "label": "榛果色", "value": "hazel eyes" }
     ],
     "faceShape": [
-        { "label": "鵝蛋臉", "value": "an oval face, big round eyes" },
-        { "label": "心形臉", "value": "heart-shaped face, big round eyes" },
+        { "label": "鵝蛋臉", "value": "an oval face, large almond eyes" },
+        { "label": "心形臉", "value": "heart-shaped face, large almond eyes" },
         { "label": "V型臉", "value": "a V-shaped face" },
-        { "label": "圓臉", "value": "a round face, big round eyes" },
+        { "label": "圓臉", "value": "a round face, large almond eyes" },
         { "label": "娃娃臉", "value": "a baby face" },
         { "label": "高顴骨", "value": "defined cheekbones and sharp features" }
     ],
