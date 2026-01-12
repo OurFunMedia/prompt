@@ -42,8 +42,9 @@
         {
             "group": "髮飾/頭帶 (Hair Acc)",
             "options": [
-                { "label": "絲帶髮帶", "value": "wearing a silk ribbon hairband" },
+                { "label": "髮箍", "value": "wearing a hair headband"},
                 { "label": "蕾絲髮箍", "value": "wearing a lace headband" },
+                { "label": "絲帶髮帶", "value": "wearing a silk ribbon hairband" },
                 { "label": "大蝴蝶結 (頭頂)", "value": "wearing a giant bow on top of head" },
                 { "label": "髮夾 (多個)", "value": "wearing multiple colorful hair clips" },
                 { "label": "珍珠髮夾", "value": "wearing pearl hairpins" },
