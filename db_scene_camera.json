@@ -23,6 +23,8 @@
                 { "label": "動態姿勢 (動態)", "value": "dynamic pose, moving" },
                 { "label": "走路/跑步", "value": "walking towards camera, running" },
                 { "label": "梳妝/整理儀容", "value": "applying makeup, tying hair, adjusting clothes" },
+                { "label": "綁馬尾", "value": "tying hair up with both hands" },
+                { "label": "撩髮", "value": "running fingers through hair" },
                 { "label": "自拍/拍照", "value": "taking a mirror selfie, holding a camera" },
                 { "label": "伸懶腰/打哈欠", "value": "stretching arms overhead, yawning" },
                 { "label": "睡覺/休息", "value": "sleeping, resting" },
@@ -44,8 +46,7 @@
                 { "label": "四肢著地 (爬行)", "value": "crawling on all fours towards camera", "tags": ["sexy"] },
                 { "label": "抬腿靠牆", "value": "one leg lifted high against the wall", "tags": ["sexy"] },
                 { "label": "張開雙腿坐", "value": "sitting with legs spread open (M-shape)", "tags": ["nsfw"] },
-                { "label": "雙手被縛身後", "value": "hands tied behind back", "tags": ["nsfw"] },
-                { "label": "Jack-o pose", "value": "posing with arms raised and bent, hands near head like pumpkin", "tags": ["sexy"] }
+                { "label": "雙手被縛身後", "value": "hands tied behind back", "tags": ["nsfw"] }
             ]
         }
     ],
@@ -81,6 +82,7 @@
                 { "label": "臥室 (Bedroom)", "value": "in a cozy bedroom, bed" },
                 { "label": "浴室 (Bathroom)", "value": "in a bathroom, tiled walls" },
                 { "label": "廚房 (Kitchen)", "value": "in a kitchen, counter" },
+                { "label": "窗邊 (Windows)", "value": "near the windows" },
                 { "label": "陽台 (Balcony)", "value": "standing on a balcony with city view" },
                 { "label": "飯店/旅館 (Hotel)", "value": "in a luxurious hotel room" }
             ]
