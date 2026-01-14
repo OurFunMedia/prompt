@@ -428,8 +428,8 @@
             "group": "校服裙/下著 (Uniform Bottoms)",
             "options": [
                 { "label": "格紋百褶裙 (Plaid)", "value": "wearing a plaid pleated school skirt" },
-                { "label": "深藍百褶裙 (Solid)", "value": "wearing a solid navy blue pleated school skirt" },
-                { "label": "灰色西裝裙", "value": "wearing a grey formal school skirt" },
+                { "label": "百褶校裙 (Solid)", "value": "wearing a solid pleated school skirt" },
+                { "label": "西裝校裙", "value": "wearing a formal school skirt" },
                 { "label": "超短改裝校裙 (Mini)", "value": "wearing a micro-mini pleated school skirt, high waist", "tags": ["nsfw"] },
                 { "label": "體育短褲 (Bloomers)", "value": "wearing retro dark blue gym bloomers" },
                 { "label": "體育長褲 (Track pants)", "value": "wearing school jersey track pants with side stripes" }
