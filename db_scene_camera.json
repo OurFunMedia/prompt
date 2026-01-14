@@ -11,6 +11,7 @@
                 { "label": "趴著/伏著 (Prone)", "value": "lying on stomach, prone position, legs up" },
                 { "label": "跪姿 (Kneeling)", "value": "kneeling on floor" },
                 { "label": "回眸 (Looking Back)", "value": "looking back over shoulder" },
+                { "label": "單手心形手勢", "value": "making a half-heart gesture with one hand towards camera" },
                 { "label": "雙手托腮", "value": "resting chin in hands, looking cute" },
                 { "label": "雙手抱頭", "value": "hands behind head, elbows out, chest out" },
                 { "label": "彎腰", "value": "bending over forward" },
@@ -60,6 +61,7 @@
     "actionExpression": [
         { "label": "--- 無特定表情 ---", "value": "" },
         { "label": "羞澀靦腆笑容", "value": "shy and bashful smile, slight blush, looking at viewer shyly, sweet demeanor" },
+        { "label": "梨渦淺笑", "value": "a sweet smile with dimples"},
         { "label": "臉部凍紅", "value": "cheeks and nose tip blushing red from the cold" },
         { "label": "明亮眼神直視", "value": "bright eyes looking directly at camera" },
         { "label": "眼神離開鏡頭", "value": "looking away from camera" },
