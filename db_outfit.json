@@ -90,6 +90,7 @@
         {
             "group": "耳環專區 (Earrings)",
             "options": [
+                { "label": "耳環, ", "value": "wearing earrings" },
                 { "label": "鑽石耳釘 (Studs)", "value": "wearing shiny diamond stud earrings" },
                 { "label": "大圓圈耳環 (Hoops)", "value": "wearing large gold hoop earrings" },
                 { "label": "長垂墜耳環", "value": "wearing long dangling earrings" },
@@ -212,7 +213,8 @@
                 { "label": "敞開的棒球褸 (Open)", "value": "wearing an unbuttoned varsity jacket, revealing inner wear" },
                 { "label": "風衣 (Trench)", "value": "wearing a beige trench coat" },
                 { "label": "敞開的風衣", "value": "wearing an open trench coat" },
-                { "label": "披肩 (Shawl)", "value": "wearing a knitted shawl draped over shoulders" }
+                { "label": "披肩 (Shawl)", "value": "wearing a knitted shawl draped over shoulders" },
+                { "label": "職人工作圍裙 (Canvas)", "value": "wearing a heavy-duty canvas work apron" }
             ]
         }
     ],
