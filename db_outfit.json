@@ -90,7 +90,7 @@
         {
             "group": "耳環專區 (Earrings)",
             "options": [
-                { "label": "耳環, ", "value": "wearing earrings" },
+                { "label": "耳環", "value": "wearing earrings" },
                 { "label": "鑽石耳釘 (Studs)", "value": "wearing shiny diamond stud earrings" },
                 { "label": "大圓圈耳環 (Hoops)", "value": "wearing large gold hoop earrings" },
                 { "label": "長垂墜耳環", "value": "wearing long dangling earrings" },
@@ -564,4 +564,5 @@
         { "label": "條紋", "value": "striped" },
         { "label": "波點", "value": "polka dot" }
     ]
+
 }
