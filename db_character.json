@@ -197,11 +197,10 @@
         {
             "group": "眼妝細節",
             "options": [
-                { "label": "貓眼眼線", "value": "sharp winged eyeliner, cat eye makeup" },
+                { "label": "精緻眼線", "value": "sharp winged eyeliner" },
                 { "label": "濃密睫毛", "value": "long voluminous eyelashes" },
                 { "label": "煙燻眼妝", "value": "dark smoky eye makeup" },
-                { "label": "亮片眼影", "value": "shimmering glitter eyeshadow" },
-                { "label": "彩色眼線", "value": "colorful eyeliner" }
+                { "label": "亮片眼影", "value": "shimmering glitter eyeshadow" }
             ]
         },
         {

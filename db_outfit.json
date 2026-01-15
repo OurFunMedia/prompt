@@ -126,7 +126,8 @@
                 { "label": "腿環 (Garter)", "value": "wearing a leather thigh garter" },
                 { "label": "聽診器", "value": "wearing a stethoscope" },
                 { "label": "紋身 (手臂)", "value": "with tattoos on arms" },
-                { "label": "手袋 (Handbag)", "value": "wearing a handbag" }
+                { "label": "手袋 (Handbag)", "value": "wearing a handbag" },
+                { "label": "斜背迷你包 (Satchel)", "value": "wearing a long satchel crossbody mini bag" }
             ]
         },
         {
@@ -280,6 +281,7 @@
         {
             "group": "休閒/T恤 (Casual & Tees)",
             "options": [
+                { "label": "超貼身短袖T恤", "value": "wearing a short-sleeved skintight t-shirt, the fabric clinging to her body and showing off her curves" },
                 { "label": "緊身T恤", "value": "wearing a tight-fitting t-shirt" },
                 { "label": "T恤 (合身)", "value": "wearing a basic fitted cotton t-shirt" },
                 { "label": "Oversize T恤", "value": "oversized boyfriend style t-shirt" },
