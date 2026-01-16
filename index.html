@@ -581,7 +581,10 @@
             <div class="bg-black p-4 rounded-xl border border-gray-800 h-1/4 flex flex-col">
                 <label class="text-xs font-bold text-gray-500 mb-2 uppercase"><i class="fas fa-ban mr-1"></i> Negative Prompt 負面提示:</label>
                 <textarea id="negative-text"
-                    class="flex-grow bg-gray-900/50 text-gray-500 text-xs p-3 rounded-lg border border-gray-800 font-mono resize-none outline-none focus:border-gray-600">Negative Prompt: avoid AI-like appearance, low saturation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name, cartoon illustrations, 3D animationlow quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name</textarea>
+                    class="flex-grow bg-gray-900/50 text-gray-500 text-xs p-3 rounded-lg border border-gray-800 font-mono resize-none outline-none focus:border-gray-600">Negative Prompt: avoid AI-like appearance, low saturation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name, cartoon illustrations, 3D animation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name</textarea>
+                <button onclick="copyAllPrompts()" class="mt-2 w-full bg-gray-700 hover:bg-gray-600 text-gray-300 py-2 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-2">
+                    <i class="fas fa-paste"></i> 複製全部提示詞 (Prompt + Negative)
+                </button>
             </div>
         </div>
     </div>
@@ -942,6 +945,15 @@
         function copyPrompt(id) {
             const t = document.getElementById(id); t.select();
             navigator.clipboard.writeText(t.value).then(() => alert("已複製提示詞！"));
+        }
+
+        function copyAllPrompts() {
+            const positive = document.getElementById('output-text').value;
+            const negative = document.getElementById('negative-text').value;
+            const combined = positive + "\n" + negative;
+            navigator.clipboard.writeText(combined).then(() => {
+                alert("已複製全部提示詞！");
+            });
         }
 
         function saveCharacter(btn) {
