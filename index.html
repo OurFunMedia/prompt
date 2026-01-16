@@ -398,6 +398,16 @@
                                 (Outerwear)</label>
                             <select id="outfit-outer"
                                 class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                            <div id="outfit-outer-state" class="mt-2 space-x-4 hidden">
+                                <label class="cursor-pointer text-xs">
+                                    <input type="radio" name="outfit-outer-state" value="closed" class="accent-theme" checked onchange="generatePrompt()">
+                                    封閉 (Closed)
+                                </label>
+                                <label class="cursor-pointer text-xs">
+                                    <input type="radio" name="outfit-outer-state" value="open" class="accent-theme" onchange="generatePrompt()">
+                                    敞開 (Open)
+                                </label>
+                            </div>
                             <input type="text" id="outfit-outer-custom" placeholder="自訂外套..."
                                 class="mt-1 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
                         </div>
@@ -638,6 +648,7 @@
         let currentMode = 'sexy';
 
         const v = (id) => document.getElementById(id)?.value || "";
+        const c = (id) => document.getElementById(id)?.checked || false;
 
         async function init() {
             try {
@@ -648,11 +659,17 @@
                 const d2 = await outfitRes.json();
                 const d3 = await sceneRes.json();
                 db = { ...d1, ...d2, ...d3 };
+
+                // 將所有外套選項扁平化以便查找
+                db.flatOutfitOuter = db.outfitOuter.reduce((acc, group) => {
+                    if(group.options) acc.push(...group.options);
+                    else acc.push(group);
+                    return acc;
+                }, []);
+                
                 setMode('sexy');
             } catch (err) {
-                // 如果本地測試沒有JSON，這行alert可能會跳出，實作時請確保檔案存在
-                // alert("提示：請確保 db_character.json, db_outfit.json, db_scene_camera.json 與此檔案在同一目錄。");
-                console.log("Database load error or local testing mode.");
+                console.log("Database load error:", err);
             }
         }
 
@@ -662,9 +679,10 @@
                 if (item.tags.includes('sexy') && mode === 'clean') return false;
             }
             if (mode === 'clean') {
-                const cleanBanned = ['lingerie', 'bra', 'panties', 'thong', 'bikini', 'swimsuit', 'cleavage', 'bust', 'chest'];
-                const text = (item.value + " " + (item.label || "")).toLowerCase();
-                return !cleanBanned.some(k => text.includes(k));
+                const cleanBanned = ['lingerie', 'bra', 'panties', 'thong', 'bikini', 'swimsuit', 'cleavage', 'bust', 'chest', 'nude', 'nsfw', 'sexy'];
+                // 檢查所有可能的 text 屬性
+                const textToCheck = [item.value, item.label, item.open, item.closed].join(' ').toLowerCase();
+                return !cleanBanned.some(k => textToCheck.includes(k));
             }
             return true;
         }
@@ -698,7 +716,7 @@
             populate('cam-angle', db.camAngle); populate('cam-shot', db.camShot);
             populate('cam-lens', db.camLens); populate('scene-style', db.sceneStyle);
 
-            updateVisualFeedback(); // Refresh visual highlights
+            updateVisualFeedback();
         }
 
         function populate(id, data) {
@@ -714,29 +732,48 @@
                         group.label = item.group;
                         validOptions.forEach(sub => {
                             const opt = document.createElement('option');
-                            opt.value = sub.value; opt.innerText = sub.label;
+                            // For outfit-outer, use 'key' if available, otherwise 'value'
+                            opt.value = id === 'outfit-outer' && sub.key ? sub.key : sub.value;
+                            opt.innerText = sub.label;
                             group.appendChild(opt);
                         });
                         el.appendChild(group);
                     }
                 } else if (isAllowed(item, currentMode)) {
                     const opt = document.createElement('option');
-                    opt.value = item.value; opt.innerText = item.label;
+                    opt.value = item.value;
+                    opt.innerText = item.label;
                     el.appendChild(opt);
                 }
             });
             const exists = Array.from(el.options).some(o => o.value === currentVal);
             el.value = exists ? currentVal : "";
+            if (id === 'outfit-outer') {
+                handleOuterwearChange(); // Initial check
+            }
+        }
+        
+        function handleOuterwearChange() {
+            const outerKey = v('outfit-outer');
+            const outerStateDiv = document.getElementById('outfit-outer-state');
+            if (!outerKey || !db.flatOutfitOuter) {
+                outerStateDiv.classList.add('hidden');
+                return;
+            }
+
+            const selectedOuter = db.flatOutfitOuter.find(o => o.key === outerKey);
+
+            if (selectedOuter && selectedOuter.open && selectedOuter.closed) {
+                outerStateDiv.classList.remove('hidden');
+            } else {
+                outerStateDiv.classList.add('hidden');
+            }
         }
 
         function setMode(mode) {
             currentMode = mode;
-
-            // 1. Theme Class Switching on Body
-            document.body.classList.remove('mode-clean', 'mode-sexy', 'mode-nsfw');
-            document.body.classList.add(`mode-${mode}`);
-
-            // 2. Button States
+            document.body.className = `bg-gray-950 text-gray-100 min-h-screen p-4 flex flex-col items-center mode-${mode}`;
+            
             ['clean', 'sexy', 'nsfw'].forEach(m => {
                 document.getElementById(`btn-${m}`).classList.toggle('mode-active', m === mode);
             });
@@ -755,6 +792,8 @@
                     const el = document.getElementById(id);
                     if (el) { el.checked = false; el.parentElement.classList.add('hidden'); }
                 });
+                // Also reset bust values
+                ['body-bust', 'body-waist', 'body-hip'].forEach(id => document.getElementById(id).value = "");
             } else {
                 statusEl.innerText = mode === 'sexy' ? "💜 性感版 (Standard)" : "🔞 NSFW版 (Uncensored)";
                 statusEl.className = `text-xs font-bold px-2 py-0.5 rounded ${mode === 'sexy' ? 'bg-pink-900 text-pink-300' : 'bg-red-900 text-red-300'}`;
@@ -772,16 +811,12 @@
 
         function updateVisualFeedback() {
             document.querySelectorAll('select, input[type="text"]').forEach(el => {
-                if (el.value && el.value.trim() !== "") {
-                    el.classList.add('has-value');
-                } else {
-                    el.classList.remove('has-value');
-                }
+                const hasValue = el.value && el.value.trim() !== "";
+                el.classList.toggle('has-value', hasValue);
             });
         }
 
         function generatePrompt() {
-            // Also triggers visual feedback update
             updateVisualFeedback();
 
             let prompts = [];
@@ -789,85 +824,73 @@
             if (v('char-age') || v('race')) charDesc += `, a ${v('char-age')} ${v('race')} female`;
             prompts.push(charDesc);
 
-            let mkBase = v('makeup-base');
-            let mkDetail = v('makeup-detail');
-            let mkDetail2 = v('makeup-detail-2');
-            let combinedMakeup = [mkBase, mkDetail, mkDetail2].filter(Boolean).join(", ");
-
-            let specialEffects = [];
-            ['effect-damp-hair', 'effect-wet-skin', 'effect-oily'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el && el.checked) specialEffects.push(el.value);
-            });
-
             let feats = [
-                v('hair-color') + ' ' + v('hair-style'),
-                ...specialEffects,
+                (v('hair-color') + ' ' + v('hair-style')).trim(),
+                c('effect-damp-hair') ? 'noticeably damp hair, glistening wet hair texture' : '',
+                c('effect-wet-skin') ? 'wet skin, sweating, glistening skin' : '',
+                c('effect-oily') ? 'oiled skin, shiny skin' : '',
                 v('eye-color'),
                 v('face-shape'),
                 v('skin-type'),
-                combinedMakeup,
+                [v('makeup-base'), v('makeup-detail'), v('makeup-detail-2')].filter(Boolean).join(", "),
                 v('body-height')
-            ].filter(s => s.trim().length > 1);
+            ].filter(s => s && s.trim().length > 1);
 
             if (currentMode !== 'clean' && v('body-bust')) feats.push(`body: ${v('body-bust')}, ${v('body-waist')}, ${v('body-hip')}`);
             if (feats.length) prompts.push(feats.join(", "));
 
             let outfit = [];
             if (v('outfit-theme')) outfit.push(`Style: ${v('outfit-theme')}`);
-            let themeCustom = v('outfit-theme-custom');
-            if (themeCustom) outfit.push(themeCustom);
+            if (v('outfit-theme-custom')) outfit.push(v('outfit-theme-custom'));
 
-            let head = v('outfit-head');
-            let headCustom = v('outfit-head-custom');
-            let fullHead = [head, headCustom].filter(Boolean).join(", ");
+            let fullHead = [v('outfit-head'), v('outfit-head-custom')].filter(Boolean).join(", ");
             if (fullHead) outfit.push(fullHead);
 
-            let acc = v('outfit-acc');
-            let acc2 = v('outfit-acc-2');
-            let accCustom = v('outfit-acc-custom');
-            let fullAcc = [acc, acc2, accCustom].filter(Boolean).join(", ");
+            let fullAcc = [v('outfit-acc'), v('outfit-acc-2'), v('outfit-acc-custom')].filter(Boolean).join(", ");
             if (fullAcc) outfit.push(fullAcc);
-
+            
             if (v('outfit-acc-detail')) outfit.push(v('outfit-acc-detail'));
             if (v('outfit-acc-detail-2')) outfit.push(v('outfit-acc-detail-2'));
+            
+            // Outerwear Logic
+            const outerKey = v('outfit-outer');
+            if (outerKey) {
+                const selectedOuter = db.flatOutfitOuter.find(o => o.key === outerKey);
+                if (selectedOuter) {
+                    const state = document.querySelector('input[name="outfit-outer-state"]:checked').value;
+                    if (selectedOuter[state]) {
+                        outfit.push(selectedOuter[state]);
+                    } else { // Fallback for items without open/closed states
+                        outfit.push(selectedOuter.value);
+                    }
+                } else { // Fallback for items that might not use the key system (e.g. from custom input)
+                     outfit.push(outerKey);
+                }
+            }
+            if (v('outfit-outer-custom')) outfit.push(v('outfit-outer-custom'));
+
             let top = v('outfit-top');
             if (top) {
                 let attr = [v('top-color'), v('top-pat'), v('top-mat')].filter(Boolean).join(" ");
                 outfit.push(attr ? top.replace("wearing a", `wearing a ${attr}`) : top);
             }
-            let topCustom = v('outfit-top-custom');
-            if (topCustom) outfit.push(topCustom);
+            if (v('outfit-top-custom')) outfit.push(v('outfit-top-custom'));
 
             let btm = v('outfit-bottom');
             if (btm) {
-                let attr = [v('bottom-color'), v('bottom-pat'), v('bottom-mat')].filter(Boolean).join(" ");
-                outfit.push(attr ? `${btm} (${attr})` : btm);
+                let attr = [v('bottom-color'), v('bottom-pat'), ' ', v('bottom-mat')].filter(Boolean).join(" ");
+                outfit.push(attr.trim() ? `${btm} (${attr.trim()})` : btm);
             }
-            let btmCustom = v('outfit-bottom-custom');
-            if (btmCustom) outfit.push(btmCustom);
+            if (v('outfit-bottom-custom')) outfit.push(v('outfit-bottom-custom'));
 
-            let outer = v('outfit-outer');
-            let outerCustom = v('outfit-outer-custom');
-            let fullOuter = [outer, outerCustom].filter(Boolean).join(", ");
-            if (fullOuter) outfit.push(fullOuter);
-
-            let sock = v('outfit-sock');
-            let sockCustom = v('outfit-sock-custom');
-            let fullSock = [sock, sockCustom].filter(Boolean).join(", ");
+            let fullSock = [v('outfit-sock'), v('outfit-sock-custom')].filter(Boolean).join(", ");
             if (fullSock) outfit.push(fullSock);
 
-            let shoe = v('outfit-shoe');
-            let shoeCustom = v('outfit-shoe-custom');
-            let fullShoe = [shoe, shoeCustom].filter(Boolean).join(", ");
+            let fullShoe = [v('outfit-shoe'), v('outfit-shoe-custom')].filter(Boolean).join(", ");
             if (fullShoe) outfit.push(fullShoe);
 
-            let outfitStr = outfit.join(", ");
-            if (currentMode === 'clean') {
-                const banned = [/latex/gi, /busty/gi, /cleavage/gi, /see-through/gi, /sheer/gi, /bra/gi, /panties/gi, /lingerie/gi, /thong/gi, /naked/gi, /bikini/gi, /nude/gi, /topless/gi];
-                banned.forEach(regex => { outfitStr = outfitStr.replace(regex, ""); });
-            }
-            if (outfitStr.trim()) prompts.push(outfitStr);
+            let outfitStr = outfit.filter(Boolean).join(", ");
+            if (outfitStr) prompts.push(outfitStr);
 
             let pose = v('action-pose');
             let poseCustom = v('action-pose-custom');
@@ -877,7 +900,7 @@
             let act = (fullPose && activity) ? `She is ${fullPose} while ${activity}` : (fullPose || activity || "");
             if (expr) act = act ? `${act}, with ${expr}` : `She has ${expr}`;
             if (act) prompts.push(act);
-
+            
             let loc = v('scene-loc');
             let locCustom = v('scene-loc-custom');
             let fullLoc = [loc, locCustom].filter(Boolean).join(", ");
@@ -895,44 +918,33 @@
             if (cam.length) prompts.push(cam.join(", "));
 
             if (currentMode === 'nsfw') prompts.push("NSFW, detailed skin, mature female");
-            document.getElementById('output-text').value = prompts.join(". ");
+            
+            let finalPrompt = prompts.join(". ").replace(/\.\s*\./g, '.').replace(/,\s*,/g, ',');
+            document.getElementById('output-text').value = finalPrompt;
         }
 
         function scrollToSection(id) {
             const el = document.getElementById(id);
             if (!el) return;
-            // 計算偏移量：扣除 sticky tab 的高度 (約 60px) 與一些緩衝
             const offset = 80;
             const elementPosition = el.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
+            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
         }
 
-        // Scroll Spy: 捲動時自動更新 Tab 狀態
         window.addEventListener('scroll', () => {
             const sections = ['tab-identity', 'tab-outfit', 'tab-scene'];
-            const scrollPos = window.scrollY + 120; // 增加偏移量以提早觸發
-
+            const scrollPos = window.scrollY + 120;
             let current = sections[0];
-            sections.forEach(id => {
+            for (const id of sections) {
                 const el = document.getElementById(id);
                 if (el && el.offsetTop <= scrollPos) {
                     current = id;
                 }
-            });
-
+            }
             sections.forEach(id => {
-                const btn = document.getElementById('btn-' + id);
-                if (btn) {
-                    const isActive = id === current;
-                    btn.className = isActive
-                        ? "flex-1 py-4 text-sm font-bold tab-active transition-all"
-                        : "flex-1 py-4 text-sm font-bold tab-inactive transition-all";
-                }
+                document.getElementById('btn-' + id)?.classList.toggle('tab-active', id === current);
+                document.getElementById('btn-' + id)?.classList.toggle('tab-inactive', id !== current);
             });
         });
 
@@ -943,7 +955,8 @@
         }
 
         function copyPrompt(id) {
-            const t = document.getElementById(id); t.select();
+            const t = document.getElementById(id);
+            t.select();
             navigator.clipboard.writeText(t.value).then(() => alert("已複製提示詞！"));
         }
 
@@ -951,9 +964,7 @@
             const positive = document.getElementById('output-text').value;
             const negative = document.getElementById('negative-text').value;
             const combined = positive + "\n" + negative;
-            navigator.clipboard.writeText(combined).then(() => {
-                alert("已複製全部提示詞！");
-            });
+            navigator.clipboard.writeText(combined).then(() => alert("已複製全部提示詞！"));
         }
 
         function saveCharacter(btn) {
@@ -961,18 +972,12 @@
                 'char-name', 'race', 'char-age', 'body-height',
                 'body-bust', 'body-waist', 'body-hip',
                 'hair-style', 'hair-color', 'eye-color',
-                'face-shape', 'skin-type', 'makeup-base', 'makeup-detail'
+                'face-shape', 'skin-type', 'makeup-base', 'makeup-detail', 'makeup-detail-2'
             ];
             const data = {};
             charIds.forEach(id => data[id] = v(id));
-
-            ['effect-damp-hair', 'effect-wet-skin', 'effect-oily'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) data[id] = el.checked;
-            });
-
+            ['effect-damp-hair', 'effect-wet-skin', 'effect-oily'].forEach(id => data[id] = c(id));
             localStorage.setItem('wm_saved_character', JSON.stringify(data));
-
             const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-check mr-1.5"></i> 已儲存';
             setTimeout(() => btn.innerHTML = originalHTML, 1500);
@@ -981,7 +986,6 @@
         function loadCharacter(btn) {
             const json = localStorage.getItem('wm_saved_character');
             if (!json) return alert("尚未儲存任何角色設定");
-
             const data = JSON.parse(json);
             Object.keys(data).forEach(key => {
                 const el = document.getElementById(key);
@@ -991,7 +995,6 @@
                 }
             });
             generatePrompt();
-
             const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-check mr-1.5"></i> 已讀取';
             setTimeout(() => btn.innerHTML = originalHTML, 1500);
@@ -1000,18 +1003,25 @@
         function randomAll() {
             document.querySelectorAll('select').forEach(s => {
                 if (!s.disabled && !s.closest('.pointer-events-none')) {
-                    if (s.options.length > 1) s.selectedIndex = Math.floor(Math.random() * (s.options.length - 1)) + 1;
+                    if (s.options.length > 1) s.selectedIndex = Math.floor(Math.random() * s.options.length);
                 }
+            });
+             // Randomly check some checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                if(!cb.closest('.pointer-events-none')) cb.checked = Math.random() > 0.7;
             });
             generatePrompt();
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            init();
             document.querySelectorAll('select, input').forEach(el => {
                 el.addEventListener('change', generatePrompt);
-                el.addEventListener('input', generatePrompt);
+                if (el.type !== 'checkbox' && el.type !== 'radio') {
+                    el.addEventListener('input', generatePrompt);
+                }
             });
-            init();
+            document.getElementById('outfit-outer').addEventListener('change', handleOuterwearChange);
         });
     </script>
 

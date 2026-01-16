@@ -186,33 +186,25 @@
         {
             "group": "冬季保暖 (Winter)",
             "options": [
-                { "label": "蓬鬆羽絨褸 (Puffer)", "value": "wearing a thick quilted puffer jacket" },
-                { "label": "敞開的羽絨褸 (Open)", "value": "wearing an unzipped thick puffer jacket, revealing inner wear" },
+                { "label": "蓬鬆羽絨褸 (Puffer)", "key": "puffer_jacket", "closed": "wearing a thick quilted puffer jacket", "open": "wearing an unzipped thick puffer jacket, revealing inner wear" },
                 { "label": "滑雪連身服 (Ski Suit)", "value": "wearing a professional insulated one-piece ski suit" },
-                { "label": "敞開的滑雪外套", "value": "wearing an open ski jacket" },
+                { "label": "滑雪外套", "key": "ski_jacket", "closed": "wearing a ski jacket", "open": "wearing an open ski jacket" },
                 { "label": "連帽派克大衣 (Parka)", "value": "wearing a heavy winter parka with fur-trimmed hood" },
                 { "label": "羊毛大衣 (Coat)", "value": "wearing an elegant long wool overcoat" },
-                { "label": "敞開的雙排扣外套", "value": "wearing an open double-breasted jacket" }
+                { "label": "雙排扣外套", "key": "double_breasted_jacket", "closed": "wearing a double-breasted jacket", "open": "wearing an open double-breasted jacket" }
             ]
         },
         {
             "group": "日常/時尚",
             "options": [
-                { "label": "牛仔外套 (Denim)", "value": "wearing a classic denim jacket" },
-                { "label": "敞開的牛仔外套 (Open)", "value": "wearing an unbuttoned denim jacket" },
-                { "label": "飛行夾克 (Bomber)", "value": "wearing a bomber jacket" },
-                { "label": "敞開的飛行夾克", "value": "wearing an unzipped bomber jacket" },
-                { "label": "皮革騎士夾克 (Leather)", "value": "wearing a black leather biker jacket" },
-                { "label": "敞開的皮衣 (Open)", "value": "wearing an open leather biker jacket" },
-                { "label": "運動風褸 (Windbreaker)", "value": "wearing a lightweight sports windbreaker" },
-                { "label": "敞開的運動風褸", "value": "wearing an open lightweight sports windbreaker, revealing inner clothing" },
-                { "label": "連帽外套 (Zip Hoodie)", "value": "wearing a zip-up hoodie" },
-                { "label": "敞開的連帽外套", "value": "wearing an unzipped hoodie jacket" },
+                { "label": "牛仔外套 (Denim)", "key": "denim_jacket", "closed": "wearing a classic denim jacket", "open": "wearing an unbuttoned denim jacket" },
+                { "label": "飛行夾克 (Bomber)", "key": "bomber_jacket", "closed": "wearing a bomber jacket", "open": "wearing an unzipped bomber jacket" },
+                { "label": "皮革騎士夾克 (Leather)", "key": "leather_jacket", "closed": "wearing a black leather biker jacket", "open": "wearing an open leather biker jacket" },
+                { "label": "運動風褸 (Windbreaker)", "key": "windbreaker", "closed": "wearing a lightweight sports windbreaker", "open": "wearing an open lightweight sports windbreaker, revealing inner clothing" },
+                { "label": "連帽外套 (Zip Hoodie)", "key": "zip_hoodie", "closed": "wearing a zip-up hoodie", "open": "wearing an unzipped hoodie jacket" },
                 { "label": "針織開襟衫 (Cardigan)", "value": "wearing a cozy knit cardigan" },
-                { "label": "棒球褸 (Varsity)", "value": "wearing a classic varsity jacket with contrast sleeves" },
-                { "label": "敞開的棒球褸 (Open)", "value": "wearing an unbuttoned varsity jacket, revealing inner wear" },
-                { "label": "風衣 (Trench)", "value": "wearing a beige trench coat" },
-                { "label": "敞開的風衣", "value": "wearing an open trench coat" },
+                { "label": "棒球褸 (Varsity)", "key": "varsity_jacket", "closed": "wearing a classic varsity jacket with contrast sleeves", "open": "wearing an unbuttoned varsity jacket, revealing inner wear" },
+                { "label": "風衣 (Trench)", "key": "trench_coat", "closed": "wearing a beige trench coat", "open": "wearing an open trench coat" },
                 { "label": "披肩 (Shawl)", "value": "wearing a knitted shawl draped over shoulders" },
                 { "label": "職人工作圍裙 (Canvas)", "value": "wearing a heavy-duty canvas work apron" }
             ]
@@ -564,5 +556,4 @@
         { "label": "條紋", "value": "striped" },
         { "label": "波點", "value": "polka dot" }
     ]
-
 }
