@@ -60,7 +60,7 @@
     ],
     "bodyHip": [
         { "label": "標準 (Proportional)", "value": "proportional hips" },
-        { "label": "窄臀 (Narrow)", "value": "narrow hips" },
+        { "label": "窄臀纖腿 (Narrow)", "value": "narrow hips, pencil-thin legs" },
         { "label": "S型曲線 (Curvy)", "value": "curvy S-shape hips" },
         { "label": "蜜大腿 (Thick)", "value": "thick thighs" },
         { "label": "寬臀 (Wide)", "value": "wide, curvy hips" }
