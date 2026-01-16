@@ -6,6 +6,7 @@
                 { "label": "自然站立 (Standing)", "value": "standing naturally, posing" },
                 { "label": "優閒坐著 (Sitting)", "value": "sitting comfortably" },
                 { "label": "抱膝坐", "value": "sitting on floor hugging knees to chest" },
+                { "label": "盤膝而坐", "value": "sitting cross-legged"},
                 { "label": "雙腿交疊 (翹腳)", "value": "legs crossed elegantly" },
                 { "label": "蹲著 (Squat)", "value": "squatting down on heels" },
                 { "label": "趴著/伏著 (Prone)", "value": "lying on stomach, prone position, legs up" },
