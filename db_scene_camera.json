@@ -15,6 +15,8 @@
                 { "label": "單手心形手勢", "value": "making a half-heart gesture with one hand towards camera" },
                 { "label": "雙手托腮", "value": "resting chin in hands, looking cute" },
                 { "label": "雙手抱頭", "value": "hands behind head, elbows out, chest out" },
+                { "label": "單手托頭", "value": "resting head on one hand, propping head up with hand" },
+                { "label": "趴在桌上 (Resting on Table)", "value": "leaning forward, resting head on crossed arms on table" },
                 { "label": "彎腰", "value": "bending over forward" },
                 { "label": "靠牆", "value": "leaning against a wall" }
             ]
