@@ -541,10 +541,13 @@
                     <div class="pt-2 border-t border-gray-800">
                         <p class="text-xs text-gray-500 font-bold uppercase mb-3"><i
                                 class="fas fa-camera-retro mr-1"></i> 攝影機設定</p>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
                             <div><label class="field-label"><i class="fas fa-video"></i> 視角</label><select
                                     id="cam-angle"
                                     class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                                <select
+                                    id="cam-angle-2"
+                                    class="mt-1 w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
                             </div>
                             <div><label class="field-label"><i class="fas fa-crop-alt"></i> 景別</label><select
                                     id="cam-shot"
@@ -554,8 +557,12 @@
                                     id="cam-lens"
                                     class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
                             </div>
-                            <div><label class="field-label"><i class="fas fa-photo-video"></i> 風格</label><select
-                                    id="scene-style"
+                            <div><label class="field-label"><i class="fas fa-camera"></i> 寫實風格</label><select
+                                    id="scene-style-realistic"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                            </div>
+                            <div><label class="field-label"><i class="fas fa-magic"></i> 特殊效果</label><select
+                                    id="scene-style-special"
                                     class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
                             </div>
                         </div>
@@ -678,12 +685,6 @@
                 if (item.tags.includes('nsfw') && mode !== 'nsfw') return false;
                 if (item.tags.includes('sexy') && mode === 'clean') return false;
             }
-            if (mode === 'clean') {
-                const cleanBanned = ['lingerie', 'bra', 'panties', 'thong', 'bikini', 'swimsuit', 'cleavage', 'bust', 'chest', 'nude', 'nsfw', 'sexy'];
-                // 檢查所有可能的 text 屬性
-                const textToCheck = [item.value, item.label, item.open, item.closed].join(' ').toLowerCase();
-                return !cleanBanned.some(k => textToCheck.includes(k));
-            }
             return true;
         }
 
@@ -713,8 +714,12 @@
             populate('scene-props', db.sceneProps); populate('scene-props-detail', db.scenePropsDetail);
             populate('scene-lighting', db.sceneLighting);
             populate('scene-time', db.sceneTime); populate('scene-weather', db.sceneWeather);
-            populate('cam-angle', db.camAngle); populate('cam-shot', db.camShot);
-            populate('cam-lens', db.camLens); populate('scene-style', db.sceneStyle);
+            populate('cam-angle', db.camAngle); 
+            populate('cam-angle-2', db.camAngle); 
+            populate('cam-shot', db.camShot);
+            populate('cam-lens', db.camLens); 
+            populate('scene-style-realistic', db.sceneStyleRealistic);
+            populate('scene-style-special', db.sceneStyleSpecial);
 
             updateVisualFeedback();
         }
@@ -864,7 +869,7 @@
                         outfit.push(selectedOuter.value);
                     }
                 } else { // Fallback for items that might not use the key system (e.g. from custom input)
-                     outfit.push(outerKey);
+                    outfit.push(outerKey);
                 }
             }
             if (v('outfit-outer-custom')) outfit.push(v('outfit-outer-custom'));
@@ -914,7 +919,7 @@
             if (env.length) sceneStr += (sceneStr ? ". " : "") + `Environment: ${env.join(", ")}`;
             if (sceneStr) prompts.push(sceneStr);
 
-            let cam = [v('cam-angle'), v('cam-shot'), v('cam-lens'), v('scene-style')].filter(Boolean);
+            let cam = [v('cam-angle'), v('cam-angle-2'), v('cam-shot'), v('cam-lens'), v('scene-style-realistic'), v('scene-style-special')].filter(Boolean);
             if (cam.length) prompts.push(cam.join(", "));
 
             if (currentMode === 'nsfw') prompts.push("NSFW, detailed skin, mature female");

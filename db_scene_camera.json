@@ -180,57 +180,34 @@
             { "label": "黃金時刻 (逆光)", "value": "backlighting, golden hour glow, lens flare" }
         ]}
     ],
-    "sceneStyle": [
-        {
-            "group": "寫實風格 (Realistic)",
-            "options": [
-            { "label": "寫實 (Realism)", "value": "photorealistic/hyper-realistic, 8k resolution, highly detailed texture, masterpiece, raw photo" },
-            { "label": "iPhone 攝影 (IG風)", "value": "shot on iPhone, instagram style, phone photography, raw photo, hard flash, amateur, candid" }, 
-            { "label": "網紅自拍 (Influencer)", "value": "influencer selfie, ring light, beauty filter, tiktok style, uploaded to snapchat" },
-            { "label": "日系寫真 (Photobook)", "value": "Japanese photobook style, natural and fresh" },
-            { "label": "日系甜美寫真", "value": "high visual richness, detailed texture, cinematic lighting, Japanese gravure photography style, sweet and clean aesthetic, high quality, soft focus, non-erotic" },
-            { "label": "電影感", "value": "cinematic lighting" },
-            { "label": "私房寫真", "value": "ultimate seduction and sexiness, intimate boudoir photography", "tags": ["sexy"] },
-            { "label": "拍立得", "value": "polaroid style, flash photography" },
-            { "label": "賽博龐克", "value": "cyberpunk neon style" }
-            ]
-        },
-        {
-            "group": "二次元/動漫 (Anime/Manga)",
-            "options": [
-                { "label": "日本動漫 (Anime)", "value": "anime style, key visual, vibrant colors" },
-                { "label": "漫畫黑白 (Manga)", "value": "manga style, monochrome, sketch, lineart, screen tones" },
-                { "label": "賽璐璐 (Cel Shaded)", "value": "cel shaded, flat color, anime screencap" },
-                { "label": "吉卜力風格", "value": "Studio Ghibli style, watercolor background" },
-                { "label": "像素風 (Pixel Art)", "value": "pixel art, 16-bit game style" }
-            ]
-        },
-        {
-            "group": "藝術/繪畫 (Artistic)",
-            "options": [
-                { "label": "美式漫畫 (American Comic)", "value": "American comic book style, bold lines, vibrant colors, marvel style" },
-                { "label": "中式水墨 (Ink Wash)", "value": "traditional Chinese ink wash painting, shanshui, watercolor, calligraphy brush" },
-                { "label": "古典油畫 (Oil Painting)", "value": "classic oil painting, textured brush strokes, renaissance style" },
-                { "label": "普普藝術 (Pop Art)", "value": "pop art style, halftone dots, vintage comic" },
-                { "label": "素描 (Sketch)", "value": "pencil sketch, graphite, charcoal drawing" },
-                { "label": "浮世繪 (Ukiyo-e)", "value": "Japanese ukiyo-e style, woodblock print" }
-            ]
-        },
-        {
-            "group": "特殊效果",
-            "options": [
-                { "label": "柔和夢幻 (Soft)", "value": "soft focus, dreamy atmosphere" },
-                { "label": "膠片顆粒 (Film Grain)", "value": "film grain, vintage film look" },
-                { "label": "光暈效果 (Glow)", "value": "glow effect, ethereal lighting" },
-                { "label": "霧氣瀰漫 (Foggy)", "value": "foggy atmosphere, misty background" },
-                { "label": "高對比", "value": "high contrast, dramatic shadows" }
-            ]
-        }
+    "sceneStyleRealistic": [
+        { "label": "寫實風格(不限)", "value": "" },
+        { "label": "寫實 (Realism)", "value": "photorealistic/hyper-realistic, 8k resolution, highly detailed texture, masterpiece, raw photo" },
+        { "label": "iPhone 攝影 (IG風)", "value": "shot on iPhone, instagram style, phone photography, raw photo, hard flash, amateur, candid" },
+        { "label": "網紅自拍 (Influencer)", "value": "influencer selfie, ring light, beauty filter, tiktok style, uploaded to snapchat" },
+        { "label": "日系寫真 (Photobook)", "value": "Japanese photobook style, natural and fresh" },
+        { "label": "日系甜美寫真", "value": "high visual richness, detailed texture, cinematic lighting, Japanese gravure photography style, sweet and clean aesthetic, high quality, soft focus, non-erotic" },
+        { "label": "電影感", "value": "cinematic lighting" },
+        { "label": "私房寫真", "value": "ultimate seduction and sexiness, intimate boudoir photography", "tags": ["sexy"] },
+        { "label": "拍立得", "value": "polaroid style, flash photography" },
+        { "label": "賽博龐克", "value": "cyberpunk neon style" }
+    ],
+    "sceneStyleSpecial": [
+        { "label": "特殊效果(不限)", "value": "" },
+        { "label": "柔和夢幻 (Soft)", "value": "soft focus, dreamy atmosphere" },
+        { "label": "膠片顆粒 (Film Grain)", "value": "film grain, vintage film look" },
+        { "label": "Fujifilm", "value": "fujifilm film simulation" },
+        { "label": "銀鹽照片 (B&W Film)", "value": "monochrome, silver halide photo, black and white film" },
+        { "label": "光暈效果 (Glow)", "value": "glow effect, ethereal lighting" },
+        { "label": "霧氣瀰漫 (Foggy)", "value": "foggy atmosphere, misty background" },
+        { "label": "高對比", "value": "high contrast, dramatic shadows" }
     ],
     "camAngle": [
         { "label": "視角(預設)", "value": "" },
         { "label": "垂直俯拍 (Top-down)", "value": "top-down view directly from above" },
         { "label": "平視鏡頭", "value": "eye-level shot" },
+        { "label": "3/4 角度", "value": "three-quarters view" },
+        { "label": "側面90度", "value": "side view, profile view" },
         { "label": "高角度俯拍", "value": "high angle shot, from above" },
         { "label": "低角度仰拍", "value": "low angle shot, from below" },
         { "label": "蟲視角極低", "value": "worm's-eye view, very low angle" },

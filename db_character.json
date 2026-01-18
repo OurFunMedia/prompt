@@ -42,9 +42,9 @@
         { "label": "極高 (Towering)", "value": "statuesque and towering figure" }
     ],
     "bodyBust": [
-        { "label": "適中 (Balanced)", "value": "a balanced bust" },
-        { "label": "纖細 (Petite)", "value": "a petite bust" },
-        { "label": "豐滿 (Voluptuous)", "value": "a voluptuous bust" },
+        { "label": "適中 (Balanced)", "value": "a balanced bust", "tags": ["sexy"] },
+        { "label": "纖細 (Petite)", "value": "a petite bust", "tags": ["sexy"] },
+        { "label": "豐滿 (Voluptuous)", "value": "a voluptuous bust", "tags": ["sexy"]},
         { "label": "巨乳 (Large)", "value": "a large bust", "tags": ["sexy"] },
         { 
             "label": "極度豐滿 (XXL)", 
@@ -60,7 +60,7 @@
     ],
     "bodyHip": [
         { "label": "標準 (Proportional)", "value": "proportional hips" },
-        { "label": "窄臀纖腿 (Narrow)", "value": "narrow hips, pencil-thin legs" },
+        { "label": "窄臀纖腿 (Narrow)", "value": "narrow hips, and pencil-thin legs" },
         { "label": "S型曲線 (Curvy)", "value": "curvy S-shape hips" },
         { "label": "蜜大腿 (Thick)", "value": "thick thighs" },
         { "label": "寬臀 (Wide)", "value": "wide, curvy hips" }

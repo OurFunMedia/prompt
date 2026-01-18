@@ -15,7 +15,7 @@
         { "label": "晚宴 (Evening)", "value": "elegant evening formal wear" },
         { "label": "運動 (性感Sporty)", "value": "sexy sportswear style" },
         { "label": "街頭 (Street)", "value": "trendy streetwear" },
-        { "label": "泳裝 (Swim)", "value": "swimwear style" },
+        { "label": "泳裝 (Swim)", "value": "swimwear style", "tags": ["sexy"] },
         { "label": "角色扮演 (Cosplay)", "value": "cosplay outfit style" },
         { "label": "舒適睡衣 (Sleep)", "value": "cozy loungewear" },
         { "label": "維秘風/性感睡衣", "value": "Victoria's Secret style, seductive intimate wear", "tags": ["sexy"] }
@@ -222,7 +222,7 @@
             "group": "內衣/胸罩 (Bras)",
             "options": [
                 { "label": "1/2杯內衣 (半罩)", "value": "demi-cup bra, uplifting", "tags": ["nsfw"] },
-                { "label": "運動內衣", "value": "a sports bra" },
+                { "label": "運動內衣", "value": "a sports bra", "tags": ["sexy"] },
                 { "label": "深V蕾絲胸罩", "value": "deep-V lace bra", "tags": ["nsfw"] },
                 { "label": "透明蕾絲胸罩", "value": "sheer lace bra, see-through", "tags": ["nsfw"] },
                 { "label": "超深V高衩連身睡衣", "value": "wearing a Victoria's Secret style seductive teddy lingerie, deep V-neck, high-cut leg, lace sheer sexy bodysuit", "tags": ["sexy"] },
