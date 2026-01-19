@@ -128,7 +128,8 @@
                 { "label": "聽診器", "value": "wearing a stethoscope" },
                 { "label": "紋身 (手臂)", "value": "with tattoos on arms" },
                 { "label": "手袋 (Handbag)", "value": "wearing a handbag" },
-                { "label": "斜背迷你包 (Satchel)", "value": "wearing a long satchel crossbody mini bag" }
+                { "label": "斜背迷你包 (Satchel)", "value": "wearing a long satchel crossbody mini bag" },
+                { "label": "小型復古風格相機", "value": "carrying a small vintage style camera with an extra-long thin strap. The camera is hanging crossbody" }
             ]
         },
         {
