@@ -242,15 +242,21 @@
                                 class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                         <div>
                             <label class="field-label"><i class="fas fa-birthday-cake"></i> 年齡 (Age)</label>
                             <select id="char-age"
                                 class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select>
                         </div>
                         <div>
-                            <label class="field-label"><i class="fas fa-ruler-vertical"></i> 身高體型 (Height)</label>
+                            <label class="field-label"><i class="fas fa-ruler-vertical"></i> 身高 (Height)</label>
                             <select id="body-height"
+                                class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                        </div>
+                        <div class="col-span-2 md:col-span-1">
+                            <label class="field-label text-theme"><i class="fas fa-shapes"></i> 體型氣質 (Type)</label>
+                            <select id="body-type"
                                 class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select>
                         </div>
                     </div>
@@ -360,7 +366,7 @@
                         <label class="field-label text-theme"><i class="fas fa-layer-group"></i> 整體風格 (Outfit
                             Theme)</label>
                         <select id="outfit-theme"
-                            class="w-full bg-gray-900 border-theme border rounded px-3 py-3 text-sm font-medium text-gray-100 focus:outline-none"></select>
+                            class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-3 text-sm font-medium text-gray-100 focus:outline-none"></select>
                         <input type="text" id="outfit-theme-custom" placeholder="自訂服裝風格或特定服飾 (e.g. wearing a kimono)..."
                             class="mt-1 w-full bg-gray-800/50 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme placeholder-gray-600 transition-colors">
                     </div>
@@ -691,7 +697,9 @@
         function populateAllMenus() {
             // Identity
             populate('race', db.race); populate('char-age', db.charAge);
-            populate('body-height', db.bodyHeight); populate('body-bust', db.bodyBust);
+            populate('body-height', db.bodyHeight); 
+            populate('body-type', db.bodyType); // <--- 加入 body-type
+            populate('body-bust', db.bodyBust);
             populate('body-waist', db.bodyWaist); populate('body-hip', db.bodyHip);
             populate('hair-style', db.hairStyle); populate('hair-color', db.hairColor);
             populate('eye-color', db.eyeColor); populate('face-shape', db.faceShape);
@@ -792,7 +800,7 @@
                 statusEl.innerText = "✅ 清純版 (Gemini Safe)";
                 statusEl.className = "text-xs font-bold px-2 py-0.5 rounded bg-emerald-900 text-emerald-300";
                 bustWarn.classList.remove('hidden');
-                bustContainer.classList.add('opacity-50', 'pointer-events-none');
+                bustContainer.classList.add('hidden'); // 修改：在清純模式隱藏 bustContainer
                 nsfwEffects.forEach(id => {
                     const el = document.getElementById(id);
                     if (el) { el.checked = false; el.parentElement.classList.add('hidden'); }
@@ -803,6 +811,7 @@
                 statusEl.innerText = mode === 'sexy' ? "💜 性感版 (Standard)" : "🔞 NSFW版 (Uncensored)";
                 statusEl.className = `text-xs font-bold px-2 py-0.5 rounded ${mode === 'sexy' ? 'bg-pink-900 text-pink-300' : 'bg-red-900 text-red-300'}`;
                 bustWarn.classList.add('hidden');
+                bustContainer.classList.remove('hidden'); // 修改：顯示 bustContainer
                 bustContainer.classList.remove('opacity-50', 'pointer-events-none');
                 nsfwEffects.forEach(id => {
                     const el = document.getElementById(id);
@@ -838,7 +847,8 @@
                 v('face-shape'),
                 v('skin-type'),
                 [v('makeup-base'), v('makeup-detail'), v('makeup-detail-2')].filter(Boolean).join(", "),
-                v('body-height')
+                v('body-height'),
+                v('body-type') // <--- 加入 body-type
             ].filter(s => s && s.trim().length > 1);
 
             if (currentMode !== 'clean' && v('body-bust')) feats.push(`body: ${v('body-bust')}, ${v('body-waist')}, ${v('body-hip')}`);
@@ -974,7 +984,7 @@
 
         function saveCharacter(btn) {
             const charIds = [
-                'char-name', 'race', 'char-age', 'body-height',
+                'char-name', 'race', 'char-age', 'body-height', 'body-type', // <--- 加入 body-type
                 'body-bust', 'body-waist', 'body-hip',
                 'hair-style', 'hair-color', 'eye-color',
                 'face-shape', 'skin-type', 'makeup-base', 'makeup-detail', 'makeup-detail-2'
@@ -1035,7 +1045,7 @@
     <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button"
         data-slug="on9ai" data-color="#ec4899" data-emoji="" data-font="Lato" data-text="Buy Me a Coffee"
         data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#ffffff">
-        </script>
+    </script>
 </body>
 
 </html>

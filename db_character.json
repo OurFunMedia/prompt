@@ -41,6 +41,25 @@
         { "label": "高挑長腿模特 (Tall)", "value": "tall and slender model-like figure, endless and slender legs, model proportions" },
         { "label": "極高 (Towering)", "value": "statuesque and towering figure" }
     ],
+    "bodyType": [
+        { "label": "-- 體態與氣質 (Silhouette) --", "value": "" },
+        {
+            "group": "感性形容 (Gemini Safe)",
+            "options": [
+                { "label": "☁️ 豐潤柔軟 (Marshmallow)", "value": "soft and marshmallow-like physique, heavily curved silhouette, healthy and full figure, mature feminine proportions, soft fleshy texture", "tags": ["clean", "sexy"] },
+                { "label": "🗿 雕塑S曲線 (Statuesque)", "value": "statuesque hourglass figure, grand and imposing silhouette, wide hips contrasting with narrow waist, distinct feminine curves, full-figured elegance", "tags": ["clean", "sexy"] },
+                { "label": "🌸 純欲肉感 (Soft & Fleshy)", "value": "mature feminine proportions, soft fleshy texture, pure desire style, innocent yet alluring", "tags": ["clean", "sexy"] }
+            ]
+        },
+        {
+            "group": "物理形容 (General)",
+            "options": [
+                { "label": "纖細骨感 (Slender)", "value": "slender frame, delicate bone structure" },
+                { "label": "健美運動 (Athletic)", "value": "fit and athletic body, toned muscles" },
+                { "label": "微胖 (Chubby)", "value": "chubby, soft body" }
+            ]
+        }
+    ],
     "bodyBust": [
         { "label": "適中 (Balanced)", "value": "a balanced bust", "tags": ["sexy"] },
         { "label": "纖細 (Petite)", "value": "a petite bust", "tags": ["sexy"] },
