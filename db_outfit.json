@@ -1,561 +1,1847 @@
 {
     "outfitTheme": [
-        { "label": "--- 無特定風格 ---", "value": "" },
-        { "label": "全身赤裸 (Nude)", "value": "nude, completely naked, full body nudity", "tags": ["nsfw"] },
-        { "label": "校園/JK (School)", "value": "Japanese school uniform style" },
-        { "label": "便服 (Casual)", "value": "casual fashion" },
-        { "label": "冬季/滑雪 (Winter)", "value": "winter snow fashion" },
-        { "label": "現代和風 (Modern Kimono)", "value": "modern kimono fusion style" },
-        { "label": "中式/旗袍 (Cheongsam)", "value": "traditional Chinese cheongsam style" },
-        { "label": "度假風 (Resort)", "value": "summer resort fashion" },
-        { "label": "性感內衣 (Lingerie)", "value": "seductive lingerie style, aesthetic lighting, non-NSFW, tasteful art", "tags": ["sexy"] },
-        { "label": "賽博龐克 (Cyberpunk)", "value": "futuristic cyberpunk fashion, techwear" },
-        { "label": "OL/秘書 (Office)", "value": "tight office lady professional attire" },
-        { "label": "女僕 (Maid)", "value": "french maid costume theme", "tags": ["sexy"] },
-        { "label": "晚宴 (Evening)", "value": "elegant evening formal wear" },
-        { "label": "運動 (性感Sporty)", "value": "sexy sportswear style" },
-        { "label": "街頭 (Street)", "value": "trendy streetwear" },
-        { "label": "泳裝 (Swim)", "value": "swimwear style", "tags": ["sexy"] },
-        { "label": "角色扮演 (Cosplay)", "value": "cosplay outfit style" },
-        { "label": "舒適睡衣 (Sleep)", "value": "cozy loungewear" },
-        { "label": "維秘風/性感睡衣", "value": "Victoria's Secret style, seductive intimate wear", "tags": ["sexy"] }
+        {
+            "label": "--- 無特定風格 ---",
+            "value": ""
+        },
+        {
+            "label": "全身赤裸 (Nude)",
+            "value": "nude, completely naked, full body nudity",
+            "tags": [
+                "nsfw"
+            ]
+        },
+        {
+            "label": "校園/JK (School)",
+            "value": "Japanese school uniform style"
+        },
+        {
+            "label": "便服 (Casual)",
+            "value": "casual fashion"
+        },
+        {
+            "label": "冬季/滑雪 (Winter)",
+            "value": "winter snow fashion"
+        },
+        {
+            "label": "現代和風 (Modern Kimono)",
+            "value": "modern kimono fusion style"
+        },
+        {
+            "label": "中式/旗袍 (Cheongsam)",
+            "value": "traditional Chinese cheongsam style"
+        },
+        {
+            "label": "度假風 (Resort)",
+            "value": "summer resort fashion"
+        },
+        {
+            "label": "性感內衣 (Lingerie)",
+            "value": "seductive lingerie style, aesthetic lighting, non-NSFW, tasteful art",
+            "tags": [
+                "sexy"
+            ]
+        },
+        {
+            "label": "賽博龐克 (Cyberpunk)",
+            "value": "futuristic cyberpunk fashion, techwear"
+        },
+        {
+            "label": "OL/秘書 (Office)",
+            "value": "tight office lady professional attire"
+        },
+        {
+            "label": "女僕 (Maid)",
+            "value": "french maid costume theme",
+            "tags": [
+                "sexy"
+            ]
+        },
+        {
+            "label": "晚宴 (Evening)",
+            "value": "elegant evening formal wear"
+        },
+        {
+            "label": "運動 (性感Sporty)",
+            "value": "sexy sportswear style"
+        },
+        {
+            "label": "街頭 (Street)",
+            "value": "trendy streetwear"
+        },
+        {
+            "label": "泳裝 (Swim)",
+            "value": "swimwear style",
+            "tags": [
+                "sexy"
+            ]
+        },
+        {
+            "label": "角色扮演 (Cosplay)",
+            "value": "cosplay outfit style"
+        },
+        {
+            "label": "舒適睡衣 (Sleep)",
+            "value": "cozy loungewear"
+        },
+        {
+            "label": "維秘風/性感睡衣",
+            "value": "Victoria's Secret style, seductive intimate wear",
+            "tags": [
+                "sexy"
+            ]
+        }
     ],
     "outfitHead": [
-        { "label": "無", "value": "" },
+        {
+            "label": "無",
+            "value": ""
+        },
         {
             "group": "日常帽款 (Hats)",
             "options": [
-                { "label": "棒球帽 (反戴)", "value": "wearing a baseball cap backwards" },
-                { "label": "棒球帽 (Cap)", "value": "wearing a baseball cap" },
-                { "label": "針織毛帽 (Pompom)", "value": "wearing a thick cable-knit beanie with a pompom" },
-                { "label": "毛線帽 (Beanie)", "value": "wearing a knitted beanie" },
-                { "label": "毛絨護耳罩 (Earmuffs)", "value": "wearing fluffy winter earmuffs" },
-                { "label": "寬簷草帽", "value": "wearing a wide-brimmed straw hat" },
-                { "label": "貝雷帽 (畫家帽)", "value": "wearing a stylish beret" },
-                { "label": "漁夫帽", "value": "wearing a bucket hat" },
-                { "label": "報童帽", "value": "wearing a newsboy cap" },
-                { "label": "遮陽帽 (Visor)", "value": "wearing a sun visor" },
-                { "label": "頭巾 (Bandana)", "value": "wearing a bandana headscarf" },
-                { "label": "牛仔帽", "value": "wearing a cowboy hat" }
+                {
+                    "label": "棒球帽 (反戴)",
+                    "value": "wearing a baseball cap backwards"
+                },
+                {
+                    "label": "棒球帽 (Cap)",
+                    "value": "wearing a baseball cap"
+                },
+                {
+                    "label": "針織毛帽 (Pompom)",
+                    "value": "wearing a thick cable-knit beanie with a pompom"
+                },
+                {
+                    "label": "毛線帽 (Beanie)",
+                    "value": "wearing a knitted beanie"
+                },
+                {
+                    "label": "毛絨護耳罩 (Earmuffs)",
+                    "value": "wearing fluffy winter earmuffs"
+                },
+                {
+                    "label": "寬簷草帽",
+                    "value": "wearing a wide-brimmed straw hat"
+                },
+                {
+                    "label": "貝雷帽 (畫家帽)",
+                    "value": "wearing a stylish beret"
+                },
+                {
+                    "label": "漁夫帽",
+                    "value": "wearing a bucket hat"
+                },
+                {
+                    "label": "報童帽",
+                    "value": "wearing a newsboy cap"
+                },
+                {
+                    "label": "遮陽帽 (Visor)",
+                    "value": "wearing a sun visor"
+                },
+                {
+                    "label": "頭巾 (Bandana)",
+                    "value": "wearing a bandana headscarf"
+                },
+                {
+                    "label": "牛仔帽",
+                    "value": "wearing a cowboy hat"
+                }
             ]
         },
         {
             "group": "髮飾/頭帶 (Hair Acc)",
             "options": [
-                { "label": "髮箍", "value": "wearing a hair headband"},
-                { "label": "蕾絲髮箍", "value": "wearing a lace headband" },
-                { "label": "絲帶髮帶", "value": "wearing a silk ribbon hairband" },
-                { "label": "大蝴蝶結 (頭頂)", "value": "wearing a giant bow on top of head" },
-                { "label": "髮夾 (多個)", "value": "wearing multiple colorful hair clips" },
-                { "label": "珍珠髮夾", "value": "wearing pearl hairpins" },
-                { "label": "花朵髮飾", "value": "wearing a flower hair accessory" },
-                { "label": "皇冠 (Tiara)", "value": "wearing a sparkling diamond tiara" },
-                { "label": "新娘頭紗", "value": "wearing a wedding veil" },
-                { "label": "運動頭帶", "value": "wearing a sports sweatband" },
-                { "label": "中式髮簪 (簪子)", "value": "wearing a traditional Chinese hair stick" }
+                {
+                    "label": "髮箍",
+                    "value": "wearing a hair headband"
+                },
+                {
+                    "label": "蕾絲髮箍",
+                    "value": "wearing a lace headband"
+                },
+                {
+                    "label": "絲帶髮帶",
+                    "value": "wearing a silk ribbon hairband"
+                },
+                {
+                    "label": "大蝴蝶結 (頭頂)",
+                    "value": "wearing a giant bow on top of head"
+                },
+                {
+                    "label": "髮夾 (多個)",
+                    "value": "wearing multiple colorful hair clips"
+                },
+                {
+                    "label": "珍珠髮夾",
+                    "value": "wearing pearl hairpins"
+                },
+                {
+                    "label": "花朵髮飾",
+                    "value": "wearing a flower hair accessory"
+                },
+                {
+                    "label": "皇冠 (Tiara)",
+                    "value": "wearing a sparkling diamond tiara"
+                },
+                {
+                    "label": "新娘頭紗",
+                    "value": "wearing a wedding veil"
+                },
+                {
+                    "label": "運動頭帶",
+                    "value": "wearing a sports sweatband"
+                },
+                {
+                    "label": "中式髮簪 (簪子)",
+                    "value": "wearing a traditional Chinese hair stick"
+                }
             ]
         },
         {
             "group": "眼鏡/面部 (Face)",
             "options": [
-                { "label": "細框眼鏡", "value": "wearing thin metal rimmed glasses" },
-                { "label": "黑框眼鏡", "value": "wearing thick black-rimmed glasses" },
-                { "label": "太陽眼鏡 (頭頂)", "value": "sunglasses perched on head" },
-                { "label": "太陽眼鏡 (戴著)", "value": "wearing dark sunglasses" },
-                { "label": "單片眼鏡", "value": "wearing a monocle" },
-                { "label": "眼罩 (醫療)", "value": "wearing a medical eye patch" },
-                { "label": "口罩 (黑)", "value": "wearing a black face mask" }
+                {
+                    "label": "細框眼鏡",
+                    "value": "wearing thin metal rimmed glasses"
+                },
+                {
+                    "label": "黑框眼鏡",
+                    "value": "wearing thick black-rimmed glasses"
+                },
+                {
+                    "label": "太陽眼鏡 (頭頂)",
+                    "value": "sunglasses perched on head"
+                },
+                {
+                    "label": "太陽眼鏡 (戴著)",
+                    "value": "wearing dark sunglasses"
+                },
+                {
+                    "label": "單片眼鏡",
+                    "value": "wearing a monocle"
+                },
+                {
+                    "label": "眼罩 (醫療)",
+                    "value": "wearing a medical eye patch"
+                },
+                {
+                    "label": "口罩 (黑)",
+                    "value": "wearing a black face mask"
+                }
             ]
         },
         {
             "group": "特殊/Cosplay",
             "options": [
-                { "label": "兔耳髮箍", "value": "wearing a black bunny ears headband" },
-                { "label": "貓耳 (毛茸茸)", "value": "wearing fluffy cat ears" },
-                { "label": "狐狸耳", "value": "wearing fox ears" },
-                { "label": "女僕喀秋莎", "value": "wearing a frilly maid headdress" },
-                { "label": "蕾絲眼罩", "value": "wearing a black lace blindfold" },
-                { "label": "惡魔角", "value": "wearing small devil horns" },
-                { "label": "天使光環", "value": "with a glowing angel halo above head" },
-                { "label": "耳機 (掛頸)", "value": "headphones around neck" },
-                { "label": "貓耳耳機", "value": "wearing cat-ear gaming headphones" },
-                { "label": "頭戴式耳機", "value": "wearing over-ear headphones" },
-                { "label": "護士帽", "value": "wearing a nurse hat" },
-                { "label": "魔法師帽", "value": "wearing a tall pointed wizard hat" }
+                {
+                    "label": "兔耳髮箍",
+                    "value": "wearing a black bunny ears headband"
+                },
+                {
+                    "label": "貓耳 (毛茸茸)",
+                    "value": "wearing fluffy cat ears"
+                },
+                {
+                    "label": "狐狸耳",
+                    "value": "wearing fox ears"
+                },
+                {
+                    "label": "女僕喀秋莎",
+                    "value": "wearing a frilly maid headdress"
+                },
+                {
+                    "label": "蕾絲眼罩",
+                    "value": "wearing a black lace blindfold"
+                },
+                {
+                    "label": "惡魔角",
+                    "value": "wearing small devil horns"
+                },
+                {
+                    "label": "天使光環",
+                    "value": "with a glowing angel halo above head"
+                },
+                {
+                    "label": "耳機 (掛頸)",
+                    "value": "headphones around neck"
+                },
+                {
+                    "label": "貓耳耳機",
+                    "value": "wearing cat-ear gaming headphones"
+                },
+                {
+                    "label": "頭戴式耳機",
+                    "value": "wearing over-ear headphones"
+                },
+                {
+                    "label": "護士帽",
+                    "value": "wearing a nurse hat"
+                },
+                {
+                    "label": "魔法師帽",
+                    "value": "wearing a tall pointed wizard hat"
+                }
             ]
         }
     ],
     "outfitAcc": [
-        { "label": "無", "value": "" },
+        {
+            "label": "無",
+            "value": ""
+        },
         {
             "group": "耳環專區 (Earrings)",
             "options": [
-                { "label": "耳環", "value": "wearing earrings" },
-                { "label": "鑽石耳釘 (Studs)", "value": "wearing shiny diamond stud earrings" },
-                { "label": "大圓圈耳環 (Hoops)", "value": "wearing large gold hoop earrings" },
-                { "label": "長垂墜耳環", "value": "wearing long dangling earrings" },
-                { "label": "珍珠耳環", "value": "wearing elegant pearl earrings" },
-                { "label": "流蘇耳環", "value": "wearing tassel earrings" },
-                { "label": "十字架耳環", "value": "wearing gothic cross earrings" },
-                { "label": "耳骨夾 (Cuff)", "value": "wearing ear cuffs" },
-                { "label": "耳釘 (Stud)", "value": "wearing small stud earrings" },
-                { "label": "多重耳環", "value": "wearing multiple piercings on ears" }
+                {
+                    "label": "耳環",
+                    "value": "wearing earrings"
+                },
+                {
+                    "label": "鑽石耳釘 (Studs)",
+                    "value": "wearing shiny diamond stud earrings"
+                },
+                {
+                    "label": "大圓圈耳環 (Hoops)",
+                    "value": "wearing large gold hoop earrings"
+                },
+                {
+                    "label": "長垂墜耳環",
+                    "value": "wearing long dangling earrings"
+                },
+                {
+                    "label": "珍珠耳環",
+                    "value": "wearing elegant pearl earrings"
+                },
+                {
+                    "label": "流蘇耳環",
+                    "value": "wearing tassel earrings"
+                },
+                {
+                    "label": "十字架耳環",
+                    "value": "wearing gothic cross earrings"
+                },
+                {
+                    "label": "耳骨夾 (Cuff)",
+                    "value": "wearing ear cuffs"
+                },
+                {
+                    "label": "耳釘 (Stud)",
+                    "value": "wearing small stud earrings"
+                },
+                {
+                    "label": "多重耳環",
+                    "value": "wearing multiple piercings on ears"
+                }
             ]
         },
         {
             "group": "頸部飾品 (Neck)",
             "options": [
-                { "label": "厚羊毛圍巾", "value": "wearing a chunky wool scarf wrapped around neck" },
-                { "label": "格紋圍巾", "value": "wearing a plaid pattern winter scarf" },
-                { "label": "皮革頸圈 (Choker)", "value": "wearing a studded leather choker with a ring" },
-                { "label": "蕾絲頸鍊", "value": "wearing a delicate black lace choker" },
-                { "label": "金屬項鍊", "value": "wearing a simple gold chain necklace" },
-                { "label": "多層珍珠項鍊", "value": "wearing a layered pearl necklace" },
-                { "label": "鑽石項鍊", "value": "wearing a luxury diamond necklace" },
-                { "label": "紅絲帶 (頸部)", "value": "wearing a red ribbon tied around neck" },
-                { "label": "狗牌 (Dog Tag)", "value": "wearing military dog tags" }
+                {
+                    "label": "厚羊毛圍巾",
+                    "value": "wearing a chunky wool scarf wrapped around neck"
+                },
+                {
+                    "label": "格紋圍巾",
+                    "value": "wearing a plaid pattern winter scarf"
+                },
+                {
+                    "label": "皮革頸圈 (Choker)",
+                    "value": "wearing a studded leather choker with a ring"
+                },
+                {
+                    "label": "蕾絲頸鍊",
+                    "value": "wearing a delicate black lace choker"
+                },
+                {
+                    "label": "金屬項鍊",
+                    "value": "wearing a simple gold chain necklace"
+                },
+                {
+                    "label": "多層珍珠項鍊",
+                    "value": "wearing a layered pearl necklace"
+                },
+                {
+                    "label": "鑽石項鍊",
+                    "value": "wearing a luxury diamond necklace"
+                },
+                {
+                    "label": "紅絲帶 (頸部)",
+                    "value": "wearing a red ribbon tied around neck"
+                },
+                {
+                    "label": "狗牌 (Dog Tag)",
+                    "value": "wearing military dog tags"
+                }
             ]
         },
         {
             "group": "手部/身體 (Body)",
             "options": [
-                { "label": "毛絨連指手套", "value": "wearing soft warm winter mittens" },
-                { "label": "紅色緞帶 (綁手)", "value": "hands tied with red satin ribbon" },
-                { "label": "皮革束帶 (Harness)", "value": "wearing a leather body harness over chest" },
-                { "label": "緞面長手套", "value": "wearing long satin gloves" },
-                { "label": "蕾絲手套", "value": "wearing sheer lace gloves" },
-                { "label": "腿環 (Garter)", "value": "wearing a leather thigh garter" },
-                { "label": "聽診器", "value": "wearing a stethoscope" },
-                { "label": "紋身 (手臂)", "value": "with tattoos on arms" },
-                { "label": "手袋 (Handbag)", "value": "wearing a handbag" },
-                { "label": "斜背迷你包 (Satchel)", "value": "wearing a long satchel crossbody mini bag" },
-                { "label": "小型復古風格相機", "value": "wearing a small vintage style camera with an extra-long thin strap. The camera is hanging crossbody" }
+                {
+                    "label": "毛絨連指手套",
+                    "value": "wearing soft warm winter mittens"
+                },
+                {
+                    "label": "紅色緞帶 (綁手)",
+                    "value": "hands tied with red satin ribbon"
+                },
+                {
+                    "label": "皮革束帶 (Harness)",
+                    "value": "wearing a leather body harness over chest"
+                },
+                {
+                    "label": "緞面長手套",
+                    "value": "wearing long satin gloves"
+                },
+                {
+                    "label": "蕾絲手套",
+                    "value": "wearing sheer lace gloves"
+                },
+                {
+                    "label": "腿環 (Garter)",
+                    "value": "wearing a leather thigh garter"
+                },
+                {
+                    "label": "聽診器",
+                    "value": "wearing a stethoscope"
+                },
+                {
+                    "label": "紋身 (手臂)",
+                    "value": "with tattoos on arms"
+                },
+                {
+                    "label": "手袋 (Handbag)",
+                    "value": "wearing a handbag"
+                },
+                {
+                    "label": "斜背迷你包 (Satchel)",
+                    "value": "wearing a long satchel crossbody mini bag"
+                },
+                {
+                    "label": "小型復古風格相機",
+                    "value": "wearing a small vintage style camera with an extra-long thin strap. The camera is hanging crossbody"
+                }
             ]
         },
         {
             "group": "校園配件 (School Acc)",
             "options": [
-                { "label": "JK書包 (皮革)", "value": "holding a leather school briefcase bag" },
-                { "label": "尼龍書包 (深藍)", "value": "carrying a navy blue nylon school bag" },
-                { "label": "臂章 (風紀委員)", "value": "wearing a red armband on sleeve" }
+                {
+                    "label": "JK書包 (皮革)",
+                    "value": "holding a leather school briefcase bag"
+                },
+                {
+                    "label": "尼龍書包 (深藍)",
+                    "value": "carrying a navy blue nylon school bag"
+                },
+                {
+                    "label": "臂章 (風紀委員)",
+                    "value": "wearing a red armband on sleeve"
+                }
             ]
         }
     ],
     "outfitAccDetail": [
-        { "label": "無額外細節", "value": "" },
+        {
+            "label": "無額外細節",
+            "value": ""
+        },
         {
             "group": "手部細節",
             "options": [
-                { "label": "戒指 (多枚)", "value": "wearing multiple rings on fingers" },
-                { "label": "單一鑽戒", "value": "wearing a diamond ring on finger" },
-                { "label": "手鍊", "value": "wearing a delicate bracelet chain" },
-                { "label": "手錶", "value": "wearing a wristwatch" },
-                { "label": "金手鐲", "value": "wearing gold bracelets" },
-                { "label": "指甲油", "value": "with colorful nail polish" },
-                { "label": "法式指甲", "value": "with French manicure" }
+                {
+                    "label": "戒指 (多枚)",
+                    "value": "wearing multiple rings on fingers"
+                },
+                {
+                    "label": "單一鑽戒",
+                    "value": "wearing a diamond ring on finger"
+                },
+                {
+                    "label": "手鍊",
+                    "value": "wearing a delicate bracelet chain"
+                },
+                {
+                    "label": "手錶",
+                    "value": "wearing a wristwatch"
+                },
+                {
+                    "label": "金手鐲",
+                    "value": "wearing gold bracelets"
+                },
+                {
+                    "label": "指甲油",
+                    "value": "with colorful nail polish"
+                },
+                {
+                    "label": "法式指甲",
+                    "value": "with French manicure"
+                }
             ]
         },
         {
             "group": "其他細節",
             "options": [
-                { "label": "鑰匙扣 (背包)", "value": "with keychains hanging from bag" },
-                { "label": "徽章 (背包)", "value": "with enamel pins on bag" },
-                { "label": "名牌 (身份證)", "value": "wearing a name tag on chest" },
-                { "label": "藍牙耳機 (耳上)", "value": "wearing Bluetooth earpiece" },
-                { "label": "太陽眼鏡 (頸上)", "value": "sunglasses hanging from collar" },
-                { "label": "口罩 (白色)", "value": "wearing a white face mask" },
-                { "label": "口紅痕跡", "value": "with lipstick on lips" },
-                { "label": "眼影濃妝", "value": "with heavy eyeshadow makeup" }
+                {
+                    "label": "鑰匙扣 (背包)",
+                    "value": "with keychains hanging from bag"
+                },
+                {
+                    "label": "徽章 (背包)",
+                    "value": "with enamel pins on bag"
+                },
+                {
+                    "label": "名牌 (身份證)",
+                    "value": "wearing a name tag on chest"
+                },
+                {
+                    "label": "藍牙耳機 (耳上)",
+                    "value": "wearing Bluetooth earpiece"
+                },
+                {
+                    "label": "太陽眼鏡 (頸上)",
+                    "value": "sunglasses hanging from collar"
+                },
+                {
+                    "label": "口罩 (白色)",
+                    "value": "wearing a white face mask"
+                },
+                {
+                    "label": "口紅痕跡",
+                    "value": "with lipstick on lips"
+                },
+                {
+                    "label": "眼影濃妝",
+                    "value": "with heavy eyeshadow makeup"
+                }
             ]
         },
         {
             "group": "特殊裝飾",
             "options": [
-                { "label": "羽毛裝飾", "value": "with feather accessories" },
-                { "label": "亮片裝飾", "value": "with glitter and sparkles" },
-                { "label": "鈴鐺項鍊", "value": "wearing a bell choker" },
-                { "label": "頸部刺青", "value": "with neck tattoo" },
-                { "label": "手臂刺青", "value": "with arm tattoos" },
-                { "label": "唇環", "value": "with lip piercing" },
-                { "label": "眉毛穿刺", "value": "with eyebrow piercing" },
-                { "label": "肚臍環", "value": "with navel piercing" }
+                {
+                    "label": "羽毛裝飾",
+                    "value": "with feather accessories"
+                },
+                {
+                    "label": "亮片裝飾",
+                    "value": "with glitter and sparkles"
+                },
+                {
+                    "label": "鈴鐺項鍊",
+                    "value": "wearing a bell choker"
+                },
+                {
+                    "label": "頸部刺青",
+                    "value": "with neck tattoo"
+                },
+                {
+                    "label": "手臂刺青",
+                    "value": "with arm tattoos"
+                },
+                {
+                    "label": "唇環",
+                    "value": "with lip piercing"
+                },
+                {
+                    "label": "眉毛穿刺",
+                    "value": "with eyebrow piercing"
+                },
+                {
+                    "label": "肚臍環",
+                    "value": "with navel piercing"
+                }
             ]
         }
     ],
     "outfitOuter": [
-        { "label": "--- 無外套 (No Outerwear) ---", "value": "" },
+        {
+            "label": "--- 無外套 (No Outerwear) ---",
+            "value": ""
+        },
         {
             "group": "冬季保暖 (Winter)",
             "options": [
-                { "label": "蓬鬆羽絨褸 (Puffer)", "key": "puffer_jacket", "closed": "wearing a thick quilted puffer jacket", "open": "wearing an unzipped thick puffer jacket, revealing inner wear" },
-                { "label": "滑雪連身服 (Ski Suit)", "value": "wearing a professional insulated one-piece ski suit" },
-                { "label": "滑雪外套", "key": "ski_jacket", "closed": "wearing a ski jacket", "open": "wearing an open ski jacket" },
-                { "label": "連帽派克大衣 (Parka)", "value": "wearing a heavy winter parka with fur-trimmed hood" },
-                { "label": "羊毛大衣 (Coat)", "value": "wearing an elegant long wool overcoat" },
-                { "label": "雙排扣外套", "key": "double_breasted_jacket", "closed": "wearing a double-breasted jacket", "open": "wearing an open double-breasted jacket" }
+                {
+                    "label": "蓬鬆羽絨褸 (Puffer)",
+                    "key": "puffer_jacket",
+                    "closed": "wearing a thick quilted puffer jacket",
+                    "open": "wearing an unzipped thick puffer jacket, revealing inner wear"
+                },
+                {
+                    "label": "滑雪連身服 (Ski Suit)",
+                    "value": "wearing a professional insulated one-piece ski suit"
+                },
+                {
+                    "label": "滑雪外套",
+                    "key": "ski_jacket",
+                    "closed": "wearing a ski jacket",
+                    "open": "wearing an open ski jacket"
+                },
+                {
+                    "label": "連帽派克大衣 (Parka)",
+                    "value": "wearing a heavy winter parka with fur-trimmed hood"
+                },
+                {
+                    "label": "羊毛大衣 (Coat)",
+                    "value": "wearing an elegant long wool overcoat"
+                },
+                {
+                    "label": "雙排扣外套",
+                    "key": "double_breasted_jacket",
+                    "closed": "wearing a double-breasted jacket",
+                    "open": "wearing an open double-breasted jacket"
+                }
             ]
         },
         {
             "group": "日常/時尚",
             "options": [
-                { "label": "牛仔外套 (Denim)", "key": "denim_jacket", "closed": "wearing a classic denim jacket", "open": "wearing an unbuttoned denim jacket" },
-                { "label": "飛行夾克 (Bomber)", "key": "bomber_jacket", "closed": "wearing a bomber jacket", "open": "wearing an unzipped bomber jacket" },
-                { "label": "皮革騎士夾克 (Leather)", "key": "leather_jacket", "closed": "wearing a black leather biker jacket", "open": "wearing an open leather biker jacket" },
-                { "label": "運動風褸 (Windbreaker)", "key": "windbreaker", "closed": "wearing a lightweight sports windbreaker", "open": "wearing an open lightweight sports windbreaker, revealing inner clothing" },
-                { "label": "連帽外套 (Zip Hoodie)", "key": "zip_hoodie", "closed": "wearing a zip-up hoodie", "open": "wearing an unzipped hoodie jacket" },
-                { "label": "針織開襟衫 (Cardigan)", "value": "wearing a cozy knit cardigan" },
-                { "label": "棒球褸 (Varsity)", "key": "varsity_jacket", "closed": "wearing a classic varsity jacket with contrast sleeves", "open": "wearing an unbuttoned varsity jacket, revealing inner wear" },
-                { "label": "風衣 (Trench)", "key": "trench_coat", "closed": "wearing a beige trench coat", "open": "wearing an open trench coat" },
-                { "label": "披肩 (Shawl)", "value": "wearing a knitted shawl draped over shoulders" },
-                { "label": "職人工作圍裙 (Canvas)", "value": "wearing a heavy-duty canvas work apron" }
+                {
+                    "label": "牛仔外套 (Denim)",
+                    "key": "denim_jacket",
+                    "closed": "wearing a classic denim jacket",
+                    "open": "wearing an unbuttoned denim jacket"
+                },
+                {
+                    "label": "飛行夾克 (Bomber)",
+                    "key": "bomber_jacket",
+                    "closed": "wearing a bomber jacket",
+                    "open": "wearing an unzipped bomber jacket"
+                },
+                {
+                    "label": "皮革騎士夾克 (Leather)",
+                    "key": "leather_jacket",
+                    "closed": "wearing a black leather biker jacket",
+                    "open": "wearing an open leather biker jacket"
+                },
+                {
+                    "label": "運動風褸 (Windbreaker)",
+                    "key": "windbreaker",
+                    "closed": "wearing a lightweight sports windbreaker",
+                    "open": "wearing an open lightweight sports windbreaker, revealing inner clothing"
+                },
+                {
+                    "label": "連帽外套 (Zip Hoodie)",
+                    "key": "zip_hoodie",
+                    "closed": "wearing a zip-up hoodie",
+                    "open": "wearing an unzipped hoodie jacket"
+                },
+                {
+                    "label": "針織開襟衫 (Cardigan)",
+                    "value": "wearing a cozy knit cardigan"
+                },
+                {
+                    "label": "棒球褸 (Varsity)",
+                    "key": "varsity_jacket",
+                    "closed": "wearing a classic varsity jacket with contrast sleeves",
+                    "open": "wearing an unbuttoned varsity jacket, revealing inner wear"
+                },
+                {
+                    "label": "風衣 (Trench)",
+                    "key": "trench_coat",
+                    "closed": "wearing a beige trench coat",
+                    "open": "wearing an open trench coat"
+                },
+                {
+                    "label": "披肩 (Shawl)",
+                    "value": "wearing a knitted shawl draped over shoulders"
+                },
+                {
+                    "label": "職人工作圍裙 (Canvas)",
+                    "value": "wearing a heavy-duty canvas work apron"
+                }
             ]
         }
     ],
     "outfitTop": [
-        { "label": "--- 基礎上衣 ---", "value": "" },
+        {
+            "label": "--- 基礎上衣 ---",
+            "value": ""
+        },
         {
             "group": "赤裸/限制級 (NSFW)",
             "options": [
-                { "label": "上身赤裸 (Topless)", "value": "topless, bare chest, no top, nipples visible", "tags": ["nsfw"] }
+                {
+                    "label": "上身赤裸 (Topless)",
+                    "value": "topless, bare chest, no top, nipples visible",
+                    "tags": [
+                        "nsfw"
+                    ]
+                }
             ]
         },
         {
             "group": "內衣/胸罩 (Bras)",
             "options": [
-                { "label": "1/2杯內衣 (半罩)", "value": "demi-cup bra, uplifting", "tags": ["nsfw"] },
-                { "label": "運動內衣", "value": "a sports bra", "tags": ["sexy"] },
-                { "label": "深V蕾絲胸罩", "value": "deep-V lace bra", "tags": ["nsfw"] },
-                { "label": "透明蕾絲胸罩", "value": "sheer lace bra, see-through", "tags": ["nsfw"] },
-                { "label": "超深V高衩連身睡衣", "value": "wearing a Victoria's Secret style seductive teddy lingerie, deep V-neck, high-cut leg, lace sheer sexy bodysuit", "tags": ["sexy"] },
-                { "label": "僅胸貼 (Pasties)", "value": "wearing only nipple pasties", "tags": ["nsfw"] }
+                {
+                    "label": "1/2杯內衣 (半罩)",
+                    "value": "demi-cup bra, uplifting",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "運動內衣",
+                    "value": "a sports bra",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "深V蕾絲胸罩",
+                    "value": "deep-V lace bra",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "透明蕾絲胸罩",
+                    "value": "sheer lace bra, see-through",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "超深V高衩連身睡衣",
+                    "value": "wearing a Victoria's Secret style seductive teddy lingerie, deep V-neck, high-cut leg, lace sheer sexy bodysuit",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "僅胸貼 (Pasties)",
+                    "value": "wearing only nipple pasties",
+                    "tags": [
+                        "nsfw"
+                    ]
+                }
             ]
         },
         {
             "group": "泳裝/比基尼 (Swimwear)",
             "options": [
-                { "label": "三點式比基尼上衣", "value": "wearing a classic triangle string bikini top, non-NSFW", "tags": ["sexy"] },
-                { "label": "深V掛脖泳裝", "value": "deep-V halter neck swimsuit", "tags": ["nsfw"] },
-                { "label": "側空連身泳衣", "value": "high-cut bodysuit revealing sideboob", "tags": ["nsfw"] }
+                {
+                    "label": "三點式比基尼上衣",
+                    "value": "wearing a classic triangle string bikini top, non-NSFW",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "深V掛脖泳裝",
+                    "value": "deep-V halter neck swimsuit",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "側空連身泳衣",
+                    "value": "high-cut bodysuit revealing sideboob",
+                    "tags": [
+                        "nsfw"
+                    ]
+                }
             ]
         },
         {
             "group": "睡衣/居家 (Sleepwear)",
             "options": [
-                { "label": "居家連身服 (Onesie)", "value": "wearing a cute animal onesie" },
-                { "label": "寬鬆白襯衫 (BF風)", "value": "wearing an oversized white shirt" },
-                { "label": "吊帶露背絲綢睡裙", "value": "wearing a sexy spaghetti strap nightgown, deep V-neckline with large armholes revealing sideboob, backless to hip design, silky fabricis light, soft and drapes down", "tags": ["sexy"] }
+                {
+                    "label": "居家連身服 (Onesie)",
+                    "value": "wearing a cute animal onesie"
+                },
+                {
+                    "label": "寬鬆白襯衫 (BF風)",
+                    "value": "wearing an oversized white shirt"
+                },
+                {
+                    "label": "吊帶露背絲綢睡裙",
+                    "value": "wearing a sexy spaghetti strap nightgown, deep V-neckline with large armholes revealing sideboob, backless to hip design, silky fabricis light, soft and drapes down",
+                    "tags": [
+                        "sexy"
+                    ]
+                }
             ]
         },
         {
             "group": "性感時裝 (Sexy Fashion)",
             "options": [
-                { "label": "超深V高貴華麗晚裝", "value": "wearing a luxurious and elegant evening gown, extremely deep plunging V-neckline, high-end fashion", "tags": ["sexy"] },
-                { "label": "深V開胸上衣", "value": "top with plunging neckline, deep cleavage", "tags": ["sexy"] },
-                { "label": "深V細肩帶上衣", "value": "deep V-neck top with thin straps features a simple and fitted cut, with a natural drape of fabric, creating a relaxed yet sophisticated style.", "tags": ["sexy"] },
-                { "label": "綁帶露背上衣", "value": "backless top with criss-cross straps", "tags": ["sexy"] },
-                { "label": "綁帶露胸上衣", "value": "front-tie crop top, revealing cleavage", "tags": ["nsfw"] },
-                { "label": "側開高領毛衣", "value": "high-neck sleeveless sweater with open sides", "tags": ["nsfw"] },
-                { "label": "殺死處男毛衣", "value": "virgin killer sweater, open back", "tags": ["sexy"] }
+                {
+                    "label": "超深V高貴華麗晚裝",
+                    "value": "wearing a luxurious and elegant evening gown, extremely deep plunging V-neckline, high-end fashion",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "深V開胸上衣",
+                    "value": "top with plunging neckline, deep cleavage",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "深V細肩帶上衣",
+                    "value": "deep V-neck top with thin straps features a simple and fitted cut, with a natural drape of fabric, creating a relaxed yet sophisticated style.",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "綁帶露背上衣",
+                    "value": "backless top with criss-cross straps",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "綁帶露胸上衣",
+                    "value": "front-tie crop top, revealing cleavage",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "側開高領毛衣",
+                    "value": "high-neck sleeveless sweater with open sides",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "殺死處男毛衣",
+                    "value": "backless ribbed knit sweater, open back, virgin killer sweater, high-neck, sleeveless, sideboob hint, heavy knit texture",
+                    "tags": [
+                        "sexy"
+                    ]
+                }
             ]
         },
         {
             "group": "吊帶/背心 (Camisoles & Vests)",
             "options": [
-                { "label": "基礎吊帶背心 (Spaghetti)", "value": "wearing a basic spaghetti strap camisole" },
-                { "label": "細肩帶蕾絲背心", "value": "wearing a lace-trimmed camisole" },
-                { "label": "緊身工字背心 (Racerback)", "value": "wearing a tight racerback tank top" },
-                { "label": "羅紋針織背心", "value": "wearing a ribbed knit vest top" },
-                { "label": "掛脖短版背心 (Halter)", "value": "wearing a cropped halter top" },
-                { "label": "交叉綁帶背心", "value": "wearing a criss-cross strap tank top" },
-                { "label": "短版運動背心", "value": "cropped athletic tank top" },
-                { "label": "緞面內搭背心", "value": "satin camisole worn under jacket" },
-                { "label": "露肚臍吊帶背心", "value": "spaghetti strap camisole showing belly button" },
-                { "label": "大袖口背心 (側乳)", "value": "tank top with large armholes revealing sideboob", "tags": ["nsfw"] },
-                { "label": "露肚肚吊帶背心 (側乳)", "value": "spaghetti strap camisole with sideboob", "tags": ["nsfw"] }
+                {
+                    "label": "基礎吊帶背心 (Spaghetti)",
+                    "value": "wearing a basic spaghetti strap camisole"
+                },
+                {
+                    "label": "細肩帶蕾絲背心",
+                    "value": "wearing a lace-trimmed camisole"
+                },
+                {
+                    "label": "緊身工字背心 (Racerback)",
+                    "value": "wearing a tight racerback tank top"
+                },
+                {
+                    "label": "羅紋針織背心",
+                    "value": "tight ribbed knit sweater vest, vertical lines texture, form-fitting knitwear"
+                },
+                {
+                    "label": "掛脖短版背心 (Halter)",
+                    "value": "wearing a cropped halter top"
+                },
+                {
+                    "label": "交叉綁帶背心",
+                    "value": "wearing a criss-cross strap tank top"
+                },
+                {
+                    "label": "短版運動背心",
+                    "value": "cropped athletic tank top"
+                },
+                {
+                    "label": "緞面內搭背心",
+                    "value": "satin camisole worn under jacket"
+                },
+                {
+                    "label": "露肚臍吊帶背心",
+                    "value": "spaghetti strap camisole showing belly button"
+                },
+                {
+                    "label": "大袖口背心 (側乳)",
+                    "value": "tank top with large armholes revealing sideboob",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "露肚肚吊帶背心 (側乳)",
+                    "value": "spaghetti strap camisole with sideboob",
+                    "tags": [
+                        "nsfw"
+                    ]
+                }
             ]
         },
         {
             "group": "休閒/T恤 (Casual & Tees)",
             "options": [
-                { "label": "超貼身短袖T恤", "value": "wearing a short-sleeved skintight t-shirt, the fabric clinging to her body and showing off her curves" },
-                { "label": "緊身T恤", "value": "wearing a tight-fitting t-shirt" },
-                { "label": "T恤 (合身)", "value": "wearing a basic fitted cotton t-shirt" },
-                { "label": "Oversize T恤", "value": "oversized boyfriend style t-shirt" },
-                { "label": "連帽衛衣 (Hoodie)", "value": "comfortable hoodie" },
-                { "label": "格子襯衫", "value": "plaid flannel shirt" }
+                {
+                    "label": "緊身T恤",
+                    "value": "wearing a tight-fitting t-shirt"
+                },
+                {
+                    "label": "T恤 (合身)",
+                    "value": "wearing a basic fitted cotton t-shirt"
+                },
+                {
+                    "label": "Oversize 男友T恤",
+                    "value": "oversized boyfriend style t-shirt"
+                },
+                {
+                    "label": "連帽衛衣 (Hoodie)",
+                    "value": "comfortable hoodie"
+                },
+                {
+                    "label": "格子襯衫",
+                    "value": "plaid flannel shirt"
+                }
             ]
         },
         {
             "group": "日常/質感 (Daily Fashion)",
             "options": [
-                { "label": "羅紋針織開襟衫 (粉)", "value": "pink ribbed knit cardigan" },
-                { "label": "肩帶滑落上衣", "value": "spaghetti strap top with one strap slipping off shoulder" },
-                { "label": "蕾絲長袖襯衫", "value": "lace long-sleeve blouse" },
-                { "label": "寬鬆垂領上衣", "value": "loose cowl neck top" },
-                { "label": "露肩針織衫", "value": "off-shoulder knitted sweater" },
-                { "label": "短版小可愛", "value": "tiny crop top" },
-                { "label": "短版立領襯衫", "value": "crop top with mandarin collar" },
-                { "label": "高領無袖上衣", "value": "sleeveless turtleneck top" }
+                {
+                    "label": "羅紋針織開襟衫",
+                    "value": "ribbed knit cardigan"
+                },
+                {
+                    "label": "肩帶滑落上衣",
+                    "value": "spaghetti strap top with one strap slipping off shoulder"
+                },
+                {
+                    "label": "蕾絲長袖襯衫",
+                    "value": "lace long-sleeve blouse"
+                },
+                {
+                    "label": "寬鬆垂領上衣",
+                    "value": "loose cowl neck top"
+                },
+                {
+                    "label": "露肩針織衫",
+                    "value": "off-shoulder knitted sweater"
+                },
+                {
+                    "label": "緊身針織衫 (顯身材)",
+                    "value": "tight ribbed knit sweater, vertical lines texture, form-fitting knitwear, solid color",
+                    "tags": [
+                        "clean"
+                    ]
+                },
+                {
+                    "label": "短版緊身T恤 (Baby Tee)",
+                    "value": "cropped baby tee, hemline rising, midriff exposed, fitted style"
+                },
+                {
+                    "label": "短版立領襯衫",
+                    "value": "crop top with mandarin collar"
+                },
+                {
+                    "label": "高領無袖上衣",
+                    "value": "sleeveless turtleneck, ribbed fabric, armholes cutting in, contouring upper body, fitted silhouette"
+                }
             ]
         },
         {
             "group": "冬季/毛衣 (Winter)",
             "options": [
-                { "label": "高領厚毛衣 (Turtleneck)", "value": "wearing a chunky turtleneck cable-knit sweater" },
-                { "label": "毛絨抓絨上衣 (Fleece)", "value": "wearing a fuzzy sherpa fleece pullover" }
+                {
+                    "label": "高領厚毛衣 (Turtleneck)",
+                    "value": "wearing a chunky turtleneck cable-knit sweater"
+                },
+                {
+                    "label": "毛絨抓絨上衣 (Fleece)",
+                    "value": "wearing a fuzzy sherpa fleece pullover"
+                }
             ]
         },
         {
             "group": "旗袍/中式 (Cheongsam)",
             "options": [
-                { "label": "古典長旗袍 (優雅)", "value": "wearing a traditional elegant silk cheongsam, high collar" },
-                { "label": "高衩旗袍 (露腿)", "value": "wearing a high-slit cheongsam revealing thighs", "tags": ["nsfw"] },
-                { "label": "開胸旗袍 (挖空)", "value": "wearing a modified cheongsam with a deep V-neck and high slit, the open neckline reveals her ample cleavage and skin", "tags": ["sexy"] },
-                { "label": "入膊旗袍 (削肩)", "value": "wearing a halter-neck sleeveless cheongsam" },
-                { "label": "短裙改良旗袍 (Mini)", "value": "wearing a modern tight mini cheongsam" },
-                { "label": "蕾絲透視旗袍", "value": "wearing a sheer lace cheongsam style lingerie", "tags": ["nsfw"] }
+                {
+                    "label": "古典長旗袍 (優雅)",
+                    "value": "wearing a traditional elegant silk cheongsam, high collar"
+                },
+                {
+                    "label": "高衩旗袍 (露腿)",
+                    "value": "wearing a high-slit cheongsam revealing thighs",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "開胸旗袍 (挖空)",
+                    "value": "wearing a modified cheongsam with a deep V-neck and high slit, the open neckline reveals her ample cleavage and skin",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "入膊旗袍 (削肩)",
+                    "value": "wearing a halter-neck sleeveless cheongsam"
+                },
+                {
+                    "label": "短裙改良旗袍 (Mini)",
+                    "value": "wearing a modern tight mini cheongsam"
+                },
+                {
+                    "label": "蕾絲透視旗袍",
+                    "value": "wearing a sheer lace cheongsam style lingerie",
+                    "tags": [
+                        "nsfw"
+                    ]
+                }
             ]
         },
         {
             "group": "職場/行政 (Executive)",
             "options": [
-                { "label": "修身西裝外套 (Blazer)", "value": "tailored black blazer" },
-                { "label": "絲綢襯衫 (白)", "value": "white silk button-down shirt" },
-                { "label": "雪紡襯衫 (半透)", "value": "semi-sheer chiffon blouse" },
-                { "label": "西裝馬甲 (Vest)", "value": "formal suit vest" },
-                { "label": "雙排扣西裝", "value": "double-breasted suit jacket" },
-                { "label": "立領襯衫", "value": "mandarin collar shirt" }
+                {
+                    "label": "修身西裝外套 (Blazer)",
+                    "value": "tailored black blazer"
+                },
+                {
+                    "label": "絲綢襯衫 (白)",
+                    "value": "white silk button-down shirt"
+                },
+                {
+                    "label": "雪紡襯衫 (半透)",
+                    "value": "semi-sheer chiffon blouse"
+                },
+                {
+                    "label": "西裝馬甲 (Vest)",
+                    "value": "formal suit vest"
+                },
+                {
+                    "label": "雙排扣西裝",
+                    "value": "double-breasted suit jacket"
+                },
+                {
+                    "label": "立領襯衫",
+                    "value": "mandarin collar shirt"
+                }
             ]
         },
         {
             "group": "工作/制服 (Work & Uniforms)",
             "options": [
-                { "label": "職人工作圍裙 (Canvas)", "value": "wearing a heavy-duty canvas work apron" },
-                { "label": "可愛廚房圍裙 (Frilly)", "value": "wearing a cute frilly kitchen apron" },
-                { "label": "工裝連身服 (Boilersuit)", "value": "wearing a utility boiler suit" }
+                {
+                    "label": "職人工作圍裙 (Canvas)",
+                    "value": "wearing a heavy-duty canvas work apron"
+                },
+                {
+                    "label": "可愛廚房圍裙 (Frilly)",
+                    "value": "wearing a cute frilly kitchen apron"
+                },
+                {
+                    "label": "工裝連身服 (Boilersuit)",
+                    "value": "wearing a utility boiler suit"
+                }
             ]
         },
         {
             "group": "日式校服 (JK Uniform)",
             "options": [
-                { "label": "傳統水手服 (深藍)", "value": "wearing a classic navy blue sailor uniform top (seifuku), white collar with stripes" },
-                { "label": "夏季水手服 (白)", "value": "wearing a white short-sleeve sailor uniform top" },
-                { "label": "西裝外套 (Blazer)", "value": "wearing a school uniform blazer with an embroidered emblem" },
-                { "label": "米色針織開衫 (卡其)", "value": "wearing a loose beige knit school cardigan" },
-                { "label": "海軍藍針織背心", "value": "wearing a navy blue knitted school vest over white shirt" },
-                { "label": "白襯衫+領結 (Ribbon)", "value": "wearing a crisp white button-up school shirt with a colorful ribbon bowtie" },
-                { "label": "白襯衫+領帶 (Tie)", "value": "wearing a white school shirt with a loose necktie" },
-                { "label": "體育服 (Jersey)", "value": "wearing a zipped-up japanese school gym jersey jacket" },
-                { "label": "體育服T恤 (Gym)", "value": "wearing a white school gym t-shirt with nametag" }
+                {
+                    "label": "傳統水手服 (深藍)",
+                    "value": "wearing a classic navy blue sailor uniform top (seifuku), white collar with stripes"
+                },
+                {
+                    "label": "夏季水手服 (白)",
+                    "value": "wearing a white short-sleeve sailor uniform top"
+                },
+                {
+                    "label": "西裝外套 (Blazer)",
+                    "value": "wearing a school uniform blazer with an embroidered emblem"
+                },
+                {
+                    "label": "米色針織開衫 (卡其)",
+                    "value": "wearing a loose beige knit school cardigan"
+                },
+                {
+                    "label": "海軍藍針織背心",
+                    "value": "wearing a navy blue knitted school vest over white shirt"
+                },
+                {
+                    "label": "白襯衫+領結 (Ribbon)",
+                    "value": "wearing a crisp white button-up school shirt with a colorful ribbon bowtie"
+                },
+                {
+                    "label": "白襯衫+領帶 (Tie)",
+                    "value": "wearing a white school shirt with a loose necktie"
+                },
+                {
+                    "label": "體育服 (Jersey)",
+                    "value": "wearing a zipped-up japanese school gym jersey jacket"
+                },
+                {
+                    "label": "體育服T恤 (Gym)",
+                    "value": "wearing a white school gym t-shirt with nametag"
+                }
             ]
         },
         {
             "group": "性感/情趣 (Sexy Lingerie & Fetish)",
             "options": [
-                { "label": "乳膠緊身衣 (上身)", "value": "tight shiny latex bodysuit top", "tags": ["nsfw"] },
-                { "label": "透視薄紗襯衫", "value": "completely see-through chiffon blouse", "tags": ["nsfw"] },
-                { "label": "網狀上衣 (Fishnet)", "value": "fishnet top, bare skin underneath", "tags": ["nsfw"] },
-                { "label": "開襟透視上衣", "value": "open-front sheer blouse, revealing bra", "tags": ["nsfw"] },
-                { "label": "兔女郎馬甲", "value": "satin bunny girl corset bodysuit", "tags": ["nsfw"] }
+                {
+                    "label": "乳膠緊身衣 (上身)",
+                    "value": "tight shiny latex bodysuit top",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "透視薄紗襯衫",
+                    "value": "translucent tulle top, see-through fabric, delicate texture, soft lighting passing through",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "網狀上衣 (Fishnet)",
+                    "value": "fishnet top, bare skin underneath",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "開襟透視上衣",
+                    "value": "open-front sheer blouse, revealing bra",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "兔女郎馬甲",
+                    "value": "satin bunny girl corset bodysuit",
+                    "tags": [
+                        "nsfw"
+                    ]
+                }
             ]
         },
         {
             "group": "制服/Cosplay",
             "options": [
-                { "label": "爆扣襯衫", "value": "tight shirt with buttons straining", "tags": ["nsfw"] },
-                { "label": "濕透襯衫", "value": "wet shirt, clinging to skin, translucent", "tags": ["nsfw"] },
-                { "label": "裸體圍裙 (Naked Apron)", "value": "wearing only an apron, naked apron", "tags": ["nsfw"] },
-                { "label": "護士服", "value": "classic nurse uniform" },
-                { "label": "護士服 (拉鍊)", "value": "tight nurse tunic with zipper down", "tags": ["nsfw"] },
-                { "label": "護士服 (開胸)", "value": "sexy nurse uniform with open chest", "tags": ["nsfw"] },
-                { "label": "女僕裝", "value": "classic french maid outfit" },
-                { "label": "女僕裝 (低胸)", "value": "sexy french maid outfit with low-cut neckline", "tags": ["nsfw"] },
-                { "label": "女僕裝 (短裙)", "value": "sexy french maid outfit with short skirt", "tags": ["nsfw"] },
-                { "label": "性感水手服 (露腰)", "value": "cropped sailor uniform top" }
+                {
+                    "label": "爆扣襯衫",
+                    "value": "tight white formal shirt, fitted office wear, slim fit",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "濕透襯衫",
+                    "value": "wet shirt, clinging to skin, translucent",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "裸體圍裙 (Naked Apron)",
+                    "value": "wearing only an apron, naked apron",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "護士服",
+                    "value": "classic nurse uniform"
+                },
+                {
+                    "label": "護士服 (拉鍊)",
+                    "value": "tight nurse tunic with zipper down",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "護士服 (開胸)",
+                    "value": "sexy nurse uniform with open chest",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "女僕裝",
+                    "value": "classic french maid outfit"
+                },
+                {
+                    "label": "女僕裝 (低胸)",
+                    "value": "sexy french maid outfit with low-cut neckline",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "女僕裝 (短裙)",
+                    "value": "sexy french maid outfit with short skirt",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "性感水手服 (露腰)",
+                    "value": "cropped sailor uniform top"
+                }
             ]
         },
         {
             "group": "特色服裝 (Special)",
             "options": [
-                { "label": "傳統和服", "value": "traditional japanese kimono, ornate silk fabric, obi sash" },
-                { "label": "性感和服", "value": "modified sexy japanese kimono, ornate silk fabric, obi sash", "tags": ["sexy"]},
-                { "label": "傳統韓服", "value": "traditional korean hanbok, high-waisted skirt, jeogori jacket" },
-                { "label": "性感韓服", "value": "modified sexy korean hanbok, high-waisted skirt, jeogori jacket", "tags":["sexy"] },
-                { "label": "傳統泰服", "value": "traditional thai outfit, chut thai, sabai shawl, wrapped skirt" },
-                { "label": "性感泰服", "value": "modified sexy thai outfit, chut thai, sabai shawl, wrapped skirt", "tags": ["sexy"]},
-                { "label": "中式漢服", "value": "chinese ancient hanfu, ruqun style, flowing sleeves, traditional embroidery" },
-                { "label": "性感漢服", "value": "modified deep V-neck, high-slit embroidered tulle Hanfu, the open collar reveals her skin and cleavage, exuding both coolness and sexiness while maintaining elegance", "tags": ["sexy"]},
-                { "label": "越南奧黛", "value": "vietnamese ao dai, long tunic with high slits over trousers" },
-                { "label": "性感奧黛", "value": "modified sexy vietnamese ao dai with a deep V-neck and high slit, the open neckline reveals her ample cleavage and skin, long tunic with high slits over trousers", "tags": ["sexy"]}
+                {
+                    "label": "傳統和服",
+                    "value": "traditional japanese kimono, ornate silk fabric, obi sash"
+                },
+                {
+                    "label": "性感和服",
+                    "value": "modified sexy japanese kimono, ornate silk fabric, obi sash",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "傳統韓服",
+                    "value": "traditional korean hanbok, high-waisted skirt, jeogori jacket"
+                },
+                {
+                    "label": "性感韓服",
+                    "value": "modified sexy korean hanbok, high-waisted skirt, jeogori jacket",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "傳統泰服",
+                    "value": "traditional thai outfit, chut thai, sabai shawl, wrapped skirt"
+                },
+                {
+                    "label": "性感泰服",
+                    "value": "modified sexy thai outfit, chut thai, sabai shawl, wrapped skirt",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "中式漢服",
+                    "value": "chinese ancient hanfu, ruqun style, flowing sleeves, traditional embroidery"
+                },
+                {
+                    "label": "性感漢服",
+                    "value": "modified deep V-neck, high-slit embroidered tulle Hanfu, the open collar reveals her skin and cleavage, exuding both coolness and sexiness while maintaining elegance",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "越南奧黛",
+                    "value": "vietnamese ao dai, long tunic with high slits over trousers"
+                },
+                {
+                    "label": "性感奧黛",
+                    "value": "modified sexy vietnamese ao dai with a deep V-neck and high slit, the open neckline reveals her ample cleavage and skin, long tunic with high slits over trousers",
+                    "tags": [
+                        "sexy"
+                    ]
+                }
             ]
         }
     ],
     "outfitBottom": [
-        { "label": "--- 基礎下著 ---", "value": "" },
+        {
+            "label": "--- 基礎下著 ---",
+            "value": ""
+        },
         {
             "group": "休閒/工裝 (Casual & Work)",
             "options": [
-                { "label": "尼龍雪褲", "value": "wearing waterproof insulated snow pants" },
-                { "label": "內起絨保暖長褲", "value": "wearing fleece-lined winter trousers" },
-                { "label": "優閒直腳褲 (Straight)", "value": "casual straight-leg pants" },
-                { "label": "牛仔吊帶褲 (工人褲)", "value": "denim overalls, dungarees" },
-                { "label": "卡其吊帶褲", "value": "beige work dungarees" },
-                { "label": "緊身牛仔褲 (Skinny)", "value": "skinny blue jeans" },
-                { "label": "牛仔褲 (Regular)", "value": "blue jeans" },
-                { "label": "運動褲 (運動)", "value": "athletic pants" },
-                { "label": "寬鬆工裝褲 (Cargo)", "value": "baggy cargo pants with pockets" },
-                { "label": "高腰牛仔短褲", "value": "high-waisted denim shorts" },
-                { "label": "棉質褲", "value": "sweatpants" },
-                { "label": "喇叭褲", "value": "retro flared trousers" },
-                { "label": "單車褲 (Biker)", "value": "tight biker shorts" }
+                {
+                    "label": "尼龍雪褲",
+                    "value": "wearing waterproof insulated snow pants"
+                },
+                {
+                    "label": "內起絨保暖長褲",
+                    "value": "wearing fleece-lined winter trousers"
+                },
+                {
+                    "label": "優閒直腳褲 (Straight)",
+                    "value": "casual straight-leg pants"
+                },
+                {
+                    "label": "牛仔吊帶褲 (工人褲)",
+                    "value": "denim overalls, dungarees"
+                },
+                {
+                    "label": "卡其吊帶褲",
+                    "value": "beige work dungarees"
+                },
+                {
+                    "label": "緊身牛仔褲 (Skinny)",
+                    "value": "skinny blue jeans"
+                },
+                {
+                    "label": "牛仔褲 (Regular)",
+                    "value": "blue jeans"
+                },
+                {
+                    "label": "運動褲 (運動)",
+                    "value": "athletic pants"
+                },
+                {
+                    "label": "寬鬆工裝褲 (Cargo)",
+                    "value": "baggy cargo pants with pockets"
+                },
+                {
+                    "label": "高腰牛仔短褲",
+                    "value": "high-waisted denim shorts"
+                },
+                {
+                    "label": "棉質褲",
+                    "value": "sweatpants"
+                },
+                {
+                    "label": "喇叭褲",
+                    "value": "retro flared trousers"
+                },
+                {
+                    "label": "單車褲 (Biker)",
+                    "value": "tight biker shorts"
+                }
             ]
         },
         {
             "group": "職場/裙裝 (Office)",
             "options": [
-                { "label": "連身裙 (全身)", "value": "a floral sundress" },
-                { "label": "性感連身裙", "value": "sexy sundress" },
-                { "label": "及膝鉛筆裙", "value": "knee-length pencil skirt" },
-                { "label": "西裝長褲", "value": "tailored formal trousers" },
-                { "label": "A字西裝裙", "value": "A-line formal skirt" },
-                { "label": "開衩包臀裙", "value": "tight skirt with side slit" },
-                { "label": "寬褲 (Palazzo)", "value": "wide-leg palazzo pants" }
+                {
+                    "label": "連身裙 (全身)",
+                    "value": "a floral sundress"
+                },
+                {
+                    "label": "性感連身裙",
+                    "value": "sexy sundress"
+                },
+                {
+                    "label": "及膝鉛筆裙",
+                    "value": "knee-length pencil skirt"
+                },
+                {
+                    "label": "西裝長褲",
+                    "value": "tailored formal trousers"
+                },
+                {
+                    "label": "A字西裝裙",
+                    "value": "A-line formal skirt"
+                },
+                {
+                    "label": "開衩包臀裙",
+                    "value": "tight skirt with side slit"
+                },
+                {
+                    "label": "寬褲 (Palazzo)",
+                    "value": "wide-leg palazzo pants"
+                }
             ]
         },
         {
             "group": "校服裙/下著 (Uniform Bottoms)",
             "options": [
-                { "label": "格紋百褶裙 (Plaid)", "value": "wearing a plaid pleated school skirt" },
-                { "label": "百褶校裙 (Solid)", "value": "wearing a solid pleated school skirt" },
-                { "label": "西裝校裙", "value": "wearing a formal school skirt" },
-                { "label": "超短改裝校裙 (Mini)", "value": "wearing a micro-mini pleated school skirt, high waist", "tags": ["nsfw"] },
-                { "label": "體育短褲 (Bloomers)", "value": "wearing retro dark blue gym bloomers" },
-                { "label": "體育長褲 (Track pants)", "value": "wearing school jersey track pants with side stripes" }
+                {
+                    "label": "格紋百褶裙 (Plaid)",
+                    "value": "wearing a plaid pleated school skirt"
+                },
+                {
+                    "label": "百褶校裙 (Solid)",
+                    "value": "wearing a solid pleated school skirt"
+                },
+                {
+                    "label": "西裝校裙",
+                    "value": "wearing a formal school skirt"
+                },
+                {
+                    "label": "超短改裝校裙 (Mini)",
+                    "value": "wearing a micro-mini pleated school skirt, high waist",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "體育短褲 (Bloomers)",
+                    "value": "wearing retro dark blue gym bloomers"
+                },
+                {
+                    "label": "體育長褲 (Track pants)",
+                    "value": "wearing school jersey track pants with side stripes"
+                }
             ]
         },
         {
             "group": "短裙系列",
             "options": [
-                { "label": "百褶短裙", "value": "pleated mini skirt" },
-                { "label": "高腰百褶裙", "value": "high-waisted pleated skirt" },
-                { "label": "超短迷你裙", "value": "micro mini skirt, barely covering", "tags": ["nsfw"] },
-                { "label": "牛仔短裙", "value": "short denim skirt" },
-                { "label": "性感短裙", "value": "sexy mini skirt", "tags": ["sexy"] },
-                { "label": "荷葉邊短裙", "value": "ruffled mini skirt" },
-                { "label": "包臀皮裙", "value": "tight leather pencil skirt" },
-                { "label": "開衩短裙", "value": "short skirt with thigh-high slit", "tags": ["sexy"] },
-                { "label": "透明薄紗裙", "value": "sheer tulle skirt", "tags": ["nsfw"] },
-                { "label": "乳膠短裙", "value": "shiny latex mini skirt", "tags": ["nsfw"] }
+                {
+                    "label": "百褶短裙",
+                    "value": "pleated mini skirt"
+                },
+                {
+                    "label": "高腰百褶裙",
+                    "value": "high-waisted pleated skirt"
+                },
+                {
+                    "label": "超短迷你裙",
+                    "value": "micro mini skirt, barely covering",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "牛仔短裙",
+                    "value": "short denim skirt"
+                },
+                {
+                    "label": "性感短裙",
+                    "value": "sexy mini skirt",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "荷葉邊短裙",
+                    "value": "ruffled mini skirt"
+                },
+                {
+                    "label": "包臀皮裙",
+                    "value": "tight leather pencil skirt"
+                },
+                {
+                    "label": "開衩短裙",
+                    "value": "short skirt with thigh-high slit",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "透明薄紗裙",
+                    "value": "sheer tulle skirt",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "乳膠短裙",
+                    "value": "shiny latex mini skirt",
+                    "tags": [
+                        "nsfw"
+                    ]
+                }
             ]
         },
         {
             "group": "褲裝/短褲 (性感)",
             "options": [
-                { "label": "真理褲", "value": "dolphin shorts, tight gym shorts" },
-                { "label": "熱褲 (牛仔)", "value": "ultra-short denim daisy dukes" },
-                { "label": "瑜伽褲", "value": "tight yoga pants" },
-                { "label": "瑜伽褲 (駱駝)", "value": "tight yoga pants, cameltoe outline", "tags": ["nsfw"] },
-                { "label": "開檔緊身褲", "value": "open-crotch leggings", "tags": ["nsfw"] },
-                { "label": "皮褲", "value": "tight leather pants" }
+                {
+                    "label": "真理褲",
+                    "value": "dolphin shorts, tight gym shorts"
+                },
+                {
+                    "label": "熱褲 (牛仔)",
+                    "value": "ultra-short denim daisy dukes"
+                },
+                {
+                    "label": "瑜伽褲",
+                    "value": "tight yoga pants"
+                },
+                {
+                    "label": "瑜伽褲 (駱駝)",
+                    "value": "tight yoga pants, cameltoe outline",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "開檔緊身褲",
+                    "value": "open-crotch leggings",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "皮褲",
+                    "value": "tight leather pants"
+                }
             ]
         },
         {
             "group": "內著/極限",
             "options": [
-                { "label": "三點式比基尼下著", "value": "wearing side-tie string bikini bottoms, non-NSFW", "tags": ["sexy"] },
-                { "label": "比基尼泳褲", "value": "micro bikini bottom", "tags": ["nsfw"] },
-                { "label": "下身赤裸 (Bottomless)", "value": "bottomless, no panties, naked lower body", "tags": ["nsfw"] },
-                { "label": "丁字褲 (Thong)", "value": "tiny thong panties", "tags": ["nsfw"] },
-                { "label": "C字褲", "value": "invisible c-string", "tags": ["nsfw"] },
-                { "label": "蕾絲內褲", "value": "lace panties", "tags": ["nsfw"] },
-                { "label": "開檔內褲", "value": "crotchless panties", "tags": ["nsfw"] },
-                { "label": "僅吊帶襪", "value": "wearing only a garter belt and stockings, no panties", "tags": ["nsfw"] },
-                { "label": "女裝平腳內褲", "value": "Women's Boxer Briefs", "tags": ["sexy"] }
+                {
+                    "label": "三點式比基尼下著",
+                    "value": "wearing side-tie string bikini bottoms, non-NSFW",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "比基尼泳褲",
+                    "value": "micro bikini bottom",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "下身赤裸 (Bottomless)",
+                    "value": "bottomless, no panties, naked lower body",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "丁字褲 (Thong)",
+                    "value": "tiny thong panties",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "C字褲",
+                    "value": "invisible c-string",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "蕾絲內褲",
+                    "value": "lace panties",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "開檔內褲",
+                    "value": "crotchless panties",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "僅吊帶襪",
+                    "value": "wearing only a garter belt and stockings, no panties",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "女裝平腳內褲",
+                    "value": "Women's Boxer Briefs",
+                    "tags": [
+                        "sexy"
+                    ]
+                }
             ]
         }
     ],
     "outfitSock": [
-        { "label": "無/裸足", "value": "bare legs" },
+        {
+            "label": "無/裸足",
+            "value": "bare legs"
+        },
         {
             "group": "襪子/絲襪",
             "options": [
-                { "label": "厚羊毛襪", "value": "thick thermal wool socks" },
-                { "label": "短襪 (Ankle)", "value": "ankle socks" },
-                { "label": "膝下襪 (Knee)", "value": "black knee-high socks" },
-                { "label": "過膝襪 (Thigh)", "value": "thigh-high socks" },
-                { "label": "黑絲襪 (Pantyhose)", "value": "black sheer pantyhose" },
-                { "label": "網襪 (Fishnet)", "value": "black fishnet stockings" },
-                { "label": "吊帶襪 (Garter)", "value": "sexy garter belt and stockings", "tags": ["nsfw"] },
-                { "label": "絲襪 (Stockings)", "value": "silk stockings" }
+                {
+                    "label": "厚羊毛襪",
+                    "value": "thick thermal wool socks"
+                },
+                {
+                    "label": "短襪 (Ankle)",
+                    "value": "ankle socks"
+                },
+                {
+                    "label": "膝下襪 (Knee)",
+                    "value": "black knee-high socks"
+                },
+                {
+                    "label": "過膝襪 (Thigh)",
+                    "value": "thigh-high socks"
+                },
+                {
+                    "label": "黑絲襪 (Pantyhose)",
+                    "value": "black sheer pantyhose"
+                },
+                {
+                    "label": "網襪 (Fishnet)",
+                    "value": "black fishnet stockings"
+                },
+                {
+                    "label": "吊帶襪 (Garter)",
+                    "value": "sexy garter belt and stockings",
+                    "tags": [
+                        "nsfw"
+                    ]
+                },
+                {
+                    "label": "絲襪 (Stockings)",
+                    "value": "silk stockings"
+                }
             ]
         }
     ],
     "outfitShoe": [
-        { "label": "無/赤腳", "value": "barefoot" },
+        {
+            "label": "無/赤腳",
+            "value": "barefoot"
+        },
         {
             "group": "鞋款",
             "options": [
-                { "label": "毛絨雪靴 (Snow Boots)", "value": "wearing heavy waterproof snow boots with fur lining" },
-                { "label": "麂皮保暖靴 (Ugg Style)", "value": "wearing cozy sheepskin winter boots" },
-                { "label": "高跟鞋 (Heels)", "value": "high heels" },
-                { "label": "細高跟 (Stilettos)", "value": "stiletto heels" },
-                { "label": "運動鞋 (Sneakers)", "value": "trendy sneakers" },
-                { "label": "靴子 (Boots)", "value": "leather boots" },
-                { "label": "過膝長靴", "value": "thigh-high leather boots" },
-                { "label": "涼鞋", "value": "strappy sandals" },
-                { "label": "學生皮鞋 (Loafers)", "value": "leather loafers" }
+                {
+                    "label": "毛絨雪靴 (Snow Boots)",
+                    "value": "wearing heavy waterproof snow boots with fur lining"
+                },
+                {
+                    "label": "麂皮保暖靴 (Ugg Style)",
+                    "value": "wearing cozy sheepskin winter boots"
+                },
+                {
+                    "label": "高跟鞋 (Heels)",
+                    "value": "high heels"
+                },
+                {
+                    "label": "細高跟 (Stilettos)",
+                    "value": "stiletto heels"
+                },
+                {
+                    "label": "運動鞋 (Sneakers)",
+                    "value": "trendy sneakers"
+                },
+                {
+                    "label": "靴子 (Boots)",
+                    "value": "leather boots"
+                },
+                {
+                    "label": "過膝長靴",
+                    "value": "thigh-high leather boots"
+                },
+                {
+                    "label": "涼鞋",
+                    "value": "strappy sandals"
+                },
+                {
+                    "label": "拖鞋 (Slippers)",
+                    "value": "wearing comfy slippers"
+                },
+                {
+                    "label": "樂福鞋 (Loafers)",
+                    "value": "leather loafers"
+                }
             ]
         },
         {
             "group": "校園專屬鞋款 (School)",
             "options": [
-                { "label": "樂福鞋 (Loafers)", "value": "wearing brown leather loafers" },
-                { "label": "黑色制服鞋", "value": "wearing black leather school shoes" },
-                { "label": "室內鞋 (Uwabaki)", "value": "wearing japanese indoor school shoes (uwabaki), rubber toes" }
+                {
+                    "label": "學生皮鞋 (Loafers)",
+                    "value": "wearing brown leather loafers"
+                },
+                {
+                    "label": "黑色制服鞋",
+                    "value": "wearing black leather school shoes"
+                },
+                {
+                    "label": "室內鞋 (Uwabaki)",
+                    "value": "wearing japanese indoor school shoes (uwabaki), rubber toes"
+                }
             ]
         }
     ],
     "itemColors": [
-        { "label": "顏色(無)", "value": "" },
-        { "label": "黑 (Black)", "value": "black" },
-        { "label": "白 (White)", "value": "white" },
-        { "label": "紅 (Red)", "value": "red" },
-        { "label": "藍 (Blue)", "value": "blue" },
-        { "label": "粉紅 (Pink)", "value": "pink" },
-        { "label": "黃 (Yellow)", "value": "yellow" },
-        { "label": "綠 (Green)", "value": "green" },
-        { "label": "紫 (Purple)", "value": "purple" },
-        { "label": "金 (Gold)", "value": "gold" },
-        { "label": "銀 (Silver)", "value": "silver" },
-        { "label": "灰 (Grey)", "value": "grey" },
-        { "label": "棕 (Brown)", "value": "brown" },
-        { "label": "米色 (Beige)", "value": "beige" }
+        {
+            "label": "顏色(無)",
+            "value": ""
+        },
+        {
+            "label": "黑 (Black)",
+            "value": "black"
+        },
+        {
+            "label": "白 (White)",
+            "value": "white"
+        },
+        {
+            "label": "紅 (Red)",
+            "value": "red"
+        },
+        {
+            "label": "藍 (Blue)",
+            "value": "blue"
+        },
+        {
+            "label": "粉紅 (Pink)",
+            "value": "pink"
+        },
+        {
+            "label": "黃 (Yellow)",
+            "value": "yellow"
+        },
+        {
+            "label": "綠 (Green)",
+            "value": "green"
+        },
+        {
+            "label": "紫 (Purple)",
+            "value": "purple"
+        },
+        {
+            "label": "金 (Gold)",
+            "value": "gold"
+        },
+        {
+            "label": "銀 (Silver)",
+            "value": "silver"
+        },
+        {
+            "label": "灰 (Grey)",
+            "value": "grey"
+        },
+        {
+            "label": "棕 (Brown)",
+            "value": "brown"
+        },
+        {
+            "label": "米色 (Beige)",
+            "value": "beige"
+        }
     ],
     "itemMaterials": [
-        { "label": "材質(無)", "value": "" },
-        { "label": "純棉 (Cotton)", "value": "cotton" },
-        { "label": "羅紋針織 (Ribbed)", "value": "ribbed knit" },
-        { "label": "錦緞 (Brocade)", "value": "luxurious brocade" },
-        { "label": "薄紗 (Tulle)", "value": "sheer tulle" },
-        { "label": "乳膠(Latex)", "value": "shiny latex", "tags": ["nsfw"] },
-        { "label": "漆皮(PVC)", "value": "glossy PVC", "tags": ["nsfw"] },
-        { "label": "蕾絲(Lace)", "value": "delicate lace" },
-        { "label": "絲綢(Silk)", "value": "smooth silk" },
-        { "label": "網紗(Mesh)", "value": "see-through mesh", "tags": ["nsfw"] },
-        { "label": "皮革(Leather)", "value": "leather" },
-        { "label": "牛仔(Denim)", "value": "denim" },
-        { "label": "羊毛 (Wool)", "value": "thick wool" },
-        { "label": "抓絨 (Fleece)", "value": "soft fleece" }
+        {
+            "label": "材質(無)",
+            "value": ""
+        },
+        {
+            "label": "純棉 (Cotton)",
+            "value": "cotton"
+        },
+        {
+            "label": "羅紋針織 (Ribbed)",
+            "value": "ribbed knit"
+        },
+        {
+            "label": "錦緞 (Brocade)",
+            "value": "luxurious brocade"
+        },
+        {
+            "label": "薄紗 (Tulle)",
+            "value": "sheer tulle"
+        },
+        {
+            "label": "乳膠(Latex)",
+            "value": "shiny latex",
+            "tags": [
+                "nsfw"
+            ]
+        },
+        {
+            "label": "漆皮(PVC)",
+            "value": "glossy PVC",
+            "tags": [
+                "nsfw"
+            ]
+        },
+        {
+            "label": "蕾絲(Lace)",
+            "value": "delicate lace"
+        },
+        {
+            "label": "絲綢(Silk)",
+            "value": "smooth silk"
+        },
+        {
+            "label": "網紗(Mesh)",
+            "value": "see-through mesh",
+            "tags": [
+                "nsfw"
+            ]
+        },
+        {
+            "label": "皮革(Leather)",
+            "value": "leather"
+        },
+        {
+            "label": "牛仔(Denim)",
+            "value": "denim"
+        },
+        {
+            "label": "羊毛 (Wool)",
+            "value": "thick wool"
+        },
+        {
+            "label": "抓絨 (Fleece)",
+            "value": "soft fleece"
+        }
     ],
     "itemPatterns": [
-        { "label": "花紋(無)", "value": "" },
-        { "label": "碎花", "value": "small floral print" },
-        { "label": "和風花紋", "value": "traditional japanese patterns" },
-        { "label": "幾何圖案", "value": "geometric patterns" },
-        { "label": "豹紋", "value": "leopard print" },
-        { "label": "蛇紋", "value": "snakeskin print" },
-        { "label": "格紋", "value": "plaid" },
-        { "label": "條紋", "value": "striped" },
-        { "label": "波點", "value": "polka dot" }
+        {
+            "label": "花紋(無)",
+            "value": ""
+        },
+        {
+            "label": "碎花",
+            "value": "small floral print"
+        },
+        {
+            "label": "和風花紋",
+            "value": "traditional japanese patterns"
+        },
+        {
+            "label": "幾何圖案",
+            "value": "geometric patterns"
+        },
+        {
+            "label": "豹紋",
+            "value": "leopard print"
+        },
+        {
+            "label": "蛇紋",
+            "value": "snakeskin print"
+        },
+        {
+            "label": "格紋",
+            "value": "plaid"
+        },
+        {
+            "label": "條紋",
+            "value": "striped"
+        },
+        {
+            "label": "波點",
+            "value": "polka dot"
+        }
+    ],
+    "outfitFitPhysics": [
+        {
+            "label": "--- 無穿著效果 ---",
+            "value": ""
+        },
+        {
+            "label": "寬鬆感 (Loose/Oversized)",
+            "value": "oversized fit, loose fitting, baggy style, fabric draping, air gap between body and cloth"
+        },
+        {
+            "label": "極度貼合 (Form Fitting)",
+            "value": "form-fitting, accentuating silhouette, following body curves"
+        },
+        {
+            "label": "緊繃張力 (Straining Fabric)",
+            "value": "fabric straining, buttons pulling tight, clothes stretching, high tension fabric"
+        },
+        {
+            "label": "透膚質感 (Sheer Hint)",
+            "value": "slightly translucent fabric, hint of skin beneath, sheer knit texture"
+        },
+        {
+            "label": "勒肉感 (Squeezing)",
+            "value": "clothing digging into skin, soft flesh overflow, tight hemline"
+        }
     ]
 }

@@ -437,6 +437,11 @@
                                         class="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs focus:outline-none"></select>
                                 </div>
                             </div>
+                            <div class="mt-2">
+                                <label class="field-label text-theme"><i class="fas fa-arrows-alt-h"></i> 穿著效果 (Fit & Physics)</label>
+                                <select id="outfit-fit-physics"
+                                    class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                            </div>
                         </div>
                         <div>
                             <label class="field-label text-gray-300"><i class="fas fa-user-tag"></i> 下著 (Bottom)</label>
@@ -711,6 +716,7 @@
             populate('outfit-acc', db.outfitAcc); populate('outfit-acc-2', db.outfitAcc); populate('outfit-acc-detail', db.outfitAccDetail); populate('outfit-acc-detail-2', db.outfitAccDetail);
             populate('outfit-outer', db.outfitOuter);
             populate('outfit-top', db.outfitTop); populate('outfit-bottom', db.outfitBottom);
+            populate('outfit-fit-physics', db.outfitFitPhysics); // <--- New Physics Category
             populate('outfit-sock', db.outfitSock); populate('outfit-shoe', db.outfitShoe);
             ['top-color', 'bottom-color'].forEach(id => populate(id, db.itemColors));
             ['top-mat', 'bottom-mat'].forEach(id => populate(id, db.itemMaterials));
@@ -888,6 +894,14 @@
             if (top) {
                 let attr = [v('top-color'), v('top-pat'), v('top-mat')].filter(Boolean).join(" ");
                 outfit.push(attr ? top.replace("wearing a", `wearing a ${attr}`) : top);
+
+                // --- Physics Injection Logic ---
+                let physics = v('outfit-fit-physics');
+                if (!physics) {
+                    physics = autoInjectPhysics(top); 
+                }
+                if (physics) outfit.push(physics);
+                // -------------------------------
             }
             if (v('outfit-top-custom')) outfit.push(v('outfit-top-custom'));
 
@@ -1038,6 +1052,22 @@
             });
             document.getElementById('outfit-outer').addEventListener('change', handleOuterwearChange);
         });
+
+        function autoInjectPhysics(topValue) {
+            if (!topValue) return "";
+            const lower = topValue.toLowerCase();
+            if (lower.includes('knit') || lower.includes('sweater') || lower.includes('cardigan') || lower.includes('virgin killer')) {
+                return "soft texture, slight stretch, fabric following curves";
+            }
+            if (lower.includes('tight') || lower.includes('form-fitting') || lower.includes('skinny')) {
+                return "high tension fabric, stretching across body, taut fit";
+            }
+            if (lower.includes('shirt') || lower.includes('blouse')) {
+                if (lower.includes('wet') || lower.includes('sheer')) return "clinging to skin, translucent texture";
+                return "fabric gathering, subtle tension points";
+            }
+            return "";
+        }
     </script>
 
     <br>
