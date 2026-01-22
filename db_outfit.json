@@ -1,4 +1,57 @@
 {
+    "coreVibe": [
+        {
+            "label": "✨ 高貴名媛 (High Class)",
+            "value": "ethereal beauty, graceful poise, sophisticated temperament, high-end sensuality, soft cinematic lighting"
+        },
+        {
+            "label": "🌸 純欲風格 (Pure Lust)",
+            "value": "pure lust style, innocent face with voluptuous figure, breath-taking beauty, soft lighting, bloom effect, dreamy atmosphere",
+            "tags": [
+                "sexy"
+            ]
+        },
+        {
+            "label": "💃 時尚大片 (Vogue)",
+            "value": "statuesque figure, cinematic lighting, vogue magazine style, sharp focus, masterpiece, 8k resolution"
+        },
+        {
+            "label": "🤖 賽博龐克 (Cyberpunk)",
+            "value": "cyberpunk vibe, neon lights, futuristic atmosphere, mechanical details, night city background"
+        },
+        {
+            "label": "🦇 暗黑哥德 (Gothic)",
+            "value": "dark gothic atmosphere, mysterious aura, low key lighting, dramatic shadows, melancholy"
+        },
+        {
+            "label": "💋 私房寫真 (Boudoir)",
+            "value": "intimate atmosphere, shot in bedroom, soft sheets, skin texture, pov, sensual gaze",
+            "tags": [
+                "nsfw"
+            ]
+        },
+        {
+            "label": "⛓️ 特殊癖好 (Fetish/BDSM)",
+            "value": "kinky atmosphere, shiny leather texture, dramatic lighting, submission, dominance",
+            "tags": [
+                "nsfw"
+            ]
+        },
+        {
+            "label": "📸 寫實重口 (Raw/Hardcore)",
+            "value": "amateur style, camera flash, raw photo, unpolished, realistic skin imperfections, sweating",
+            "tags": [
+                "nsfw"
+            ]
+        },
+        {
+            "label": "🎨 官能藝術 (Erotic Art)",
+            "value": "erotic art style, artistic nude, renaissance lighting, elegant pose, tasteful composition",
+            "tags": [
+                "nsfw"
+            ]
+        }
+    ],
     "outfitTheme": [
         {
             "label": "--- 無特定風格 ---",
@@ -1624,6 +1677,10 @@
                     "value": "thigh-high leather boots"
                 },
                 {
+                    "label": "膝下長靴 (Knee-high)",
+                    "value": "knee-high leather boots"
+                },
+                {
                     "label": "涼鞋",
                     "value": "strappy sandals"
                 },
@@ -1723,16 +1780,58 @@
             "value": "cotton"
         },
         {
+            "label": "牛仔(Denim)",
+            "value": "denim"
+        },
+        {
             "label": "羅紋針織 (Ribbed)",
             "value": "ribbed knit"
+        },
+        {
+            "label": "抓絨 (Fleece)",
+            "value": "soft fleece"
+        },
+        {
+            "label": "羊毛 (Wool)",
+            "value": "thick wool"
+        },
+        {
+            "label": "羊絨針織 (Cashmere)",
+            "value": "soft cashmere knit, fuzzy texture, warm and cozy"
+        },
+        {
+            "label": "高級絲綢 (High-end Silk)",
+            "value": "luxurious silk, liquid fabric texture, elegant drape"
         },
         {
             "label": "錦緞 (Brocade)",
             "value": "luxurious brocade"
         },
         {
+            "label": "皮革(Leather)",
+            "value": "leather"
+        },
+        {
+            "label": "蕾絲(Lace)",
+            "value": "delicate lace"
+        },
+        {
+            "label": "透膚雪紡 (Sheer)",
+            "value": "semi-transparent chiffon, ethereal fabric",
+            "tags": [
+                "sexy"
+            ]
+        },
+        {
             "label": "薄紗 (Tulle)",
             "value": "sheer tulle"
+        },
+        {
+            "label": "網紗(Mesh)",
+            "value": "see-through mesh",
+            "tags": [
+                "nsfw"
+            ]
         },
         {
             "label": "乳膠(Latex)",
@@ -1747,37 +1846,6 @@
             "tags": [
                 "nsfw"
             ]
-        },
-        {
-            "label": "蕾絲(Lace)",
-            "value": "delicate lace"
-        },
-        {
-            "label": "絲綢(Silk)",
-            "value": "smooth silk"
-        },
-        {
-            "label": "網紗(Mesh)",
-            "value": "see-through mesh",
-            "tags": [
-                "nsfw"
-            ]
-        },
-        {
-            "label": "皮革(Leather)",
-            "value": "leather"
-        },
-        {
-            "label": "牛仔(Denim)",
-            "value": "denim"
-        },
-        {
-            "label": "羊毛 (Wool)",
-            "value": "thick wool"
-        },
-        {
-            "label": "抓絨 (Fleece)",
-            "value": "soft fleece"
         }
     ],
     "itemPatterns": [

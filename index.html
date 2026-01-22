@@ -242,7 +242,7 @@
                                 class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"></select>
                         </div>
                     </div>
-                    
+
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                         <div>
                             <label class="field-label"><i class="fas fa-birthday-cake"></i> 年齡 (Age)</label>
@@ -349,7 +349,8 @@
                                         class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
                                 </div>
                                 <div>
-                                    <label class="field-label text-theme"><i class="fas fa-star-half-alt"></i> 妝容細節 2</label>
+                                    <label class="field-label text-theme"><i class="fas fa-star-half-alt"></i> 妝容細節
+                                        2</label>
                                     <select id="makeup-detail-2"
                                         class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
                                 </div>
@@ -362,9 +363,19 @@
                     <h2 class="text-xl font-bold text-theme"><i class="fas fa-tshirt mr-2"></i>服裝穿搭</h2>
                 </div>
                 <div id="tab-outfit" class="space-y-4">
+
+                    <div
+                        class="col-span-2 mb-2 p-4 bg-gradient-to-r from-purple-900/40 to-blue-900/40 rounded-lg border border-purple-500/30 shadow-lg">
+                        <label class="field-label text-purple-300 mb-2">
+                            <i class="fas fa-magic mr-2"></i>核心氣質 (Core Vibe)
+                        </label>
+                        <select id="core-vibe"
+                            class="w-full bg-gray-900 border border-purple-500/30 rounded px-3 py-3 text-sm font-medium text-purple-200 focus:outline-none focus:border-purple-400 transition-colors"></select>
+                    </div>
+
                     <div>
-                        <label class="field-label text-theme"><i class="fas fa-layer-group"></i> 整體風格 (Outfit
-                            Theme)</label>
+                        <label class="field-label text-theme"><i class="fas fa-layer-group"></i> 服裝套裝 (Costume
+                            Preset)</label>
                         <select id="outfit-theme"
                             class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-3 text-sm font-medium text-gray-100 focus:outline-none"></select>
                         <input type="text" id="outfit-theme-custom" placeholder="自訂服裝風格或特定服飾 (e.g. wearing a kimono)..."
@@ -406,11 +417,13 @@
                                 class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
                             <div id="outfit-outer-state" class="mt-2 space-x-4 hidden">
                                 <label class="cursor-pointer text-xs">
-                                    <input type="radio" name="outfit-outer-state" value="closed" class="accent-theme" checked onchange="generatePrompt()">
+                                    <input type="radio" name="outfit-outer-state" value="closed" class="accent-theme"
+                                        checked onchange="generatePrompt()">
                                     封閉 (Closed)
                                 </label>
                                 <label class="cursor-pointer text-xs">
-                                    <input type="radio" name="outfit-outer-state" value="open" class="accent-theme" onchange="generatePrompt()">
+                                    <input type="radio" name="outfit-outer-state" value="open" class="accent-theme"
+                                        onchange="generatePrompt()">
                                     敞開 (Open)
                                 </label>
                             </div>
@@ -438,7 +451,8 @@
                                 </div>
                             </div>
                             <div class="mt-2">
-                                <label class="field-label text-theme"><i class="fas fa-arrows-alt-h"></i> 穿著效果 (Fit & Physics)</label>
+                                <label class="field-label text-theme"><i class="fas fa-arrows-alt-h"></i> 穿著效果 (Fit &
+                                    Physics)</label>
                                 <select id="outfit-fit-physics"
                                     class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
                             </div>
@@ -556,8 +570,7 @@
                             <div><label class="field-label"><i class="fas fa-video"></i> 視角</label><select
                                     id="cam-angle"
                                     class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
-                                <select
-                                    id="cam-angle-2"
+                                <select id="cam-angle-2"
                                     class="mt-1 w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
                             </div>
                             <div><label class="field-label"><i class="fas fa-crop-alt"></i> 景別</label><select
@@ -607,10 +620,12 @@
             </div>
 
             <div class="bg-black p-4 rounded-xl border border-gray-800 h-1/4 flex flex-col">
-                <label class="text-xs font-bold text-gray-500 mb-2 uppercase"><i class="fas fa-ban mr-1"></i> Negative Prompt 負面提示:</label>
+                <label class="text-xs font-bold text-gray-500 mb-2 uppercase"><i class="fas fa-ban mr-1"></i> Negative
+                    Prompt 負面提示:</label>
                 <textarea id="negative-text"
                     class="flex-grow bg-gray-900/50 text-gray-500 text-xs p-3 rounded-lg border border-gray-800 font-mono resize-none outline-none focus:border-gray-600">Negative Prompt: avoid AI-like appearance, low saturation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name, cartoon illustrations, 3D animation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name</textarea>
-                <button onclick="copyAllPrompts()" class="mt-2 w-full bg-gray-700 hover:bg-gray-600 text-gray-300 py-2 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-2">
+                <button onclick="copyAllPrompts()"
+                    class="mt-2 w-full bg-gray-700 hover:bg-gray-600 text-gray-300 py-2 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-2">
                     <i class="fas fa-paste"></i> 複製全部提示詞 (Prompt + Negative)
                 </button>
             </div>
@@ -680,11 +695,11 @@
 
                 // 將所有外套選項扁平化以便查找
                 db.flatOutfitOuter = db.outfitOuter.reduce((acc, group) => {
-                    if(group.options) acc.push(...group.options);
+                    if (group.options) acc.push(...group.options);
                     else acc.push(group);
                     return acc;
                 }, []);
-                
+
                 setMode('sexy');
             } catch (err) {
                 console.log("Database load error:", err);
@@ -702,7 +717,7 @@
         function populateAllMenus() {
             // Identity
             populate('race', db.race); populate('char-age', db.charAge);
-            populate('body-height', db.bodyHeight); 
+            populate('body-height', db.bodyHeight);
             populate('body-type', db.bodyType); // <--- 加入 body-type
             populate('body-bust', db.bodyBust);
             populate('body-waist', db.bodyWaist); populate('body-hip', db.bodyHip);
@@ -712,6 +727,7 @@
             populate('makeup-base', db.makeupBase); populate('makeup-detail', db.makeupDetail); populate('makeup-detail-2', db.makeupDetail);
 
             // Outfit
+            populate('core-vibe', db.coreVibe); // <--- Core Vibe moved found JSON
             populate('outfit-theme', db.outfitTheme); populate('outfit-head', db.outfitHead);
             populate('outfit-acc', db.outfitAcc); populate('outfit-acc-2', db.outfitAcc); populate('outfit-acc-detail', db.outfitAccDetail); populate('outfit-acc-detail-2', db.outfitAccDetail);
             populate('outfit-outer', db.outfitOuter);
@@ -728,10 +744,10 @@
             populate('scene-props', db.sceneProps); populate('scene-props-detail', db.scenePropsDetail);
             populate('scene-lighting', db.sceneLighting);
             populate('scene-time', db.sceneTime); populate('scene-weather', db.sceneWeather);
-            populate('cam-angle', db.camAngle); 
-            populate('cam-angle-2', db.camAngle); 
+            populate('cam-angle', db.camAngle);
+            populate('cam-angle-2', db.camAngle);
             populate('cam-shot', db.camShot);
-            populate('cam-lens', db.camLens); 
+            populate('cam-lens', db.camLens);
             populate('scene-style-realistic', db.sceneStyleRealistic);
             populate('scene-style-special', db.sceneStyleSpecial);
 
@@ -771,7 +787,7 @@
                 handleOuterwearChange(); // Initial check
             }
         }
-        
+
         function handleOuterwearChange() {
             const outerKey = v('outfit-outer');
             const outerStateDiv = document.getElementById('outfit-outer-state');
@@ -792,7 +808,7 @@
         function setMode(mode) {
             currentMode = mode;
             document.body.className = `bg-gray-950 text-gray-100 min-h-screen p-4 flex flex-col items-center mode-${mode}`;
-            
+
             ['clean', 'sexy', 'nsfw'].forEach(m => {
                 document.getElementById(`btn-${m}`).classList.toggle('mode-active', m === mode);
             });
@@ -844,6 +860,10 @@
             if (v('char-age') || v('race')) charDesc += `, a ${v('char-age')} ${v('race')} female`;
             prompts.push(charDesc);
 
+            // Vibe 放在角色描述之後，細節特徵之前，定調畫面風格
+            const vibe = v('core-vibe');
+            if (vibe) prompts.push(vibe);
+
             let feats = [
                 (v('hair-color') + ' ' + v('hair-style')).trim(),
                 c('effect-damp-hair') ? 'noticeably damp hair, glistening wet hair texture' : '',
@@ -869,10 +889,10 @@
 
             let fullAcc = [v('outfit-acc'), v('outfit-acc-2'), v('outfit-acc-custom')].filter(Boolean).join(", ");
             if (fullAcc) outfit.push(fullAcc);
-            
+
             if (v('outfit-acc-detail')) outfit.push(v('outfit-acc-detail'));
             if (v('outfit-acc-detail-2')) outfit.push(v('outfit-acc-detail-2'));
-            
+
             // Outerwear Logic
             const outerKey = v('outfit-outer');
             if (outerKey) {
@@ -898,7 +918,7 @@
                 // --- Physics Injection Logic ---
                 let physics = v('outfit-fit-physics');
                 if (!physics) {
-                    physics = autoInjectPhysics(top); 
+                    physics = autoInjectPhysics(top);
                 }
                 if (physics) outfit.push(physics);
                 // -------------------------------
@@ -929,7 +949,7 @@
             let act = (fullPose && activity) ? `She is ${fullPose} while ${activity}` : (fullPose || activity || "");
             if (expr) act = act ? `${act}, with ${expr}` : `She has ${expr}`;
             if (act) prompts.push(act);
-            
+
             let loc = v('scene-loc');
             let locCustom = v('scene-loc-custom');
             let fullLoc = [loc, locCustom].filter(Boolean).join(", ");
@@ -947,7 +967,7 @@
             if (cam.length) prompts.push(cam.join(", "));
 
             if (currentMode === 'nsfw') prompts.push("NSFW, detailed skin, mature female");
-            
+
             let finalPrompt = prompts.join(". ").replace(/\.\s*\./g, '.').replace(/,\s*,/g, ',');
             document.getElementById('output-text').value = finalPrompt;
         }
@@ -1035,9 +1055,9 @@
                     if (s.options.length > 1) s.selectedIndex = Math.floor(Math.random() * s.options.length);
                 }
             });
-             // Randomly check some checkboxes
+            // Randomly check some checkboxes
             document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-                if(!cb.closest('.pointer-events-none')) cb.checked = Math.random() > 0.7;
+                if (!cb.closest('.pointer-events-none')) cb.checked = Math.random() > 0.7;
             });
             generatePrompt();
         }
@@ -1075,7 +1095,7 @@
     <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button"
         data-slug="on9ai" data-color="#ec4899" data-emoji="" data-font="Lato" data-text="Buy Me a Coffee"
         data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#ffffff">
-    </script>
+        </script>
 </body>
 
 </html>
