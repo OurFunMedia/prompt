@@ -798,7 +798,7 @@
         },
         {
             "label": "廣角 (風景/張力)",
-            "value": "wide angle lens"
+            "value": "24mm wide angle lens"
         },
         {
             "label": "標準 (50mm)",
@@ -807,6 +807,18 @@
         {
             "label": "人像 (85mm)",
             "value": "85mm portrait lens"
+        },
+        {
+            "label": "長焦 (壓縮感)",
+            "value": "200mm telephoto lens, compressed perspective"
+        },
+        {
+            "label": "魚眼鏡頭",
+            "value": "fish-eye lens, extreme wide angle"
+        },
+        {
+            "label": "微距鏡頭",
+            "value": "macro lens, extreme close-up"
         },
         {
             "label": "自拍 (手機鏡頭)",
@@ -819,12 +831,28 @@
             "value": ""
         },
         {
+            "label": "f/1.6 (夢幻虛化)",
+            "value": "f/1.6 aperture, extremely shallow depth of field"
+        },
+                {
             "label": "f/1.8 (大光圈)",
             "value": "f/1.8 aperture"
         },
         {
-            "label": "f/1.6 (夢幻虛化)",
-            "value": "f/1.6 aperture, extremely shallow depth of field"
+            "label": "f/2.8 (中光圈)",
+            "value": "f/2.8 aperture"
+        },
+        {
+            "label": "f/5.6 (適中)",
+            "value": "f/5.6 aperture"
+        },
+        {
+            "label": "f/8 (小光圈)",
+            "value": "f/8 aperture"
+        },
+        {
+            "label": "f/11 (更小光圈)",
+            "value": "f/11 aperture"
         },
         {
             "label": "小光圈 (清晰)",
