@@ -887,7 +887,7 @@
             "label": "f/1.6 (夢幻虛化)",
             "value": "f/1.6 aperture, extremely shallow depth of field"
         },
-                {
+        {
             "label": "f/1.8 (大光圈)",
             "value": "f/1.8 aperture"
         },
@@ -910,6 +910,40 @@
         {
             "label": "小光圈 (清晰)",
             "value": "f/22, sharp background"
+        }
+    ],
+    "sceneComposition": [
+        {
+            "label": "構圖(不限)",
+            "value": ""
+        },
+        {
+            "label": "三分法 (Rule of Thirds)",
+            "value": "rule of thirds composition, subject placed off-center"
+        },
+        {
+            "label": "中心構圖 (Central)",
+            "value": "central composition, subject in the center, balanced"
+        },
+        {
+            "label": "對稱構圖 (Symmetry)",
+            "value": "symmetrical composition, perfectly matched sides"
+        },
+        {
+            "label": "引導線 (Leading Lines)",
+            "value": "leading lines composition, lines pointing to the subject"
+        },
+        {
+            "label": "框架構圖 (Framing)",
+            "value": "framing composition, subject framed by environment elements"
+        },
+        {
+            "label": "黃金比例 (Golden Ratio)",
+            "value": "golden ratio composition, divine proportions"
+        },
+        {
+            "label": "對角線構圖 (Diagonal)",
+            "value": "diagonal composition, dynamic and energetic line"
         }
     ]
 }

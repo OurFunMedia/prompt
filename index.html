@@ -594,6 +594,10 @@
                                     id="scene-style-special"
                                     class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
                             </div>
+                            <div><label class="field-label"><i class="fas fa-th"></i> 構圖法則</label><select
+                                    id="scene-composition"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -756,6 +760,7 @@
             populate('cam-lens', db.camLens);
             populate('scene-style-realistic', db.sceneStyleRealistic);
             populate('scene-style-special', db.sceneStyleSpecial);
+            populate('scene-composition', db.sceneComposition);
 
             updateVisualFeedback();
         }
@@ -973,7 +978,7 @@
             if (env.length) sceneStr += (sceneStr ? ". " : "") + `Environment: ${env.join(", ")}`;
             if (sceneStr) prompts.push(sceneStr);
 
-            let cam = [v('cam-angle'), v('cam-angle-2'), v('cam-shot'), v('cam-lens'), v('scene-style-realistic'), v('scene-style-special')].filter(Boolean);
+            let cam = [v('cam-angle'), v('cam-angle-2'), v('cam-shot'), v('cam-lens'), v('scene-style-realistic'), v('scene-style-special'), v('scene-composition')].filter(Boolean);
             if (cam.length) prompts.push(cam.join(", "));
 
             if (currentMode === 'nsfw') prompts.push("NSFW, detailed skin, mature female");
