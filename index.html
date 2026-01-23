@@ -521,9 +521,14 @@
                                     class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
                             </div>
                         </div>
-                        <div class="mt-3"><label class="field-label"><i class="fas fa-laugh"></i> 臉部表情
-                                (Expression)</label><select id="action-expression"
-                                class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                        <div class="mt-3">
+                            <label class="field-label"><i class="fas fa-laugh"></i> 臉部表情 (Expression)</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <select id="action-expression"
+                                    class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                                <select id="action-expression-2"
+                                    class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none"></select>
+                            </div>
                         </div>
                     </div>
 
@@ -740,7 +745,8 @@
 
             // Scene
             populate('action-pose', db.actionPose); populate('action-activity', db.actionActivity);
-            populate('action-expression', db.actionExpression); populate('scene-loc', db.sceneLoc);
+            populate('action-expression', db.actionExpression); populate('action-expression-2', db.actionExpression);
+            populate('scene-loc', db.sceneLoc);
             populate('scene-props', db.sceneProps); populate('scene-props-detail', db.scenePropsDetail);
             populate('scene-lighting', db.sceneLighting);
             populate('scene-time', db.sceneTime); populate('scene-weather', db.sceneWeather);
@@ -945,9 +951,13 @@
             let poseCustom = v('action-pose-custom');
             let fullPose = [pose, poseCustom].filter(Boolean).join(", ");
 
-            let activity = v('action-activity'); let expr = v('action-expression');
+            let activity = v('action-activity');
+            let expr1 = v('action-expression');
+            let expr2 = v('action-expression-2');
+            let exprCombined = [expr1, expr2].filter(Boolean).join(", ");
+
             let act = (fullPose && activity) ? `She is ${fullPose} while ${activity}` : (fullPose || activity || "");
-            if (expr) act = act ? `${act}, with ${expr}` : `She has ${expr}`;
+            if (exprCombined) act = act ? `${act}, with ${exprCombined}` : `She has ${exprCombined}`;
             if (act) prompts.push(act);
 
             let loc = v('scene-loc');
@@ -1051,8 +1061,15 @@
 
         function randomAll() {
             document.querySelectorAll('select').forEach(s => {
-                if (!s.disabled && !s.closest('.pointer-events-none')) {
-                    if (s.options.length > 1) s.selectedIndex = Math.floor(Math.random() * s.options.length);
+                if (!s.disabled && !s.closest('.pointer-events-none') && !s.id.includes('custom')) {
+                    if (s.options.length > 1) {
+                        // For fields like expression-2, acc-2, etc., give a 50% chance to remain empty
+                        if (s.id.endsWith('-2') || s.id.includes('detail-2')) {
+                            s.selectedIndex = Math.random() > 0.5 ? Math.floor(Math.random() * s.options.length) : 0;
+                        } else {
+                            s.selectedIndex = Math.floor(Math.random() * s.options.length);
+                        }
+                    }
                 }
             });
             // Randomly check some checkboxes

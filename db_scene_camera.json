@@ -219,88 +219,141 @@
     ],
     "actionExpression": [
         {
-            "label": "--- 無特定表情 ---",
-            "value": ""
-        },
-        {
-            "label": "清純欲 (Pure Lust)",
-            "value": "innocent yet alluring expression, pure desire style, watery eyes, slightly flushed cheeks",
-            "tags": [
-                "sexy"
+            "group": "微笑與喜悅 (Smile & Joy)",
+            "options": [
+                {
+                    "label": "溫柔微笑",
+                    "value": "gentle smile"
+                },
+                {
+                    "label": "梨渦淺笑",
+                    "value": "a sweet smile with dimples"
+                },
+                {
+                    "label": "羞澀靦腆笑容",
+                    "value": "shy and bashful smile, slight blush, looking at viewer shyly, sweet demeanor"
+                },
+                {
+                    "label": "開懷大笑",
+                    "value": "joyful laugh, showing teeth"
+                },
+                {
+                    "label": "調皮笑容",
+                    "value": "playful smirking"
+                }
             ]
         },
         {
-            "label": "羞澀靦腆笑容",
-            "value": "shy and bashful smile, slight blush, looking at viewer shyly, sweet demeanor"
-        },
-        {
-            "label": "梨渦淺笑",
-            "value": "a sweet smile with dimples"
-        },
-        {
-            "label": "臉部凍紅",
-            "value": "cheeks and nose tip blushing red from the cold"
-        },
-        {
-            "label": "明亮眼神直視",
-            "value": "bright eyes looking directly at camera"
-        },
-        {
-            "label": "眼神離開鏡頭",
-            "value": "looking away from camera"
-        },
-        {
-            "label": "微張嘴 (Surprised)",
-            "value": "mouth slightly open"
-        },
-        {
-            "label": "放空無表情",
-            "value": "expressionless face, blank stare, dazed"
-        },
-        {
-            "label": "溫柔微笑",
-            "value": "gentle smile"
-        },
-        {
-            "label": "高潮臉(Ahegao)",
-            "value": "ahegao expression, rolling eyes, tongue out",
-            "tags": [
-                "nsfw"
+            "group": "眼神與注視 (Gaze & Eyes)",
+            "options": [
+                {
+                    "label": "明亮眼神直視",
+                    "value": "bright eyes looking directly at camera"
+                },
+                {
+                    "label": "眼神離開鏡頭",
+                    "value": "looking away from camera"
+                },
+                {
+                    "label": "深情對視",
+                    "value": "looking into the camera with deep affection"
+                },
+                {
+                    "label": "Wink (單眼眨眼)",
+                    "value": "winking playfully at camera"
+                },
+                {
+                    "label": "向上仰望",
+                    "value": "looking upwards with a dreamy expression"
+                },
+                {
+                    "label": "向下俯視",
+                    "value": "looking down bashfully"
+                }
             ]
         },
         {
-            "label": "迷離眼神",
-            "value": "heavy-lidded seductive eyes",
-            "tags": [
-                "sexy"
+            "group": "清純/挑逗 (Pure & Alluring)",
+            "options": [
+                {
+                    "label": "清純欲 (Pure Lust)",
+                    "value": "innocent yet alluring expression, pure desire style, watery eyes, slightly flushed cheeks",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "迷離眼神",
+                    "value": "heavy-lidded seductive eyes",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "咬唇",
+                    "value": "biting lower lip",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "吐舌",
+                    "value": "sticking tongue out playfully"
+                },
+                {
+                    "label": "微醺迷離",
+                    "value": "tipsy expression, slightly glazed eyes"
+                }
             ]
         },
         {
-            "label": "咬唇",
-            "value": "biting lower lip",
-            "tags": [
-                "sexy"
+            "group": "高冷/情緒 (Cool & Emotion)",
+            "options": [
+                {
+                    "label": "高冷鄙視",
+                    "value": "looking down with disgust, cold eyes"
+                },
+                {
+                    "label": "放空無表情",
+                    "value": "expressionless face, blank stare, dazed"
+                },
+                {
+                    "label": "高貴疏離",
+                    "value": "serene and noble expression, sophisticated temperament"
+                },
+                {
+                    "label": "哀愁眼神",
+                    "value": "with a hint of sadness in her eyes"
+                },
+                {
+                    "label": "微張嘴 (驚訝)",
+                    "value": "mouth slightly open in surprise"
+                }
             ]
         },
         {
-            "label": "吐舌",
-            "value": "sticking tongue out playfully"
-        },
-        {
-            "label": "羞恥臉紅",
-            "value": "blushing heavily, embarrassed face"
-        },
-        {
-            "label": "高貴疏離 (Noble)",
-            "value": "serene and noble expression, sophisticated temperament, looking at viewer with a gentle gaze"
-        },
-        {
-            "label": "高冷鄙視",
-            "value": "looking down with disgust"
-        },
-        {
-            "label": "閉眼享受",
-            "value": "eyes closed, enjoying"
+            "group": "狀態與反應 (States)",
+            "options": [
+                {
+                    "label": "閉眼享受",
+                    "value": "eyes closed, enjoying the moment"
+                },
+                {
+                    "label": "臉部凍紅",
+                    "value": "cheeks and nose tip blushing red from the cold"
+                },
+                {
+                    "label": "羞恥臉紅",
+                    "value": "blushing heavily, embarrassed face"
+                },
+                {
+                    "label": "高潮臉(Ahegao)",
+                    "value": "ahegao expression, rolling eyes, tongue out",
+                    "tags": [
+                        "nsfw"
+                    ]
+                }
+            ]
         }
     ],
     "sceneLoc": [
