@@ -572,31 +572,35 @@
                         <p class="text-xs text-gray-500 font-bold uppercase mb-3"><i
                                 class="fas fa-camera-retro mr-1"></i> 攝影機設定</p>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                            <div><label class="field-label"><i class="fas fa-video"></i> 視角</label><select
+                            <div><label class="field-label"><i class="fas fa-circle-notch"></i> 焦段 (Lens)</label><select
+                                    id="cam-lens"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                            </div>
+                            <div><label class="field-label"><i class="fas fa-circle"></i> 光圈 (Aperture)</label><select
+                                    id="cam-aperture"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                            </div>
+                            <div><label class="field-label"><i class="fas fa-th"></i> 構圖法則 (Composition)</label><select
+                                    id="scene-composition"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                            </div>
+                            <div><label class="field-label"><i class="fas fa-crop-alt"></i> 景別 (Shot)</label><select
+                                    id="cam-shot"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                            </div>
+                            <div><label class="field-label"><i class="fas fa-camera"></i> 寫實風格 (Style)</label><select
+                                    id="scene-style-realistic"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                            </div>
+                            <div><label class="field-label"><i class="fas fa-magic"></i> 特殊效果 (Effects)</label><select
+                                    id="scene-style-special"
+                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                            </div>
+                            <div><label class="field-label"><i class="fas fa-video"></i> 視角 (Angle)</label><select
                                     id="cam-angle"
                                     class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
                                 <select id="cam-angle-2"
                                     class="mt-1 w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
-                            </div>
-                            <div><label class="field-label"><i class="fas fa-crop-alt"></i> 景別</label><select
-                                    id="cam-shot"
-                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
-                            </div>
-                            <div><label class="field-label"><i class="fas fa-circle-notch"></i> 焦段</label><select
-                                    id="cam-lens"
-                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
-                            </div>
-                            <div><label class="field-label"><i class="fas fa-camera"></i> 寫實風格</label><select
-                                    id="scene-style-realistic"
-                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
-                            </div>
-                            <div><label class="field-label"><i class="fas fa-magic"></i> 特殊效果</label><select
-                                    id="scene-style-special"
-                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
-                            </div>
-                            <div><label class="field-label"><i class="fas fa-th"></i> 構圖法則</label><select
-                                    id="scene-composition"
-                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
                             </div>
                         </div>
                     </div>
@@ -761,6 +765,7 @@
             populate('scene-style-realistic', db.sceneStyleRealistic);
             populate('scene-style-special', db.sceneStyleSpecial);
             populate('scene-composition', db.sceneComposition);
+            populate('cam-aperture', db.camAperture);
 
             updateVisualFeedback();
         }
@@ -978,7 +983,7 @@
             if (env.length) sceneStr += (sceneStr ? ". " : "") + `Environment: ${env.join(", ")}`;
             if (sceneStr) prompts.push(sceneStr);
 
-            let cam = [v('cam-angle'), v('cam-angle-2'), v('cam-shot'), v('cam-lens'), v('scene-style-realistic'), v('scene-style-special'), v('scene-composition')].filter(Boolean);
+            let cam = [v('cam-angle'), v('cam-angle-2'), v('cam-shot'), v('cam-lens'), v('cam-aperture'), v('scene-style-realistic'), v('scene-style-special'), v('scene-composition')].filter(Boolean);
             if (cam.length) prompts.push(cam.join(", "));
 
             if (currentMode === 'nsfw') prompts.push("NSFW, detailed skin, mature female");
