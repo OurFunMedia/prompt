@@ -231,8 +231,12 @@
                     "value": "wearing multiple colorful hair clips"
                 },
                 {
-                    "label": "珍珠髮夾",
-                    "value": "wearing pearl hairpins"
+                    "label": "金屬髮夾",
+                    "value": "wearing metal hair clip"
+                },
+                {
+                    "label": "珍珠髮釵",
+                    "value": "wearing pearl hairpin"
                 },
                 {
                     "label": "花朵髮飾",
@@ -657,6 +661,12 @@
         {
             "group": "日常/時尚",
             "options": [
+                {
+                    "label": "背心外套 (Vest Outfits)",
+                    "key": "vest outfits",
+                    "closed": "wearing a vest jacket",
+                    "open": "wearing an open vest jacket"
+                },
                 {
                     "label": "牛仔外套 (Denim)",
                     "key": "denim_jacket",

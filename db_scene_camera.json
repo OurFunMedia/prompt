@@ -647,6 +647,10 @@
                     "value": "cinematic lighting, dramatic shadows"
                 },
                 {
+                    "label": "攝影背光燈",
+                    "value": "rim light, hair light"
+                },
+                {
                     "label": "倫勃朗光 (立體)",
                     "value": "Rembrandt lighting, chiaroscuro"
                 },
