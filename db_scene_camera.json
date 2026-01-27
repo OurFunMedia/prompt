@@ -193,6 +193,35 @@
                     ]
                 }
             ]
+        },
+        {
+            "group": "躺姿系列 (Lying Poses)",
+            "options": [
+                {
+                    "label": "仰躺 (Supine)",
+                    "value": "lying on back, supine position, lying flat, spread-eagled, looking at ceiling"
+                },
+                {
+                    "label": "側躺 (Side Lying)",
+                    "value": "lying on side, resting on arm, hand tucked under head"
+                },
+                {
+                    "label": "蜷縮 (Fetal)",
+                    "value": "fetal position, curled up, lying on side"
+                },
+                {
+                    "label": "趴著 (Prone)",
+                    "value": "lying on stomach, prone position, face down"
+                },
+                {
+                    "label": "半躺/靠坐 (Reclining)",
+                    "value": "reclining, leaning back, propped up on elbows"
+                },
+                {
+                    "label": "隨意攤開 (Sprawled)",
+                    "value": "sprawled out on surface, relaxed limbs, messy pose"
+                }
+            ]
         }
     ],
     "actionActivity": [
@@ -395,6 +424,14 @@
                 {
                     "label": "飯店/旅館 (Hotel)",
                     "value": "in a luxurious hotel room"
+                },
+                {
+                    "label": "舒適床鋪 (Cozy Bed)",
+                    "value": "on a soft white bed, messy sheets, sinking into the mattress, cozy atmosphere"
+                },
+                {
+                    "label": "復古皮沙發 (Leather Sofa)",
+                    "value": "on a vintage leather sofa, dimly lit room"
                 }
             ]
         },
@@ -457,6 +494,10 @@
                 {
                     "label": "花園/草地",
                     "value": "in a flower garden, grassy field"
+                },
+                {
+                    "label": "雛菊/花海 (Flower Field)",
+                    "value": "in a field of blooming daisies, sunlight filtering through leaves, vibrant colors"
                 },
                 {
                     "label": "泳池",
@@ -584,6 +625,14 @@
         {
             "label": "文具/書包",
             "value": "school bag, stationery, open notebook"
+        },
+        {
+            "label": "亂的床單 (Messy Sheets)",
+            "value": "messy sheets, crumpled bed linen"
+        },
+        {
+            "label": "陷入床墊 (Sinking)",
+            "value": "body sinking into the soft mattress, heavy indentation on bed"
         }
     ],
     "sceneTime": [
@@ -677,6 +726,14 @@
                 {
                     "label": "黃金時刻 (逆光)",
                     "value": "backlighting, golden hour glow, lens flare"
+                },
+                {
+                    "label": "樹影光斑 (Dappled)",
+                    "value": "sunlight filtering through leaves, dappled sunlight on face"
+                },
+                {
+                    "label": "陰鬱氛圍 (Moody)",
+                    "value": "dimly lit, moody atmosphere, shadows"
                 }
             ]
         }

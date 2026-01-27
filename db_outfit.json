@@ -1249,6 +1249,13 @@
                 {
                     "label": "性感水手服 (露腰)",
                     "value": "cropped sailor uniform top"
+                },
+                {
+                    "label": "洛可可風格塑身連身裙",
+                    "value": "rococo style fitted dress with low-cut sweetheart neckline and tie-up corset",
+                    "tags": [
+                        "sexy"
+                    ]
                 }
             ]
         },
