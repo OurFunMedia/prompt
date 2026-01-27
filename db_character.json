@@ -108,7 +108,7 @@
         },
         {
             "label": "嬌小可愛 (Petite)",
-            "value": "petite and cute stature, short torso"
+            "value": "petite and cute stature, noticeably short torso, which accentuates her distinct hourglass figure"
         },
         {
             "label": "高挑長腿模特 (Tall)",
@@ -188,7 +188,7 @@
         },
         {
             "label": "豐滿 (Voluptuous)",
-            "value": "a voluptuous bust",
+            "value": "a curvaceous feminine proportions",
             "tags": [
                 "sexy"
             ]
@@ -214,12 +214,16 @@
             "value": "a natural waist"
         },
         {
-            "label": "馬甲線 (Toned)",
-            "value": "a toned waist"
-        },
-        {
             "label": "螞蟻腰 (Wasp)",
             "value": "an extremely tiny waist"
+        },
+        {
+            "label": "纖細 (Slim)",
+            "value": "a very slim waist"
+        },
+        {
+            "label": "馬甲線 (Toned)",
+            "value": "a toned waist"
         },
         {
             "label": "水桶腰 (Thick)",
