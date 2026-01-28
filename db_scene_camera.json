@@ -56,6 +56,10 @@
                     "value": "resting head on one hand, propping head up with hand"
                 },
                 {
+                    "label": "一隻手抬起放在頭上",
+                    "value": "one hand placed on top of head"
+                },
+                {
                     "label": "趴在桌上 (Resting on Table)",
                     "value": "lying on the table with her face turned to the side, her arms resting on her hands, her fingers folded so the rest of her hands were not visible"
                 },
@@ -269,6 +273,10 @@
                 {
                     "label": "調皮笑容",
                     "value": "playful smirking"
+                },
+                {
+                    "label": "微笑微露出上排牙齒",
+                    "value": "smile, slightly showing upper teeth"
                 }
             ]
         },
