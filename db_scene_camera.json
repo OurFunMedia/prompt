@@ -587,6 +587,10 @@
         {
             "label": "工業/科幻細節",
             "value": "exposed pipes, wires, futuristic panels"
+        },
+        {
+            "label": "MUJI 風格 (MUJI Style)",
+            "value": "muji style interior, minimalist, clean white and wood texture, simple furniture"
         }
     ],
     "scenePropsDetail": [
