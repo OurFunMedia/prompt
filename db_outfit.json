@@ -748,10 +748,38 @@
             "group": "內衣/胸罩 (Bras)",
             "options": [
                 {
+                    "label": "集中型胸圍",
+                    "value": "push-up bra",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "深V胸圍",
+                    "value": "plunge bra",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
                     "label": "1/2杯內衣 (半罩)",
                     "value": "demi-cup bra, uplifting",
                     "tags": [
-                        "nsfw"
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "籠式胸圍",
+                    "value": "cage bra",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "鏤空胸圍",
+                    "value": "cut-out bra",
+                    "tags": [
+                        "sexy"
                     ]
                 },
                 {
@@ -762,10 +790,17 @@
                     ]
                 },
                 {
+                    "label": "蕾絲胸圍",
+                    "value": "lace-up bra",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
                     "label": "深V蕾絲胸罩",
                     "value": "deep-V lace bra",
                     "tags": [
-                        "nsfw"
+                        "sexy"
                     ]
                 },
                 {
@@ -1316,17 +1351,6 @@
                     "tags": [
                         "sexy"
                     ]
-                },
-                {
-                    "label": "越南奧黛",
-                    "value": "vietnamese ao dai, long tunic with high slits over trousers"
-                },
-                {
-                    "label": "性感奧黛",
-                    "value": "modified sexy vietnamese ao dai with a deep V-neck and high slit, the open neckline reveals her ample cleavage and skin, long tunic with high slits over trousers",
-                    "tags": [
-                        "sexy"
-                    ]
                 }
             ]
         }
@@ -1603,13 +1627,6 @@
                     ]
                 },
                 {
-                    "label": "蕾絲內褲",
-                    "value": "lace panties",
-                    "tags": [
-                        "nsfw"
-                    ]
-                },
-                {
                     "label": "開檔內褲",
                     "value": "crotchless panties",
                     "tags": [
@@ -1621,6 +1638,20 @@
                     "value": "wearing only a garter belt and stockings, no panties",
                     "tags": [
                         "nsfw"
+                    ]
+                },
+                {
+                    "label": "蕾絲內褲",
+                    "value": "lace panties",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "巴西式內褲",
+                    "value": "brazilian panties",
+                    "tags": [
+                        "sexy"
                     ]
                 },
                 {
