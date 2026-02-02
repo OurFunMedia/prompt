@@ -790,15 +790,8 @@
                     ]
                 },
                 {
-                    "label": "蕾絲胸圍",
-                    "value": "lace-up bra",
-                    "tags": [
-                        "sexy"
-                    ]
-                },
-                {
-                    "label": "深V蕾絲胸罩",
-                    "value": "deep-V lace bra",
+                    "label": "性感蕾絲胸圍",
+                    "value": "sexy lace-up bra",
                     "tags": [
                         "sexy"
                     ]
@@ -831,7 +824,7 @@
             "options": [
                 {
                     "label": "三點式比基尼上衣",
-                    "value": "wearing a classic triangle string bikini top, non-NSFW",
+                    "value": "wearing a classic triangle string bikini top",
                     "tags": [
                         "sexy"
                     ]
@@ -920,6 +913,13 @@
                 {
                     "label": "殺死處男毛衣",
                     "value": "backless ribbed knit sweater, open back, virgin killer sweater, high-neck, sleeveless, sideboob hint, heavy knit texture",
+                    "tags": [
+                        "sexy"
+                    ]
+                },
+                {
+                    "label": "性感女裝(隨機)",
+                    "value": "sexy women's clothing",
                     "tags": [
                         "sexy"
                     ]
@@ -1593,7 +1593,7 @@
             "options": [
                 {
                     "label": "三點式比基尼下著",
-                    "value": "wearing side-tie string bikini bottoms, non-NSFW",
+                    "value": "wearing side-tie string bikini bottoms",
                     "tags": [
                         "sexy"
                     ]

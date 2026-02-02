@@ -880,13 +880,22 @@
             updateVisualFeedback();
 
             let prompts = [];
-            let charDesc = `Analog photograph of ${v('char-name')}`;
-            if (v('char-age') || v('race')) charDesc += `, a ${v('char-age')} ${v('race')} female`;
-            prompts.push(charDesc);
 
-            // Vibe 放在角色描述之後，細節特徵之前，定調畫面風格
+            // 1. [攝影風格/光影] (Camera & Style & Vibe)
+            let cam = [
+                v('cam-angle'), v('cam-angle-2'), v('cam-shot'), v('cam-lens'), v('cam-aperture'),
+                v('scene-style-realistic'), v('scene-style-special'), v('scene-composition'),
+                v('scene-lighting'), v('scene-time'), v('scene-weather')
+            ].filter(Boolean);
+
             const vibe = v('core-vibe');
-            if (vibe) prompts.push(vibe);
+            if (vibe) cam.push(vibe);
+
+            if (cam.length) prompts.push(cam.join(", "));
+
+            // 2. [MyModel DNA] (Identity & Physical Features)
+            let dna = [`Analog photograph of ${v('char-name')}`];
+            if (v('char-age') || v('race')) dna.push(`a ${v('char-age')} ${v('race')} female`.replace(/\s+/g, ' ').trim());
 
             let feats = [
                 (v('hair-color') + ' ' + v('hair-style')).trim(),
@@ -898,73 +907,31 @@
                 v('skin-type'),
                 [v('makeup-base'), v('makeup-detail'), v('makeup-detail-2')].filter(Boolean).join(", "),
                 v('body-height'),
-                v('body-type') // <--- 加入 body-type
+                v('body-type')
             ].filter(s => s && s.trim().length > 1);
 
-            if (currentMode !== 'clean' && v('body-bust')) feats.push(`body: ${v('body-bust')}, ${v('body-waist')}, ${v('body-hip')}`);
-            if (feats.length) prompts.push(feats.join(", "));
-
-            let outfit = [];
-            if (v('outfit-theme')) outfit.push(`Style: ${v('outfit-theme')}`);
-            if (v('outfit-theme-custom')) outfit.push(v('outfit-theme-custom'));
-
-            let fullHead = [v('outfit-head'), v('outfit-head-custom')].filter(Boolean).join(", ");
-            if (fullHead) outfit.push(fullHead);
-
-            let fullAcc = [v('outfit-acc'), v('outfit-acc-2'), v('outfit-acc-custom')].filter(Boolean).join(", ");
-            if (fullAcc) outfit.push(fullAcc);
-
-            if (v('outfit-acc-detail')) outfit.push(v('outfit-acc-detail'));
-            if (v('outfit-acc-detail-2')) outfit.push(v('outfit-acc-detail-2'));
-
-            // Outerwear Logic
-            const outerKey = v('outfit-outer');
-            if (outerKey) {
-                const selectedOuter = db.flatOutfitOuter.find(o => o.key === outerKey);
-                if (selectedOuter) {
-                    const state = document.querySelector('input[name="outfit-outer-state"]:checked').value;
-                    if (selectedOuter[state]) {
-                        outfit.push(selectedOuter[state]);
-                    } else { // Fallback for items without open/closed states
-                        outfit.push(selectedOuter.value);
-                    }
-                } else { // Fallback for items that might not use the key system (e.g. from custom input)
-                    outfit.push(outerKey);
-                }
+            if (currentMode !== 'clean' && v('body-bust')) {
+                feats.push(`body: ${v('body-bust')}, ${v('body-waist')}, ${v('body-hip')}`);
             }
-            if (v('outfit-outer-custom')) outfit.push(v('outfit-outer-custom'));
 
-            let top = v('outfit-top');
-            if (top) {
-                let attr = [v('top-color'), v('top-pat'), v('top-mat')].filter(Boolean).join(" ");
-                outfit.push(attr ? top.replace("wearing a", `wearing a ${attr}`) : top);
+            if (feats.length) dna.push(feats.join(", "));
+            prompts.push(dna.join(", "));
 
-                // --- Physics Injection Logic ---
-                let physics = v('outfit-fit-physics');
-                if (!physics) {
-                    physics = autoInjectPhysics(top);
-                }
-                if (physics) outfit.push(physics);
-                // -------------------------------
-            }
-            if (v('outfit-top-custom')) outfit.push(v('outfit-top-custom'));
+            // 3. [使用者場景細節] (Location & Props)
+            let loc = v('scene-loc');
+            let locCustom = v('scene-loc-custom');
+            let fullLoc = [loc, locCustom].filter(Boolean).join(", ");
 
-            let btm = v('outfit-bottom');
-            if (btm) {
-                let attr = [v('bottom-color'), v('bottom-pat'), ' ', v('bottom-mat')].filter(Boolean).join(" ");
-                outfit.push(attr.trim() ? `${btm} (${attr.trim()})` : btm);
-            }
-            if (v('outfit-bottom-custom')) outfit.push(v('outfit-bottom-custom'));
+            let props = v('scene-props');
+            let propsDetail = v('scene-props-detail');
+            let sceneParts = [];
+            if (fullLoc) sceneParts.push(`Location: ${fullLoc}`);
+            if (props) sceneParts.push(props);
+            if (propsDetail) sceneParts.push(propsDetail);
 
-            let fullSock = [v('outfit-sock'), v('outfit-sock-custom')].filter(Boolean).join(", ");
-            if (fullSock) outfit.push(fullSock);
+            if (sceneParts.length) prompts.push(sceneParts.join(", "));
 
-            let fullShoe = [v('outfit-shoe'), v('outfit-shoe-custom')].filter(Boolean).join(", ");
-            if (fullShoe) outfit.push(fullShoe);
-
-            let outfitStr = outfit.filter(Boolean).join(", ");
-            if (outfitStr) prompts.push(outfitStr);
-
+            // 4. [動作與表情] (Pose & Action & Expression)
             let pose = v('action-pose');
             let poseCustom = v('action-pose-custom');
             let fullPose = [pose, poseCustom].filter(Boolean).join(", ");
@@ -978,22 +945,63 @@
             if (exprCombined) act = act ? `${act}, with ${exprCombined}` : `She has ${exprCombined}`;
             if (act) prompts.push(act);
 
-            let loc = v('scene-loc');
-            let locCustom = v('scene-loc-custom');
-            let fullLoc = [loc, locCustom].filter(Boolean).join(", ");
+            // 5. [服裝] (Outfit)
+            let outfit = [];
+            if (v('outfit-theme')) outfit.push(`Style: ${v('outfit-theme')}`);
+            if (v('outfit-theme-custom')) outfit.push(v('outfit-theme-custom'));
 
-            let props = v('scene-props');
-            let propsDetail = v('scene-props-detail');
-            let env = [v('scene-time'), v('scene-weather'), v('scene-lighting')].filter(Boolean);
-            let sceneStr = fullLoc ? `Location: ${fullLoc}` : "";
-            if (props) sceneStr += (sceneStr ? ", " : "") + props;
-            if (propsDetail) sceneStr += (sceneStr ? ", " : "") + propsDetail;
-            if (env.length) sceneStr += (sceneStr ? ". " : "") + `Environment: ${env.join(", ")}`;
-            if (sceneStr) prompts.push(sceneStr);
+            let fullHead = [v('outfit-head'), v('outfit-head-custom')].filter(Boolean).join(", ");
+            if (fullHead) outfit.push(fullHead);
 
-            let cam = [v('cam-angle'), v('cam-angle-2'), v('cam-shot'), v('cam-lens'), v('cam-aperture'), v('scene-style-realistic'), v('scene-style-special'), v('scene-composition')].filter(Boolean);
-            if (cam.length) prompts.push(cam.join(", "));
+            let fullAcc = [v('outfit-acc'), v('outfit-acc-2'), v('outfit-acc-custom')].filter(Boolean).join(", ");
+            if (fullAcc) outfit.push(fullAcc);
 
+            if (v('outfit-acc-detail')) outfit.push(v('outfit-acc-detail'));
+            if (v('outfit-acc-detail-2')) outfit.push(v('outfit-acc-detail-2'));
+
+            const outerKey = v('outfit-outer');
+            if (outerKey) {
+                const selectedOuter = db.flatOutfitOuter.find(o => o.key === outerKey);
+                if (selectedOuter) {
+                    const state = document.querySelector('input[name="outfit-outer-state"]:checked').value;
+                    outfit.push(selectedOuter[state] || selectedOuter.value);
+                } else {
+                    outfit.push(outerKey);
+                }
+            }
+            if (v('outfit-outer-custom')) outfit.push(v('outfit-outer-custom'));
+
+            let top = v('outfit-top');
+            if (top) {
+                let attr = [v('top-color'), v('top-pat'), v('top-mat')].filter(Boolean).join(" ");
+                outfit.push(attr ? top.replace("wearing a", `wearing a ${attr}`) : top);
+                let physics = v('outfit-fit-physics') || autoInjectPhysics(top);
+                if (physics) outfit.push(physics);
+            }
+            if (v('outfit-top-custom')) outfit.push(v('outfit-top-custom'));
+
+            let btm = v('outfit-bottom');
+            if (btm) {
+                let attr = [v('bottom-color'), v('bottom-pat'), v('bottom-mat')].filter(Boolean).join(" ");
+                outfit.push(attr.trim() ? `${btm} (${attr.trim()})` : btm);
+            }
+            if (v('outfit-bottom-custom')) outfit.push(v('outfit-bottom-custom'));
+
+            let fullSock = [v('outfit-sock'), v('outfit-sock-custom')].filter(Boolean).join(", ");
+            if (fullSock) outfit.push(fullSock);
+
+            let fullShoe = [v('outfit-shoe'), v('outfit-shoe-custom')].filter(Boolean).join(", ");
+            if (fullShoe) outfit.push(fullShoe);
+
+            // 若未指定顯眼的服裝，則搭配顯身材的穿搭
+            if (outfit.length === 0) {
+                outfit.push("(wearing a form-fitting outfit:1.1), emphasizing her feminine silhouette");
+            }
+
+            let outfitStr = outfit.filter(Boolean).join(", ");
+            if (outfitStr) prompts.push(outfitStr);
+
+            // NSFW & Endings
             if (currentMode === 'nsfw') prompts.push("NSFW, detailed skin, mature female");
 
             let finalPrompt = prompts.join(". ").replace(/\.\s*\./g, '.').replace(/,\s*,/g, ',');
