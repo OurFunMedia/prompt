@@ -154,6 +154,54 @@
             "tags": [
                 "sexy"
             ]
+        },
+        {
+            "label": "日系森女/原宿 (Mori & Harajuku)",
+            "value": "Japanese Mori girl style combined with Harajuku street fashion, layered clothing, soft textures, creative accessories"
+        },
+        {
+            "label": "韓系精緻 (Korean Style)",
+            "value": "refined Korean fashion, slim-fit silhouettes, trendy aesthetics, K-drama inspired styling"
+        },
+        {
+            "label": "歐美簡約 (Western Style)",
+            "value": "bold and minimalist Western fashion, clean lines, neutral tones, high-contrast styling"
+        },
+        {
+            "label": "法式慵懶 (French Chic)",
+            "value": "French chic style, effortless elegance, minimalist essentials, timeless sophistication"
+        },
+        {
+            "label": "商務休閒 (Smart Casual)",
+            "value": "professional yet relaxed business casual attire, blazer and trousers, polished and comfortable"
+        },
+        {
+            "label": "美式學院 (Preppy Style)",
+            "value": "American preppy ivy league style, plaid patterns, knit sweaters, classic loafers, scholarly vibe"
+        },
+        {
+            "label": "中性工裝 (Tomboy/Workwear)",
+            "value": "gender-neutral tomboy aesthetic, rugged workwear elements, loose-fit utility clothing, oversized silhouettes"
+        },
+        {
+            "label": "運動休閒 (Athleisure)",
+            "value": "functional athletic wear combined with daily casual fashion, stylish gym clothes, performance fabrics"
+        },
+        {
+            "label": "精緻小香風 (Tweed/Chanel)",
+            "value": "classic tweed fabric, sophisticated socialite elegance, high-end Chanel-inspired aesthetic"
+        },
+        {
+            "label": "清新碎花 (Fresh & Cute)",
+            "value": "fresh and cute aesthetic, light pastel colors, floral prints, lace details, innocent charm"
+        },
+        {
+            "label": "經典復古 (Vintage)",
+            "value": "vintage fashion elements from 70s and 90s, flared pants, shoulder pads, retro patterns and textures"
+        },
+        {
+            "label": "華麗休閒 (Dressy Casual)",
+            "value": "elevated dressy casual style, sophisticated semi-formal look, perfect for social gatherings"
         }
     ],
     "outfitHead": [
@@ -918,7 +966,7 @@
                     ]
                 },
                 {
-                    "label": "性感女裝(隨機)",
+                    "label": "性感女裝 (隨機)",
                     "value": "sexy women's clothing",
                     "tags": [
                         "sexy"
@@ -1003,6 +1051,10 @@
                 {
                     "label": "格子襯衫",
                     "value": "plaid flannel shirt"
+                },
+                {
+                    "label": "高貴時尚  (隨機)",
+                    "value": "elegant and fashionable women's clothing"
                 }
             ]
         },
