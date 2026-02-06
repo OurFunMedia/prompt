@@ -104,19 +104,19 @@
     "bodyHeight": [
         {
             "label": "標準身高 (Average)",
-            "value": "average height, short torso"
+            "value": "average height"
         },
         {
             "label": "嬌小可愛 (Petite)",
-            "value": "petite and cute stature, noticeably short torso, which accentuates her distinct hourglass figure"
+            "value": "petite stature, short torso"
         },
         {
-            "label": "高挑長腿模特 (Tall)",
-            "value": "tall and slender model-like figure, endless and slender legs, model proportions"
+            "label": "高挑模特 (Tall)",
+            "value": "tall slender model proportions, long legs"
         },
         {
             "label": "極高 (Towering)",
-            "value": "statuesque and towering figure"
+            "value": "statuesque towering figure"
         }
     ],
     "bodyType": [
@@ -137,7 +137,7 @@
                 },
                 {
                     "label": "🗿 雕塑S曲線 (Statuesque)",
-                    "value": "statuesque hourglass figure, grand and imposing silhouette, wide hips contrasting with narrow waist, distinct feminine curves, full-figured elegance",
+                    "value": "statuesque hourglass figure, wide hips, narrow waist, full-figured elegance",
                     "tags": [
                         "clean",
                         "sexy"
@@ -145,7 +145,7 @@
                 },
                 {
                     "label": "☁️ 豐潤柔軟 (Marshmallow)",
-                    "value": "soft and marshmallow-like physique, heavily curved silhouette, healthy and full figure, mature feminine proportions, soft fleshy texture",
+                    "value": "soft marshmallow-like physique, heavily curved, healthy full figure",
                     "tags": [
                         "clean",
                         "sexy"
@@ -173,15 +173,15 @@
     ],
     "bodyBust": [
         {
-            "label": "適中 (Balanced)",
-            "value": "a balanced bust",
+            "label": "纖細 (Petite)",
+            "value": "a petite bust",
             "tags": [
                 "sexy"
             ]
         },
         {
-            "label": "纖細 (Petite)",
-            "value": "a petite bust",
+            "label": "適中 (Balanced)",
+            "value": "a balanced bust",
             "tags": [
                 "sexy"
             ]
@@ -210,10 +210,6 @@
     ],
     "bodyWaist": [
         {
-            "label": "標準 (Natural)",
-            "value": "a natural waist"
-        },
-        {
             "label": "螞蟻腰 (Wasp)",
             "value": "an extremely tiny waist"
         },
@@ -226,22 +222,26 @@
             "value": "a toned waist"
         },
         {
+            "label": "標準 (Natural)",
+            "value": "a natural waist"
+        },
+        {
             "label": "水桶腰 (Thick)",
             "value": "a thick waist"
         }
     ],
     "bodyHip": [
         {
-            "label": "標準 (Proportional)",
-            "value": "proportional hips"
-        },
-        {
             "label": "窄臀纖腿 (Narrow)",
             "value": "lifted and firm lower body curves, narrow hips, and pencil-thin legs"
         },
         {
+            "label": "標準 (Proportional)",
+            "value": "proportional hips"
+        },
+        {
             "label": "S型曲線 (Curvy)",
-            "value": "curvy S-shape hips"
+            "value": "curvy S-shape lower body"
         },
         {
             "label": "蜜大腿 (Thick)",
@@ -512,14 +512,14 @@
         },
         {
             "label": "白皙自然",
-            "value": "fair natural skin, detailed skin texture"
+            "value": "fair skin, detailed texture"
         },
         {
             "label": "小麥色 (光澤)",
-            "value": "sun-kissed tan skin, shiny skin"
+            "value": "tan skin, shiny texture"
         },
         {
-            "label": "真實毛孔感",
+            "label": "真實感",
             "value": "highly detailed skin, visible pores, natural imperfections"
         },
         {
@@ -635,11 +635,11 @@
             "options": [
                 {
                     "label": "雀斑妝",
-                    "value": "faux freckles across nose and cheeks"
+                    "value": "faux freckles"
                 },
                 {
                     "label": "曬傷妝",
-                    "value": "sunburned blush effect"
+                    "value": "sunburned blush"
                 },
                 {
                     "label": "愛心眼 (瞳孔)",
@@ -649,8 +649,8 @@
                     ]
                 },
                 {
-                    "label": "宿醉妝",
-                    "value": "heavy under-eye blush"
+                    "label": "宿醉/Igari 妝",
+                    "value": "heavy under-eye blush, igari style blush"
                 },
                 {
                     "label": "髒汙/戰損",

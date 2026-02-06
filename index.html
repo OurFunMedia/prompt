@@ -857,13 +857,16 @@
                 statusEl.innerText = mode === 'sexy' ? "💜 性感版 (Standard)" : "🔞 NSFW版 (Uncensored)";
                 statusEl.className = `text-xs font-bold px-2 py-0.5 rounded ${mode === 'sexy' ? 'bg-pink-900 text-pink-300' : 'bg-red-900 text-red-300'}`;
                 bustWarn.classList.add('hidden');
-                bustContainer.classList.remove('hidden'); // 修改：顯示 bustContainer
+                bustContainer.classList.remove('hidden');
                 bustContainer.classList.remove('opacity-50', 'pointer-events-none');
                 nsfwEffects.forEach(id => {
                     const el = document.getElementById(id);
                     if (el) el.parentElement.classList.remove('hidden');
                 });
             }
+
+            // Sync character name value back to input if it's empty
+            if (!v('char-name')) document.getElementById('char-name').value = "MyModel";
 
             populateAllMenus();
             generatePrompt();
@@ -915,7 +918,10 @@
             }
 
             if (feats.length) dna.push(feats.join(", "));
-            prompts.push(dna.join(", "));
+
+            // Clean up DNA array and join properly
+            let dnaStr = dna.filter(s => s && s.trim().length > 0).join(", ");
+            if (dnaStr) prompts.push(dnaStr);
 
             // 3. [使用者場景細節] (Location & Props)
             let loc = v('scene-loc');
@@ -994,8 +1000,8 @@
             if (fullShoe) outfit.push(fullShoe);
 
             // 若未指定顯眼的服裝，則搭配顯身材的穿搭
-            if (outfit.length === 0) {
-                outfit.push("(wearing a form-fitting outfit:1.1), emphasizing her feminine silhouette");
+            if (outfit.length === 0 && currentMode !== 'clean') {
+                outfit.push("emphasizing her feminine silhouette");
             }
 
             let outfitStr = outfit.filter(Boolean).join(", ");
