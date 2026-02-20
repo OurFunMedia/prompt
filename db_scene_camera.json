@@ -12,15 +12,15 @@
                     "value": "sitting comfortably"
                 },
                 {
-                    "label": "抱膝坐",
+                    "label": "抱膝坐 (Hugging Knees)",
                     "value": "sitting on floor hugging knees to chest"
                 },
                 {
-                    "label": "盤膝而坐",
+                    "label": "盤膝而坐 (Cross-legged)",
                     "value": "sitting cross-legged"
                 },
                 {
-                    "label": "雙腿交疊 (翹腳)",
+                    "label": "雙腿交疊 (翹腳) (Legs Crossed)",
                     "value": "legs crossed elegantly"
                 },
                 {
@@ -40,31 +40,31 @@
                     "value": "looking back over shoulder"
                 },
                 {
-                    "label": "單手心形手勢",
+                    "label": "單手心形手勢 (Half-Heart)",
                     "value": "making a half-heart gesture with one hand towards camera"
                 },
                 {
-                    "label": "雙手托腮",
+                    "label": "雙手托腮 (Resting Chin)",
                     "value": "resting chin in hands, looking cute"
                 },
                 {
-                    "label": "雙手抱頭",
+                    "label": "雙手抱頭 (Hands Behind Head)",
                     "value": "hands behind head, elbows out, chest out"
                 },
                 {
-                    "label": "單手托頭",
+                    "label": "單手托頭 (Propping Head)",
                     "value": "resting head on one hand, propping head up with hand"
                 },
                 {
-                    "label": "一隻手抬起放在頭上",
+                    "label": "一隻手抬起放在頭上 (Hand on Head)",
                     "value": "one hand placed on top of head"
                 },
                 {
-                    "label": "彎腰",
+                    "label": "彎腰 (Bending Over)",
                     "value": "bending over forward"
                 },
                 {
-                    "label": "靠牆",
+                    "label": "靠牆 (Leaning Against Wall)",
                     "value": "leaning against a wall"
                 }
             ]
@@ -77,43 +77,43 @@
                     "value": "dynamic pose, moving"
                 },
                 {
-                    "label": "走路/跑步",
+                    "label": "走路/跑步 (Walking/Running)",
                     "value": "walking towards camera, running"
                 },
                 {
-                    "label": "梳妝/整理儀容",
+                    "label": "梳妝/整理儀容 (Grooming)",
                     "value": "applying makeup, tying hair, adjusting clothes"
                 },
                 {
-                    "label": "綁馬尾",
+                    "label": "綁馬尾 (Tying Hair)",
                     "value": "tying hair up with both hands"
                 },
                 {
-                    "label": "撩髮",
+                    "label": "撩髮 (Running Fingers Through Hair)",
                     "value": "running fingers through hair"
                 },
                 {
-                    "label": "自拍/拍照",
+                    "label": "自拍/拍照 (Taking a Selfie)",
                     "value": "taking a mirror selfie, holding a camera"
                 },
                 {
-                    "label": "伸懶腰/打哈欠",
+                    "label": "伸懶腰/打哈欠 (Stretching/Yawning)",
                     "value": "stretching arms overhead, yawning"
                 },
                 {
-                    "label": "睡覺/休息",
+                    "label": "睡覺/休息 (Sleeping/Resting)",
                     "value": "sleeping, resting"
                 },
                 {
-                    "label": "做家務 (烹飪/打掃)",
+                    "label": "做家務 (烹飪/打掃) (Doing Chores)",
                     "value": "cooking, cleaning, doing chores"
                 },
                 {
-                    "label": "運動/健身",
+                    "label": "運動/健身 (Exercising)",
                     "value": "exercising, working out, yoga pose"
                 },
                 {
-                    "label": "跳舞/表演",
+                    "label": "跳舞/表演 (Dancing)",
                     "value": "dancing, performing on stage"
                 }
             ]
@@ -122,7 +122,7 @@
             "group": "極致誘惑 (Sexy)",
             "options": [
                 {
-                    "label": "前傾 (擠溝)",
+                    "label": "前傾 (擠溝) (Leaning Forward)",
                     "value": "leaning forward, elbows on table, cleavage focus",
                     "tags": [
                         "sexy"
@@ -133,60 +133,60 @@
                     "value": "sitting on the floor in a W-shape (duck sitting)"
                 },
                 {
-                    "label": "雙手托胸",
+                    "label": "雙手托胸 (Holding Breasts)",
                     "value": "holding own breasts with hands, emphasizing cleavage",
                     "tags": [
                         "sexy"
                     ]
                 },
                 {
-                    "label": "拉扯內褲邊緣",
+                    "label": "拉扯內褲邊緣 (Pulling Panty Strap)",
                     "value": "pulling panty side strap with thumb",
                     "tags": [
                         "nsfw"
                     ]
                 },
                 {
-                    "label": "手指觸唇",
+                    "label": "手指觸唇 (Finger Touching Lip)",
                     "value": "finger lightly touching lower lip"
                 },
                 {
-                    "label": "肩帶滑落",
+                    "label": "肩帶滑落 (Strap Slipping)",
                     "value": "letting one strap slip off shoulder",
                     "tags": [
                         "sexy"
                     ]
                 },
                 {
-                    "label": "跪姿後仰 (展示曲線)",
+                    "label": "跪姿後仰 (展示曲線) (Kneeling Arching Back)",
                     "value": "kneeling and arching back significantly",
                     "tags": [
                         "sexy"
                     ]
                 },
                 {
-                    "label": "四肢著地 (爬行)",
+                    "label": "四肢著地 (爬行) (Crawling)",
                     "value": "crawling on all fours towards camera",
                     "tags": [
                         "sexy"
                     ]
                 },
                 {
-                    "label": "抬腿靠牆",
+                    "label": "抬腿靠牆 (Legs Up Wall)",
                     "value": "one leg lifted high against the wall",
                     "tags": [
                         "sexy"
                     ]
                 },
                 {
-                    "label": "張開雙腿坐",
+                    "label": "張開雙腿坐 (Legs Spread Open)",
                     "value": "sitting with legs spread open (M-shape)",
                     "tags": [
                         "nsfw"
                     ]
                 },
                 {
-                    "label": "雙手被縛身後",
+                    "label": "雙手被縛身後 (Hands Tied Behind Back)",
                     "value": "hands tied behind back",
                     "tags": [
                         "nsfw"
@@ -230,19 +230,19 @@
             "value": ""
         },
         {
-            "label": "閱讀/書寫",
+            "label": "閱讀/書寫 (Reading/Writing)",
             "value": "reading a book, writing notes"
         },
         {
-            "label": "飲食/喝咖啡",
+            "label": "飲食/喝咖啡 (Eating/Drinking)",
             "value": "eating food, drinking beverage"
         },
         {
-            "label": "使用手機/電腦",
+            "label": "使用手機/電腦 (Using Phone/Computer)",
             "value": "using smartphone, working on laptop"
         },
         {
-            "label": "聽音樂",
+            "label": "聽音樂 (Listening to Music)",
             "value": "listening to music with headphones"
         }
     ],
@@ -251,27 +251,27 @@
             "group": "微笑與喜悅 (Smile & Joy)",
             "options": [
                 {
-                    "label": "溫柔微笑",
+                    "label": "溫柔微笑 (Gentle Smile)",
                     "value": "gentle smile"
                 },
                 {
-                    "label": "梨渦淺笑",
+                    "label": "梨渦淺笑 (Sweet Smile with Dimples)",
                     "value": "a sweet smile with dimples"
                 },
                 {
-                    "label": "羞澀靦腆笑容",
+                    "label": "羞澀靦腆笑容 (Shy Smile)",
                     "value": "shy and bashful smile, slight blush, looking at viewer shyly, sweet demeanor"
                 },
                 {
-                    "label": "開懷大笑",
+                    "label": "開懷大笑 (Laughing)",
                     "value": "joyful laugh, showing teeth"
                 },
                 {
-                    "label": "調皮笑容",
+                    "label": "調皮笑容 (Playful Smirk)",
                     "value": "playful smirking"
                 },
                 {
-                    "label": "微笑微露出上排牙齒",
+                    "label": "微笑微露出上排牙齒 (Smile with Teeth)",
                     "value": "smile, slightly showing upper teeth"
                 }
             ]
@@ -280,27 +280,27 @@
             "group": "眼神與注視 (Gaze & Eyes)",
             "options": [
                 {
-                    "label": "明亮眼神直視",
+                    "label": "明亮眼神直視 (Bright Eyes)",
                     "value": "bright eyes looking directly at camera"
                 },
                 {
-                    "label": "眼神離開鏡頭",
+                    "label": "眼神離開鏡頭 (Looking Away)",
                     "value": "looking away from camera"
                 },
                 {
-                    "label": "深情對視",
+                    "label": "深情對視 (Deep Gaze)",
                     "value": "looking into the camera with deep affection"
                 },
                 {
-                    "label": "Wink (單眼眨眼)",
+                    "label": "單眼眨眼 (Wink)",
                     "value": "winking playfully at camera"
                 },
                 {
-                    "label": "向上仰望",
+                    "label": "向上仰望 (Looking Up)",
                     "value": "looking upwards with a dreamy expression"
                 },
                 {
-                    "label": "向下俯視",
+                    "label": "向下俯視 (Looking Down)",
                     "value": "looking down bashfully"
                 }
             ]
@@ -316,33 +316,26 @@
                     ]
                 },
                 {
-                    "label": "迷離眼神",
+                    "label": "迷離眼神 (Seductive Eyes)",
                     "value": "heavy-lidded seductive eyes",
                     "tags": [
                         "sexy"
                     ]
                 },
                 {
-                    "label": "咬唇",
-                    "value": "biting lower lip",
-                    "tags": [
-                        "sexy"
-                    ]
-                },
-                {
-                    "label": "吐舌",
+                    "label": "吐舌 (Sticking Tongue Out)",
                     "value": "sticking tongue out playfully"
                 },
                 {
-                    "label": "微醺迷離",
+                    "label": "微醺迷離 (Tipsy)",
                     "value": "tipsy expression, slightly glazed eyes"
                 },
                 {
-                    "label": "嘟嘴",
+                    "label": "嘟嘴 (Pouting)",
                     "value": "pouty lips, pouting"
                 },
                 {
-                    "label": "輕咬下唇",
+                    "label": "輕咬下唇 (Biting Lower Lip)",
                     "value": "biting her lower lip"
                 },
                 {
@@ -355,23 +348,23 @@
             "group": "高冷/情緒 (Cool & Emotion)",
             "options": [
                 {
-                    "label": "高冷鄙視",
+                    "label": "高冷鄙視 (Cold Contempt)",
                     "value": "looking down with disgust, cold eyes"
                 },
                 {
-                    "label": "放空無表情",
+                    "label": "放空無表情 (Expressionless)",
                     "value": "expressionless face, blank stare, dazed"
                 },
                 {
-                    "label": "高貴疏離",
+                    "label": "高貴疏離 (Noble & Aloof)",
                     "value": "serene and noble expression, sophisticated temperament"
                 },
                 {
-                    "label": "哀愁眼神",
+                    "label": "哀愁眼神 (Sad Eyes)",
                     "value": "with a hint of sadness in her eyes"
                 },
                 {
-                    "label": "微張嘴",
+                    "label": "微張嘴 (Slightly Open Mouth)",
                     "value": "mouth slightly open in surprise"
                 }
             ]
@@ -380,15 +373,15 @@
             "group": "狀態與反應 (States)",
             "options": [
                 {
-                    "label": "閉眼享受",
+                    "label": "閉眼享受 (Eyes Closed)",
                     "value": "eyes closed, enjoying the moment"
                 },
                 {
-                    "label": "臉部凍紅",
+                    "label": "臉部凍紅 (Face Frozen Red)",
                     "value": "cheeks and nose tip blushing red from the cold"
                 },
                 {
-                    "label": "羞恥臉紅",
+                    "label": "羞恥臉紅 (Embarrassed Face)",
                     "value": "blushing heavily, embarrassed face"
                 },
                 {
@@ -447,19 +440,19 @@
             "group": "都市/交通 (City & Transport)",
             "options": [
                 {
-                    "label": "街道/路口",
+                    "label": "街道/路口 (Street/Intersection)",
                     "value": "on a busy city street, intersection"
                 },
                 {
-                    "label": "公園/廣場",
+                    "label": "公園/廣場 (Park/Plaza)",
                     "value": "in a public park, outdoor plaza"
                 },
                 {
-                    "label": "商店/商場",
+                    "label": "商店/商場 (Shop/Mall)",
                     "value": "inside a shopping mall, boutique"
                 },
                 {
-                    "label": "咖啡廳/餐廳",
+                    "label": "咖啡廳/餐廳 (Cafe/Restaurant)",
                     "value": "in a cozy coffee shop, restaurant"
                 },
                 {
@@ -471,15 +464,15 @@
                     "value": "sitting inside a luxury car"
                 },
                 {
-                    "label": "圖書館/書店",
+                    "label": "圖書館/書店 (Library/Bookstore)",
                     "value": "in a library, bookstore"
                 },
                 {
-                    "label": "娛樂場所 (電影/KTV)",
+                    "label": "娛樂場所 (電影/KTV) (Entertainment)",
                     "value": "in a movie theater, karaoke room"
                 },
                 {
-                    "label": "夜店/酒吧",
+                    "label": "夜店/酒吧 (Nightclub/Bar)",
                     "value": "in a nightclub, bar"
                 }
             ]
@@ -492,15 +485,15 @@
                     "value": "on a sandy beach, ocean view"
                 },
                 {
-                    "label": "森林/樹林",
+                    "label": "森林/樹林 (Forest)",
                     "value": "in a dense forest, trees"
                 },
                 {
-                    "label": "山頂/高處",
+                    "label": "山頂/高處 (Mountain Peak)",
                     "value": "on a mountain peak, scenic view"
                 },
                 {
-                    "label": "花園/草地",
+                    "label": "花園/草地 (Garden/Lawn)",
                     "value": "in a flower garden, grassy field"
                 },
                 {
@@ -508,15 +501,15 @@
                     "value": "in a field of blooming daisies, sunlight filtering through leaves, vibrant colors"
                 },
                 {
-                    "label": "泳池",
+                    "label": "泳池 (Swimming Pool)",
                     "value": "in a swimming pool"
                 },
                 {
-                    "label": "溫泉",
+                    "label": "溫泉 (Hot Spring)",
                     "value": "in a hot spring"
                 },
                 {
-                    "label": "雪地/冬季",
+                    "label": "雪地/冬季 (Snowy Landscape)",
                     "value": "in a snowy landscape, winter"
                 }
             ]
@@ -533,7 +526,7 @@
                     "value": "in a school classroom"
                 },
                 {
-                    "label": "醫院/診所",
+                    "label": "醫院/診所 (Hospital)",
                     "value": "in a hospital room"
                 },
                 {
@@ -541,7 +534,7 @@
                     "value": "in a fitness gym"
                 },
                 {
-                    "label": "工廠/倉庫",
+                    "label": "工廠/倉庫 (Factory/Warehouse)",
                     "value": "in an industrial factory, warehouse"
                 },
                 {
@@ -557,23 +550,23 @@
             "value": ""
         },
         {
-            "label": "大量室內植物",
+            "label": "大量室內植物 (Indoor Plants)",
             "value": "surrounded by lush green indoor plants"
         },
         {
-            "label": "書架與雜物",
+            "label": "書架與雜物 (Bookshelves)",
             "value": "background filled with bookshelves and vintage items"
         },
         {
-            "label": "凌亂衣物",
+            "label": "凌亂衣物 (Messy Clothes)",
             "value": "with clothes scattered on the floor"
         },
         {
-            "label": "霓虹燈飾",
+            "label": "霓虹燈飾 (Neon Lights)",
             "value": "decorated with colorful neon lights"
         },
         {
-            "label": "復古家具",
+            "label": "復古家具 (Vintage Furniture)",
             "value": "furnished with antique wooden furniture"
         },
         {
@@ -581,7 +574,7 @@
             "value": "luxurious chandelier, gold accents, marble texture"
         },
         {
-            "label": "工業/科幻細節",
+            "label": "工業/科幻細節 (Industrial/Sci-fi)",
             "value": "exposed pipes, wires, futuristic panels"
         },
         {
@@ -595,35 +588,35 @@
             "value": ""
         },
         {
-            "label": "飲食/下午茶",
+            "label": "飲食/下午茶 (Food/Tea)",
             "value": "coffee cup, dessert, snacks on table"
         },
         {
-            "label": "數位產品 (筆電/手機)",
+            "label": "數位產品 (筆電/手機) (Digital Products)",
             "value": "laptop open, smartphone nearby, gadgets"
         },
         {
-            "label": "毛毯與抱枕",
+            "label": "毛毯與抱枕 (Blanket & Pillows)",
             "value": "with soft blanket and decorative pillows"
         },
         {
-            "label": "鏡子裝飾",
+            "label": "鏡子裝飾 (Mirrors)",
             "value": "with multiple mirrors reflecting the scene"
         },
         {
-            "label": "燭光點綴",
+            "label": "燭光點綴 (Candlelight)",
             "value": "with scattered candlelight creating warm glow"
         },
         {
-            "label": "花卉擺設",
+            "label": "花卉擺設 (Flowers)",
             "value": "with fresh flower arrangements"
         },
         {
-            "label": "書籍堆疊",
+            "label": "書籍堆疊 (Books)",
             "value": "with stacks of books scattered around"
         },
         {
-            "label": "影音設備 (相機/音響)",
+            "label": "影音設備 (相機/音響) (Audio/Video Equipment)",
             "value": "music speakers, camera on tripod"
         },
         {
@@ -635,7 +628,7 @@
             "value": "suitcase, travel bag"
         },
         {
-            "label": "文具/書包",
+            "label": "文具/書包 (Stationery/School Bag)",
             "value": "school bag, stationery, open notebook"
         },
         {
@@ -653,27 +646,27 @@
             "value": ""
         },
         {
-            "label": "夏日午後(熱)",
+            "label": "夏日午後(熱) (Summer Afternoon)",
             "value": "summer afternoon"
         },
         {
-            "label": "清晨",
+            "label": "清晨 (Dawn)",
             "value": "at sunrise"
         },
         {
-            "label": "白天",
+            "label": "白天 (Daylight)",
             "value": "daylight"
         },
         {
-            "label": "黃昏",
+            "label": "黃昏 (Sunset)",
             "value": "at sunset"
         },
         {
-            "label": "夜晚",
+            "label": "夜晚 (Night)",
             "value": "at night"
         },
         {
-            "label": "午夜",
+            "label": "午夜 (Midnight)",
             "value": "midnight"
         }
     ],
@@ -683,23 +676,23 @@
             "value": ""
         },
         {
-            "label": "晴天",
+            "label": "晴天 (Sunny)",
             "value": "sunny"
         },
         {
-            "label": "自然光",
+            "label": "自然光 (Natural Lighting)",
             "value": "natural lighting"
         },
         {
-            "label": "雨天",
+            "label": "雨天 (Rainy)",
             "value": "rainy, wet skin"
         },
         {
-            "label": "陰天",
+            "label": "陰天 (Overcast)",
             "value": "overcast"
         },
         {
-            "label": "下雪",
+            "label": "下雪 (Snowy)",
             "value": "snowy, snow falling"
         }
     ],
@@ -716,27 +709,27 @@
                     "value": "cinematic lighting, dramatic shadows"
                 },
                 {
-                    "label": "攝影背光燈",
+                    "label": "攝影背光燈 (Rim Light)",
                     "value": "rim light, hair light"
                 },
                 {
-                    "label": "倫勃朗光 (立體)",
+                    "label": "倫勃朗光 (立體) (Rembrandt Lighting)",
                     "value": "Rembrandt lighting, chiaroscuro"
                 },
                 {
-                    "label": "體積光 (丁達爾效應)",
+                    "label": "體積光 (丁達爾效應) (Volumetric Lighting)",
                     "value": "volumetric lighting, god rays, misty atmosphere"
                 },
                 {
-                    "label": "霓虹光 (賽博)",
+                    "label": "霓虹光 (賽博) (Neon Lighting)",
                     "value": "neon lighting, cyan and magenta rim light"
                 },
                 {
-                    "label": "自然窗光",
+                    "label": "自然窗光 (Natural Window Light)",
                     "value": "soft window light, sun shafts"
                 },
                 {
-                    "label": "黃金時刻 (逆光)",
+                    "label": "黃金時刻 (逆光) (Golden Hour Backlighting)",
                     "value": "backlighting, golden hour glow, lens flare"
                 },
                 {
@@ -772,26 +765,26 @@
             "value": "Japanese photobook style, natural and fresh"
         },
         {
-            "label": "日系甜美寫真",
+            "label": "日系甜美寫真 (Japanese Sweet Style)",
             "value": "high visual richness, detailed texture, cinematic lighting, Japanese gravure photography style, sweet and clean aesthetic, high quality, soft focus, non-erotic"
         },
         {
-            "label": "電影感",
+            "label": "電影感 (Cinematic)",
             "value": "cinematic lighting"
         },
         {
-            "label": "私房寫真",
+            "label": "私房寫真 (Boudoir)",
             "value": "ultimate seduction and sexiness, intimate boudoir photography",
             "tags": [
                 "sexy"
             ]
         },
         {
-            "label": "拍立得",
+            "label": "拍立得 (Polaroid)",
             "value": "polaroid style, flash photography"
         },
         {
-            "label": "賽博龐克",
+            "label": "賽博龐克 (Cyberpunk)",
             "value": "cyberpunk neon style"
         }
     ],
@@ -825,7 +818,7 @@
             "value": "foggy atmosphere, misty background"
         },
         {
-            "label": "高對比",
+            "label": "高對比 (High Contrast)",
             "value": "high contrast, dramatic shadows"
         }
     ],
@@ -839,35 +832,35 @@
             "value": "top-down view directly from above"
         },
         {
-            "label": "平視鏡頭",
+            "label": "平視鏡頭 (Eye-level)",
             "value": "eye-level shot"
         },
         {
-            "label": "3/4 角度",
+            "label": "3/4 角度 (Three-quarters View)",
             "value": "three-quarters view"
         },
         {
-            "label": "側面90度",
+            "label": "側面90度 (Side View)",
             "value": "side view, profile view"
         },
         {
-            "label": "高角度俯拍",
+            "label": "高角度俯拍 (High Angle)",
             "value": "high angle shot, from above"
         },
         {
-            "label": "低角度仰拍",
+            "label": "低角度仰拍 (Low Angle)",
             "value": "low angle shot, from below"
         },
         {
-            "label": "蟲視角極低",
+            "label": "蟲視角極低 (Worm's-eye View)",
             "value": "worm's-eye view, very low angle"
         },
         {
-            "label": "腰部平視",
+            "label": "腰部平視 (Cowboy Shot)",
             "value": "cowboy shot, waist level"
         },
         {
-            "label": "背面視角",
+            "label": "背面視角 (Back View)",
             "value": "view from behind, back view"
         }
     ],
@@ -877,48 +870,48 @@
             "value": ""
         },
         {
-            "label": "極特寫 (眼睛/嘴唇)",
+            "label": "極特寫 (Extreme Close-up)",
             "value": "extreme close-up macro shot"
         },
         {
-            "label": "特寫 (頭部)",
+            "label": "特寫 (Close-up)",
             "value": "close-up portrait"
         },
         {
-            "label": "中近景 (胸上)",
+            "label": "中近景 (Medium Close-up)",
             "value": "medium close-up, upper body"
         },
         {
-            "label": "七分身 (牛仔景)",
+            "label": "七分身 (牛仔景) (Cowboy Shot)",
             "value": "cowboy shot, hips and thighs visible"
         },
         {
-            "label": "全身鏡頭",
+            "label": "全身鏡頭 (Full Body Shot)",
             "value": "full body shot"
         },
         {
-            "label": "聚焦胸部",
+            "label": "聚焦胸部 (Focus on Chest)",
             "value": "focus on chest",
             "tags": [
                 "sexy"
             ]
         },
         {
-            "label": "聚焦臀部",
+            "label": "聚焦臀部 (Focus on Hips)",
             "value": "focus on hips",
             "tags": [
                 "sexy"
             ]
         },
         {
-            "label": "聚焦美腿",
+            "label": "聚焦美腿 (Focus on Legs)",
             "value": "focus on legs",
             "tags": [
                 "sexy"
             ]
         },
         {
-            "label": "聚焦美足",
+            "label": "聚焦美足 (Focus on Feet)",
             "value": "focus on feet",
             "tags": [
                 "sexy"
@@ -931,31 +924,31 @@
             "value": ""
         },
         {
-            "label": "廣角 (風景/張力)",
+            "label": "廣角 (風景/張力) (Wide Angle)",
             "value": "24mm wide angle lens"
         },
         {
-            "label": "標準 (50mm)",
+            "label": "標準 (50mm) (Standard)",
             "value": "50mm standard lens"
         },
         {
-            "label": "人像 (85mm)",
+            "label": "人像 (85mm) (Portrait)",
             "value": "85mm portrait lens"
         },
         {
-            "label": "長焦 (壓縮感)",
+            "label": "長焦 (壓縮感) (Telephoto)",
             "value": "200mm telephoto lens, compressed perspective"
         },
         {
-            "label": "魚眼鏡頭",
+            "label": "魚眼鏡頭 (Fish-eye)",
             "value": "fish-eye lens, extreme wide angle"
         },
         {
-            "label": "微距鏡頭",
+            "label": "微距鏡頭 (Macro)",
             "value": "macro lens, extreme close-up"
         },
         {
-            "label": "自拍 (手機鏡頭)",
+            "label": "自拍 (手機鏡頭) (Selfie)",
             "value": "wide angle selfie lens, slight distortion"
         }
     ],
@@ -965,31 +958,31 @@
             "value": ""
         },
         {
-            "label": "f/1.6 (夢幻虛化)",
+            "label": "f/1.6 (夢幻虛化) (Shallow Depth of Field)",
             "value": "f/1.6 aperture, extremely shallow depth of field"
         },
         {
-            "label": "f/1.8 (大光圈)",
+            "label": "f/1.8 (大光圈) (Large Aperture)",
             "value": "f/1.8 aperture"
         },
         {
-            "label": "f/2.8 (中光圈)",
+            "label": "f/2.8 (中光圈) (Medium Aperture)",
             "value": "f/2.8 aperture"
         },
         {
-            "label": "f/5.6 (適中)",
+            "label": "f/5.6 (適中) (Moderate Aperture)",
             "value": "f/5.6 aperture"
         },
         {
-            "label": "f/8 (小光圈)",
+            "label": "f/8 (小光圈) (Small Aperture)",
             "value": "f/8 aperture"
         },
         {
-            "label": "f/11 (更小光圈)",
+            "label": "f/11 (更小光圈) (Smaller Aperture)",
             "value": "f/11 aperture"
         },
         {
-            "label": "小光圈 (清晰)",
+            "label": "f/22 (清晰) (Sharp Background)",
             "value": "f/22, sharp background"
         }
     ],

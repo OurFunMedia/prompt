@@ -1,75 +1,75 @@
 {
     "race": [
         {
-            "group": "亞洲",
+            "group": "亞洲 (Asian)",
             "options": [
                 {
                     "label": "東亞 (East Asian)",
                     "value": "East Asian"
                 },
                 {
-                    "label": "香港",
+                    "label": "香港 (Hong Kong)",
                     "value": "from Hong Kong"
                 },
                 {
-                    "label": "台灣",
+                    "label": "台灣 (Taiwan)",
                     "value": "Taiwanese"
                 },
                 {
-                    "label": "中國",
+                    "label": "中國 (Chinese)",
                     "value": "Chinese"
                 },
                 {
-                    "label": "日本",
+                    "label": "日本 (Japanese)",
                     "value": "Japanese"
                 },
                 {
-                    "label": "韓國",
+                    "label": "韓國 (Korean)",
                     "value": "Korean"
                 },
                 {
-                    "label": "泰國",
+                    "label": "泰國 (Thai)",
                     "value": "Thai"
                 },
                 {
-                    "label": "混血",
+                    "label": "混血 (Mixed)",
                     "value": "mixed Asian/Caucasian"
                 }
             ]
         },
         {
-            "group": "歐美",
+            "group": "歐美 (European/American)",
             "options": [
                 {
-                    "label": "美國(白人)",
+                    "label": "美國 (American)",
                     "value": "American (Caucasian)"
                 },
                 {
-                    "label": "英國",
+                    "label": "英國 (British)",
                     "value": "British"
                 },
                 {
-                    "label": "法國",
+                    "label": "法國 (French)",
                     "value": "French"
                 },
                 {
-                    "label": "俄羅斯",
+                    "label": "俄羅斯 (Russian)",
                     "value": "Russian"
                 },
                 {
-                    "label": "德國",
+                    "label": "德國 (German)",
                     "value": "German"
                 },
                 {
-                    "label": "義大利",
+                    "label": "義大利 (Italian)",
                     "value": "Italian"
                 },
                 {
-                    "label": "拉丁裔",
+                    "label": "拉丁裔 (Latina)",
                     "value": "Latina"
                 },
                 {
-                    "label": "非裔",
+                    "label": "非裔 (African American)",
                     "value": "Black/African American"
                 }
             ]
@@ -77,27 +77,27 @@
     ],
     "charAge": [
         {
-            "label": "18歲",
+            "label": "18歲 (18 years old)",
             "value": "18 years old"
         },
         {
-            "label": "20歲初",
+            "label": "20歲初 (in her early 20s)",
             "value": "in her early 20s"
         },
         {
-            "label": "22歲 (大學生)",
+            "label": "22歲 (大學生) (22 years old)",
             "value": "22 years old"
         },
         {
-            "label": "25歲左右",
+            "label": "25歲左右 (in her mid 20s)",
             "value": "in her mid 20s"
         },
         {
-            "label": "28-30歲",
+            "label": "28-30歲 (in her late 20s)",
             "value": "in her late 20s"
         },
         {
-            "label": "30+ 輕熟女",
+            "label": "30+ 輕熟女 (in her early 30s, mature woman)",
             "value": "in her early 30s, mature woman"
         }
     ],
@@ -315,23 +315,23 @@
             "group": "長髮系列",
             "options": [
                 {
-                    "label": "長直髮",
+                    "label": "長直髮 (Long Straight Hair)",
                     "value": "long straight hair"
                 },
                 {
-                    "label": "微波浪長髮",
+                    "label": "微波浪長髮 (Long Hair with Messy Waves)",
                     "value": "long hair with messy waves"
                 },
                 {
-                    "label": "柔亮大波浪",
+                    "label": "柔亮大波浪 (Glossy Long Wavy Hair)",
                     "value": "glossy long wavy hair"
                 },
                 {
-                    "label": "直順長髮+齊瀏海",
+                    "label": "直順長髮+齊瀏海 (Sleek Long Hair with Blunt Bangs)",
                     "value": "sleek long hair with blunt bangs"
                 },
                 {
-                    "label": "華麗側分復古波浪",
+                    "label": "華麗側分復古波浪 (Glamorous Side-Parted Vintage Waves)",
                     "value": "glamourous side-parted vintage waves"
                 }
             ]
@@ -340,23 +340,23 @@
             "group": "中長髮系列",
             "options": [
                 {
-                    "label": "中長層次+自然中分",
+                    "label": "中長層次+自然中分 (Medium Layered Hair with Center Part)",
                     "value": "medium layered hair with center part"
                 },
                 {
-                    "label": "中長直髮+齊瀏海",
+                    "label": "中長直髮+齊瀏海 (Medium Straight Hair with Bangs)",
                     "value": "medium straight hair with bangs"
                 },
                 {
-                    "label": "狼尾層次中長髮",
+                    "label": "狼尾層次中長髮 (Medium Length Wolf Cut)",
                     "value": "medium length wolf cut"
                 },
                 {
-                    "label": "法式中長微亂捲",
+                    "label": "法式中長微亂捲 (French Style Medium Length Messy Curls)",
                     "value": "French style medium length messy curls"
                 },
                 {
-                    "label": "自然層次剪裁",
+                    "label": "自然層次剪裁 (Medium Length Natural Layered Cut)",
                     "value": "medium length natural layered cut"
                 }
             ]
@@ -365,27 +365,27 @@
             "group": "短髮系列",
             "options": [
                 {
-                    "label": "空氣感短鮑伯頭",
+                    "label": "空氣感短鮑伯頭 (Airy Short Bob Cut)",
                     "value": "airy short bob cut"
                 },
                 {
-                    "label": "短直髮",
+                    "label": "短直髮 (Short Straight Hair)",
                     "value": "short straight hair"
                 },
                 {
-                    "label": "深側分直短髮",
+                    "label": "深側分直短髮 (Deep Side Part Short Straight Hair)",
                     "value": "deep side part short straight hair"
                 },
                 {
-                    "label": "齊劉海短髮妹妹頭",
+                    "label": "齊劉海短髮妹妹頭 (Short Hair with Blunt Bangs)",
                     "value": "short hair with blunt bangs"
                 },
                 {
-                    "label": "碎層蓬鬆短髮",
+                    "label": "碎層蓬鬆短髮 (Fluffy Layered Short Hair)",
                     "value": "fluffy layered short hair"
                 },
                 {
-                    "label": "精靈短髮",
+                    "label": "精靈短髮 (Pixie Cut)",
                     "value": "pixie cut"
                 }
             ]
@@ -427,19 +427,19 @@
             "group": "瀏海/其他",
             "options": [
                 {
-                    "label": "薄瀏海",
+                    "label": "薄瀏海 (Thin See-Through Bangs)",
                     "value": "thin see-through bangs"
                 },
                 {
-                    "label": "齊薄瀏海",
+                    "label": "齊薄瀏海 (Thin Blunt Bangs)",
                     "value": "thin blunt bangs"
                 },
                 {
-                    "label": "姬髮式",
+                    "label": "姬髮式 (Hime Cut)",
                     "value": "hime cut"
                 },
                 {
-                    "label": "遮眼瀏海",
+                    "label": "遮眼瀏海 (Hair Over Eyes)",
                     "value": "hair over eyes"
                 }
             ]
@@ -447,83 +447,83 @@
     ],
     "eyeColor": [
         {
-            "label": "淺棕",
+            "label": "淺棕 (Light Brown)",
             "value": "light brown eyes"
         },
         {
-            "label": "深褐",
+            "label": "深褐 (Dark Brown)",
             "value": "dark brown eyes"
         },
         {
-            "label": "黑",
+            "label": "黑 (Black)",
             "value": "black eyes"
         },
         {
-            "label": "琥珀",
+            "label": "琥珀 (Amber)",
             "value": "amber eyes"
         },
         {
-            "label": "藍",
+            "label": "藍 (Blue)",
             "value": "blue eyes"
         },
         {
-            "label": "綠",
+            "label": "綠 (Green)",
             "value": "green eyes"
         },
         {
-            "label": "灰",
+            "label": "灰 (Grey)",
             "value": "grey eyes"
         },
         {
-            "label": "榛果色",
+            "label": "榛果色 (Hazel)",
             "value": "hazel eyes"
         }
     ],
     "faceShape": [
         {
-            "label": "鵝蛋臉",
+            "label": "鵝蛋臉 (Oval Face)",
             "value": "an oval face, large almond eyes"
         },
         {
-            "label": "心形臉",
+            "label": "心形臉 (Heart-Shaped Face)",
             "value": "heart-shaped face, large almond eyes"
         },
         {
-            "label": "V型臉",
+            "label": "V型臉 (V-Shaped Face)",
             "value": "a V-shaped face"
         },
         {
-            "label": "圓臉",
+            "label": "圓臉 (Round Face)",
             "value": "a round face, large almond eyes"
         },
         {
-            "label": "娃娃臉",
+            "label": "娃娃臉 (Baby Face)",
             "value": "a baby face"
         },
         {
-            "label": "高顴骨",
+            "label": "高顴骨 (High Cheekbones)",
             "value": "defined cheekbones and sharp features"
         }
     ],
     "skinType": [
         {
-            "label": "雪白肌膚",
+            "label": "雪白肌膚 (Snow-White Skin)",
             "value": "snow-white skin"
         },
         {
-            "label": "白皙自然",
+            "label": "白皙自然 (Fair Skin)",
             "value": "fair skin, detailed texture"
         },
         {
-            "label": "小麥色 (光澤)",
+            "label": "小麥色 (Tan Skin)",
             "value": "tan skin, shiny texture"
         },
         {
-            "label": "真實感",
+            "label": "真實感 (Realistic Skin)",
             "value": "highly detailed skin, visible pores, natural imperfections"
         },
         {
-            "label": "自然膚色",
+            "label": "自然膚色 (Natural Skin Tone)",
             "value": "natural skin tone"
         }
     ],
@@ -588,23 +588,23 @@
             "group": "唇妝細節",
             "options": [
                 {
-                    "label": "經典紅唇",
+                    "label": "經典紅唇 (Classic Red Lips)",
                     "value": "classic red lips"
                 },
                 {
-                    "label": "水光唇釉",
+                    "label": "水光唇釉 (Glossy Lips)",
                     "value": "glossy lips"
                 },
                 {
-                    "label": "霧面裸唇",
+                    "label": "霧面裸唇 (Matte Nude Lips)",
                     "value": "matte nude lips"
                 },
                 {
-                    "label": "咬唇妝",
+                    "label": "咬唇妝 (Gradient Lips)",
                     "value": "gradient lips"
                 },
                 {
-                    "label": "深色/黑唇",
+                    "label": "深色/黑唇 (Dark Gothic Lips)",
                     "value": "dark gothic lips"
                 }
             ]
@@ -613,19 +613,19 @@
             "group": "眼妝細節",
             "options": [
                 {
-                    "label": "精緻眼線",
+                    "label": "精緻眼線 (Sharp Winged Eyeliner)",
                     "value": "sharp winged eyeliner"
                 },
                 {
-                    "label": "濃密睫毛",
+                    "label": "濃密睫毛 (Long Voluminous Eyelashes)",
                     "value": "long voluminous eyelashes"
                 },
                 {
-                    "label": "煙燻眼妝",
+                    "label": "煙燻眼妝 (Dark Smoky Eye Makeup)",
                     "value": "dark smoky eye makeup"
                 },
                 {
-                    "label": "亮片眼影",
+                    "label": "亮片眼影 (Shimmering Glitter Eyeshadow)",
                     "value": "shimmering glitter eyeshadow"
                 }
             ]
@@ -634,26 +634,26 @@
             "group": "特殊特徵",
             "options": [
                 {
-                    "label": "雀斑妝",
+                    "label": "雀斑妝 (Faux Freckles)",
                     "value": "faux freckles"
                 },
                 {
-                    "label": "曬傷妝",
+                    "label": "曬傷妝 (Sunburned Blush)",
                     "value": "sunburned blush"
                 },
                 {
-                    "label": "愛心眼 (瞳孔)",
+                    "label": "愛心眼 (瞳孔) (Heart-Shaped Pupils)",
                     "value": "heart-shaped pupils",
                     "tags": [
                         "sexy"
                     ]
                 },
                 {
-                    "label": "宿醉/Igari 妝",
+                    "label": "宿醉/Igari 妝 (Heavy Under-Eye Blush, Igari Style Blush)",
                     "value": "heavy under-eye blush, igari style blush"
                 },
                 {
-                    "label": "髒汙/戰損",
+                    "label": "髒汙/戰損 (Slightly Dirty Face, Smudge Makeup)",
                     "value": "slightly dirty face, smudge makeup"
                 }
             ]
