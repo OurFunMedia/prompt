@@ -213,7 +213,7 @@
             "group": "日常帽款 (Hats)",
             "options": [
                 {
-                    "label": "棒球帽 (Backward Baseball Cap)",
+                    "label": "反戴棒球帽 (Backward Baseball Cap)",
                     "value": "wearing a baseball cap backwards"
                 },
                 {
@@ -341,6 +341,10 @@
                 {
                     "label": "眼罩 (醫療) (Medical Eye Patch)",
                     "value": "wearing a medical eye patch"
+                },
+                {
+                    "label": "口罩 (白色) (White Face Mask)",
+                    "value": "wearing a white face mask"
                 },
                 {
                     "label": "口罩 (黑) (Black Face Mask)",
@@ -618,10 +622,6 @@
                     "value": "sunglasses hanging from collar"
                 },
                 {
-                    "label": "口罩 (白色) (White Face Mask)",
-                    "value": "wearing a white face mask"
-                },
-                {
                     "label": "口紅痕跡 (Lipstick)",
                     "value": "with lipstick on lips"
                 },
@@ -767,10 +767,6 @@
                 {
                     "label": "披肩 (Shawl)",
                     "value": "wearing a knitted shawl draped over shoulders"
-                },
-                {
-                    "label": "職人工作圍裙 (Canvas)",
-                    "value": "wearing a heavy-duty canvas work apron"
                 }
             ]
         }
