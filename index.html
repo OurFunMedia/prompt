@@ -993,6 +993,28 @@
             });
         }
 
+        // Helper to inject attributes (color, pattern, material) into outfit descriptions
+        function injectAttributes(description, color, pattern, material) {
+            if (!description) return "";
+            let attrs = [color, pattern, material].filter(Boolean).join(" ");
+            if (!attrs) return description;
+
+            // Try to insert after "wearing a" or "wearing an"
+            let match = description.match(/^(wearing an?)\s+/i);
+            if (match) {
+                return description.replace(match[0], `${match[0]}${attrs} `);
+            }
+
+            // Try to insert after leading "a" or "an"
+            match = description.match(/^(an?)\s+/i);
+            if (match) {
+                return description.replace(match[0], `${match[0]} ${attrs} `).replace(/\s+/g, ' ');
+            }
+
+            // Otherwise, prepend
+            return `${attrs} ${description}`;
+        }
+
         function generatePrompt() {
             updateVisualFeedback();
 
@@ -1027,8 +1049,10 @@
                 v('body-type')
             ].filter(s => s && s.trim().length > 1);
 
-            if (currentMode !== 'clean' && v('body-bust')) {
-                feats.push(`body: ${v('body-bust')}, ${v('body-waist')}, ${v('body-hip')}`);
+            // NSFW Body
+            if (currentMode !== 'clean') {
+                let bodyStats = [v('body-bust'), v('body-waist'), v('body-hip')].filter(Boolean);
+                if (bodyStats.length > 0) prompts.push(`body: ${bodyStats.join(", ")}`);
             }
 
             if (feats.length) dna.push(feats.join(", "));
@@ -1093,17 +1117,17 @@
 
             let top = v('outfit-top');
             if (top) {
-                let attr = [v('top-color'), v('top-pat'), v('top-mat')].filter(Boolean).join(" ");
-                outfit.push(attr ? top.replace("wearing a", `wearing a ${attr}`) : top);
+                let attrTop = injectAttributes(top, v('top-color'), v('top-pat'), v('top-mat'));
+                outfit.push(attrTop);
                 let physics = v('outfit-fit-physics') || autoInjectPhysics(top);
                 if (physics) outfit.push(physics);
             }
             if (v('outfit-top-custom')) outfit.push(v('outfit-top-custom'));
 
-            let btm = v('outfit-bottom');
-            if (btm) {
-                let attr = [v('bottom-color'), v('bottom-pat'), v('bottom-mat')].filter(Boolean).join(" ");
-                outfit.push(attr.trim() ? `${btm} (${attr.trim()})` : btm);
+            let bottom = v('outfit-bottom');
+            if (bottom) {
+                let attrBot = injectAttributes(bottom, v('bottom-color'), v('bottom-pat'), v('bottom-mat'));
+                outfit.push(attrBot);
             }
             if (v('outfit-bottom-custom')) outfit.push(v('outfit-bottom-custom'));
 
@@ -1124,8 +1148,17 @@
             // NSFW & Endings
             if (currentMode === 'nsfw') prompts.push("NSFW, detailed skin, mature female");
 
-            let finalPrompt = prompts.join(". ").replace(/\.\s*\./g, '.').replace(/,\s*,/g, ',');
-            document.getElementById('output-text').value = finalPrompt;
+            // Final build & Clean
+            let final = prompts.filter(p => p && p.trim()).join(". ");
+
+            // Final Sanitization: fix redundant dots/commas
+            final = final.replace(/\.\s*\./g, '.')
+                .replace(/,\s*,/g, ',')
+                .replace(/,\s*\./g, '.')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            document.getElementById('output-text').value = final;
         }
 
         function scrollToSection(id) {
