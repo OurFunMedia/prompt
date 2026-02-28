@@ -213,10 +213,6 @@
             "group": "日常帽款 (Hats)",
             "options": [
                 {
-                    "label": "反戴棒球帽 (Backward Baseball Cap)",
-                    "value": "wearing a baseball cap backwards"
-                },
-                {
                     "label": "棒球帽 (Cap)",
                     "value": "wearing a baseball cap"
                 },
@@ -1099,6 +1095,14 @@
                 {
                     "label": "高領無袖上衣 (Sleeveless Turtleneck)",
                     "value": "sleeveless turtleneck, ribbed fabric, armholes cutting in, contouring upper body, fitted silhouette"
+                },
+                {
+                    "label": "連身裙 (全身) (Floral Sundress)",
+                    "value": "a floral sundress"
+                },
+                {
+                    "label": "性感連身裙 (Sexy Sundress)",
+                    "value": "deep V-neck sexy sundress"
                 }
             ]
         },
@@ -1468,14 +1472,6 @@
         {
             "group": "職場/裙裝 (Office)",
             "options": [
-                {
-                    "label": "連身裙 (全身) (Floral Sundress)",
-                    "value": "a floral sundress"
-                },
-                {
-                    "label": "性感連身裙 (Sexy Sundress)",
-                    "value": "sexy sundress"
-                },
                 {
                     "label": "及膝鉛筆裙 (Knee-Length Pencil Skirt)",
                     "value": "knee-length pencil skirt"
