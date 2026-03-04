@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Shirt 貼圖模擬器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Serif+TC:wght@700&family=Zhi+Mang+Xing&family=Roboto+Mono&display=swap');
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f8fafc;
+        }
+
+        :root {
+            --tshirt-color: #ffffff;
+        }
+
+        .mockup-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            aspect-ratio: 1/1;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        #mockup-viewport {
+            position: relative;
+            width: 90%;
+            height: 90%;
+        }
+
+        #layer-color {
+            position: absolute;
+            inset: 0;
+            background-color: var(--tshirt-color);
+            z-index: 1;
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            transition: background-color 0.3s ease;
+        }
+
+        #layer-texture,
+        #layer-highlight {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        #layer-texture {
+            mix-blend-mode: multiply;
+            opacity: 0.85;
+        }
+
+        #layer-highlight {
+            mix-blend-mode: screen;
+            z-index: 3;
+            opacity: 0.3;
+        }
+
+        #design-area {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            overflow: hidden;
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+        }
+
+        .draggable-element {
+            position: absolute;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+            transform: translate(-50%, -50%) rotate(0deg);
+            outline: 2px dashed transparent;
+            outline-offset: 4px;
+            white-space: nowrap;
+            will-change: left, top, transform;
+        }
+
+        .draggable-element.active {
+            outline-color: #3b82f6;
+            z-index: 20;
+        }
+
+        .control-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.5rem;
+            padding: 1.25rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-active {
+            background-color: #1e293b !important;
+            color: white !important;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 5px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #3b82f6;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+        .input-number-small {
+            width: 60px;
+            padding: 2px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .layer-item.active {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-8 lg:p-12 bg-slate-50">
+
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
+
+        <!-- 左側預覽 -->
+        <div class="flex-1 space-y-6">
+            <div class="flex items-center justify-between px-2">
+                <div>
+                    <h1 class="text-3xl font-black text-slate-900 tracking-tight">Mockup Studio <span
+                            class="text-blue-500">.</span></h1>
+                    <p class="text-slate-500 text-sm font-medium">穩定流暢的多重設計系統</p>
+                </div>
+                <div class="flex bg-slate-200 p-1 rounded-xl">
+                    <button id="btn-front"
+                        class="px-5 py-2 rounded-lg text-xs font-bold transition-all btn-active">正面</button>
+                    <button id="btn-back"
+                        class="px-5 py-2 rounded-lg text-xs font-bold transition-all text-slate-600">背面</button>
+                </div>
+            </div>
+
+            <div class="mockup-container" id="mockup-container">
+                <div id="mockup-viewport">
+                    <div id="layer-color"></div>
+                    <img id="layer-texture" src="" alt="">
+                    <img id="layer-highlight" src="" alt="">
+
+                    <div id="design-area">
+                        <!-- 對齊線 -->
+                        <div id="guide-v"
+                            class="absolute inset-y-0 left-1/2 w-0.5 bg-blue-500/50 opacity-0 pointer-events-none transition-opacity">
+                        </div>
+                        <div id="guide-h"
+                            class="absolute inset-x-0 top-[40%] h-0.5 bg-blue-500/50 opacity-0 pointer-events-none transition-opacity">
+                        </div>
+
+                        <!-- 物件放置區 -->
+                        <div id="canvas-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右側控制面板 -->
+        <div class="w-full lg:w-[450px] space-y-4 max-h-[90vh] overflow-y-auto pr-2 custom-scrollbar">
+
+            <!-- 款式與顏色 -->
+            <div class="control-card grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-[10px] font-black text-slate-400 mb-2 uppercase">衣服款式</label>
+                    <select id="select-style"
+                        class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none">
+                        <option value="crew">圓領 TEE</option>
+                        <option value="vneck">V領 TEE</option>
+                        <option value="long">休閒長袖</option>
+                        <option value="hoodie">連帽衛衣</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black text-slate-400 mb-2 uppercase">底色</label>
+                    <input type="color" id="input-color"
+                        class="w-full h-9 rounded-lg cursor-pointer bg-transparent border-none" value="#ffffff">
+                </div>
+            </div>
+
+            <!-- 文字管理 -->
+            <div class="control-card space-y-4">
+                <div class="flex items-center justify-between">
+                    <label class="text-xs font-black text-slate-400 uppercase">文字圖層管理</label>
+                    <button id="add-text-btn"
+                        class="px-3 py-1 bg-blue-600 text-white text-[10px] font-bold rounded-full hover:bg-blue-700 transition-colors">+
+                        新增文字</button>
+                </div>
+
+                <div id="text-layers-list" class="space-y-2 max-h-40 overflow-y-auto custom-scrollbar">
+                    <!-- 文字清單 -->
+                </div>
+            </div>
+
+            <!-- 物件編輯面板 -->
+            <div id="edit-panel" class="control-card space-y-4 hidden border-blue-200 bg-blue-50/30">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                    <span class="text-xs font-black text-blue-600 uppercase">編輯選中物件</span>
+                    <button id="delete-el-btn" class="text-red-500 hover:text-red-700 p-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="text-specific-tools" class="space-y-3">
+                    <input type="text" id="edit-text-content"
+                        class="w-full p-2 bg-white border border-slate-200 rounded-lg text-sm outline-none shadow-sm"
+                        placeholder="輸入文字內容...">
+                    <div class="grid grid-cols-2 gap-2">
+                        <select id="edit-text-font"
+                            class="p-2 bg-white border border-slate-200 rounded-lg text-xs outline-none">
+                            <option value="'Inter', sans-serif">無襯線</option>
+                            <option value="'Noto Serif TC', serif">優雅襯線體</option>
+                            <option value="'Zhi Mang Xing', cursive">手寫毛筆字</option>
+                            <option value="'Roboto Mono', monospace">等寬代碼</option>
+                        </select>
+                        <div class="flex items-center bg-white border border-slate-200 rounded-lg px-2">
+                            <input type="color" id="edit-text-color"
+                                class="w-full h-6 bg-transparent cursor-pointer border-none">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 調整數值 -->
+                <div class="space-y-4 pt-2">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">大小尺寸</span>
+                            <div class="flex items-center gap-1">
+                                <input type="number" id="num-scale" class="input-number-small" min="10" max="600">
+                                <span class="text-[9px] text-slate-400">px</span>
+                            </div>
+                        </div>
+                        <input type="range" id="range-scale" min="10" max="600" value="100">
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">旋轉角度</span>
+                            <div class="flex items-center gap-1">
+                                <input type="number" id="num-rotate" class="input-number-small" min="-180" max="180">
+                                <span class="text-[9px] text-slate-400">°</span>
+                            </div>
+                        </div>
+                        <input type="range" id="range-rotate" min="-180" max="180" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 圖案上傳 -->
+            <div class="control-card">
+                <label class="block text-[10px] font-black text-slate-400 mb-2 uppercase">上傳標誌 / 圖案</label>
+                <input type="file" id="upload-input" class="hidden" accept="image/*">
+                <button onclick="document.getElementById('upload-input').click()"
+                    class="w-full py-3 border-2 border-dashed border-slate-200 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-50 transition-colors">上傳圖片
+                    (PNG/JPG)</button>
+            </div>
+
+            <button id="btn-export"
+                class="w-full py-5 bg-blue-600 text-white font-black text-lg rounded-2xl shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all active:scale-95">
+                導出設計 (PNG)
+            </button>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * SVG 版型資源生成
+         */
+        function getSVG(style, type, view) {
+            const paths = {
+                crew: {
+                    front: "M140,40 C140,40 170,80 200,80 C230,80 260,40 260,40 L370,90 L330,180 L290,150 L290,380 L110,380 L110,150 L70,180 L30,90 Z",
+                    back: "M140,40 C140,40 170,50 200,50 C230,50 260,40 260,40 L370,90 L330,180 L290,150 L290,380 L110,380 L110,150 L70,180 L30,90 Z"
+                },
+                vneck: {
+                    front: "M140,40 L200,120 L260,40 L370,90 L330,180 L290,150 L290,380 L110,380 L110,150 L70,180 L30,90 Z",
+                    back: "M140,40 C140,40 170,50 200,50 C230,50 260,40 260,40 L370,90 L330,180 L290,150 L290,380 L110,380 L110,150 L70,180 L30,90 Z"
+                },
+                long: {
+                    front: "M140,40 C140,40 170,80 200,80 C230,80 260,40 260,40 L390,150 L350,380 L310,380 L290,160 L290,380 L110,380 L110,160 L90,380 L50,380 L10,150 Z",
+                    back: "M140,40 C140,40 170,50 200,50 C230,50 260,40 260,40 L390,150 L350,380 L310,380 L290,160 L290,380 L110,380 L110,160 L90,380 L50,380 L10,150 Z"
+                },
+                hoodie: {
+                    front: "M130,50 C130,-10 270,-10 270,50 L370,110 L330,220 L290,180 L290,380 L110,380 L110,180 L70,220 L30,110 Z",
+                    back: "M130,50 C130,-5 270,-5 270,50 L370,110 L330,220 L290,180 L290,380 L110,380 L110,180 L70,220 L30,110 Z"
+                }
+            };
+
+            const path = paths[style][view];
+            let content = '';
+            if (type === 'mask') content = `<path d="${path}" fill="black" />`;
+            else if (type === 'texture') {
+                content = `<defs><filter id="s"><feGaussianBlur stdDeviation="8"/></filter></defs>
+                           <path d="${path}" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="4" />
+                           <path d="M120,100 Q145,220 120,370" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="30" filter="url(#s)" />
+                           <path d="M280,100 Q255,220 280,370" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="30" filter="url(#s)" />`;
+                if (style === 'hoodie' && view === 'front') content += `<path d="M150,280 L250,280 L275,350 L125,350 Z" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="3" />`;
+            } else if (type === 'highlight') {
+                content = `<path d="M160,80 Q200,75 240,80" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="15" />
+                           <path d="M200,100 L200,350" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="60" />`;
+            }
+
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">${content}</svg>`;
+            return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+        }
+
+        // 核心狀態
+        let state = {
+            style: 'crew',
+            view: 'front',
+            color: '#ffffff',
+            activeId: null,
+            elements: []
+        };
+
+        const canvasContent = document.getElementById('canvas-content');
+        const textLayersList = document.getElementById('text-layers-list');
+        const editPanel = document.getElementById('edit-panel');
+
+        function renderMockup() {
+            const m = getSVG(state.style, 'mask', state.view);
+            document.getElementById('layer-color').style.webkitMaskImage = `url('${m}')`;
+            document.getElementById('layer-color').style.maskImage = `url('${m}')`;
+            document.getElementById('design-area').style.webkitMaskImage = `url('${m}')`;
+            document.getElementById('design-area').style.maskImage = `url('${m}')`;
+            document.getElementById('layer-texture').src = getSVG(state.style, 'texture', state.view);
+            document.getElementById('layer-highlight').src = getSVG(state.style, 'highlight', state.view);
+            document.documentElement.style.setProperty('--tshirt-color', state.color);
+        }
+
+        function refreshCanvas() {
+            canvasContent.innerHTML = '';
+            state.elements.forEach(el => {
+                const dom = document.createElement(el.type === 'text' ? 'div' : 'img');
+                dom.className = `draggable-element ${state.activeId === el.id ? 'active' : ''}`;
+                dom.id = `el-${el.id}`;
+                dom.dataset.id = el.id;
+
+                if (el.type === 'text') {
+                    dom.textContent = el.content;
+                    dom.style.fontFamily = el.font;
+                    dom.style.color = el.color;
+                    dom.style.fontSize = `${el.scale / 5}px`;
+                    dom.style.fontWeight = '800';
+                } else {
+                    dom.src = el.content;
+                    dom.style.width = `${el.scale}px`;
+                }
+
+                dom.style.left = `${el.x}px`;
+                dom.style.top = `${el.y}px`;
+                dom.style.transform = `translate(-50%, -50%) rotate(${el.rotate}deg)`;
+
+                canvasContent.appendChild(dom);
+            });
+            updateLayersUI();
+            updateEditPanel();
+        }
+
+        function updateLayersUI() {
+            textLayersList.innerHTML = '';
+            state.elements.forEach(el => {
+                const item = document.createElement('div');
+                item.className = `layer-item flex items-center justify-between p-2 border border-slate-200 rounded-lg text-xs cursor-pointer hover:bg-slate-50 transition-colors ${state.activeId === el.id ? 'active' : ''}`;
+                item.innerHTML = `
+                    <div class="flex items-center gap-2 overflow-hidden pointer-events-none">
+                        <span class="bg-slate-100 text-[8px] px-1 rounded uppercase font-black text-slate-500">${el.type === 'text' ? 'T' : 'IMG'}</span>
+                        <span class="truncate font-bold">${el.type === 'text' ? el.content : '圖案物件'}</span>
+                    </div>
+                `;
+                item.onclick = (e) => selectElement(el.id);
+                textLayersList.appendChild(item);
+            });
+        }
+
+        function selectElement(id) {
+            state.activeId = id;
+            const allElements = document.querySelectorAll('.draggable-element');
+            allElements.forEach(el => {
+                if (parseInt(el.dataset.id) === id) el.classList.add('active');
+                else el.classList.remove('active');
+            });
+            updateLayersUI();
+            updateEditPanel();
+        }
+
+        function updateEditPanel() {
+            const el = state.elements.find(e => e.id === state.activeId);
+            if (!el) {
+                editPanel.classList.add('hidden');
+                return;
+            }
+            editPanel.classList.remove('hidden');
+
+            const textTools = document.getElementById('text-specific-tools');
+            if (el.type === 'text') {
+                textTools.classList.remove('hidden');
+                document.getElementById('edit-text-content').value = el.content;
+                document.getElementById('edit-text-font').value = el.font;
+                document.getElementById('edit-text-color').value = el.color;
+            } else {
+                textTools.classList.add('hidden');
+            }
+
+            // 同步數值顯示
+            document.getElementById('range-scale').value = el.scale;
+            document.getElementById('range-rotate').value = el.rotate;
+            document.getElementById('num-scale').value = el.scale;
+            document.getElementById('num-rotate').value = el.rotate;
+        }
+
+        // --- 事件監聽 ---
+
+        document.getElementById('select-style').onchange = (e) => { state.style = e.target.value; renderMockup(); };
+        document.getElementById('input-color').oninput = (e) => { state.color = e.target.value; renderMockup(); };
+
+        document.getElementById('add-text-btn').onclick = () => {
+            const newId = Date.now();
+            state.elements.push({
+                id: newId,
+                type: 'text',
+                content: '新文字',
+                scale: 150,
+                rotate: 0,
+                x: 200,
+                y: 180,
+                font: "'Inter', sans-serif",
+                color: '#000000'
+            });
+            refreshCanvas();
+            selectElement(newId);
+        };
+
+        document.getElementById('upload-input').onchange = (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (f) => {
+                    const newId = Date.now();
+                    state.elements.push({
+                        id: newId,
+                        type: 'image',
+                        content: f.target.result,
+                        scale: 150,
+                        rotate: 0,
+                        x: 200,
+                        y: 180
+                    });
+                    refreshCanvas();
+                    selectElement(newId);
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        // 修改內容同步
+        function updateActiveElementProperty(prop, value) {
+            const el = state.elements.find(i => i.id === state.activeId);
+            if (!el) return;
+
+            el[prop] = value;
+            const dom = document.getElementById(`el-${el.id}`);
+            if (!dom) return;
+
+            if (prop === 'content' && el.type === 'text') dom.textContent = value;
+            if (prop === 'font') dom.style.fontFamily = value;
+            if (prop === 'color') dom.style.color = value;
+            if (prop === 'scale') {
+                if (el.type === 'text') dom.style.fontSize = `${value / 5}px`;
+                else dom.style.width = `${value}px`;
+            }
+            if (prop === 'rotate') {
+                dom.style.transform = `translate(-50%, -50%) rotate(${value}deg)`;
+            }
+        }
+
+        document.getElementById('edit-text-content').oninput = (e) => {
+            updateActiveElementProperty('content', e.target.value);
+            updateLayersUI();
+        };
+        document.getElementById('edit-text-font').onchange = (e) => updateActiveElementProperty('font', e.target.value);
+        document.getElementById('edit-text-color').oninput = (e) => updateActiveElementProperty('color', e.target.value);
+
+        // 大小調整：同步滑動條與輸入框
+        document.getElementById('range-scale').oninput = (e) => {
+            const val = parseInt(e.target.value);
+            document.getElementById('num-scale').value = val;
+            updateActiveElementProperty('scale', val);
+        };
+        document.getElementById('num-scale').oninput = (e) => {
+            let val = parseInt(e.target.value) || 0;
+            if (val > 600) val = 600;
+            document.getElementById('range-scale').value = val;
+            updateActiveElementProperty('scale', val);
+        };
+
+        // 旋轉調整：同步滑動條與輸入框
+        document.getElementById('range-rotate').oninput = (e) => {
+            const val = parseInt(e.target.value);
+            document.getElementById('num-rotate').value = val;
+            updateActiveElementProperty('rotate', val);
+        };
+        document.getElementById('num-rotate').oninput = (e) => {
+            let val = parseInt(e.target.value) || 0;
+            if (val > 180) val = 180;
+            if (val < -180) val = -180;
+            document.getElementById('range-rotate').value = val;
+            updateActiveElementProperty('rotate', val);
+        };
+
+        document.getElementById('delete-el-btn').onclick = () => {
+            state.elements = state.elements.filter(e => e.id !== state.activeId);
+            state.activeId = null;
+            refreshCanvas();
+        };
+
+        // 視角
+        document.getElementById('btn-front').onclick = (e) => {
+            state.view = 'front';
+            document.getElementById('btn-back').classList.remove('btn-active');
+            e.target.classList.add('btn-active');
+            renderMockup();
+        };
+        document.getElementById('btn-back').onclick = (e) => {
+            state.view = 'back';
+            document.getElementById('btn-front').classList.remove('btn-active');
+            e.target.classList.add('btn-active');
+            renderMockup();
+        };
+
+        // 拖曳邏輯
+        let dragInfo = { isDragging: false, offset: { x: 0, y: 0 }, targetDom: null };
+        const gV = document.getElementById('guide-v');
+        const gH = document.getElementById('guide-h');
+
+        function startDrag(e) {
+            const target = e.target.closest('.draggable-element');
+            if (!target) return;
+
+            const id = parseInt(target.dataset.id);
+            selectElement(id);
+
+            dragInfo.isDragging = true;
+            dragInfo.targetDom = target;
+
+            const cx = e.touches ? e.touches[0].clientX : e.clientX;
+            const cy = e.touches ? e.touches[0].clientY : e.clientY;
+            const rect = target.getBoundingClientRect();
+
+            dragInfo.offset.x = cx - (rect.left + rect.width / 2);
+            dragInfo.offset.y = cy - (rect.top + rect.height / 2);
+
+            target.style.cursor = 'grabbing';
+            if (e.type === 'mousedown') e.preventDefault();
+        }
+
+        function doDrag(e) {
+            if (!dragInfo.isDragging || !dragInfo.targetDom) return;
+
+            const cx = e.touches ? e.touches[0].clientX : e.clientX;
+            const cy = e.touches ? e.touches[0].clientY : e.clientY;
+            const container = document.getElementById('design-area').getBoundingClientRect();
+
+            let nx = cx - container.left - dragInfo.offset.x;
+            let ny = cy - container.top - dragInfo.offset.y;
+
+            const midX = container.width / 2, midY = container.height * 0.4;
+            let sv = false, sh = false;
+            if (Math.abs(nx - midX) < 15) { nx = midX; sv = true; }
+            if (Math.abs(ny - midY) < 15) { ny = midY; sh = true; }
+
+            gV.style.opacity = sv ? '1' : '0';
+            gH.style.opacity = sh ? '1' : '0';
+
+            dragInfo.targetDom.style.left = nx + 'px';
+            dragInfo.targetDom.style.top = ny + 'px';
+
+            const el = state.elements.find(i => i.id === state.activeId);
+            if (el) { el.x = nx; el.y = ny; }
+        }
+
+        function stopDrag() {
+            if (dragInfo.isDragging) {
+                dragInfo.isDragging = false;
+                if (dragInfo.targetDom) dragInfo.targetDom.style.cursor = 'grab';
+                dragInfo.targetDom = null;
+                gV.style.opacity = '0';
+                gH.style.opacity = '0';
+            }
+        }
+
+        window.addEventListener('mousedown', startDrag);
+        window.addEventListener('mousemove', doDrag);
+        window.addEventListener('mouseup', stopDrag);
+        window.addEventListener('touchstart', startDrag, { passive: false });
+        window.addEventListener('touchmove', doDrag, { passive: false });
+        window.addEventListener('touchend', stopDrag);
+
+        // 導出功能
+        document.getElementById('btn-export').onclick = async function () {
+            const btn = this;
+            btn.disabled = true; btn.textContent = '生成中...';
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = 1000; canvas.height = 1000;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, 1000, 1000);
+
+                const loadImg = (s) => new Promise(r => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => r(i); i.src = s; });
+                const mI = await loadImg(getSVG(state.style, 'mask', state.view));
+                const tI = await loadImg(getSVG(state.style, 'texture', state.view));
+                const hI = await loadImg(getSVG(state.style, 'highlight', state.view));
+
+                const dW = 900, dH = 900, dX = 50, dY = 50;
+                const offC = document.createElement('canvas'); offC.width = 1000; offC.height = 1000;
+                const oCtx = offC.getContext('2d');
+                oCtx.drawImage(mI, dX, dY, dW, dH);
+                oCtx.globalCompositeOperation = 'source-in';
+                oCtx.fillStyle = state.color; oCtx.fillRect(0, 0, 1000, 1000);
+                ctx.drawImage(offC, 0, 0);
+
+                ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.8; ctx.drawImage(tI, dX, dY, dW, dH);
+                ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = 0.2; ctx.drawImage(hI, dX, dY, dW, dH);
+                ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+
+                const area = document.getElementById('design-area').getBoundingClientRect();
+                const ratio = 1000 / area.width;
+
+                for (const el of state.elements) {
+                    ctx.save();
+                    ctx.translate(el.x * ratio, el.y * ratio);
+                    ctx.rotate(el.rotate * Math.PI / 180);
+                    if (el.type === 'image') {
+                        const img = await loadImg(el.content);
+                        const fw = el.scale * ratio;
+                        const fh = fw * (img.naturalHeight / img.naturalWidth);
+                        ctx.drawImage(img, -fw / 2, -fh / 2, fw, fh);
+                    } else {
+                        ctx.font = `800 ${el.scale * ratio / 5}px ${el.font}`;
+                        ctx.fillStyle = el.color;
+                        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                        ctx.fillText(el.content, 0, 0);
+                    }
+                    ctx.restore();
+                }
+
+                const link = document.createElement('a');
+                link.download = `TShirt-Design-${Date.now()}.png`;
+                link.href = canvas.toDataURL(); link.click();
+            } catch (e) { console.error(e); alert("導出出錯"); }
+            finally { btn.disabled = false; btn.textContent = '導出設計 (PNG)'; }
+        };
+
+        renderMockup();
+        refreshCanvas();
+    </script>
+</body>
+
+</html>
