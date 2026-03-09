@@ -274,16 +274,22 @@
                 </button>
             </div>
             <div class="p-5">
-                <div class="mb-4 pb-2 border-b border-gray-800 flex justify-between items-center">
+                <div
+                    class="mb-4 pb-2 border-b border-gray-800 flex flex-col md:flex-row justify-between items-center gap-3">
                     <h2 class="text-xl font-bold text-theme"><i class="fas fa-user-circle mr-2"></i>角色設定</h2>
-                    <div class="flex gap-2">
+                    <div class="flex items-center gap-2 w-full md:w-auto">
+                        <select id="saved-characters-dropdown" onchange="loadSelectedCharacter()"
+                            class="bg-gray-800 border border-gray-700 rounded px-2 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-theme transition-colors min-w-[120px] flex-grow md:flex-grow-0">
+                            <option value="">-- 已儲存角色 --</option>
+                        </select>
+                        <button onclick="deleteCharacter()" title="刪除選定角色"
+                            class="text-xs bg-gray-800 hover:bg-red-900/40 text-gray-500 hover:text-red-400 px-2 py-1.5 rounded border border-gray-700 transition flex items-center">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <div class="h-4 w-[1px] bg-gray-700 mx-1"></div>
                         <button onclick="saveCharacter(this)"
                             class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded border border-gray-600 transition flex items-center hover:text-white hover:border-gray-500">
                             <i class="fas fa-save mr-1.5"></i> 儲存
-                        </button>
-                        <button onclick="loadCharacter(this)"
-                            class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded border border-gray-600 transition flex items-center hover:text-white hover:border-gray-500">
-                            <i class="fas fa-folder-open mr-1.5"></i> 讀取
                         </button>
                     </div>
                 </div>
@@ -417,8 +423,12 @@
                     </div>
                 </div>
 
-                <div class="mt-8 mb-4 pb-2 border-b border-gray-800">
+                <div class="mt-8 mb-4 pb-2 border-b border-gray-800 flex justify-between items-center">
                     <h2 class="text-xl font-bold text-theme"><i class="fas fa-tshirt mr-2"></i>服裝穿搭</h2>
+                    <button onclick="resetSection('tab-outfit')"
+                        class="text-[10px] bg-gray-800 hover:bg-gray-700 text-gray-500 hover:text-white px-2 py-1 rounded border border-gray-700 transition flex items-center gap-1">
+                        <i class="fas fa-undo"></i> 重設服裝
+                    </button>
                 </div>
                 <div id="tab-outfit" class="space-y-4">
 
@@ -556,8 +566,12 @@
                     </div>
                 </div>
 
-                <div class="mt-8 mb-4 pb-2 border-b border-gray-800">
+                <div class="mt-8 mb-4 pb-2 border-b border-gray-800 flex justify-between items-center">
                     <h2 class="text-xl font-bold text-theme"><i class="fas fa-film mr-2"></i>場景與鏡頭</h2>
+                    <button onclick="resetSection('tab-scene')"
+                        class="text-[10px] bg-gray-800 hover:bg-gray-700 text-gray-500 hover:text-white px-2 py-1 rounded border border-gray-700 transition flex items-center gap-1">
+                        <i class="fas fa-undo"></i> 重設場景
+                    </button>
                 </div>
                 <div id="tab-scene" class="space-y-5">
                     <div
@@ -683,15 +697,23 @@
             </div>
 
             <!-- 我的最愛收藏 -->
-            <div class="bg-black p-4 rounded-xl border border-gray-800 flex flex-col max-h-[200px]">
+            <div class="bg-black p-4 rounded-xl border border-gray-800 flex flex-col transition-all duration-300"
+                id="favorites-section">
                 <div class="flex justify-between items-center mb-3">
-                    <label class="text-xs font-bold text-gray-500 uppercase"><i class="fas fa-star mr-1"></i> 我的最愛
-                        (Favorites)</label>
+                    <div class="flex items-center gap-2 cursor-pointer group" onclick="toggleFavorites()">
+                        <label
+                            class="text-xs font-bold text-gray-500 uppercase cursor-pointer group-hover:text-theme transition-colors"><i
+                                class="fas fa-star mr-1"></i> 我的最愛 (Favorites)</label>
+                        <i id="favorites-toggle-icon"
+                            class="fas fa-chevron-right text-[10px] text-gray-600 group-hover:text-theme transition-all"></i>
+                    </div>
                     <button onclick="clearFavorites()"
                         class="text-[10px] text-gray-600 hover:text-red-400">清除全部</button>
                 </div>
-                <div id="favorites-list" class="flex-grow overflow-y-auto custom-scrollbar space-y-2 pr-1">
-                    <p class="text-center text-gray-700 py-4 text-xs italic">暫無收藏</p>
+                <div id="favorites-list-container" class="flex-grow overflow-hidden flex flex-col hidden">
+                    <div id="favorites-list" class="flex-grow overflow-y-auto custom-scrollbar space-y-2 pr-1">
+                        <p class="text-center text-gray-700 py-4 text-xs italic">暫無收藏</p>
+                    </div>
                 </div>
             </div>
 
@@ -702,6 +724,23 @@
                     <span id="mode-status"
                         class="text-xs font-bold px-2 py-0.5 rounded bg-gray-800 text-gray-400">模式未定</span>
                 </div>
+
+                <!-- 客製化備註/前綴 -->
+                <div class="mb-3">
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-[10px] text-gray-500 uppercase font-bold"><i class="fas fa-pen-nib mr-1"></i>
+                            客製化備註 (Custom Note)</label>
+                        <div class="flex gap-2">
+                            <button onclick="resetPositiveCustom()"
+                                class="text-[9px] text-gray-600 hover:text-orange-400 transition-colors">重設</button>
+                            <button onclick="savePositiveCustom()"
+                                class="text-[9px] text-gray-600 hover:text-emerald-400 transition-colors">儲存本地</button>
+                        </div>
+                    </div>
+                    <textarea id="custom-positive-note" placeholder="在此加入您的自訂備註或是特定提示詞前綴..."
+                        class="w-full bg-gray-900/30 text-gray-400 text-xs p-2 rounded border border-gray-800 focus:border-gray-700 outline-none h-12 resize-none transition-colors"></textarea>
+                </div>
+
                 <textarea id="output-text" readonly
                     class="flex-grow bg-gray-900/50 text-gray-300 text-sm p-4 rounded-lg border border-gray-800 font-mono resize-none outline-none leading-relaxed focus:border-theme transition-colors"></textarea>
                 <button onclick="copyPrompt('output-text')"
@@ -710,27 +749,52 @@
                 </button>
             </div>
 
-            <div class="bg-black p-4 rounded-xl border border-gray-800 h-1/4 flex flex-col">
-                <label class="text-xs font-bold text-gray-500 mb-2 uppercase"><i class="fas fa-ban mr-1"></i> Negative
-                    Prompt 負面提示:</label>
-                <textarea id="negative-text"
-                    class="flex-grow bg-gray-900/50 text-gray-500 text-xs p-3 rounded-lg border border-gray-800 font-mono resize-none outline-none focus:border-gray-600">Negative Prompt: avoid AI-like appearance, low saturation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name, cartoon illustrations, 3D animation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name</textarea>
-                <button onclick="copyAllPrompts()"
-                    class="mt-2 w-full bg-gray-700 hover:bg-gray-600 text-gray-300 py-2 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-2">
-                    <i class="fas fa-paste"></i> 複製全部提示詞 (Prompt + Negative)
-                </button>
+            <!-- 負面提示區塊 -->
+            <div class="bg-black p-4 rounded-xl border border-gray-800 flex flex-col transition-all duration-300"
+                id="negative-prompt-section">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center gap-2 cursor-pointer group" onclick="toggleNegativePrompt()">
+                        <label
+                            class="text-xs font-bold text-gray-500 uppercase cursor-pointer group-hover:text-theme transition-colors">
+                            <i class="fas fa-ban mr-1"></i> Negative Prompt 負面提示
+                        </label>
+                        <i id="negative-toggle-icon"
+                            class="fas fa-chevron-right text-[10px] text-gray-600 group-hover:text-theme transition-all"></i>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="resetNegativePrompt()"
+                            class="text-[10px] text-gray-600 hover:text-orange-400 transition-colors">重設</button>
+                        <button onclick="saveNegativePrompt()"
+                            class="text-[10px] text-gray-600 hover:text-emerald-400 transition-colors">儲存本地</button>
+                    </div>
+                </div>
+                <div id="negative-prompt-list-container" class="flex flex-col flex-grow hidden">
+                    <textarea id="negative-text"
+                        class="w-full bg-gray-900/50 text-gray-500 text-[10px] p-3 rounded-lg border border-gray-800 font-mono resize-none outline-none focus:border-gray-600 h-24 mb-2 transition-colors">avoid AI-like appearance, low saturation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name, cartoon illustrations, 3D animation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name</textarea>
+                    <button onclick="copyAllPrompts()"
+                        class="w-full bg-gray-700 hover:bg-gray-600 text-gray-300 py-2 rounded-lg font-bold text-[10px] transition-all flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fas fa-paste"></i> 複製全部提示詞 (Prompt + Negative)
+                    </button>
+                </div>
             </div>
 
             <!-- 最近生成紀錄 -->
-            <div
-                class="bg-black p-4 rounded-xl border border-gray-800 flex-grow overflow-hidden flex flex-col max-h-[300px]">
+            <div class="bg-black p-4 rounded-xl border border-gray-800 flex flex-col transition-all duration-300"
+                id="history-section">
                 <div class="flex justify-between items-center mb-3">
-                    <label class="text-xs font-bold text-gray-500 uppercase"><i class="fas fa-history mr-1"></i> 最近生成
-                        (History)</label>
+                    <div class="flex items-center gap-2 cursor-pointer group" onclick="toggleHistory()">
+                        <label
+                            class="text-xs font-bold text-gray-500 uppercase cursor-pointer group-hover:text-theme transition-colors"><i
+                                class="fas fa-history mr-1"></i> 最近生成 (History)</label>
+                        <i id="history-toggle-icon"
+                            class="fas fa-chevron-right text-[10px] text-gray-600 group-hover:text-theme transition-all"></i>
+                    </div>
                     <button onclick="clearHistory()" class="text-[10px] text-gray-600 hover:text-red-400">清除全部</button>
                 </div>
-                <div id="history-list" class="flex-grow overflow-y-auto custom-scrollbar space-y-2 pr-1">
-                    <p class="text-center text-gray-700 py-8 text-xs italic">暫無生成紀錄</p>
+                <div id="history-list-container" class="flex-grow overflow-hidden flex flex-col hidden">
+                    <div id="history-list" class="flex-grow overflow-y-auto custom-scrollbar space-y-2 pr-1">
+                        <p class="text-center text-gray-700 py-8 text-xs italic">暫無生成紀錄</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -829,13 +893,39 @@
                     return acc;
                 }, []);
 
+                // 遷移舊的單一角色資料到新的多角色系統
+                const oldData = localStorage.getItem('wm_saved_character');
+                if (oldData) {
+                    let characters = JSON.parse(localStorage.getItem('wm_characters') || '{}');
+                    const data = JSON.parse(oldData);
+                    const name = data['char-name'] || 'Legacy Character';
+                    if (!characters[name]) {
+                        characters[name] = data;
+                        localStorage.setItem('wm_characters', JSON.stringify(characters));
+                    }
+                    localStorage.removeItem('wm_saved_character'); // 遷移後移除
+                }
+
                 // 讀取儲存的角色名稱
                 const savedName = localStorage.getItem('wm_char_name');
                 if (savedName) {
                     document.getElementById('char-name').value = savedName;
                 }
 
+                // 讀取儲存的客製化正向提示前綴
+                const savedCustomPos = localStorage.getItem('wm_custom_positive');
+                if (savedCustomPos) {
+                    document.getElementById('custom-positive-note').value = savedCustomPos;
+                }
+
+                // 讀取儲存的負面提示
+                const savedNegative = localStorage.getItem('wm_negative_prompt');
+                if (savedNegative) {
+                    document.getElementById('negative-text').value = savedNegative;
+                }
+
                 setMode('sexy');
+                renderCharacterDropdown();
             } catch (err) {
                 console.log("Database load error:", err);
             }
@@ -1019,6 +1109,10 @@
             updateVisualFeedback();
 
             let prompts = [];
+
+            // 0. [客製化備註] (Custom Note)
+            const customNote = document.getElementById('custom-positive-note').value.trim();
+            if (customNote) prompts.push(customNote);
 
             // 1. [攝影風格/光影] (Camera & Style & Vibe)
             let cam = [
@@ -1218,8 +1312,8 @@
             // 移除重複並放在最前面
             history = history.filter(p => p !== prompt);
             history.unshift(prompt);
-            // 只保留最近 10 筆
-            if (history.length > 10) history.pop();
+            // 只保留最近 5 筆
+            if (history.length > 5) history.pop();
             localStorage.setItem('wm_history', JSON.stringify(history));
             renderHistory();
         }
@@ -1383,9 +1477,31 @@
             }
         }
 
+        function renderCharacterDropdown() {
+            const dropdown = document.getElementById('saved-characters-dropdown');
+            if (!dropdown) return;
+            const characters = JSON.parse(localStorage.getItem('wm_characters') || '{}');
+            const currentSelection = dropdown.value;
+
+            dropdown.innerHTML = '<option value="">-- 已儲存角色 --</option>';
+            Object.keys(characters).sort().forEach(name => {
+                const opt = document.createElement('option');
+                opt.value = name;
+                opt.innerText = name;
+                dropdown.appendChild(opt);
+            });
+
+            if (characters[currentSelection]) {
+                dropdown.value = currentSelection;
+            }
+        }
+
         function saveCharacter(btn) {
+            const name = v('char-name').trim();
+            if (!name) return showToast("請輸入角色名稱", "fa-exclamation-triangle");
+
             const charIds = [
-                'char-name', 'race', 'char-age', 'body-height', 'body-type', // <--- 加入 body-type
+                'char-name', 'race', 'char-age', 'body-height', 'body-type',
                 'body-bust', 'body-waist', 'body-hip',
                 'hair-style', 'hair-color', 'eye-color',
                 'face-shape', 'skin-type', 'makeup-base', 'makeup-detail', 'makeup-detail-2'
@@ -1393,16 +1509,28 @@
             const data = {};
             charIds.forEach(id => data[id] = v(id));
             ['effect-damp-hair', 'effect-wet-skin', 'effect-oily'].forEach(id => data[id] = c(id));
-            localStorage.setItem('wm_saved_character', JSON.stringify(data));
+
+            let characters = JSON.parse(localStorage.getItem('wm_characters') || '{}');
+            characters[name] = data;
+            localStorage.setItem('wm_characters', JSON.stringify(characters));
+
+            renderCharacterDropdown();
+            document.getElementById('saved-characters-dropdown').value = name;
+
             const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-check mr-1.5"></i> 已儲存';
             setTimeout(() => btn.innerHTML = originalHTML, 1500);
+            showToast(`角色「${name}」已儲存`);
         }
 
-        function loadCharacter(btn) {
-            const json = localStorage.getItem('wm_saved_character');
-            if (!json) return showToast("尚未儲存任何角色設定", "fa-exclamation-triangle");
-            const data = JSON.parse(json);
+        function loadSelectedCharacter() {
+            const name = document.getElementById('saved-characters-dropdown').value;
+            if (!name) return;
+
+            const characters = JSON.parse(localStorage.getItem('wm_characters') || '{}');
+            const data = characters[name];
+            if (!data) return;
+
             Object.keys(data).forEach(key => {
                 const el = document.getElementById(key);
                 if (el) {
@@ -1410,10 +1538,138 @@
                     else el.value = data[key];
                 }
             });
+
             generatePrompt();
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check mr-1.5"></i> 已讀取';
-            setTimeout(() => btn.innerHTML = originalHTML, 1500);
+            showToast(`已讀取角色: ${name}`, "fa-user-check");
+        }
+
+        function deleteCharacter() {
+            const dropdown = document.getElementById('saved-characters-dropdown');
+            const name = dropdown.value;
+            if (!name) return showToast("請先選擇要刪除的角色", "fa-exclamation-triangle");
+
+            if (confirm(`確定要刪除角色「${name}」嗎？`)) {
+                let characters = JSON.parse(localStorage.getItem('wm_characters') || '{}');
+                delete characters[name];
+                localStorage.setItem('wm_characters', JSON.stringify(characters));
+                renderCharacterDropdown();
+                showToast(`角色「${name}」已刪除`, "fa-trash-alt");
+            }
+        }
+
+        function resetSection(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            // 重設所有的 select
+            container.querySelectorAll('select').forEach(s => {
+                s.selectedIndex = 0;
+            });
+
+            // 重設所有的 text input
+            container.querySelectorAll('input[type="text"]').forEach(input => {
+                input.value = "";
+            });
+
+            // 重設所有的 checkbox
+            container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+
+            // 特殊處理：外套狀態 radio
+            const radios = container.querySelectorAll('input[type="radio"][name="outfit-outer-state"]');
+            if (radios.length > 0) {
+                radios[0].checked = true;
+            }
+
+            handleOuterwearChange();
+            generatePrompt();
+            showToast("該區塊已重設", "fa-undo");
+        }
+
+        function toggleHistory() {
+            const list = document.getElementById('history-list-container');
+            const icon = document.getElementById('history-toggle-icon');
+            const section = document.getElementById('history-section');
+
+            if (list.classList.contains('hidden')) {
+                list.classList.remove('hidden');
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-down');
+                section.classList.add('flex-grow');
+                section.classList.add('max-h-[300px]');
+            } else {
+                list.classList.add('hidden');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-right');
+                section.classList.remove('flex-grow');
+                section.classList.remove('max-h-[300px]');
+            }
+        }
+
+        function toggleFavorites() {
+            const list = document.getElementById('favorites-list-container');
+            const icon = document.getElementById('favorites-toggle-icon');
+            const section = document.getElementById('favorites-section');
+
+            if (list.classList.contains('hidden')) {
+                list.classList.remove('hidden');
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-down');
+                section.classList.add('max-h-[200px]');
+            } else {
+                list.classList.add('hidden');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-right');
+                section.classList.remove('max-h-[200px]');
+            }
+        }
+
+        function toggleNegativePrompt() {
+            const list = document.getElementById('negative-prompt-list-container');
+            const icon = document.getElementById('negative-toggle-icon');
+            const section = document.getElementById('negative-prompt-section');
+
+            if (list.classList.contains('hidden')) {
+                list.classList.remove('hidden');
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                list.classList.add('hidden');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-right');
+            }
+        }
+
+        function saveNegativePrompt() {
+            const val = document.getElementById('negative-text').value;
+            localStorage.setItem('wm_negative_prompt', val);
+            showToast("負面提示已儲存至本地", "fa-save");
+        }
+
+        const DEFAULT_NEGATIVE = "avoid AI-like appearance, low saturation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name, cartoon illustrations, 3D animation, low quality, worst quality, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, blurry, signature, watermark, text, error, jpeg artifacts, username, artist name";
+
+        function resetNegativePrompt() {
+            if (confirm("確定要將負面提示還原為預設值嗎？")) {
+                document.getElementById('negative-text').value = DEFAULT_NEGATIVE;
+                localStorage.removeItem('wm_negative_prompt');
+                showToast("負面提示已還原預設", "fa-undo");
+            }
+        }
+
+        function savePositiveCustom() {
+            const val = document.getElementById('custom-positive-note').value;
+            localStorage.setItem('wm_custom_positive', val);
+            showToast("正向提示備註已儲存", "fa-save");
+        }
+
+        function resetPositiveCustom() {
+            if (confirm("確定要清除客製化備註嗎？")) {
+                document.getElementById('custom-positive-note').value = "";
+                localStorage.removeItem('wm_custom_positive');
+                generatePrompt();
+                showToast("備註已清除", "fa-undo");
+            }
         }
 
         function randomAll() {
@@ -1440,9 +1696,9 @@
             init();
             renderHistory();
             renderFavorites();
-            document.querySelectorAll('select, input').forEach(el => {
+            document.querySelectorAll('select, input, #custom-positive-note').forEach(el => {
                 el.addEventListener('change', generatePrompt);
-                if (el.type !== 'checkbox' && el.type !== 'radio') {
+                if (el.tagName === 'TEXTAREA' || (el.type !== 'checkbox' && el.type !== 'radio')) {
                     el.addEventListener('input', generatePrompt);
                 }
                 // 自動儲存角色名稱

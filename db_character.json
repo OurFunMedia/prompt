@@ -258,12 +258,12 @@
             "value": "black hair"
         },
         {
-            "label": "深棕 (Dark Brown)",
-            "value": "dark brown hair"
-        },
-        {
             "label": "淺棕 (Light Brown)",
             "value": "light brown hair"
+        },
+        {
+            "label": "深棕 (Dark Brown)",
+            "value": "dark brown hair"
         },
         {
             "label": "淺金灰 (Ash Blonde)",
@@ -451,7 +451,7 @@
             "value": "light brown eyes"
         },
         {
-            "label": "深褐 (Dark Brown)",
+            "label": "深棕 (Dark Brown)",
             "value": "dark brown eyes"
         },
         {
