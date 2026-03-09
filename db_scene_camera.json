@@ -536,6 +536,10 @@
                 {
                     "label": "攝影棚 (Studio)",
                     "value": "in a professional photo studio"
+                },
+                {
+                    "label": "中性灰色背景 (Neutral Gray Background)",
+                    "value": "neutral gray background"
                 }
             ]
         }

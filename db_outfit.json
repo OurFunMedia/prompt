@@ -1054,6 +1054,10 @@
             "group": "日常/質感 (Daily Fashion)",
             "options": [
                 {
+                    "label": "瑜伽運動服 (Yoga Outfit)",
+                    "value": "yoga outfit"
+                },
+                {
                     "label": "羅紋針織開襟衫 (Ribbed Knit Cardigan)",
                     "value": "ribbed knit cardigan"
                 },
