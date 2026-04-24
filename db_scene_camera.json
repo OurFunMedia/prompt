@@ -862,6 +862,10 @@
         {
             "label": "背面視角 (Back View)",
             "value": "view from behind, back view"
+        },
+        {
+            "label": "上半身居中 (Upper Body Centered)",
+            "value": "upper body centered in the frame"
         }
     ],
     "camShot": [

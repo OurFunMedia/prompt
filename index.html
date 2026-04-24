@@ -668,11 +668,16 @@
                                     id="scene-style-special"
                                     class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
                             </div>
-                            <div><label class="field-label"><i class="fas fa-video"></i> 視角 (Angle)</label><select
-                                    id="cam-angle"
-                                    class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
-                                <select id="cam-angle-2"
-                                    class="mt-1 w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                            <div class="col-span-2 md:col-span-3">
+                                <label class="field-label"><i class="fas fa-video"></i> 視角 (Angle)</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <select id="cam-angle"
+                                        class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                                    <select id="cam-angle-2"
+                                        class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                                    <select id="cam-angle-3"
+                                        class="w-full bg-gray-800 border border-gray-700 rounded px-2 py-2 text-xs focus:outline-none"></select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -972,6 +977,7 @@
             populate('scene-time', db.sceneTime); populate('scene-weather', db.sceneWeather);
             populate('cam-angle', db.camAngle);
             populate('cam-angle-2', db.camAngle);
+            populate('cam-angle-3', db.camAngle);
             populate('cam-shot', db.camShot);
             populate('cam-lens', db.camLens);
             populate('scene-style-realistic', db.sceneStyleRealistic);
@@ -1116,7 +1122,7 @@
 
             // 1. [攝影風格/光影] (Camera & Style & Vibe)
             let cam = [
-                v('cam-angle'), v('cam-angle-2'), v('cam-shot'), v('cam-lens'), v('cam-aperture'),
+                v('cam-angle'), v('cam-angle-2'), v('cam-angle-3'), v('cam-shot'), v('cam-lens'), v('cam-aperture'),
                 v('scene-style-realistic'), v('scene-style-special'), v('scene-composition'),
                 v('scene-lighting'), v('scene-time'), v('scene-weather')
             ].filter(Boolean);
@@ -1677,7 +1683,7 @@
                 if (!s.disabled && !s.closest('.pointer-events-none') && !s.id.includes('custom')) {
                     if (s.options.length > 1) {
                         // For fields like expression-2, acc-2, etc., give a 50% chance to remain empty
-                        if (s.id.endsWith('-2') || s.id.includes('detail-2')) {
+                        if (s.id.endsWith('-2') || s.id.endsWith('-3') || s.id.includes('detail-2')) {
                             s.selectedIndex = Math.random() > 0.5 ? Math.floor(Math.random() * s.options.length) : 0;
                         } else {
                             s.selectedIndex = Math.floor(Math.random() * s.options.length);
