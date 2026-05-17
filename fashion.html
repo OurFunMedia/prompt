@@ -342,9 +342,7 @@
             if (type === 'mask') content = `<path d="${path}" fill="black" />`;
             else if (type === 'texture') {
                 content = `<defs><filter id="s"><feGaussianBlur stdDeviation="8"/></filter></defs>
-                           <path d="${path}" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="4" />
-                           <path d="M120,100 Q145,220 120,370" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="30" filter="url(#s)" />
-                           <path d="M280,100 Q255,220 280,370" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="30" filter="url(#s)" />`;
+                           <path d="${path}" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="4" />`;
                 if (style === 'hoodie' && view === 'front') content += `<path d="M150,280 L250,280 L275,350 L125,350 Z" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="3" />`;
             } else if (type === 'highlight') {
                 content = `<path d="M160,80 Q200,75 240,80" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="15" />
