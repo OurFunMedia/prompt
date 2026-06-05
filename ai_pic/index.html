@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>女性寫真提示詞生成器 — ComfyUI Z-Image Turbo</title>
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  background: #0f0f1a;
+  color: #e0e0f0;
+  line-height: 1.6;
+  padding: 20px;
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+header {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, #1a1a3e 0%, #2d1b69 50%, #0f0f1a 100%);
+  border-radius: 16px;
+  color: white;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 30px rgba(45, 27, 105, 0.4);
+  border: 1px solid #3d2b7a;
+}
+header h1 {
+  font-size: 1.6em;
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+header h1 span {
+  background: linear-gradient(90deg, #f472b6, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+header .sub {
+  font-size: 0.85em;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+header .badge {
+  display: inline-block;
+  background: #3d2b7a;
+  border: 1px solid #6d4bc8;
+  border-radius: 20px;
+  padding: 4px 16px;
+  font-size: 0.75em;
+  margin-top: 10px;
+  color: #c4b5fd;
+}
+.mode-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+.mode-tab {
+  padding: 8px 22px;
+  border: 1.5px solid #3d2b7a;
+  border-radius: 25px;
+  background: transparent;
+  color: #a78bfa;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.mode-tab:hover {
+  background: #2d1b6940;
+  border-color: #6d4bc8;
+}
+.mode-tab.active {
+  background: linear-gradient(135deg, #6d4bc8, #4f46e5);
+  border-color: #6d4bc8;
+  color: white;
+}
+.section {
+  background: #1a1a2e;
+  border: 1px solid #2d2d4a;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.section h2 {
+  font-size: 1.05em;
+  color: #a78bfa;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #2d2d4a;
+  letter-spacing: 0.5px;
+}
+.section h2 .hint {
+  font-size: 0.7em;
+  color: #6b7280;
+  font-weight: 400;
+  margin-left: 8px;
+}
+.tag-group {
+  margin-bottom: 14px;
+}
+.tag-group:last-child {
+  margin-bottom: 0;
+}
+.tag-group label {
+  display: block;
+  font-size: 0.82em;
+  font-weight: 500;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  padding: 4px 14px;
+  border: 1.5px solid #2d2d4a;
+  border-radius: 16px;
+  background: #12122a;
+  cursor: pointer;
+  font-size: 0.82em;
+  color: #9ca3af;
+  transition: all 0.15s;
+  user-select: none;
+}
+.tag:hover {
+  border-color: #6d4bc8;
+  background: #1a1a3e;
+  color: #c4b5fd;
+}
+.tag.active {
+  border-color: #7c3aed;
+  background: linear-gradient(135deg, #2d1b69, #1e1b4b);
+  color: #c4b5fd;
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.2);
+}
+.tags[data-single] .tag {
+  border-left: 2.5px solid #3d2b7a;
+}
+.tags[data-single] .tag.active {
+  border-left-color: #a78bfa;
+}
+.single-hint {
+  display: inline-block;
+  font-size: 0.65em;
+  color: #6b7280;
+  background: #1e1e3a;
+  padding: 1px 8px;
+  border-radius: 8px;
+  margin-left: 6px;
+  font-weight: 400;
+}
+.input-box {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #2d2d4a;
+  border-radius: 8px;
+  font-size: 0.9em;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  background: #12122a;
+  color: #e0e0f0;
+}
+.input-box:focus {
+  border-color: #6d4bc8;
+  box-shadow: 0 0 12px rgba(109, 75, 200, 0.15);
+}
+.col3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 760px) {
+  .col3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .row, .col3 { grid-template-columns: 1fr; }
+}
+.prompt-box {
+  background: #12122a;
+  border: 1.5px solid #3d2b7a;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 20px;
+}
+.prompt-box h3 {
+  font-size: 0.9em;
+  color: #a78bfa;
+  margin-bottom: 8px;
+}
+.prompt-content {
+  background: #0a0a1a;
+  border: 1px solid #1e1e3a;
+  border-radius: 8px;
+  padding: 14px;
+  min-height: 50px;
+  font-size: 0.88em;
+  line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  max-height: 300px;
+  overflow-y: auto;
+  color: #d1d5db;
+  width: 100%;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+}
+.prompt-content:focus {
+  border-color: #6d4bc8;
+  box-shadow: 0 0 12px rgba(109, 75, 200, 0.15);
+}
+.prompt-content.empty {
+  color: #4b5563;
+}
+.prompt-content::placeholder {
+  color: #4b5563;
+}
+.prompt-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: 600;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #6d4bc8, #4f46e5);
+  color: white;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #7c5cd8, #5b52f0);
+  box-shadow: 0 0 16px rgba(109, 75, 200, 0.3);
+}
+.btn-secondary {
+  background: #1e1e3a;
+  color: #9ca3af;
+  border: 1px solid #2d2d4a;
+}
+.btn-secondary:hover {
+  background: #2d2d4a;
+  color: #d1d5db;
+}
+.btn-sm {
+  padding: 5px 14px;
+  font-size: 0.78em;
+}
+.history-item {
+  padding: 10px 12px;
+  border: 1px solid #2d2d4a;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 0.82em;
+  background: #12122a;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.history-item:hover {
+  border-color: #6d4bc8;
+  background: #1a1a3e;
+}
+.history-item .thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #0a0a1a;
+  border: 1px solid #2d2d4a;
+}
+.history-item .thumb-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: #0a0a1a;
+  border: 1px solid #2d2d4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  color: #4b5563;
+}
+.history-item .info {
+  flex: 1;
+  min-width: 0;
+}
+.history-del {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: #4b5563;
+  cursor: pointer;
+  font-size: 0.9em;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+  line-height: 1;
+}
+.history-del:hover {
+  color: #f87171;
+  background: #2d1b6940;
+}
+.history-item .time {
+  font-size: 0.72em;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+.history-item .prompt-text {
+  word-break: break-all;
+  color: #d1d5db;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.history-hint {
+  font-size: 0.7em;
+  color: #4b5563;
+  margin-top: 6px;
+  text-align: center;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #4b5563;
+  font-size: 0.8em;
+}
+.tip {
+  background: #1e1b3a;
+  border: 1px solid #3d2b7a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 0.82em;
+  color: #a78bfa;
+  line-height: 1.5;
+}
+.tip strong {
+  color: #c4b5fd;
+}
+.tip a {
+  color: #f472b6;
+  text-decoration: underline;
+}
+
+/* ===== Image Generation ===== */
+.api-section {
+  background: #1a1a2e;
+  border: 1px solid #2d2d4a;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.api-section h3 {
+  font-size: 0.95em;
+  color: #a78bfa;
+  margin-bottom: 12px;
+}
+.api-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.api-row .input-box {
+  flex: 1;
+  min-width: 200px;
+}
+.api-row .btn {
+  white-space: nowrap;
+}
+.api-status {
+  font-size: 0.78em;
+  margin-top: 8px;
+  min-height: 1.4em;
+}
+.api-status.ok { color: #34d399; }
+.api-status.err { color: #f87171; }
+
+.gen-section {
+  background: #1a1a2e;
+  border: 1px solid #2d2d4a;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.gen-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.gen-controls label {
+  color: #9ca3af;
+  font-size: 0.82em;
+}
+.gen-controls select {
+  background: #12122a;
+  color: #e0e0f0;
+  border: 1.5px solid #2d2d4a;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.82em;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+}
+.gen-controls select:focus {
+  border-color: #6d4bc8;
+}
+
+.result-area {
+  background: #0a0a1a;
+  border: 1px solid #1e1e3a;
+  border-radius: 8px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.result-area img {
+  max-width: 100%;
+  max-height: 600px;
+  display: block;
+  border-radius: 4px;
+}
+.result-area .placeholder {
+  color: #4b5563;
+  font-size: 0.85em;
+  text-align: center;
+  padding: 40px 20px;
+}
+.result-area .placeholder .icon {
+  font-size: 2em;
+  margin-bottom: 8px;
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #2d2d4a;
+  border-top-color: #7c3aed;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #9ca3af;
+  font-size: 0.82em;
+}
+.result-area .error-msg {
+  color: #f87171;
+  font-size: 0.85em;
+  text-align: center;
+  padding: 20px;
+  max-width: 500px;
+  word-break: break-word;
+}
+.gen-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>📷 <span>女性寫真</span> 提示詞生成器</h1>
+    <div class="sub">for ComfyUI · Z-Image Turbo · Qwen 編碼器</div>
+    <div class="badge">⚡ 8-Step · 中英雙語 · 寫實人像</div>
+  </header>
+
+  <div class="tip">
+    💡 <strong>以攝影師的邏輯構思提示詞：</strong>先決定 <strong>氣質風格</strong> → 選角（種族/年齡/身形）→
+    <strong>眼神與姿勢</strong>（人像靈魂）→ 妝髮與造型 → 光線與構圖。
+    Z-Image Turbo 的 Qwen 編碼器可理解完整中文句子，不需要負面提示詞。
+  </div>
+
+  <div class="mode-tabs">
+    <div class="mode-tab active" data-mode="portrait">📷 寫真人像</div>
+    <div class="mode-tab" data-mode="boudoir">🌹 私房/氛圍</div>
+    <div class="mode-tab" data-mode="street">🏙️ 街拍</div>
+    <div class="mode-tab" data-mode="studio">🎬 棚拍</div>
+    <div class="mode-tab" data-mode="custom">✏️ 自由</div>
+  </div>
+
+  <!-- 1. 整體氣質與角色 -->
+  <div class="section">
+    <h2>1. 整體氣質與角色 <span class="hint">先決定這組要拍什麼感覺</span></h2>
+    <div class="row">
+      <div>
+        <div class="tag-group">
+          <label>氣質類型 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="vibe" data-single="true">
+            <span class="tag">學生</span>
+            <span class="tag">OL 上班族</span>
+            <span class="tag">御姐</span>
+            <span class="tag">可愛少女</span>
+            <span class="tag">斯文大方</span>
+            <span class="tag">性感誘人</span>
+            <span class="tag">優雅貴婦</span>
+            <span class="tag">清新鄰家</span>
+            <span class="tag">冷豔</span>
+            <span class="tag">活潑陽光</span>
+            <span class="tag">文青</span>
+            <span class="tag">女王氣場</span>
+            <span class="tag">慵懶</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>氛圍修飾</label>
+          <div class="tags" data-group="vibe_detail">
+            <span class="tag">溫柔婉約</span>
+            <span class="tag">自信灑脫</span>
+            <span class="tag">神秘魅惑</span>
+            <span class="tag">高冷</span>
+            <span class="tag">甜美</span>
+            <span class="tag">自然不做作</span>
+            <span class="tag">個性叛逆</span>
+            <span class="tag">空靈</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 基本特徵 -->
+  <div class="section">
+    <h2>2. 基本特徵 <span class="hint">選角設定</span></h2>
+    <div class="col3">
+      <div class="tag-group">
+        <label>種族 <span class="single-hint">單選</span></label>
+        <div class="tags" data-group="ethnicity" data-single="true">
+          <span class="tag">亞洲人</span>
+          <span class="tag">歐洲人</span>
+          <span class="tag">非洲人</span>
+          <span class="tag">拉丁裔</span>
+          <span class="tag">中東裔</span>
+          <span class="tag">混血</span>
+        </div>
+      </div>
+      <div class="tag-group">
+        <label>年齡層 <span class="single-hint">單選</span></label>
+        <div class="tags" data-group="age" data-single="true">
+          <span class="tag">約18歲</span>
+          <span class="tag">約22歲</span>
+          <span class="tag">約25歲</span>
+          <span class="tag">約30歲</span>
+          <span class="tag">自訂</span>
+        </div>
+        <div id="custom-age-wrap" style="display:none;margin-top:8px;">
+          <input class="input-box" id="custom-age-input" placeholder="輸入自訂年齡，例如：約30歲" style="font-size:0.82em;padding:6px 10px;">
+        </div>
+      </div>
+      <div class="tag-group">
+        <label>身形框架 <span class="single-hint">單選</span></label>
+        <div class="tags" data-group="body_frame" data-single="true">
+          <span class="tag">纖細</span>
+          <span class="tag">勻稱</span>
+          <span class="tag">豐滿</span>
+          <span class="tag">健美</span>
+          <span class="tag">高挑</span>
+          <span class="tag">嬌小</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2b. 體態細節（加強版身形） -->
+  <div class="section">
+    <h2>2b. 體態細節 <span class="hint">可複選，自由搭配（例如：嬌小 + 沙漏型 + 胸部豐滿）</span></h2>
+    <div class="row">
+      <div>
+        <div class="tag-group">
+          <label>體型曲線</label>
+          <div class="tags" data-group="body_curve">
+            <span class="tag">沙漏型</span>
+            <span class="tag">梨型</span>
+            <span class="tag">直筒型</span>
+            <span class="tag">蘋果型</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>胸型特徵</label>
+          <div class="tags" data-group="bust">
+            <span class="tag">胸部豐滿</span>
+            <span class="tag">胸部適中</span>
+            <span class="tag">胸部平坦</span>
+            <span class="tag">明顯體積感</span>
+            <span class="tag">胸部自然下垂</span>
+            <span class="tag">深邃事業線</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>腰腹部</label>
+          <div class="tags" data-group="waist">
+            <span class="tag">纖細腰身</span>
+            <span class="tag">腹部平坦</span>
+            <span class="tag">馬甲線</span>
+            <span class="tag">柔軟小腹</span>
+            <span class="tag">腰部曲線明顯</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>臀部</label>
+          <div class="tags" data-group="hips">
+            <span class="tag">臀部窄翹</span>
+            <span class="tag">臀部豐滿</span>
+            <span class="tag">臀部圓潤</span>
+            <span class="tag">蜜桃臀</span>
+            <span class="tag">臀部扁平</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 眼神與表情 -->
+  <div class="section">
+    <h2>3. 眼神與表情 <span class="hint">人像的靈魂，攝影師最在意的細節</span></h2>
+    <div class="row">
+      <div>
+        <div class="tag-group">
+          <label>視線方向 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="gaze" data-single="true">
+            <span class="tag">直視鏡頭</span>
+            <span class="tag">看向遠方</span>
+            <span class="tag">低頭</span>
+            <span class="tag">回眸</span>
+            <span class="tag">閉眼</span>
+            <span class="tag">仰望</span>
+            <span class="tag">側目</span>
+            <span class="tag">俯視</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>表情</label>
+          <div class="tags" data-group="expression">
+            <span class="tag">微笑</span>
+            <span class="tag">淺笑</span>
+            <span class="tag">大笑</span>
+            <span class="tag">無表情</span>
+            <span class="tag">憂鬱</span>
+            <span class="tag">嫵媚</span>
+            <span class="tag">驚訝</span>
+            <span class="tag">嚴肅</span>
+            <span class="tag">若有所思</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 姿勢體態 -->
+  <div class="section">
+    <h2>4. 姿勢體態 <span class="hint">攝影師現場引導的動作</span></h2>
+    <div class="row">
+      <div>
+        <div class="tag-group">
+          <label>整體姿勢 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="pose" data-single="true">
+            <span class="tag">站姿</span>
+            <span class="tag">坐姿</span>
+            <span class="tag">側坐</span>
+            <span class="tag">倚靠牆面</span>
+            <span class="tag">躺姿</span>
+            <span class="tag">行走中</span>
+            <span class="tag">蹲姿</span>
+            <span class="tag">跪姿</span>
+            <span class="tag">翹腳坐</span>
+            <span class="tag">趴姿</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>手部動作</label>
+          <div class="tags" data-group="hands">
+            <span class="tag">自然垂放</span>
+            <span class="tag">撩頭髮</span>
+            <span class="tag">觸摸臉頰</span>
+            <span class="tag">插口袋</span>
+            <span class="tag">交疊胸前</span>
+            <span class="tag">扶腰</span>
+            <span class="tag">拿道具</span>
+            <span class="tag">輕碰嘴唇</span>
+            <span class="tag">拉衣領</span>
+            <span class="tag">手撐頭</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 拍攝場景 -->
+  <div class="section">
+    <h2>5. 拍攝場景 <span class="hint">棚拍還是外景？決定畫面基調</span></h2>
+    <div class="tag-group">
+      <label>場景類型 <span class="single-hint">單選</span></label>
+      <div class="tags" data-group="scene_type" data-single="true">
+        <span class="tag">專業棚拍</span>
+        <span class="tag">戶外自然</span>
+        <span class="tag">城市街拍</span>
+        <span class="tag">室內生活感</span>
+        <span class="tag">旅拍</span>
+        <span class="tag">廢墟</span>
+        <span class="tag">咖啡廳</span>
+        <span class="tag">海邊</span>
+        <span class="tag">森林</span>
+        <span class="tag">花園</span>
+        <span class="tag">天台</span>
+        <span class="tag">飯店房間</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. 五官與妝容（強化版） -->
+  <div class="section">
+    <h2>6. 五官與妝容 <span class="hint">眼型／鼻型／嘴型／下巴／眉毛</span></h2>
+    <div class="col3">
+      <div>
+        <div class="tag-group">
+          <label>臉型 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="face_shape" data-single="true">
+            <span class="tag">鵝蛋臉</span>
+            <span class="tag">瓜子臉</span>
+            <span class="tag">圓臉</span>
+            <span class="tag">方臉</span>
+            <span class="tag">心形臉</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>膚質 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="skin" data-single="true">
+            <span class="tag">白皙</span>
+            <span class="tag">小麥色</span>
+            <span class="tag">健康光澤</span>
+            <span class="tag">無瑕</span>
+            <span class="tag">雀斑</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>妝容</label>
+          <div class="tags" data-group="makeup">
+            <span class="tag">淡妝</span>
+            <span class="tag">濃妝</span>
+            <span class="tag">煙熏妝</span>
+            <span class="tag">紅唇</span>
+            <span class="tag">裸妝</span>
+            <span class="tag">韓系水光</span>
+            <span class="tag">日系透明感</span>
+            <span class="tag">古風妝</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>眼型</label>
+          <div class="tags" data-group="eye_type">
+            <span class="tag">大眼睛</span>
+            <span class="tag">大杏眼</span>
+            <span class="tag">桃花眼</span>
+            <span class="tag">丹鳳眼</span>
+            <span class="tag">狐狸眼</span>
+            <span class="tag">深邃</span>
+            <span class="tag">單眼皮</span>
+            <span class="tag">下垂眼</span>
+            <span class="tag">上挑眼</span>
+            <span class="tag">笑眼</span>
+            <span class="tag">貓眼</span>
+            <span class="tag">長睫毛</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>鼻型 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="nose" data-single="true">
+            <span class="tag">高挺鼻</span>
+            <span class="tag">小巧鼻</span>
+            <span class="tag">立體鼻樑</span>
+            <span class="tag">希臘鼻</span>
+            <span class="tag">小巧鼻頭</span>
+            <span class="tag">鷹鉤鼻</span>
+            <span class="tag">朝天鼻</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>嘴型 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="mouth" data-single="true">
+            <span class="tag">豐唇</span>
+            <span class="tag">薄唇</span>
+            <span class="tag">櫻桃小嘴</span>
+            <span class="tag">微笑唇</span>
+            <span class="tag">M字唇</span>
+            <span class="tag">性感厚唇</span>
+            <span class="tag">嘴角上揚</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>下巴 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="chin" data-single="true">
+            <span class="tag">尖下巴</span>
+            <span class="tag">圓下巴</span>
+            <span class="tag">方下巴</span>
+            <span class="tag">瓜子下巴</span>
+            <span class="tag">下巴線條明顯</span>
+            <span class="tag">雙下巴</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>眉毛 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="eyebrows" data-single="true">
+            <span class="tag">柳葉眉</span>
+            <span class="tag">一字眉</span>
+            <span class="tag">劍眉</span>
+            <span class="tag">彎眉</span>
+            <span class="tag">濃眉</span>
+            <span class="tag">細眉</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. 髮型 -->
+  <div class="section">
+    <h2>7. 髮型 <span class="hint">髮型師環節</span></h2>
+    <div class="col3">
+      <div class="tag-group">
+        <label>長度 <span class="single-hint">單選</span></label>
+        <div class="tags" data-group="hair_length" data-single="true">
+          <span class="tag">短髮</span>
+          <span class="tag">及肩</span>
+          <span class="tag">及腰</span>
+          <span class="tag">及臀</span>
+        </div>
+      </div>
+      <div class="tag-group">
+        <label>樣式</label>
+        <div class="tags" data-group="hair_style">
+          <span class="tag">直髮</span>
+          <span class="tag">波浪捲</span>
+          <span class="tag">大波浪</span>
+          <span class="tag">馬尾</span>
+          <span class="tag">丸子頭</span>
+          <span class="tag">辮子</span>
+          <span class="tag">雙馬尾</span>
+          <span class="tag">盤髮</span>
+          <span class="tag">公主頭</span>
+          <span class="tag">鮑伯頭</span>
+          <span class="tag">慵懶捲</span>
+          <span class="tag">濕髮感</span>
+        </div>
+      </div>
+      <div class="tag-group">
+        <label>髮色</label>
+        <div class="tags" data-group="hair_color">
+          <span class="tag">黑色</span>
+          <span class="tag">棕色</span>
+          <span class="tag">金黃色</span>
+          <span class="tag">銀白色</span>
+          <span class="tag">紅色</span>
+          <span class="tag">漸層染</span>
+          <span class="tag">挑染</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. 服裝穿搭 -->
+  <div class="section">
+    <h2>8. 服裝穿搭 <span class="hint">造型師環節</span></h2>
+    <div class="row">
+      <div>
+        <div class="tag-group">
+          <label>上衣</label>
+          <div class="tags" data-group="top">
+            <span class="tag">T恤</span>
+            <span class="tag">襯衫</span>
+            <span class="tag">毛衣</span>
+            <span class="tag">背心</span>
+            <span class="tag">針織衫</span>
+            <span class="tag">西裝外套</span>
+            <span class="tag">皮衣</span>
+            <span class="tag">牛仔外套</span>
+            <span class="tag">風衣</span>
+            <span class="tag">雪紡衫</span>
+            <span class="tag">旗袍</span>
+            <span class="tag">一字領</span>
+            <span class="tag">西裝背心</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>下著</label>
+          <div class="tags" data-group="bottom">
+            <span class="tag">牛仔褲</span>
+            <span class="tag">西裝褲</span>
+            <span class="tag">短褲</span>
+            <span class="tag">百褶裙</span>
+            <span class="tag">迷你裙</span>
+            <span class="tag">長裙</span>
+            <span class="tag">連衣裙</span>
+            <span class="tag">緊身裙</span>
+            <span class="tag">寬褲</span>
+            <span class="tag">A字裙</span>
+            <span class="tag">魚尾裙</span>
+            <span class="tag">熱褲</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tag-group" style="margin-top:4px;">
+      <label>材質（附加於服裝描述）</label>
+      <div class="tags" data-group="material">
+        <span class="tag">棉質</span>
+        <span class="tag">絲綢</span>
+        <span class="tag">蕾絲</span>
+        <span class="tag">皮革</span>
+        <span class="tag">牛仔布</span>
+        <span class="tag">雪紡</span>
+        <span class="tag">天鵝絨</span>
+        <span class="tag">針織</span>
+        <span class="tag">薄紗</span>
+        <span class="tag">亞麻</span>
+      </div>
+    </div>
+    <div class="tag-group" style="margin-top:4px;">
+      <label>風格 <span style="color:#6b7280;font-weight:400;font-size:0.85em;">簡約／少女／精緻／華麗...</span></label>
+      <div class="tags" data-group="clothing_style">
+        <span class="tag">簡約</span>
+        <span class="tag">休閒</span>
+        <span class="tag">少女</span>
+        <span class="tag">浪漫</span>
+        <span class="tag">優雅</span>
+        <span class="tag">性感</span>
+        <span class="tag">復古</span>
+        <span class="tag">街頭風</span>
+        <span class="tag">波西米亞</span>
+        <span class="tag">精緻</span>
+        <span class="tag">華麗</span>
+        <span class="tag">奢華</span>
+        <span class="tag">端莊</span>
+        <span class="tag">運動風</span>
+        <span class="tag">學院風</span>
+        <span class="tag">哥德風</span>
+        <span class="tag">龐克風</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. 鞋襪飾品 -->
+  <div class="section">
+    <h2>9. 鞋襪與飾品 <span class="hint">造型細節</span></h2>
+    <div class="col3">
+      <div class="tag-group">
+        <label>鞋子 <span class="single-hint">單選</span></label>
+        <div class="tags" data-group="shoes" data-single="true">
+          <span class="tag">高跟鞋</span>
+          <span class="tag">平底鞋</span>
+          <span class="tag">短靴</span>
+          <span class="tag">長靴</span>
+          <span class="tag">運動鞋</span>
+          <span class="tag">涼鞋</span>
+          <span class="tag">瑪莉珍鞋</span>
+          <span class="tag">樂福鞋</span>
+          <span class="tag">尖頭鞋</span>
+          <span class="tag">羅馬鞋</span>
+        </div>
+      </div>
+      <div class="tag-group">
+        <label>襪子 <span class="single-hint">單選</span></label>
+        <div class="tags" data-group="socks" data-single="true">
+          <span class="tag">絲襪</span>
+          <span class="tag">過膝襪</span>
+          <span class="tag">短襪</span>
+          <span class="tag">船襪</span>
+          <span class="tag">褲襪</span>
+          <span class="tag">網襪</span>
+          <span class="tag">蕾絲襪</span>
+          <span class="tag">不穿襪</span>
+        </div>
+      </div>
+      <div class="tag-group">
+        <label>飾品</label>
+        <div class="tags" data-group="accessories">
+          <span class="tag">項鍊</span>
+          <span class="tag">耳環</span>
+          <span class="tag">手鐲</span>
+          <span class="tag">戒指</span>
+          <span class="tag">髮飾</span>
+          <span class="tag">帽子</span>
+          <span class="tag">腰帶</span>
+          <span class="tag">眼鏡</span>
+          <span class="tag">手套</span>
+          <span class="tag">圍巾</span>
+          <span class="tag">頭紗</span>
+          <span class="tag">手拿包</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. 光線與色彩 (原有強化) -->
+  <div class="section">
+    <h2>10. 光線與色彩 <span class="hint">攝影師技術環節</span></h2>
+    <div class="row">
+      <div>
+        <div class="tag-group">
+          <label>光線氛圍</label>
+          <div class="tags" data-group="lighting">
+            <span class="tag">自然日光</span>
+            <span class="tag">黃金時刻</span>
+            <span class="tag">藍色時刻</span>
+            <span class="tag">逆光剪影</span>
+            <span class="tag">棚拍柔光</span>
+            <span class="tag">晨霧</span>
+            <span class="tag">夕陽</span>
+            <span class="tag">側光</span>
+            <span class="tag">頂光</span>
+            <span class="tag">眼神光</span>
+            <span class="tag">霓虹燈光</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>色彩基調 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="color" data-single="true">
+            <span class="tag">暖色調</span>
+            <span class="tag">冷色調</span>
+            <span class="tag">黑白</span>
+            <span class="tag">復古</span>
+            <span class="tag">高飽和</span>
+            <span class="tag">低飽和</span>
+            <span class="tag">粉彩</span>
+            <span class="tag">暗黑</span>
+            <span class="tag">日系淡雅</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>膚色修飾 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="skin_tone" data-single="true">
+            <span class="tag">白皙透亮</span>
+            <span class="tag">健康小麥色</span>
+            <span class="tag">自然膚色</span>
+            <span class="tag">冷白皮</span>
+            <span class="tag">暖黃皮</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. 構圖與鏡頭 (原有保留) -->
+  <div class="section">
+    <h2>11. 構圖與鏡頭</h2>
+    <div class="row">
+      <div>
+        <div class="tag-group">
+          <label>景別 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="shot" data-single="true">
+            <span class="tag">特寫</span>
+            <span class="tag">近景</span>
+            <span class="tag">中景</span>
+            <span class="tag">全景</span>
+            <span class="tag">遠景</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>鏡頭視角 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="angle" data-single="true">
+            <span class="tag">平視</span>
+            <span class="tag">俯視</span>
+            <span class="tag">仰視</span>
+            <span class="tag">低角度</span>
+            <span class="tag">鳥瞰</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>構圖方式</label>
+          <div class="tags" data-group="composition">
+            <span class="tag">置中構圖</span>
+            <span class="tag">三分法則</span>
+            <span class="tag">引導線</span>
+            <span class="tag">框架構圖</span>
+            <span class="tag">對稱構圖</span>
+            <span class="tag">留白</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>焦段 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="focal" data-single="true">
+            <span class="tag">廣角</span>
+            <span class="tag">標準 50mm</span>
+            <span class="tag">長焦 85mm</span>
+            <span class="tag">長焦 135mm</span>
+            <span class="tag">微距</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <label>光圈 <span class="single-hint">單選</span></label>
+          <div class="tags" data-group="aperture" data-single="true">
+            <span class="tag">f/1.0</span>
+            <span class="tag">f/1.2</span>
+            <span class="tag">f/1.4</span>
+            <span class="tag">f/1.8</span>
+            <span class="tag">f/2.0</span>
+            <span class="tag">f/2.8</span>
+            <span class="tag">f/4.0</span>
+            <span class="tag">f/5.6</span>
+            <span class="tag">f/8.0</span>
+            <span class="tag">f/11</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 前景 -->
+  <div class="section">
+    <h2>🌿 前景效果 <span class="hint">增加畫面層次與景深感</span></h2>
+    <div class="row">
+      <div>
+        <div class="tag-group">
+          <label>啟用前景</label>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;color:#9ca3af;font-size:0.9em;">
+              <input type="checkbox" id="foreground-toggle" style="accent-color:#7c3aed;width:16px;height:16px;cursor:pointer;">
+              加入前景元素
+            </label>
+            <button class="btn btn-secondary btn-sm" id="foreground-random">🎲 隨機</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>自訂前景描述</label>
+          <input class="input-box" id="foreground-input" placeholder="例如：散景光斑、前景樹葉、紗簾、玻璃反射" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 自訂 -->
+  <div class="section">
+    <h2>📝 自訂補充</h2>
+    <div class="row">
+      <div>
+        <div class="tag-group">
+          <label>前綴（加到最前方）</label>
+          <input class="input-box" id="custom-prefix" placeholder="範例：專業時尚攝影，柔和自然光">
+        </div>
+      </div>
+      <div>
+        <div class="tag-group">
+          <label>後綴（加到最後方）</label>
+          <input class="input-box" id="custom-suffix" placeholder="範例：景深效果，背景虛化">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 提示詞輸出 -->
+  <div class="prompt-box">
+    <h3>📋 正向提示詞（Positive Prompt）<span class="single-hint" style="font-weight:400;vertical-align:middle;">可手動編輯</span></h3>
+    <textarea class="prompt-content empty" id="positive-prompt" placeholder="點選上方標籤開始組合提示詞，或直接輸入..." spellcheck="false" rows="4"></textarea>
+    <div id="chinese-ref" style="display:none;margin-top:8px;padding:8px 10px;background:#1a1a2e;border:1px solid #374151;border-radius:6px;font-size:0.82em;color:#9ca3af;line-height:1.6;">
+      <div style="color:#6b7280;margin-bottom:2px;">📖 中文參考（僅供參考，圖片使用英文 Prompt）</div>
+      <div id="chinese-ref-text"></div>
+    </div>
+    <div class="prompt-actions">
+      <button class="btn btn-primary" id="copy-positive">📋 複製提示詞</button>
+      <button class="btn btn-secondary" id="clear-all">🗑️ 全部重設</button>
+      <button class="btn btn-secondary" id="randomize">🎲 隨機生成</button>
+      <button class="btn btn-secondary" id="btn-expand">📝 AI 擴寫</button>
+      <button class="btn btn-primary" id="btn-expand-gen">✨ 擴寫並生成</button>
+    </div>
+  </div>
+
+  <div class="prompt-box" style="border-color: #4b5563;">
+    <h3 style="color: #6b7280;">ℹ️ ComfyUI Z-Image Turbo 參數建議</h3>
+    <div style="color: #9ca3af; font-size: 0.82em; line-height: 1.8; padding: 4px 0;">
+      <strong style="color:#c4b5fd;">取樣器：</strong>Euler / DPM++ 2M Karras &nbsp;|&nbsp;
+      <strong style="color:#c4b5fd;">步數：</strong>8 步 &nbsp;|&nbsp;
+      <strong style="color:#c4b5fd;">CFG：</strong>3.0 - 5.0 &nbsp;|&nbsp;
+      <strong style="color:#c4b5fd;">解析度：</strong>1024×1024 起 &nbsp;|&nbsp;
+      <strong style="color:#c4b5fd;">Text Encoder：</strong>Qwen2.5-3B
+    </div>
+  </div>
+
+  <!-- Agnes Image Generation -->
+  <div class="api-section">
+    <h3>🔑 Agnes API 設定</h3>
+    <div class="api-row">
+      <input class="input-box" id="api-key-input" type="password" placeholder="輸入你的 Agnes API Key..." spellcheck="false">
+      <button class="btn btn-primary btn-sm" id="api-key-save">💾 儲存</button>
+      <button class="btn btn-secondary btn-sm" id="api-key-clear">🗑️ 清除</button>
+    </div>
+    <div class="api-status" id="api-status">前往 <a href="https://platform.agnes-ai.com" target="_blank" style="color:#a78bfa;">platform.agnes-ai.com</a> 註冊並取得免費 API Key</div>
+  </div>
+
+  <div class="gen-section">
+    <h3>🖼️  Agnes Image 2.1 Flash 圖片生成</h3>
+    <div class="gen-controls">
+      <label>尺寸：</label>
+      <select id="gen-size">
+        <option value="1024x768">1024×768（4:3 橫幅）</option>
+        <option value="1152x768">1152×768（3:2 橫幅）</option>
+        <option value="1024x1024" selected>1024×1024（1:1 方形）</option>
+        <option value="768x1024">768×1024（3:4 直幅）</option>
+        <option value="768x1152">768×1152（2:3 直幅）</option>
+        <option value="1280x720">1280×720（16:9 橫幅）</option>
+        <option value="720x1280">720×1280（9:16 直幅）</option>
+      </select>
+      <button class="btn btn-primary" id="btn-generate">✨ 生成圖片</button>
+    </div>
+
+    <!-- Advanced options -->
+    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:14px;">
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;color:#9ca3af;font-size:0.82em;">
+        <input type="checkbox" id="toggle-prompt-extend" checked style="accent-color:#7c3aed;width:15px;height:15px;cursor:pointer;">
+        自動擴展提示詞 <span style="color:#6b7280;font-size:0.9em;">（prompt_extend）</span>
+      </label>
+      <span style="color:#4b5563;font-size:0.72em;">💡 關閉可保留精確構圖與文字位置</span>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <label style="color:#9ca3af;font-size:0.82em;display:block;margin-bottom:4px;">
+        🚫 Negative Prompt <span style="color:#6b7280;font-weight:400;">（避免出現的元素）</span>
+      </label>
+      <textarea class="input-box" id="negative-prompt" placeholder="low resolution, low quality, deformed limbs, deformed fingers, oversaturated, waxy appearance..." spellcheck="false" rows="2" style="font-size:0.82em;resize:vertical;"></textarea>
+    </div>
+
+    <div class="result-area" id="result-area">
+      <div class="placeholder" id="result-placeholder">
+        <div class="icon">🖼️</div>
+        <div>點擊「生成圖片」按鈕，使用目前提示詞生成寫真</div>
+      </div>
+    </div>
+    <div class="gen-actions" id="gen-actions" style="display:none;">
+      <button class="btn btn-secondary btn-sm" id="btn-download">⬇️ 下載圖片</button>
+      <button class="btn btn-secondary btn-sm" id="btn-regenerate">🔄 重新生成</button>
+    </div>
+  </div>
+
+  <!-- 歷史紀錄 -->
+  <div class="section">
+    <h2>📜 生成紀錄</h2>
+    <div id="history">
+      <div style="color: #4b5563; font-size: 0.85em; text-align: center; padding: 20px;">暫無紀錄</div>
+    </div>
+    <div class="history-hint">💡 點擊任一紀錄可還原提示詞與圖片，再次生成</div>
+    <div style="margin-top: 10px;">
+      <button class="btn btn-secondary btn-sm" id="clear-history">清除所有紀錄</button>
+    </div>
+  </div>
+
+  <footer>
+    女性寫真提示詞生成器 &copy; 2026 &nbsp;·&nbsp;
+    for ComfyUI Z-Image Turbo &nbsp;·&nbsp;
+    中英雙語提示詞
+  </footer>
+</div>
+
+<script>
+const state = {
+  selections: {
+    vibe: new Set(),
+    vibe_detail: new Set(),
+    ethnicity: new Set(),
+    age: new Set(),
+    body_frame: new Set(),
+    body_curve: new Set(),
+    bust: new Set(),
+    waist: new Set(),
+    hips: new Set(),
+    skin: new Set(),
+    gaze: new Set(),
+    expression: new Set(),
+    pose: new Set(),
+    hands: new Set(),
+    scene_type: new Set(),
+    face_shape: new Set(),
+    eye_type: new Set(),
+    nose: new Set(),
+    mouth: new Set(),
+    chin: new Set(),
+    eyebrows: new Set(),
+    makeup: new Set(),
+    skin_tone: new Set(),
+    hair_length: new Set(),
+    hair_style: new Set(),
+    hair_color: new Set(),
+    top: new Set(),
+    bottom: new Set(),
+    material: new Set(),
+    shoes: new Set(),
+    socks: new Set(),
+    accessories: new Set(),
+    clothing_style: new Set(),
+    lighting: new Set(),
+    color: new Set(),
+    shot: new Set(),
+    angle: new Set(),
+    composition: new Set(),
+    focal: new Set(),
+    aperture: new Set()
+  },
+  foregroundEnabled: false,
+  foregroundText: '',
+  customAge: '',
+  history: JSON.parse(localStorage.getItem('zimage_prompt_history') || '[]'),
+  mode: 'portrait',
+  apiKey: localStorage.getItem('agnes_api_key') || '',
+  abortController: null
+};
+
+function saveHistory() {
+  localStorage.setItem('zimage_prompt_history', JSON.stringify(state.history));
+}
+
+function generatePrompt() {
+  const mode = state.mode;
+  const prefix = document.getElementById('custom-prefix').value.trim();
+  const suffix = document.getElementById('custom-suffix').value.trim();
+
+  const parts = [];
+
+  if (prefix) parts.push(prefix);
+
+  const modeIntro = {
+    portrait: '高品質寫真人像攝影，自然的肌膚質感與真實膚色，眼神生動富情感，',
+    boudoir: '柔和私房氛圍人像攝影，溫暖微光，慵懶性感氣息，自然不做作，',
+    street: '街頭風格人像攝影，城市自然光，畫面充滿生活感與故事性，',
+    studio: '專業棚拍人像攝影，均勻柔光，乾淨背景，人物立體感鮮明，',
+    custom: ''
+  };
+  if (modeIntro[mode]) parts.push(modeIntro[mode]);
+
+  // ----- 種族 + 年齡 + 身形 (選角) -----
+  const ethnicity = [...state.selections.ethnicity];
+  const age = [...state.selections.age];
+  const charParts = [];
+  if (ethnicity.length > 0) charParts.push(ethnicity.join(''));
+  if (age.length > 0) {
+    // Replace "自訂" with custom age value
+    const ageText = age.map(a => a === '自訂' ? (state.customAge || '自訂') : a).join('');
+    charParts.push(ageText);
+  }
+  const bodyFrame = [...state.selections.body_frame];
+  if (bodyFrame.length > 0) charParts.push(bodyFrame.join('') + '身材');
+  if (charParts.length > 0) {
+    let intro = '一位';
+    const vibe = [...state.selections.vibe];
+    if (vibe.length > 0) {
+      charParts.unshift(vibe.join(''));
+    }
+    // When no vibe is selected, append "女性" so the description reads
+    // naturally (e.g. "一位輕熟女性" instead of incomplete "一位輕熟")
+    if (vibe.length === 0) {
+      charParts.push('女性');
+    }
+    parts.push(intro + charParts.join(''));
+  } else {
+    const vibe = [...state.selections.vibe];
+    if (vibe.length > 0) {
+      parts.push('一位' + vibe.join('') + '女性');
+    }
+  }
+
+  // ----- 氛圍修飾 -----
+  const vibeDetail = [...state.selections.vibe_detail];
+  if (vibeDetail.length > 0) {
+    parts.push(vibeDetail.join('、'));
+  }
+
+  // ----- 體態細節 -----
+  const bodyCurve = [...state.selections.body_curve];
+  if (bodyCurve.length > 0) parts.push(bodyCurve.join('、'));
+
+  const bust = [...state.selections.bust];
+  if (bust.length > 0) parts.push(bust.join('、'));
+
+  const waist = [...state.selections.waist];
+  if (waist.length > 0) parts.push(waist.join(''));
+
+  const hips = [...state.selections.hips];
+  if (hips.length > 0) parts.push(hips.join('、'));
+
+  // ----- 膚質 -----
+  const skin = [...state.selections.skin];
+  if (skin.length > 0) parts.push(skin.join('') + '肌膚');
+
+  // ----- 臉型 -----
+  const faceShape = [...state.selections.face_shape];
+  if (faceShape.length > 0) parts.push(faceShape.join(''));
+
+  // ----- 眼型 -----
+  const eyeType = [...state.selections.eye_type];
+  if (eyeType.length > 0) parts.push(eyeType.join('、'));
+
+  // ----- 妝容 -----
+  const makeup = [...state.selections.makeup];
+  if (makeup.length > 0) parts.push(makeup.join('、'));
+
+  // ----- 鼻型 -----
+  const nose = [...state.selections.nose];
+  if (nose.length > 0) parts.push(nose.join(''));
+
+  // ----- 嘴型 -----
+  const mouth = [...state.selections.mouth];
+  if (mouth.length > 0) parts.push(mouth.join(''));
+
+  // ----- 下巴 -----
+  const chin = [...state.selections.chin];
+  if (chin.length > 0) parts.push(chin.join(''));
+
+  // ----- 眉毛 -----
+  const eyebrows = [...state.selections.eyebrows];
+  if (eyebrows.length > 0) parts.push(eyebrows.join(''));
+
+  // ----- 髮型 -----
+  const hairLen = [...state.selections.hair_length];
+  const hairStyle = [...state.selections.hair_style];
+  const hairColor = [...state.selections.hair_color];
+  if (hairLen.length > 0 || hairStyle.length > 0 || hairColor.length > 0) {
+    const hairParts = [];
+    if (hairStyle.length > 0) hairParts.push(hairStyle.join(''));
+    if (hairLen.length > 0) hairParts.push(hairLen.join(''));
+    if (hairColor.length > 0) hairParts.push(hairColor.join('') + '髮');
+    if (hairParts.length > 0) parts.push(hairParts.join(''));
+  }
+
+  // ----- 表情 -----
+  const expr = [...state.selections.expression];
+  if (expr.length > 0) parts.push('表情' + expr.join('、'));
+
+  // ----- 視線 -----
+  const gaze = [...state.selections.gaze];
+  if (gaze.length > 0) parts.push('視線' + gaze.join('、'));
+
+  // ----- 姿勢 -----
+  const pose = [...state.selections.pose];
+  if (pose.length > 0) parts.push(pose.join(''));
+
+  // ----- 手部動作 -----
+  const hands = [...state.selections.hands];
+  if (hands.length > 0) parts.push('雙手' + hands.join('、'));
+
+  // ----- 場景 -----
+  const sceneType = [...state.selections.scene_type];
+  if (sceneType.length > 0) parts.push(sceneType.join(''));
+
+  // ----- 服裝上衣 -----
+  const top = [...state.selections.top];
+  const material = [...state.selections.material];
+  if (top.length > 0) {
+    if (material.length > 0) {
+      parts.push('穿著' + material.join('') + top.join(''));
+    } else {
+      parts.push('穿著' + top.join(''));
+    }
+  }
+
+  // ----- 服裝下著 -----
+  const bottom = [...state.selections.bottom];
+  if (bottom.length > 0) {
+    if (top.length > 0) {
+      parts.push('與' + bottom.join(''));
+    } else {
+      parts.push('穿著' + bottom.join(''));
+    }
+  }
+
+  // ----- 鞋 -----
+  const shoes = [...state.selections.shoes];
+  if (shoes.length > 0) parts.push(shoes.join(''));
+
+  // ----- 襪 -----
+  const socks = [...state.selections.socks];
+  if (socks.length > 0) parts.push(socks.join(''));
+
+  // ----- 飾品 -----
+  const acc = [...state.selections.accessories];
+  if (acc.length > 0) parts.push('佩戴' + acc.join('、'));
+
+  // ----- 服裝風格 -----
+  const style = [...state.selections.clothing_style];
+  if (style.length > 0) parts.push(style.join('') + '風格');
+
+  // ----- 光線 -----
+  const lighting = [...state.selections.lighting];
+  if (lighting.length > 0) parts.push(lighting.join('、'));
+
+  // ----- 色調 -----
+  const color = [...state.selections.color];
+  if (color.length > 0) parts.push(color.join(''));
+
+  // ----- 膚色修飾 -----
+  const skinTone = [...state.selections.skin_tone];
+  if (skinTone.length > 0) parts.push(skinTone.join('、'));
+
+  // ----- 景別 -----
+  const shot = [...state.selections.shot];
+  if (shot.length > 0) parts.push(shot.join(''));
+
+  // ----- 視角 -----
+  const angle = [...state.selections.angle];
+  if (angle.length > 0) parts.push(angle.join(''));
+
+  // ----- 構圖 -----
+  const comp = [...state.selections.composition];
+  if (comp.length > 0) parts.push(comp.join(''));
+
+  // ----- 焦段 -----
+  const focal = [...state.selections.focal];
+  if (focal.length > 0) parts.push(focal.join(''));
+
+  // ----- 光圈 -----
+  const aperture = [...state.selections.aperture];
+  if (aperture.length > 0) parts.push('光圈 ' + aperture.join(''));
+
+  // ----- 前景 -----
+  if (state.foregroundEnabled) {
+    const fg = state.foregroundText;
+    if (fg) parts.push('前景 ' + fg);
+  }
+
+  if (suffix) parts.push(suffix);
+
+  return parts.join('，');
+}
+
+function updatePrompt() {
+  const prompt = generatePrompt();
+  const el = document.getElementById('positive-prompt');
+  if (prompt) {
+    el.value = prompt;
+    el.classList.remove('empty');
+  } else {
+    el.value = '';
+    el.classList.add('empty');
+  }
+  // Hide Chinese reference when prompt is regenerated from tags
+  document.getElementById('chinese-ref').style.display = 'none';
+}
+
+function toggleTag(el) {
+  const container = el.closest('.tags');
+  const group = container.dataset.group;
+  const text = el.textContent.trim();
+  const isSingle = container.dataset.single !== undefined;
+
+  if (isSingle) {
+    if (el.classList.contains('active')) return;
+    container.querySelectorAll('.tag.active').forEach(t => {
+      t.classList.remove('active');
+      state.selections[group].delete(t.textContent.trim());
+    });
+    el.classList.add('active');
+    state.selections[group].add(text);
+
+    // Custom age input visibility
+    if (group === 'age') {
+      const wrap = document.getElementById('custom-age-wrap');
+      if (text === '自訂') {
+        wrap.style.display = 'block';
+        document.getElementById('custom-age-input').focus();
+      } else {
+        wrap.style.display = 'none';
+        state.customAge = '';
+      }
+    }
+  } else {
+    el.classList.toggle('active');
+    if (el.classList.contains('active')) {
+      state.selections[group].add(text);
+    } else {
+      state.selections[group].delete(text);
+    }
+  }
+  updatePrompt();
+}
+
+document.querySelectorAll('.tags').forEach(container => {
+  container.addEventListener('click', e => {
+    if (e.target.classList.contains('tag')) {
+      toggleTag(e.target);
+    }
+  });
+});
+
+document.querySelectorAll('.input-box:not(#foreground-input)').forEach(input => {
+  input.addEventListener('input', updatePrompt);
+});
+
+document.querySelectorAll('.mode-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    state.mode = tab.dataset.mode;
+    updatePrompt();
+  });
+});
+
+document.getElementById('copy-positive').addEventListener('click', () => {
+  const text = document.getElementById('positive-prompt').value;
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-positive');
+    const orig = btn.textContent;
+    btn.textContent = '✅ 已複製';
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+
+    state.history.unshift({
+      prompt: text,
+      time: new Date().toLocaleString('zh-TW')
+    });
+    if (state.history.length > 50) state.history.pop();
+    saveHistory();
+    renderHistory();
+  });
+});
+
+document.getElementById('clear-all').addEventListener('click', () => {
+  document.querySelectorAll('.tags .tag.active').forEach(el => {
+    el.classList.remove('active');
+    const group = el.closest('.tags').dataset.group;
+    state.selections[group].delete(el.textContent.trim());
+  });
+  document.querySelectorAll('.input-box').forEach(el => el.value = '');
+  document.getElementById('foreground-toggle').checked = false;
+  document.getElementById('foreground-input').value = '';
+  document.getElementById('foreground-input').disabled = true;
+  state.foregroundEnabled = false;
+  state.foregroundText = '';
+  // Reset custom age
+  state.customAge = '';
+  document.getElementById('custom-age-wrap').style.display = 'none';
+  document.getElementById('custom-age-input').value = '';
+  updatePrompt();
+});
+
+document.getElementById('randomize').addEventListener('click', () => {
+  document.querySelectorAll('.tags .tag.active').forEach(el => {
+    el.classList.remove('active');
+    const group = el.closest('.tags').dataset.group;
+    state.selections[group].delete(el.textContent.trim());
+  });
+  document.querySelectorAll('.tags').forEach(container => {
+    const tags = container.querySelectorAll('.tag');
+    if (tags.length === 0) return;
+    const isSingle = container.dataset.single !== undefined;
+    const pickCount = isSingle ? 1 : Math.floor(Math.random() * 2) + 1;
+    const shuffled = [...tags].sort(() => Math.random() - 0.5);
+    shuffled.slice(0, pickCount).forEach(el => {
+      el.classList.add('active');
+      const group = el.closest('.tags').dataset.group;
+      state.selections[group].add(el.textContent.trim());
+    });
+  });
+  state.foregroundEnabled = false;
+  state.foregroundText = '';
+  document.getElementById('foreground-toggle').checked = false;
+  document.getElementById('foreground-input').value = '';
+  document.getElementById('foreground-input').disabled = true;
+  // Reset custom age
+  state.customAge = '';
+  document.getElementById('custom-age-wrap').style.display = 'none';
+  document.getElementById('custom-age-input').value = '';
+  updatePrompt();
+});
+
+const foregroundRandomOptions = [
+  '散景光斑', '前景樹葉', '前景花卉', '前景紗簾', '玻璃反射',
+  '雨滴水珠', '煙霧繚繞', '前景模糊', '前景框架', '光影斑駁',
+  '櫻花飄落', '氣泡', '薄紗飄動', '燭光晃動'
+];
+
+document.getElementById('foreground-toggle').addEventListener('change', e => {
+  state.foregroundEnabled = e.target.checked;
+  document.getElementById('foreground-input').disabled = !e.target.checked;
+  if (!e.target.checked) {
+    state.foregroundText = '';
+    document.getElementById('foreground-input').value = '';
+  }
+  updatePrompt();
+});
+
+document.getElementById('foreground-input').addEventListener('input', e => {
+  state.foregroundText = e.target.value.trim();
+  updatePrompt();
+});
+
+document.getElementById('foreground-random').addEventListener('click', () => {
+  const input = document.getElementById('foreground-input');
+  const toggle = document.getElementById('foreground-toggle');
+  toggle.checked = true;
+  state.foregroundEnabled = true;
+  input.disabled = false;
+  const pick = foregroundRandomOptions[Math.floor(Math.random() * foregroundRandomOptions.length)];
+  input.value = pick;
+  state.foregroundText = pick;
+  updatePrompt();
+});
+
+document.getElementById('custom-age-input').addEventListener('input', e => {
+  state.customAge = e.target.value.trim();
+  updatePrompt();
+});
+
+function renderHistory() {
+  const el = document.getElementById('history');
+  if (state.history.length === 0) {
+    el.innerHTML = '<div style="color: #4b5563; font-size: 0.85em; text-align: center; padding: 20px;">暫無紀錄</div>';
+    return;
+  }
+  el.innerHTML = state.history.map((item, i) => {
+    const thumbHtml = item.imageUrl
+      ? `<img class="thumb" src="${escapeHtml(item.imageUrl)}" alt="" loading="lazy">`
+      : `<div class="thumb-placeholder">📝</div>`;
+    return `<div class="history-item" data-index="${i}">
+      ${thumbHtml}
+      <div class="info">
+        <div class="time">#${i + 1} ${item.time}</div>
+        <div class="prompt-text">${escapeHtml(item.prompt)}</div>
+      </div>
+      <button class="history-del" data-index="${i}" title="刪除此筆">🗑️</button>
+    </div>`;
+  }).join('');
+
+  // Click to restore (ignore clicks on .history-del)
+  el.querySelectorAll('.history-item').forEach(div => {
+    div.addEventListener('click', (e) => {
+      if (e.target.closest('.history-del')) return;
+      const idx = parseInt(div.dataset.index);
+      restoreHistoryItem(idx);
+    });
+  });
+
+  // Delete individual
+  el.querySelectorAll('.history-del').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = parseInt(btn.dataset.index);
+      deleteHistoryItem(idx);
+    });
+  });
+}
+
+function deleteHistoryItem(index) {
+  state.history.splice(index, 1);
+  saveHistory();
+  renderHistory();
+}
+
+function restoreHistoryItem(index) {
+  const item = state.history[index];
+  if (!item) return;
+
+  // Restore prompt in display
+  const promptEl = document.getElementById('positive-prompt');
+  promptEl.value = item.prompt;
+  promptEl.classList.remove('empty');
+
+  // Restore image in result area (if exists)
+  if (item.imageUrl) {
+    const area = document.getElementById('result-area');
+    area.innerHTML = '<div class="spinner-wrap"><div class="spinner"></div><div>⏳ 正在載入圖片...</div></div>';
+    document.getElementById('gen-actions').style.display = 'none';
+
+    const img = new Image();
+    img.onload = () => {
+      area.innerHTML = '';
+      area.appendChild(img);
+      document.getElementById('gen-actions').style.display = 'flex';
+      state.lastImageUrl = item.imageUrl;
+    };
+    img.onerror = () => {
+      area.innerHTML =
+        '<div class="error-msg">⚠️ 圖片無法載入<br>' +
+        '<a href="' + escapeHtml(item.imageUrl) + '" target="_blank" style="color:#a78bfa;word-break:break-all;">' +
+        escapeHtml(item.imageUrl) + '</a></div>';
+      document.getElementById('gen-actions').style.display = 'flex';
+      state.lastImageUrl = item.imageUrl;
+    };
+    img.src = item.imageUrl;
+  } else {
+    showPlaceholder();
+  }
+
+  // Scroll to image generation section
+  document.querySelector('.gen-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function escapeHtml(text) {
+  const d = document.createElement('div');
+  d.textContent = text;
+  return d.innerHTML;
+}
+
+document.getElementById('clear-history').addEventListener('click', () => {
+  state.history = [];
+  saveHistory();
+  renderHistory();
+});
+
+// ===== Agnes Image Generation =====
+
+function getApiKey() {
+  return state.apiKey || localStorage.getItem('agnes_api_key') || '';
+}
+
+function saveApiKey(key) {
+  state.apiKey = key;
+  localStorage.setItem('agnes_api_key', key);
+}
+
+function clearApiKey() {
+  state.apiKey = '';
+  localStorage.removeItem('agnes_api_key');
+  document.getElementById('api-key-input').value = '';
+  setApiStatus('API Key 已清除', 'ok');
+}
+
+function setApiStatus(msg, type) {
+  const el = document.getElementById('api-status');
+  el.textContent = msg;
+  el.className = 'api-status' + (type ? ' ' + type : '');
+}
+
+function setResultContent(html) {
+  const area = document.getElementById('result-area');
+  area.innerHTML = html;
+}
+
+function showPlaceholder() {
+  setResultContent(
+    '<div class="placeholder">' +
+    '<div class="icon">🖼️</div>' +
+    '<div>點擊「生成圖片」按鈕，使用目前提示詞生成寫真</div>' +
+    '</div>'
+  );
+  document.getElementById('gen-actions').style.display = 'none';
+}
+
+function showLoading() {
+  setResultContent(
+    '<div class="spinner-wrap">' +
+    '<div class="spinner"></div>' +
+    '<div>⏳ 正在生成圖片，請稍候...</div>' +
+    '</div>'
+  );
+  document.getElementById('gen-actions').style.display = 'none';
+}
+
+function showError(msg) {
+  setResultContent('<div class="error-msg">❌ ' + escapeHtml(msg) + '</div>');
+  document.getElementById('gen-actions').style.display = 'none';
+}
+
+function showImage(url) {
+  const area = document.getElementById('result-area');
+  area.innerHTML = '<div class="spinner-wrap"><div class="spinner"></div><div>⏳ 正在載入圖片...</div></div>';
+  document.getElementById('gen-actions').style.display = 'none';
+
+  const img = new Image();
+  img.onload = () => {
+    area.innerHTML = '';
+    area.appendChild(img);
+    document.getElementById('gen-actions').style.display = 'flex';
+    state.lastImageUrl = url;
+  };
+  img.onerror = () => {
+    // 若直接顯示失敗，改用 <a> 連結讓用戶手動開啟
+    area.innerHTML =
+      '<div class="error-msg">⚠️ 瀏覽器無法直接顯示圖片，但可透過下方連結開啟<br>' +
+      '<a href="' + escapeHtml(url) + '" target="_blank" style="color:#a78bfa;word-break:break-all;">' +
+      escapeHtml(url) + '</a></div>';
+    document.getElementById('gen-actions').style.display = 'flex';
+    state.lastImageUrl = url;
+  };
+  img.src = url;
+}
+
+async function generateImage() {
+  // Cancel any in-flight request
+  if (state.abortController) {
+    state.abortController.abort();
+  }
+  state.abortController = new AbortController();
+  const signal = state.abortController.signal;
+
+  // Hide Chinese reference when generating directly
+  document.getElementById('chinese-ref').style.display = 'none';
+
+  // Validate prompt
+  const promptEl = document.getElementById('positive-prompt');
+  const prompt = promptEl.value.trim();
+  if (!prompt) {
+    showError('請先輸入或組合提示詞，再生成圖片');
+    state.abortController = null;
+    return;
+  }
+
+  // Validate API key
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    showError('請先在「Agnes API 設定」中輸入並儲存 API Key');
+    state.abortController = null;
+    return;
+  }
+
+  const size = document.getElementById('gen-size').value;
+  const negativePrompt = document.getElementById('negative-prompt').value.trim();
+  const promptExtend = document.getElementById('toggle-prompt-extend').checked;
+  const btn = document.getElementById('btn-generate');
+  btn.disabled = true;
+  btn.textContent = '⏳ 生成中...';
+  showLoading();
+
+  try {
+    const requestBody = {
+      model: 'agnes-image-2.1-flash',
+      prompt: prompt,
+      size: size,
+      extra_body: {
+        response_format: 'url',
+        prompt_extend: promptExtend
+      }
+    };
+    if (negativePrompt) {
+      requestBody.negative_prompt = negativePrompt;
+    }
+
+    const response = await fetch('https://apihub.agnes-ai.com/v1/images/generations', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + apiKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody),
+      signal: signal
+    });
+
+    if (!response.ok) {
+      let errMsg = 'HTTP ' + response.status;
+      try {
+        const errData = await response.json();
+        if (errData.error) {
+          errMsg += ': ' + (typeof errData.error === 'string' ? errData.error : (errData.error.message || JSON.stringify(errData.error)));
+        } else if (errData.message) {
+          errMsg += ': ' + errData.message;
+        }
+      } catch {
+        errMsg += ' ' + response.statusText;
+      }
+      throw new Error(errMsg);
+    }
+
+    const data = await response.json();
+
+    // Extract image URL (OpenAI DALL-E format: data[].url)
+    let imageUrl = null;
+    if (data.data && Array.isArray(data.data)) {
+      for (const item of data.data) {
+        if (item.url) { imageUrl = item.url; break; }
+      }
+    }
+    // Also check top-level or nested (bailiwick-style)
+    if (!imageUrl && data.url) imageUrl = data.url;
+    if (!imageUrl && data.image_url) imageUrl = data.image_url;
+    // Deep search
+    if (!imageUrl) {
+      const urls = collectUrls(data);
+      if (urls.length > 0) imageUrl = urls[0];
+    }
+
+    if (!imageUrl) {
+      throw new Error('API 回應中未找到圖片 URL');
+    }
+
+    showImage(imageUrl);
+
+    // Save to history
+    state.history.unshift({
+      prompt: prompt,
+      time: new Date().toLocaleString('zh-TW'),
+      imageUrl: imageUrl
+    });
+    if (state.history.length > 50) state.history.pop();
+    saveHistory();
+    renderHistory();
+
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      showPlaceholder();
+      return;
+    }
+    showError('生成失敗：' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '✨ 生成圖片';
+    state.abortController = null;
+  }
+}
+
+const EXPAND_SYSTEM_PROMPT = `你是一位精通現代 AI 繪圖模型（如 Flux, Agnes Image 2.0）的資深 Prompt 工程師。
+當用戶給你簡單的畫面概念時，請使用 Agnes-Image-2.0-Flash 最喜歡的語句風格，將其擴寫為一段結構完整、充滿細節的英文 Prompt。
+
+請遵循以下結構擴寫：
+[主體 Subject] + [動作/細節 Action/Details] + [場景/背景 Background] + [燈光/色彩 Lighting/Color] + [鏡頭/構圖 Framing/Composition]
+
+規則：
+1. 嚴禁使用無效空泛詞（如 masterpiece, hyperrealistic, 4K）。
+2. 請使用具體的物理材質與精準光影（如 atmospheric neon glow, brushed aluminum texture）。
+3. 如果有文字需求，請用英文雙引號包裹。
+
+請以下列格式輸出，中間用 ===ZH-TW=== 分隔：
+
+（英文 Prompt，用於圖片生成）
+
+===ZH-TW===
+
+（上述英文 Prompt 的繁體中文翻譯，僅供參考）`;
+
+async function expandPromptWithAI(promptText) {
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    showError('請先在「Agnes API 設定」中輸入並儲存 API Key');
+    return null;
+  }
+
+  if (!promptText || !promptText.trim()) {
+    showError('請先輸入或組合提示詞，再進行 AI 擴寫');
+    return null;
+  }
+
+  try {
+    const response = await fetch('https://apihub.agnes-ai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + apiKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'agnes-2.0-flash',
+        messages: [
+          { role: 'system', content: EXPAND_SYSTEM_PROMPT },
+          { role: 'user', content: promptText }
+        ],
+        temperature: 0.7,
+        max_tokens: 1024
+      })
+    });
+
+    if (!response.ok) {
+      let errMsg = 'HTTP ' + response.status;
+      try {
+        const errData = await response.json();
+        if (errData.error) {
+          errMsg += ': ' + (typeof errData.error === 'string' ? errData.error : (errData.error.message || JSON.stringify(errData.error)));
+        }
+      } catch { /* ignore parse error */ }
+      throw new Error(errMsg);
+    }
+
+    const data = await response.json();
+    const raw = data.choices?.[0]?.message?.content?.trim();
+    if (!raw) throw new Error('AI 回傳內容為空');
+
+    // Parse bilingual output
+    const zhIndex = raw.indexOf('===ZH-TW===');
+    if (zhIndex !== -1) {
+      const english = raw.slice(0, zhIndex).replace(/\n{3,}/g, '\n\n').trim();
+      const chinese = raw.slice(zhIndex + '===ZH-TW==='.length).replace(/^[\s\n]+|[\s\n]+$/g, '');
+      return { english, chinese };
+    }
+    // Fallback: no delimiter found, treat entire output as English
+    return { english: raw, chinese: '' };
+  } catch (err) {
+    showError('AI 擴寫失敗：' + err.message);
+    return null;
+  }
+}
+
+function collectUrls(value) {
+  const urls = [];
+  if (value && typeof value === 'object') {
+    if (Array.isArray(value)) {
+      for (const item of value) urls.push(...collectUrls(item));
+    } else {
+      for (const key of Object.keys(value)) {
+        if ((key === 'url' || key === 'image_url') && typeof value[key] === 'string' && value[key].startsWith('http')) {
+          urls.push(value[key]);
+        } else {
+          urls.push(...collectUrls(value[key]));
+        }
+      }
+    }
+  }
+  return urls;
+}
+
+// ----- Event Handlers -----
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Restore API key from localStorage
+  const savedKey = getApiKey();
+  if (savedKey) {
+    document.getElementById('api-key-input').value = savedKey;
+    setApiStatus('✅ API Key 已載入', 'ok');
+  }
+});
+
+document.getElementById('api-key-save').addEventListener('click', () => {
+  const key = document.getElementById('api-key-input').value.trim();
+  if (!key) {
+    setApiStatus('請輸入有效的 API Key', 'err');
+    return;
+  }
+  saveApiKey(key);
+  setApiStatus('✅ API Key 已儲存（localStorage）', 'ok');
+});
+
+document.getElementById('api-key-clear').addEventListener('click', clearApiKey);
+
+document.getElementById('api-key-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    document.getElementById('api-key-save').click();
+  }
+});
+
+document.getElementById('btn-generate').addEventListener('click', generateImage);
+
+document.getElementById('btn-expand').addEventListener('click', async () => {
+  const promptEl = document.getElementById('positive-prompt');
+  const chineseRef = document.getElementById('chinese-ref');
+  const chineseRefText = document.getElementById('chinese-ref-text');
+  const expandBtn = document.getElementById('btn-expand');
+  const originalText = expandBtn.textContent;
+  expandBtn.disabled = true;
+  expandBtn.textContent = '⏳ 擴寫中...';
+
+  const result = await expandPromptWithAI(promptEl.value.trim());
+  if (result) {
+    promptEl.value = result.english;
+    promptEl.classList.remove('empty');
+    if (result.chinese) {
+      chineseRefText.textContent = result.chinese;
+      chineseRef.style.display = 'block';
+    } else {
+      chineseRef.style.display = 'none';
+    }
+  }
+
+  expandBtn.disabled = false;
+  expandBtn.textContent = originalText;
+});
+
+document.getElementById('btn-expand-gen').addEventListener('click', async () => {
+  const promptEl = document.getElementById('positive-prompt');
+  const chineseRef = document.getElementById('chinese-ref');
+  const chineseRefText = document.getElementById('chinese-ref-text');
+  const genBtn = document.getElementById('btn-expand-gen');
+  const originalText = genBtn.textContent;
+  genBtn.disabled = true;
+  genBtn.textContent = '⏳ 擴寫中...';
+
+  const result = await expandPromptWithAI(promptEl.value.trim());
+  genBtn.textContent = '✨ 擴寫並生成';
+  genBtn.disabled = false;
+
+  if (result) {
+    promptEl.value = result.english;
+    promptEl.classList.remove('empty');
+    if (result.chinese) {
+      chineseRefText.textContent = result.chinese;
+      chineseRef.style.display = 'block';
+    } else {
+      chineseRef.style.display = 'none';
+    }
+    // Chain into image generation
+    generateImage();
+  }
+});
+
+document.getElementById('btn-expand-gen').addEventListener('click', async () => {
+  const promptEl = document.getElementById('positive-prompt');
+  const genBtn = document.getElementById('btn-expand-gen');
+  const originalText = genBtn.textContent;
+  genBtn.disabled = true;
+  genBtn.textContent = '⏳ 擴寫中...';
+
+  const result = await expandPromptWithAI(promptEl.value.trim());
+  genBtn.textContent = '✨ 擴寫並生成';
+  genBtn.disabled = false;
+
+  if (result) {
+    promptEl.value = result;
+    promptEl.classList.remove('empty');
+    // Chain into image generation
+    generateImage();
+  }
+});
+
+document.getElementById('btn-download').addEventListener('click', () => {
+  const url = state.lastImageUrl;
+  if (!url) return;
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'agnes-image-' + Date.now() + '.png';
+  a.target = '_blank';
+  a.click();
+});
+
+document.getElementById('btn-regenerate').addEventListener('click', generateImage);
+
+renderHistory();
+updatePrompt();
+</script>
+</body>
+</html>
