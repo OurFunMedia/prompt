@@ -1,0 +1,81 @@
+:root {
+  /* 背景 */
+  --bg-primary: #0f0f1a;
+  --bg-card: #1a1a2e;
+  --bg-input: #12122a;
+  --bg-hover: #1a1a3e;
+
+  /* 邊框 */
+  --border: #2d2d4a;
+  --border-hover: #6d4bc8;
+  --border-active: #7c3aed;
+
+  /* 文字 */
+  --text-primary: #e0e0f0;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --text-accent: #c4b5fd;
+
+  /* 強調色 */
+  --accent: #a78bfa;
+  --accent-gradient: linear-gradient(135deg, #6d4bc8, #4f46e5);
+  --accent-gradient-hover: linear-gradient(135deg, #7c5cd8, #5b52f0);
+
+  /* 狀態色 */
+  --success: #34d399;
+  --error: #f87171;
+  --warning: #fbbf24;
+
+  /* Tag */
+  --tag-bg: #12122a;
+  --tag-border: #2d2d4a;
+  --tag-text: #9ca3af;
+  --tag-active-bg: linear-gradient(135deg, #2d1b69, #1e1b4b);
+  --tag-active-border: #7c3aed;
+  --tag-active-text: #c4b5fd;
+  --tag-hover-border: #6d4bc8;
+
+  /* 按鈕 */
+  --btn-primary-bg: linear-gradient(135deg, #6d4bc8, #4f46e5);
+  --btn-secondary-bg: #1e1e3a;
+  --btn-secondary-border: #2d2d4a;
+  --btn-secondary-text: #9ca3af;
+
+  /* 間距 */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* 圓角 */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 20px;
+
+  /* 字體 */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC',
+    'Microsoft JhengHei', sans-serif;
+  --font-size-xs: 0.72em;
+  --font-size-sm: 0.78em;
+  --font-size-base: 0.82em;
+  --font-size-md: 0.9em;
+  --font-size-lg: 1.05em;
+  --font-size-xl: 1.6em;
+
+  /* 陰影 */
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 30px rgba(45, 27, 105, 0.4);
+  --shadow-glow: 0 0 12px rgba(109, 75, 200, 0.15);
+  --shadow-glow-active: 0 0 12px rgba(124, 58, 237, 0.2);
+
+  /* 過渡 */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.3s ease;
+
+  /* Header */
+  --header-height: 60px;
+}
