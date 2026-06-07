@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 虛擬人物創建</title>
+  <style>
+    /* ========== CSS Variables ========== */
+    :root {
+      --primary: #d4a5b8;
+      --secondary: #f5e6ea;
+      --accent: #c495a8;
+      --bg: #faf5f7;
+      --card-bg: #ffffff;
+      --text: #4a3f42;
+      --text-light: #7a6a6d;
+      --border: #e8d8dc;
+      --shadow: rgba(180, 140, 150, 0.15);
+      --shadow-strong: rgba(180, 140, 150, 0.25);
+      --glow: rgba(212, 165, 184, 0.5);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --transition: 0.2s ease;
+      --header-height: 70px;
+      --tab-height: 50px;
+    }
+
+    [data-theme="dark"] {
+      --primary: #c495a8;
+      --secondary: #3d3235;
+      --accent: #d4a5b8;
+      --bg: #2d2427;
+      --card-bg: #3a2f32;
+      --text: #f5e6ea;
+      --text-light: #c4b5b8;
+      --border: #4a3f42;
+      --shadow: rgba(0, 0, 0, 0.3);
+      --shadow-strong: rgba(0, 0, 0, 0.5);
+      --glow: rgba(212, 165, 184, 0.4);
+    }
+
+    /* ========== Reset & Base ========== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ========== App Container ========== */
+    #app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ========== Header ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+      box-shadow: 0 2px 10px var(--shadow);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .header-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .api-key-input {
+      width: 200px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.875rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .api-key-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    .api-key-input::placeholder {
+      color: var(--text-light);
+    }
+
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: var(--secondary);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .theme-toggle:hover {
+      background: var(--primary);
+      transform: scale(1.05);
+    }
+
+    /* ========== API Key Status ========== */
+    .api-key-wrapper {
+      display: flex; align-items: center; gap: 8px; position: relative;
+    }
+    .api-key-status {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+      background: #e88a8a; transition: background 0.3s;
+      box-shadow: 0 0 6px rgba(232, 138, 138, 0.5);
+    }
+    .api-key-status.has-key {
+      background: #7ec8a8;
+      box-shadow: 0 0 6px rgba(126, 200, 168, 0.5);
+    }
+    .api-key-apply {
+      padding: 6px 12px; border: none; border-radius: 8px;
+      background: var(--primary); color: white; cursor: pointer;
+      font-size: 0.8rem; font-weight: 600; white-space: nowrap;
+      font-family: inherit; transition: all 0.2s; text-decoration: none;
+    }
+    .api-key-apply:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+    /* ========== API Key Guide Banner ========== */
+    .api-guide-banner {
+      display: none; padding: 20px; margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+      border: 2px solid var(--primary); border-radius: var(--radius);
+      text-align: center;
+    }
+    .api-guide-banner.visible { display: block; }
+    .api-guide-banner h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
+    .api-guide-banner p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.6; }
+    .api-guide-banner .btn-apply {
+      display: inline-block; padding: 10px 24px; background: var(--primary);
+      color: white; border: none; border-radius: 10px; cursor: pointer;
+      font-size: 0.95rem; font-weight: 600; text-decoration: none;
+      font-family: inherit; transition: all 0.2s;
+    }
+    .api-guide-banner .btn-apply:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow-strong); }
+
+    /* ========== Tab Navigation ========== */
+    .tab-nav {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      height: var(--tab-height);
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      z-index: 99;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tab-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 100px;
+      height: 100%;
+      border: none;
+      background: transparent;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      transition: color var(--transition), background var(--transition);
+      white-space: nowrap;
+      padding: 0 16px;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+      background: var(--secondary);
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 3px 3px 0 0;
+    }
+
+    /* ========== Tab Content Container ========== */
+    .tab-content-container {
+      flex: 1;
+      margin-top: calc(var(--header-height) + var(--tab-height));
+      padding-bottom: 80px;
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* ========== Option Group ========== */
+    .option-group {
+      margin-bottom: 24px;
+    }
+
+    .option-group-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    .option-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .option-card {
+      padding: 10px 16px;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: var(--text);
+      transition: all var(--transition);
+      user-select: none;
+    }
+
+    .option-card:hover {
+      border-color: var(--primary);
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary);
+      background: var(--secondary);
+      box-shadow: 0 0 0 3px var(--glow), 0 4px 12px var(--shadow-strong);
+    }
+
+    /* ========== Slider Option ========== */
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slider-label {
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+
+    .slider-value {
+      font-size: 0.875rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--secondary);
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 2px 6px var(--shadow);
+      transition: transform var(--transition);
+    }
+
+    .slider::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+    }
+
+    /* ========== Generate Tab ========== */
+    .generate-section {
+      margin-bottom: 24px;
+    }
+
+    .generate-section-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .prompt-textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 16px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      resize: vertical;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .prompt-textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    .aspect-ratio-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .aspect-btn {
+      padding: 10px 18px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .aspect-btn:hover {
+      border-color: var(--primary);
+      background: var(--secondary);
+    }
+
+    .aspect-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    .style-preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .style-btn {
+      padding: 10px 18px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .style-btn:hover {
+      border-color: var(--accent);
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    .style-btn.selected {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    .style-btn-none {
+      border-color: var(--border);
+      color: var(--text-secondary);
+      opacity: 0.6;
+    }
+    .style-btn-none.selected {
+      border-color: var(--text-secondary);
+      background: var(--secondary);
+      color: var(--text-secondary);
+      opacity: 0.8;
+      box-shadow: none;
+    }
+    .style-btn-none:hover {
+      opacity: 0.9;
+      border-color: var(--text-secondary);
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 16px 24px;
+      border: none;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: 0 4px 15px var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--shadow-strong);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-reset {
+      display: block; width: 100%; margin-top: 20px; margin-bottom: 8px;
+      padding: 10px 16px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--card-bg);
+      color: var(--text-secondary); font-size: 0.85rem; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-reset:hover {
+      border-color: #e74c3c; color: #e74c3c; background: var(--secondary);
+    }
+
+    .generate-actions {
+      display: flex !important; gap: 10px;
+    }
+    .generate-actions .btn-primary { flex: 1; }
+    .generate-actions .btn-secondary { flex: 1; padding: 16px 24px; border-radius: var(--radius); font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all var(--transition); background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+    .generate-actions .btn-secondary:hover { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: 0 6px 20px var(--shadow-strong); }
+    .generate-actions .btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; background: transparent; color: var(--primary); }
+
+    .btn-secondary {
+      padding: 12px 20px;
+      border: 2px solid var(--primary);
+      border-radius: var(--radius);
+      background: transparent;
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .image-result {
+      width: 100%;
+      min-height: 300px;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      background: var(--card-bg);
+    }
+
+    .image-result.has-image {
+      border: none;
+      padding: 0;
+    }
+
+    .image-result img {
+      max-width: 100%;
+      max-height: 500px;
+      border-radius: var(--radius);
+      object-fit: contain;
+    }
+
+    .spinner {
+      width: 50px; height: 50px;
+      border: 4px solid var(--secondary);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    #error-message {
+      padding: 12px 16px; background: #fde8e8; color: #c0392b;
+      border-radius: var(--radius-sm); margin: 12px 0; display: none; font-size: 0.9rem;
+    }
+    [data-theme="dark"] #error-message { background: #4a2a2a; color: #e88a8a; }
+
+    .saved-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+    }
+    .saved-item:last-child { border-bottom: none; }
+    .saved-item-actions { display: flex; gap: 6px; }
+    .saved-item-actions button {
+      padding: 4px 10px; border: 1px solid var(--border); border-radius: 6px;
+      background: var(--card-bg); cursor: pointer; font-size: 0.8rem;
+      color: var(--text); font-family: inherit; transition: all 0.2s;
+    }
+    .saved-item-actions button:hover { border-color: var(--primary); }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--secondary);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ========== Generation History ========== */
+    .history-title {
+      font-size: 0.95rem; font-weight: 600; color: var(--text);
+      margin-bottom: 10px; padding-bottom: 6px;
+      border-bottom: 2px solid var(--border);
+    }
+    .history-item {
+      display: flex; gap: 12px; padding: 10px;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+      background: var(--card-bg);
+    }
+    .history-item:hover { border-color: var(--primary); box-shadow: 0 2px 8px var(--shadow); }
+    .history-thumb {
+      width: 64px; height: 64px; border-radius: 6px; flex-shrink: 0;
+      background-size: cover; background-position: center;
+      background-color: var(--secondary);
+    }
+    .history-info { flex: 1; min-width: 0; }
+    .history-prompt { font-size: 0.8rem; color: var(--text); line-height: 1.4; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .history-meta { font-size: 0.75rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .history-tag {
+      display: inline-block; padding: 1px 6px; font-size: 0.7rem;
+      background: var(--primary-light); color: var(--text);
+      border-radius: 4px; font-weight: 500;
+    }
+    .history-time { margin-left: auto; white-space: nowrap; }
+
+    .history-del-btn {
+      background: none; border: none; color: var(--text-secondary);
+      cursor: pointer; font-size: 0.9rem; padding: 0 4px;
+      align-self: flex-start; line-height: 1; opacity: 0.4;
+      transition: opacity 0.15s;
+    }
+    .history-item:hover .history-del-btn { opacity: 0.8; }
+    .history-del-btn:hover { opacity: 1 !important; color: #e74c3c; }
+
+    .history-clear-all-btn {
+      float: right; font-size: 0.75rem; padding: 3px 10px;
+      border: 1px solid var(--border); border-radius: 12px;
+      background: none; color: var(--text-secondary); cursor: pointer;
+      transition: all 0.15s; font-weight: 400;
+    }
+    .history-clear-all-btn:hover {
+      border-color: #e74c3c; color: #e74c3c;
+    }
+
+    /* ========== Scrollbar ========== */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 12px;
+      }
+
+      .header-title {
+        font-size: 1rem;
+      }
+
+      .api-key-input {
+        width: 140px;
+        font-size: 0.8rem;
+      }
+
+      .tab-btn {
+        min-width: 80px;
+        font-size: 0.8rem;
+        padding: 0 10px;
+      }
+
+      .tab-panel {
+        padding: 16px 12px;
+      }
+
+      .option-card {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+      }
+
+      .prompt-textarea {
+        min-height: 120px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-left {
+        gap: 8px;
+      }
+
+      .logo {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+      }
+
+      .header-title {
+        font-size: 0.9rem;
+      }
+
+      .api-key-input {
+        width: 100px;
+        padding: 6px 8px;
+      }
+
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">✨</div>
+        <h1 class="header-title">AI 虛擬人物創建</h1>
+      </div>
+      <div class="header-right">
+        <div class="api-key-wrapper">
+          <span class="api-key-status" id="apiKeyStatus" title="API Key 狀態"></span>
+          <input type="password" class="api-key-input" id="apiKeyInput" placeholder="輸入 Agnes API Key...">
+          <button class="api-key-apply" id="apiKeyApplyBtn" title="前往官網申請免費 API Key">🔑 申請 Key</button>
+        </div>
+        <button class="theme-toggle" id="themeToggle" title="切換主題">🌙</button>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="character">角色</button>
+      <button class="tab-btn" data-tab="clothing">服裝</button>
+      <button class="tab-btn" data-tab="scene">場景表情</button>
+      <button class="tab-btn" data-tab="camera">攝影參數</button>
+      <button class="tab-btn" data-tab="generate">生成照片</button>
+    </nav>
+
+    <!-- Tab Content Container -->
+    <div class="tab-content-container">
+      <!-- Tab 1: 角色 (Character) -->
+      <div class="tab-panel active" id="panel-character">
+        <div class="option-group">
+          <div class="option-group-title">種族</div>
+          <div class="option-row">
+            <div class="option-card" data-value="亞洲">亞洲</div>
+            <div class="option-card" data-value="歐美">歐美</div>
+            <div class="option-card" data-value="黑人">黑人</div>
+            <div class="option-card" data-value="拉丁">拉丁</div>
+            <div class="option-card" data-value="中東">中東</div>
+            <div class="option-card" data-value="混血">混血</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">面形</div>
+          <div class="option-row">
+            <div class="option-card" data-value="鵝蛋">鵝蛋</div>
+            <div class="option-card" data-value="圓形">圓形</div>
+            <div class="option-card" data-value="方形">方形</div>
+            <div class="option-card" data-value="心形">心形</div>
+            <div class="option-card" data-value="菱形">菱形</div>
+            <div class="option-card" data-value="長形">長形</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">眼睛</div>
+          <div class="option-row">
+            <div class="option-card" data-value="杏眼">杏眼</div>
+            <div class="option-card" data-value="丹鳳眼">丹鳳眼</div>
+            <div class="option-card" data-value="圓眼">圓眼</div>
+            <div class="option-card" data-value="桃花眼">桃花眼</div>
+            <div class="option-card" data-value="下垂眼">下垂眼</div>
+            <div class="option-card" data-value="狐狸眼">狐狸眼</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">眼型大小</div>
+          <div class="option-row">
+            <div class="option-card" data-value="大">大</div>
+            <div class="option-card" data-value="中">中</div>
+            <div class="option-card" data-value="小">小</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">瞳色</div>
+          <div class="option-row">
+            <div class="option-card" data-value="黑色">黑色</div>
+            <div class="option-card" data-value="棕色">棕色</div>
+            <div class="option-card" data-value="藍色">藍色</div>
+            <div class="option-card" data-value="綠色">綠色</div>
+            <div class="option-card" data-value="灰色">灰色</div>
+            <div class="option-card" data-value="琥珀">琥珀</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">鼻型</div>
+          <div class="option-row">
+            <div class="option-card" data-value="小巧">小巧</div>
+            <div class="option-card" data-value="高挺">高挺</div>
+            <div class="option-card" data-value="希臘鼻">希臘鼻</div>
+            <div class="option-card" data-value="朝天鼻">朝天鼻</div>
+            <div class="option-card" data-value="寬鼻">寬鼻</div>
+            <div class="option-card" data-value="鷹鉤鼻">鷹鉤鼻</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">唇型</div>
+          <div class="option-row">
+            <div class="option-card" data-value="豐滿">豐滿</div>
+            <div class="option-card" data-value="薄唇">薄唇</div>
+            <div class="option-card" data-value="微笑唇">微笑唇</div>
+            <div class="option-card" data-value="M字唇">M字唇</div>
+            <div class="option-card" data-value="小嘴">小嘴</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">眉毛</div>
+          <div class="option-row">
+            <div class="option-card" data-value="柳葉眉">柳葉眉</div>
+            <div class="option-card" data-value="一字眉">一字眉</div>
+            <div class="option-card" data-value="拱形眉">拱形眉</div>
+            <div class="option-card" data-value="粗眉">粗眉</div>
+            <div class="option-card" data-value="細眉">細眉</div>
+            <div class="option-card" data-value="上挑眉">上挑眉</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">髮型</div>
+          <div class="option-row">
+            <div class="option-card" data-value="長直">長直</div>
+            <div class="option-card" data-value="長捲">長捲</div>
+            <div class="option-card" data-value="短髮">短髮</div>
+            <div class="option-card" data-value="鮑伯頭">鮑伯頭</div>
+            <div class="option-card" data-value="馬尾">馬尾</div>
+            <div class="option-card" data-value="丸子頭">丸子頭</div>
+            <div class="option-card" data-value="辮子">辮子</div>
+            <div class="option-card" data-value="中長髮">中長髮</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">髮色</div>
+          <div class="option-row">
+            <div class="option-card" data-value="黑色">黑色</div>
+            <div class="option-card" data-value="棕色">棕色</div>
+            <div class="option-card" data-value="深棕">深棕</div>
+            <div class="option-card" data-value="亞麻">亞麻</div>
+            <div class="option-card" data-value="奶茶">奶茶</div>
+            <div class="option-card" data-value="灰色">灰色</div>
+            <div class="option-card" data-value="酒紅">酒紅</div>
+            <div class="option-card" data-value="紫色">紫色</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">膚色</div>
+          <div class="option-row">
+            <div class="option-card" data-value="白皙">白皙</div>
+            <div class="option-card" data-value="自然">自然</div>
+            <div class="option-card" data-value="小麥">小麥</div>
+            <div class="option-card" data-value="古銅">古銅</div>
+            <div class="option-card" data-value="深色">深色</div>
+            <div class="option-card" data-value="象牙白">象牙白</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">年齡</div>
+          <div class="option-row">
+            <div class="option-card" data-value="約18">約18歲</div>
+            <div class="option-card" data-value="約22">約22歲</div>
+            <div class="option-card" data-value="約25">約25歲</div>
+            <div class="option-card" data-value="約30">約30歲</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">身高</div>
+          <div class="option-row">
+            <div class="option-card" data-value="嬌小(150-160)">嬌小(150-160)</div>
+            <div class="option-card" data-value="中等(160-170)">中等(160-170)</div>
+            <div class="option-card" data-value="高挑(170-180)">高挑(170-180)</div>
+            <div class="option-card" data-value="模特(180+)">模特(180+)</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">身材</div>
+          <div class="option-row">
+            <div class="option-card" data-value="纖細">纖細</div>
+            <div class="option-card" data-value="勻稱">勻稱</div>
+            <div class="option-card" data-value="豐滿">豐滿</div>
+            <div class="option-card" data-value="運動型">運動型</div>
+            <div class="option-card" data-value="曲線型">曲線型</div>
+            <div class="option-card" data-value="微肉">微肉</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">三圍 - 胸圍</div>
+          <div class="option-row">
+            <div class="option-card" data-value="A">A</div>
+            <div class="option-card" data-value="B">B</div>
+            <div class="option-card" data-value="C">C</div>
+            <div class="option-card" data-value="D">D</div>
+            <div class="option-card" data-value="E">E</div>
+            <div class="option-card" data-value="F">F</div>
+            <div class="option-card" data-value="G">G</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">三圍 - 腰圍</div>
+          <div class="option-row">
+            <div class="option-card" data-value="細">細</div>
+            <div class="option-card" data-value="中">中</div>
+            <div class="option-card" data-value="寬">寬</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">三圍 - 臀圍</div>
+          <div class="option-row">
+            <div class="option-card" data-value="窄">窄</div>
+            <div class="option-card" data-value="中等">中等</div>
+            <div class="option-card" data-value="寬">寬</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <button class="btn-primary" id="saveCharacterBtn" style="padding:12px 20px;font-size:0.95rem;margin-bottom:16px;">💾 儲存角色</button>
+          <div id="saved-characters-list">
+            <div class="option-group-title">已儲存角色</div>
+            <p style="color:var(--text-light);font-size:0.85rem;">尚無已儲存的角色</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: 服裝 (Clothing) -->
+      <div class="tab-panel" id="panel-clothing">
+        <div class="option-group">
+          <div class="option-group-title">上衣</div>
+          <div class="option-row">
+            <div class="option-card" data-value="T恤">T恤</div>
+            <div class="option-card" data-value="襯衫">襯衫</div>
+            <div class="option-card" data-value="針織衫">針織衫</div>
+            <div class="option-card" data-value="西裝外套">西裝外套</div>
+            <div class="option-card" data-value="牛仔外套">牛仔外套</div>
+            <div class="option-card" data-value="風衣">風衣</div>
+            <div class="option-card" data-value="皮衣">皮衣</div>
+            <div class="option-card" data-value="衛衣">衛衣</div>
+            <div class="option-card" data-value="背心">背心</div>
+            <div class="option-card" data-value="比基尼">比基尼</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">下身</div>
+          <div class="option-row">
+            <div class="option-card" data-value="牛仔褲">牛仔褲</div>
+            <div class="option-card" data-value="裙子">裙子</div>
+            <div class="option-card" data-value="短褲">短褲</div>
+            <div class="option-card" data-value="熱褲">熱褲</div>
+            <div class="option-card" data-value="西裝褲">西裝褲</div>
+            <div class="option-card" data-value="運動褲">運動褲</div>
+            <div class="option-card" data-value="緊身褲">緊身褲</div>
+            <div class="option-card" data-value="A字裙">A字裙</div>
+            <div class="option-card" data-value="百褶裙">百褶裙</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">內衣</div>
+          <div class="option-row">
+            <div class="option-card" data-value="蕾絲內衣">蕾絲內衣</div>
+            <div class="option-card" data-value="運動內衣">運動內衣</div>
+            <div class="option-card" data-value="無鋼圈內衣">無鋼圈內衣</div>
+            <div class="option-card" data-value="無">無</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">內褲</div>
+          <div class="option-row">
+            <div class="option-card" data-value="三角褲">三角褲</div>
+            <div class="option-card" data-value="丁字褲">丁字褲</div>
+            <div class="option-card" data-value="平口褲">平口褲</div>
+            <div class="option-card" data-value="無">無</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">睡裙</div>
+          <div class="option-row">
+            <div class="option-card" data-value="絲質睡裙">絲質睡裙</div>
+            <div class="option-card" data-value="棉質睡裙">棉質睡裙</div>
+            <div class="option-card" data-value="吊帶睡裙">吊帶睡裙</div>
+            <div class="option-card" data-value="無">無</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">洋裝</div>
+          <div class="option-row">
+            <div class="option-card" data-value="連衣裙">連衣裙</div>
+            <div class="option-card" data-value="小禮服">小禮服</div>
+            <div class="option-card" data-value="晚禮服">晚禮服</div>
+            <div class="option-card" data-value="旗袍">旗袍</div>
+            <div class="option-card" data-value="學生制服">學生制服</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">鞋子</div>
+          <div class="option-row">
+            <div class="option-card" data-value="高跟鞋">高跟鞋</div>
+            <div class="option-card" data-value="靴子">靴子</div>
+            <div class="option-card" data-value="運動鞋">運動鞋</div>
+            <div class="option-card" data-value="帆布鞋">帆布鞋</div>
+            <div class="option-card" data-value="涼鞋">涼鞋</div>
+            <div class="option-card" data-value="平底鞋">平底鞋</div>
+            <div class="option-card" data-value="樂福鞋">樂福鞋</div>
+            <div class="option-card" data-value="拖鞋">拖鞋</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">髮飾</div>
+          <div class="option-row">
+            <div class="option-card" data-value="髮夾">髮夾</div>
+            <div class="option-card" data-value="蝴蝶結">蝴蝶結</div>
+            <div class="option-card" data-value="髮帶">髮帶</div>
+            <div class="option-card" data-value="帽子">帽子</div>
+            <div class="option-card" data-value="頭箍">頭箍</div>
+            <div class="option-card" data-value="無">無</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">飾品</div>
+          <div class="option-row">
+            <div class="option-card" data-value="項鍊">項鍊</div>
+            <div class="option-card" data-value="耳環">耳環</div>
+            <div class="option-card" data-value="手鐲">手鐲</div>
+            <div class="option-card" data-value="戒指">戒指</div>
+            <div class="option-card" data-value="手錶">手錶</div>
+            <div class="option-card" data-value="無">無</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">包包</div>
+          <div class="option-row">
+            <div class="option-card" data-value="手提包">手提包</div>
+            <div class="option-card" data-value="肩背包">肩背包</div>
+            <div class="option-card" data-value="後背包">後背包</div>
+            <div class="option-card" data-value="手拿包">手拿包</div>
+            <div class="option-card" data-value="錢包">錢包</div>
+            <div class="option-card" data-value="無">無</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">眼鏡</div>
+          <div class="option-row">
+            <div class="option-card" data-value="無">無</div>
+            <div class="option-card" data-value="近視眼鏡">近視眼鏡</div>
+            <div class="option-card" data-value="太陽眼鏡">太陽眼鏡</div>
+            <div class="option-card" data-value="書呆子眼鏡">書呆子眼鏡</div>
+            <div class="option-card" data-value="貓眼眼鏡">貓眼眼鏡</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">道具</div>
+          <div class="option-row">
+            <div class="option-card" data-value="手機">手機</div>
+            <div class="option-card" data-value="相機">相機</div>
+            <div class="option-card" data-value="書本">書本</div>
+            <div class="option-card" data-value="咖啡杯">咖啡杯</div>
+            <div class="option-card" data-value="雨傘">雨傘</div>
+            <div class="option-card" data-value="鮮花">鮮花</div>
+            <div class="option-card" data-value="毛絨玩具">毛絨玩具</div>
+            <div class="option-card" data-value="吉他">吉他</div>
+            <div class="option-card" data-value="滑板">滑板</div>
+          </div>
+        </div>
+        <button class="btn-reset" onclick="resetSection('clothing')">↺ 重設服裝</button>
+      </div>
+
+      <!-- Tab 3: 場景表情 (Scene & Expression) -->
+      <div class="tab-panel" id="panel-scene">
+        <div class="option-group">
+          <div class="option-group-title">表情</div>
+          <div class="option-row">
+            <div class="option-card" data-value="微笑">微笑</div>
+            <div class="option-card" data-value="俏皮">俏皮</div>
+            <div class="option-card" data-value="單眼">單眼</div>
+            <div class="option-card" data-value="嘟嘴">嘟嘴</div>
+            <div class="option-card" data-value="發呆">發呆</div>
+            <div class="option-card" data-value="冷酷">冷酷</div>
+            <div class="option-card" data-value="燦笑">燦笑</div>
+            <div class="option-card" data-value="害羞">害羞</div>
+            <div class="option-card" data-value="嫵媚">嫵媚</div>
+            <div class="option-card" data-value="撒嬌">撒嬌</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">姿勢</div>
+          <div class="option-row">
+            <div class="option-card" data-value="站立">站立</div>
+            <div class="option-card" data-value="側坐">側坐</div>
+            <div class="option-card" data-value="行走">行走</div>
+            <div class="option-card" data-value="跳躍">跳躍</div>
+            <div class="option-card" data-value="靠牆">靠牆</div>
+            <div class="option-card" data-value="重心偏移">重心偏移</div>
+            <div class="option-card" data-value="交叉腿">交叉腿</div>
+            <div class="option-card" data-value="回眸">回眸</div>
+            <div class="option-card" data-value="撩髮">撩髮</div>
+            <div class="option-card" data-value="托腮">托腮</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">場景</div>
+          <div class="option-row">
+            <div class="option-card" data-value="咖啡店">咖啡店</div>
+            <div class="option-card" data-value="公園">公園</div>
+            <div class="option-card" data-value="花店">花店</div>
+            <div class="option-card" data-value="便利店">便利店</div>
+            <div class="option-card" data-value="快餐店">快餐店</div>
+            <div class="option-card" data-value="沙灘">沙灘</div>
+            <div class="option-card" data-value="酒店">酒店</div>
+            <div class="option-card" data-value="泳池">泳池</div>
+            <div class="option-card" data-value="街頭">街頭</div>
+            <div class="option-card" data-value="圖書館">圖書館</div>
+            <div class="option-card" data-value="臥室">臥室</div>
+            <div class="option-card" data-value="餐廳">餐廳</div>
+            <div class="option-card" data-value="天台">天台</div>
+            <div class="option-card" data-value="地鐵">地鐵</div>
+          </div>
+        </div>
+        <button class="btn-reset" onclick="resetSection('scene')">↺ 重設場景</button>
+      </div>
+
+      <!-- Tab 4: 攝影參數 (Camera) -->
+      <div class="tab-panel" id="panel-camera">
+        <div class="option-group">
+          <div class="option-group-title">燈光</div>
+          <div class="option-row">
+            <div class="option-card" data-value="自然光">自然光</div>
+            <div class="option-card" data-value="背光">背光</div>
+            <div class="option-card" data-value="側光">側光</div>
+            <div class="option-card" data-value="頂光">頂光</div>
+            <div class="option-card" data-value="黃昏">黃昏</div>
+            <div class="option-card" data-value="晨光">晨光</div>
+            <div class="option-card" data-value="霓虹燈">霓虹燈</div>
+            <div class="option-card" data-value="燭光">燭光</div>
+            <div class="option-card" data-value="舞台光">舞台光</div>
+            <div class="option-card" data-value="柔光箱">柔光箱</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">色調</div>
+          <div class="option-row">
+            <div class="option-card" data-value="暖色">暖色</div>
+            <div class="option-card" data-value="冷色">冷色</div>
+            <div class="option-card" data-value="鮮艷">鮮艷</div>
+            <div class="option-card" data-value="柔和">柔和</div>
+            <div class="option-card" data-value="黑白">黑白</div>
+            <div class="option-card" data-value="復古">復古</div>
+            <div class="option-card" data-value="日系">日系</div>
+            <div class="option-card" data-value="電影感">電影感</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">鏡頭</div>
+          <div class="option-row">
+            <div class="option-card" data-value="魚眼">魚眼</div>
+            <div class="option-card" data-value="超廣角">超廣角</div>
+            <div class="option-card" data-value="廣角">廣角</div>
+            <div class="option-card" data-value="中距">中距</div>
+            <div class="option-card" data-value="近距">近距</div>
+            <div class="option-card" data-value="特寫">特寫</div>
+            <div class="option-card" data-value="超特寫">超特寫</div>
+            <div class="option-card" data-value="人像鏡頭">人像鏡頭</div>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-group-title">構圖</div>
+          <div class="option-row">
+            <div class="option-card" data-value="三分法">三分法</div>
+            <div class="option-card" data-value="導線">導線</div>
+            <div class="option-card" data-value="大量留白">大量留白</div>
+            <div class="option-card" data-value="中央">中央</div>
+            <div class="option-card" data-value="框架">框架</div>
+            <div class="option-card" data-value="對稱">對稱</div>
+            <div class="option-card" data-value="前景模糊">前景模糊</div>
+            <div class="option-card" data-value="低角度">低角度</div>
+            <div class="option-card" data-value="高角度">高角度</div>
+          </div>
+        </div>
+        <button class="btn-reset" onclick="resetSection('camera')">↺ 重設攝影</button>
+      </div>
+
+      <!-- Tab 5: 生成照片 (Generate) -->
+      <div class="tab-panel" id="panel-generate">
+        <div class="api-guide-banner" id="apiGuideBanner">
+          <h3>🔑 需要 API Key 才能生成照片</h3>
+          <p>本應用使用 Agnes AI 的免費 API 生成圖片。<br>
+          ⚡ 完全免費 • 無需信用卡 • 立即申請</p>
+          <a class="btn-apply" href="https://platform.agnes-ai.com" target="_blank" rel="noopener">👉 前往 platform.agnes-ai.com 申請免費 API Key</a>
+          <p style="margin-top:10px;font-size:0.8rem;color:var(--text-light);">
+            申請後將 API Key 複製貼上到頂部欄位即可使用
+          </p>
+        </div>
+        <div class="generate-section">
+          <div class="generate-section-title">提示詞</div>
+          <textarea class="prompt-textarea" id="promptTextarea" placeholder="選擇上方選項將自動生成提示詞，或手動輸入..."></textarea>
+        </div>
+
+        <div class="generate-section">
+          <div class="generate-section-title">風格預設</div>
+          <div class="style-preset-row">
+            <button class="style-btn style-btn-none" data-value="無">無</button>
+            <button class="style-btn" data-value="性感">性感</button>
+            <button class="style-btn" data-value="御姐">御姐</button>
+            <button class="style-btn" data-value="可愛">可愛</button>
+            <button class="style-btn" data-value="文青">文青</button>
+            <button class="style-btn" data-value="溫柔">溫柔</button>
+            <button class="style-btn" data-value="街拍">街拍</button>
+          </div>
+        </div>
+
+        <div class="generate-section">
+          <div class="generate-section-title">AI 擴寫提示詞</div>
+          <button class="btn-secondary" id="expandPromptBtn">✨ AI 擴寫提示詞</button>
+        </div>
+
+        <div class="generate-section">
+          <div class="generate-section-title">比例</div>
+          <div class="aspect-ratio-row">
+            <button class="aspect-btn selected" data-value="1:1">1:1</button>
+            <button class="aspect-btn" data-value="9:16">9:16</button>
+            <button class="aspect-btn" data-value="3:4">3:4</button>
+            <button class="aspect-btn" data-value="2:3">2:3</button>
+            <button class="aspect-btn" data-value="16:9">16:9</button>
+            <button class="aspect-btn" data-value="4:3">4:3</button>
+            <button class="aspect-btn" data-value="3:2">3:2</button>
+          </div>
+        </div>
+
+        <div id="error-message"></div>
+
+        <div class="generate-section generate-actions">
+          <button class="btn-primary" id="generateDirectBtn">🖼️ 直接生成</button>
+          <button class="btn-secondary" id="generateTranslatedBtn">🌐 翻譯英文後生成</button>
+        </div>
+
+        <div class="generate-section">
+          <div class="generate-section-title">生成結果</div>
+          <div class="image-result" id="imageResult">
+            <span>生成的圖片將顯示在這裡</span>
+          </div>
+        </div>
+
+        <div class="generate-section" id="generationHistory"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+/**
+ * Agnes AI 角色創建與圖片生成應用程式
+ */
+const AppState = {
+  apiKey: '',
+  activeTab: 'character',
+  character: { race:'', age:'', faceShape:'', eyeShape:'', eyeSize:'', eyeColor:'', noseShape:'', lipShape:'', eyebrows:'', hairStyle:'', hairColor:'', skinTone:'', height:'', build:'', bustSize:'', waistSize:'', hipSize:'' },
+  clothing: { top:'', bottom:'', underwear:'', panties:'', nightgown:'', dress:'', shoes:'', hairAccessory:'', jewelry:'', bag:'', glasses:'', prop:'' },
+  scene: { expression:'', pose:'', background:'' },
+  camera: { lighting:'', colorTone:'', lens:'', composition:'' },
+  generation: { aspectRatio:'1:1', prompt:'', presetStyle:'', isGenerating:false, imageUrl:'', error:'' },
+  generationHistory: [],
+  savedCharacters: []
+};
+
+function initOptionGroups() {
+  document.querySelectorAll('.option-group').forEach(group => {
+    const titleEl = group.querySelector('.option-group-title');
+    if (!titleEl) return;
+    const cn = titleEl.textContent.trim();
+    const key = cnToKey(cn);
+    if (!key) return;
+    group.setAttribute('data-option-group', key);
+    const options = group.querySelectorAll('.option-card');
+    options.forEach(opt => {
+      opt.setAttribute('data-option-value', opt.getAttribute('data-value') || '');
+      opt.addEventListener('click', function() {
+        if (this.classList.contains('selected')) {
+          // 已選取 → 取消
+          this.classList.remove('selected');
+          updateStateFromOption(key, '');
+          updatePrompt();
+        } else {
+          // 未選取 → 選取
+          options.forEach(o => o.classList.remove('selected'));
+          this.classList.add('selected');
+          const value = this.getAttribute('data-option-value');
+          updateStateFromOption(key, value);
+          resolveClothingConflicts(key, value);
+          updatePrompt();
+        }
+      });
+    });
+  });
+}
+
+function cnToKey(cn) {
+  const map = {
+    '種族':'race','面形':'faceShape','眼睛':'eyeShape','眼型大小':'eyeSize','瞳色':'eyeColor',
+    '鼻型':'noseShape','唇型':'lipShape','眉毛':'eyebrows','髮型':'hairStyle','髮色':'hairColor',
+    '膚色':'skinTone','年齡':'age','身高':'height','身材':'build',
+    '三圍 - 胸圍':'bustSize','三圍 - 腰圍':'waistSize','三圍 - 臀圍':'hipSize',
+    '上衣':'top','下身':'bottom','內衣':'underwear','內褲':'panties','睡裙':'nightgown','洋裝':'dress','鞋子':'shoes','髮飾':'hairAccessory',
+    '飾品':'jewelry','包包':'bag','眼鏡':'glasses','道具':'prop',
+    '表情':'expression','姿勢':'pose','場景':'background',
+    '燈光':'lighting','色調':'colorTone','鏡頭':'lens','構圖':'composition'
+  };
+  return map[cn] || null;
+}
+
+function updateStateFromOption(groupName, value) {
+  if (groupName in AppState.character) AppState.character[groupName] = value;
+  else if (groupName in AppState.clothing) AppState.clothing[groupName] = value;
+  else if (groupName in AppState.scene) AppState.scene[groupName] = value;
+  else if (groupName in AppState.camera) AppState.camera[groupName] = value;
+  else if (groupName in AppState.generation) AppState.generation[groupName] = value;
+}
+
+function resetSection(section) {
+  const defaults = {
+    clothing: { top:'', bottom:'', underwear:'', panties:'', nightgown:'', dress:'', shoes:'', hairAccessory:'', jewelry:'', bag:'', glasses:'', prop:'' },
+    scene: { expression:'', pose:'', background:'' },
+    camera: { lighting:'', colorTone:'', lens:'', composition:'' }
+  };
+  if (!(section in defaults)) return;
+  if (!confirm('確定重設所有'+{clothing:'服裝',scene:'場景',camera:'攝影'}[section]+'選項？')) return;
+  const target = { clothing: AppState.clothing, scene: AppState.scene, camera: AppState.camera }[section];
+  Object.assign(target, defaults[section]);
+  const tabId = { clothing:'panel-clothing', scene:'panel-scene', camera:'panel-camera' }[section];
+  const panel = document.getElementById(tabId);
+  if (panel) panel.querySelectorAll('.option-card.selected').forEach(el => el.classList.remove('selected'));
+  updatePrompt();
+}
+
+function resolveClothingConflicts(key, value) {
+  const clearGroup = (groupKey) => {
+    if (!(groupKey in AppState.clothing)) return;
+    AppState.clothing[groupKey] = '';
+    const group = document.querySelector('[data-option-group="'+groupKey+'"]');
+    if (group) group.querySelectorAll('.option-card.selected').forEach(el => el.classList.remove('selected'));
+  };
+
+  // 一件式（洋裝、睡裙）互斥，且與分件式（上衣、下身）衝突
+  if (key === 'dress') {
+    clearGroup('top');
+    clearGroup('bottom');
+    clearGroup('nightgown');
+  }
+  if (key === 'nightgown') {
+    clearGroup('top');
+    clearGroup('bottom');
+    clearGroup('dress');
+  }
+  if (key === 'top' || key === 'bottom') {
+    clearGroup('dress');
+    clearGroup('nightgown');
+  }
+}
+
+function buildChinesePrompt() {
+  const C = AppState.character, CL = AppState.clothing, S = AppState.scene, CA = AppState.camera;
+  const parts = [];
+  const ageStr = C.age ? C.age+'歲的' : '年輕的';
+  let desc = '一位'+ageStr;
+  const rm = {'亞洲':'亞洲','歐美':'歐美','黑人':'黑人','拉丁':'拉丁','中東':'中東','混血':'混血'};
+  desc += (rm[C.race] || C.race || '') + '女性';
+  const fmap = {'鵝蛋':'鵝蛋臉','圓形':'圓臉','方形':'方臉','心形':'心形臉','菱形':'菱形臉','長形':'長臉'};
+  if (C.faceShape) desc += '，' + (fmap[C.faceShape] || C.faceShape);
+  const emap = {'杏眼':'杏眼','丹鳳眼':'丹鳳眼','圓眼':'圓眼','桃花眼':'桃花眼','下垂眼':'下垂眼','狐狸眼':'狐狸眼'};
+  if (C.eyeShape) desc += '，' + (emap[C.eyeShape] || C.eyeShape);
+  if (C.eyeSize) { const sz={'大':'大眼','中':'中等眼睛','小':'小眼'}; desc += '，'+(sz[C.eyeSize]||C.eyeSize); }
+  if (C.eyeColor) { const cm={'黑色':'黑色瞳孔','棕色':'棕色瞳孔','藍色':'藍色瞳孔','綠色':'綠色瞳孔','灰色':'灰色瞳孔','琥珀':'琥珀色瞳孔'}; desc += '，'+(cm[C.eyeColor]||C.eyeColor+'瞳孔'); }
+  if (C.noseShape) { const nm={'小巧':'小巧鼻','高挺':'高挺鼻樑','希臘鼻':'希臘鼻','朝天鼻':'朝天鼻','寬鼻':'寬鼻','鷹鉤鼻':'鷹鉤鼻'}; desc += '，'+(nm[C.noseShape]||C.noseShape); }
+  if (C.lipShape) { const lm={'豐滿':'豐滿嘴唇','薄唇':'薄唇','微笑唇':'微笑唇','M字唇':'M字唇','小嘴':'小嘴'}; desc += '，'+(lm[C.lipShape]||C.lipShape); }
+  if (C.eyebrows) { const bm={'柳葉眉':'柳葉眉','一字眉':'一字眉','拱形眉':'拱形眉','粗眉':'粗眉','細眉':'細眉','上挑眉':'上挑眉'}; desc += '，'+(bm[C.eyebrows]||C.eyebrows); }
+  if (C.hairStyle) { const hm={'長直':'長直髮','長捲':'長捲髮','短髮':'短髮','鮑伯頭':'鮑伯頭','馬尾':'馬尾','丸子頭':'丸子頭','辮子':'辮子','中長髮':'中長髮'}; desc += '，'+(hm[C.hairStyle]||C.hairStyle); }
+  if (C.hairColor) { const hcm={'黑色':'黑色','棕色':'棕色','深棕':'深棕色','亞麻':'亞麻色','奶茶':'奶茶色','灰色':'灰色','酒紅':'酒紅色','紫色':'紫色'}; desc += '，'+(hcm[C.hairColor]||C.hairColor)+'髮'; }
+  if (C.skinTone) { const sm={'白皙':'白皙肌膚','自然':'自然膚色','小麥':'小麥色肌膚','古銅':'古銅肌膚','深色':'深色肌膚','象牙白':'象牙白肌膚'}; desc += '，'+(sm[C.skinTone]||C.skinTone); }
+  const bd=[];
+  if (C.height) { const hm={'嬌小':'嬌小','中等':'中等身高','高挑':'高挑','模特':'模特身高'}; bd.push(hm[C.height]||C.height); }
+  if (C.build) { const bm2={'纖細':'纖細','勻稱':'勻稱','豐滿':'豐滿','運動型':'運動型','曲線型':'曲線型','微肉':'微肉'}; bd.push(bm2[C.build]||C.build); }
+  if (bd.length) desc += '，'+bd.join('');
+  if (C.bustSize) desc += '，'+C.bustSize+'罩杯';
+  if (C.waistSize) { const wm={'細':'細腰','中等':'中等腰圍','寬':'寬腰'}; desc += '，'+(wm[C.waistSize]||C.waistSize+'腰'); }
+  if (C.hipSize) { const hm2={'窄':'窄臀','中等':'中等臀圍','寬':'寬臀'}; desc += '，'+(hm2[C.hipSize]||C.hipSize+'臀'); }
+  parts.push(desc);
+
+  const wear=[];
+  if (CL.top) { const tm={'T恤':'T恤','襯衫':'襯衫','針織衫':'針織衫','西裝外套':'西裝外套','牛仔外套':'牛仔外套','風衣':'風衣','皮衣':'皮衣','衛衣':'衛衣','背心':'背心','比基尼':'比基尼'}; wear.push('穿著'+ (tm[CL.top]||CL.top)); }
+  if (CL.bottom) { const btm={'牛仔褲':'牛仔褲','裙子':'裙子','短褲':'短褲','熱褲':'熱褲','西裝褲':'西裝褲','運動褲':'運動褲','緊身褲':'緊身褲','A字裙':'A字裙','百褶裙':'百褶裙'}; wear.push('穿著'+ (btm[CL.bottom]||CL.bottom)); }
+  if (CL.underwear && CL.underwear!=='無') { const um={'蕾絲內衣':'蕾絲內衣','運動內衣':'運動內衣','無鋼圈內衣':'無鋼圈內衣'}; wear.push('穿著'+(um[CL.underwear]||CL.underwear)); }
+  if (CL.panties && CL.panties!=='無') { const pm={'三角褲':'三角褲','丁字褲':'丁字褲','平口褲':'平口褲'}; wear.push('穿著'+(pm[CL.panties]||CL.panties)); }
+  if (CL.nightgown && CL.nightgown!=='無') { const nm={'絲質睡裙':'絲質睡裙','棉質睡裙':'棉質睡裙','吊帶睡裙':'吊帶睡裙'}; wear.push('穿著'+(nm[CL.nightgown]||CL.nightgown)); }
+  if (CL.dress && CL.dress!=='無') { const dm={'連衣裙':'連衣裙','小禮服':'小禮服','晚禮服':'晚禮服','旗袍':'旗袍','學生制服':'學生制服'}; wear.push('穿著'+ (dm[CL.dress]||CL.dress)); }
+  if (CL.shoes) { const sm2={'高跟鞋':'高跟鞋','靴子':'靴子','運動鞋':'運動鞋','帆布鞋':'帆布鞋','涼鞋':'涼鞋','平底鞋':'平底鞋','樂福鞋':'樂福鞋','拖鞋':'拖鞋'}; wear.push('腳穿'+ (sm2[CL.shoes]||CL.shoes)); }
+  if (wear.length) parts.push(wear.join('，'));
+
+  const acc=[];
+  if (CL.hairAccessory && CL.hairAccessory!=='無') acc.push(CL.hairAccessory+'髮飾');
+  if (CL.jewelry && CL.jewelry!=='無') acc.push('戴著'+CL.jewelry);
+  if (CL.bag && CL.bag!=='無') { const bm3={'手提包':'手提包','肩背包':'肩背包','後背包':'後背包','手拿包':'手拿包','錢包':'錢包'}; acc.push('拿著'+ (bm3[CL.bag]||CL.bag)); }
+  if (CL.glasses && CL.glasses!=='無') { const gm={'近視眼鏡':'近視眼鏡','太陽眼鏡':'太陽眼鏡','書呆子眼鏡':'書呆子眼鏡','貓眼眼鏡':'貓眼眼鏡'}; acc.push('戴著'+ (gm[CL.glasses]||CL.glasses)); }
+  if (CL.prop && CL.prop!=='無') { const pm={'手機':'手機','相機':'相機','書本':'書本','咖啡杯':'咖啡杯','雨傘':'雨傘','鮮花':'鮮花','毛絨玩具':'毛絨玩具','吉他':'吉他','滑板':'滑板'}; acc.push('手持'+ (pm[CL.prop]||CL.prop)); }
+  if (acc.length) parts.push(acc.join('，'));
+
+  if (S.expression) { const em2={'微笑':'微笑','俏皮':'俏皮表情','單眼':'單眼','嘟嘴':'嘟嘴','發呆':'發呆表情','冷酷':'冷酷表情','燦笑':'燦爛笑容','害羞':'害羞表情','嫵媚':'嫵媚眼神','撒嬌':'撒嬌表情'}; parts.push('表情'+(em2[S.expression]||S.expression)); }
+  if (S.pose) { const pm2={'站立':'站立','側坐':'側坐','行走':'行走中','跳躍':'跳躍','靠牆':'靠牆','重心偏移':'重心偏移','交叉腿':'交叉雙腿','回眸':'回眸','撩髮':'撩頭髮','托腮':'托腮'}; parts.push('姿勢為'+(pm2[S.pose]||S.pose)); }
+  if (S.background) { const bm4={'咖啡店':'在咖啡店裡','公園':'在公園','花店':'在花店','便利店':'在便利店','快餐店':'在快餐店','沙灘':'在沙灘','酒店':'在酒店房間','泳池':'在泳池邊','街頭':'在街頭','圖書館':'在圖書館','臥室':'在臥室','餐廳':'在餐廳','天台':'在天台','地鐵':'在地鐵站'}; parts.push(bm4[S.background]||'在'+S.background); }
+
+  const ph=[];
+  if (CA.lighting) { const lm2={'自然光':'自然光','背光':'背光','側光':'側光','頂光':'頂光','黃昏':'黃昏光線','晨光':'晨光','霓虹燈':'霓虹燈光','燭光':'燭光','舞台光':'舞台燈光','柔光箱':'柔光箱'}; ph.push(lm2[CA.lighting]||CA.lighting+'光'); }
+  if (CA.colorTone) { const tm2={'暖色':'暖色調','冷色':'冷色調','鮮艷':'鮮豔色彩','柔和':'柔和色調','黑白':'黑白','復古':'復古色調','日系':'日系色調','電影感':'電影感色調'}; ph.push(tm2[CA.colorTone]||CA.colorTone+'色調'); }
+  if (CA.lens) { const lm3={'魚眼':'魚眼鏡頭','超廣角':'超廣角','廣角':'廣角','中距':'中距離','近距':'近距離','特寫':'特寫','超特寫':'超特寫','人像鏡頭':'人像鏡頭'}; ph.push(lm3[CA.lens]||CA.lens+'鏡頭'); }
+  if (CA.composition) { const cm2={'三分法':'三分法構圖','導線':'導線構圖','大量留白':'大量留白','中央':'中央構圖','框架':'框架構圖','對稱':'對稱構圖','前景模糊':'前景模糊','低角度':'低角度','高角度':'高角度'}; ph.push(cm2[CA.composition]||CA.composition+'構圖'); }
+  if (ph.length) parts.push('拍攝參數：'+ph.join('、'));
+
+  parts.push('高品質攝影，寫實風格');
+  return parts.join('，');
+}
+
+function buildEnglishPrompt() {
+  const parts = [];
+  const C = AppState.character, CL = AppState.clothing, S = AppState.scene, CA = AppState.camera;
+  const ageStr = C.age ? ' '+C.age+'-year-old' : ' young';
+  let desc = 'portrait of a'+ageStr;
+  const rm = {'亞洲':' Asian','歐美':' Caucasian','黑人':' African','拉丁':' Latin','中東':' Middle Eastern','混血':' mixed-race'};
+  if (C.race) desc += (rm[C.race] || ' ' + C.race) + ' woman'; else desc += ' woman';
+  const fmap = {'鵝蛋':'oval face','圓形':'round face','方形':'square face','心形':'heart-shaped face','菱形':'diamond face','長形':'long face'};
+  if (C.faceShape) desc += ', ' + (fmap[C.faceShape] || C.faceShape+' face');
+  const emap = {'杏眼':'almond-shaped eyes','丹鳳眼':'phoenix eyes','圓眼':'round eyes','桃花眼':'peach blossom eyes','下垂眼':'downturned eyes','狐狸眼':'fox eyes'};
+  if (C.eyeShape) desc += ', ' + (emap[C.eyeShape] || C.eyeShape+' eyes');
+  if (C.eyeSize) { const sz={'大':'large','中':'medium-sized','小':'small'}; desc += ', '+(sz[C.eyeSize]||C.eyeSize); }
+  if (C.eyeColor) { const cm={'黑色':'dark black iris','棕色':'brown iris','藍色':'blue iris','綠色':'green iris','灰色':'grey iris','琥珀':'amber iris'}; desc += ' '+(cm[C.eyeColor]||C.eyeColor+' iris'); }
+  if (C.noseShape) { const nm={'小巧':'small delicate nose','高挺':'high nose bridge','希臘鼻':'Greek nose','朝天鼻':'upturned nose','寬鼻':'wide nose','鷹鉤鼻':'aquiline nose'}; desc += ', '+(nm[C.noseShape]||C.noseShape+' nose'); }
+  if (C.lipShape) { const lm={'豐滿':'full plump lips','薄唇':'thin lips','微笑唇':'smiling lips','M字唇':'M-shaped lips','小嘴':'small lips'}; desc += ', '+(lm[C.lipShape]||C.lipShape+' lips'); }
+  if (C.eyebrows) { const bm={'柳葉眉':'arched willow eyebrows','一字眉':'straight eyebrows','拱形眉':'arched eyebrows','粗眉':'thick eyebrows','細眉':'thin eyebrows','上挑眉':'lifted eyebrows'}; desc += ', '+(bm[C.eyebrows]||C.eyebrows+' eyebrows'); }
+  if (C.hairStyle) { const hm={'長直':'long straight','長捲':'long curly','短髮':'short','鮑伯頭':'bob cut','馬尾':'ponytail','丸子頭':'bun','辮子':'braided','中長髮':'medium-length'}; desc += ', '+(hm[C.hairStyle]||C.hairStyle)+' hair'; }
+  if (C.hairColor) { const hcm={'黑色':'black','棕色':'brown','深棕':'dark brown','亞麻':'flaxen','奶茶':'milky tea','灰色':'grey','酒紅':'wine red','紫色':'purple'}; desc += ', '+(hcm[C.hairColor]||C.hairColor)+' colored'; }
+  if (C.skinTone) { const sm={'白皙':'fair porcelain skin','自然':'natural skin tone','小麥':'wheat-colored skin','古銅':'tan bronze skin','深色':'dark skin','象牙白':'ivory white skin'}; desc += ', '+(sm[C.skinTone]||C.skinTone+' skin'); }
+  const bd=[];
+  if (C.height) { const hm={'嬌小':'petite','中等':'medium height','高挑':'tall','模特':'model-height'}; bd.push(hm[C.height]||C.height); }
+  if (C.build) { const bm2={'纖細':'slim','勻稱':'well-proportioned','豐滿':'curvy','運動型':'athletic','曲線型':'hourglass figure','微肉':'slightly plump'}; bd.push(bm2[C.build]||C.build); }
+  if (bd.length) desc += ', '+bd.join(' ');
+  if (C.bustSize) desc += ', '+C.bustSize+'-cup bust';
+  if (C.waistSize) { const wm={'細':'slim waist','中等':'medium waist','寬':'wide waist'}; desc += ', '+(wm[C.waistSize]||C.waistSize+' waist'); }
+  if (C.hipSize) { const hm2={'窄':'narrow hips','中等':'medium hips','寬':'wide hips'}; desc += ', '+(hm2[C.hipSize]||C.hipSize+' hips'); }
+  parts.push(desc);
+  const wear=[];
+  if (CL.top) { const tm={'T恤':'a t-shirt','襯衫':'a blouse','針織衫':'a knit sweater','西裝外套':'a blazer','牛仔外套':'a denim jacket','風衣':'a trench coat','皮衣':'a leather jacket','衛衣':'a hoodie','背心':'a tank top','比基尼':'a bikini top'}; wear.push(tm[CL.top]||CL.top); }
+  if (CL.bottom) { const btm={'牛仔褲':'denim jeans','裙子':'a skirt','短褲':'shorts','熱褲':'hot pants','西裝褲':'dress pants','運動褲':'sweatpants','緊身褲':'leggings','A字裙':'an A-line skirt','百褶裙':'a pleated skirt'}; wear.push(btm[CL.bottom]||CL.bottom); }
+  if (CL.underwear && CL.underwear!=='無') { const um={'蕾絲內衣':'lace lingerie','運動內衣':'a sports bra','無鋼圈內衣':'a wirefree bra'}; wear.push(um[CL.underwear]||CL.underwear); }
+  if (CL.panties && CL.panties!=='無') { const pm={'三角褲':'bikini panties','丁字褲':'a thong','平口褲':'boy shorts'}; wear.push(pm[CL.panties]||CL.panties); }
+  if (CL.nightgown && CL.nightgown!=='無') { const nm={'絲質睡裙':'a silk nightgown','棉質睡裙':'a cotton nightgown','吊帶睡裙':'a slip nightgown'}; wear.push(nm[CL.nightgown]||CL.nightgown); }
+  if (CL.dress && CL.dress!=='無') { const dm={'連衣裙':'a dress','小禮服':'a cocktail dress','晚禮服':'an evening gown','旗袍':'a cheongsam','學生制服':'a school uniform'}; wear.push(dm[CL.dress]||CL.dress); }
+  if (CL.shoes) { const sm2={'高跟鞋':'high heels','靴子':'boots','運動鞋':'sneakers','帆布鞋':'canvas shoes','涼鞋':'sandals','平底鞋':'flats','樂福鞋':'loafers','拖鞋':'slippers'}; wear.push(sm2[CL.shoes]||CL.shoes); }
+  if (wear.length) parts.push('wearing '+wear.join(', '));
+  const acc=[];
+  if (CL.hairAccessory && CL.hairAccessory!=='無') acc.push(CL.hairAccessory+' hair accessory');
+  if (CL.jewelry && CL.jewelry!=='無') acc.push('wearing '+CL.jewelry);
+  if (CL.bag && CL.bag!=='無') { const bm3={'手提包':'carrying a handbag','肩背包':'carrying a shoulder bag','後背包':'carrying a backpack','手拿包':'carrying a clutch','錢包':'holding a wallet'}; acc.push(bm3[CL.bag]||'carrying '+CL.bag); }
+  if (CL.glasses && CL.glasses!=='無') { const gm={'近視眼鏡':'wearing eyeglasses','太陽眼鏡':'wearing sunglasses','書呆子眼鏡':'wearing nerd glasses','貓眼眼鏡':'wearing cat-eye glasses'}; acc.push(gm[CL.glasses]||'wearing '+CL.glasses); }
+  if (CL.prop && CL.prop!=='無') { const pm={'手機':'holding a smartphone','相機':'holding a camera','書本':'holding a book','咖啡杯':'holding a coffee cup','雨傘':'holding an umbrella','鮮花':'holding flowers','毛絨玩具':'holding a plush toy','吉他':'playing a guitar','滑板':'holding a skateboard'}; acc.push(pm[CL.prop]||'holding '+CL.prop); }
+  if (acc.length) parts.push(acc.join(', '));
+  if (S.expression) { const em2={'微笑':'smiling gently','俏皮':'playful expression','單眼':'winking','嘟嘴':'pouting','發呆':'dazed look','冷酷':'cool expression','燦笑':'bright smile','害羞':'shy expression','嫵媚':'seductive gaze','撒嬌':'acting cute'}; parts.push(em2[S.expression]||S.expression); }
+  if (S.pose) { const pm2={'站立':'standing pose','側坐':'sitting sideways','行走':'walking','跳躍':'jumping','靠牆':'leaning against wall','重心偏移':'shifted weight pose','交叉腿':'crossed legs','回眸':'looking back over shoulder','撩髮':'hair flip','托腮':'chin resting on hand'}; parts.push(pm2[S.pose]||S.pose+' pose'); }
+  if (S.background) { const bm4={'咖啡店':'in a cozy coffee shop','公園':'in a park','花店':'in a flower shop','便利店':'in a convenience store','快餐店':'in a fast food restaurant','沙灘':'on a beach','酒店':'in a hotel room','泳池':'by the pool','街頭':'on a city street','圖書館':'in a library','臥室':'in a bedroom','餐廳':'in a restaurant','天台':'on a rooftop','地鐵':'in a subway station'}; parts.push(bm4[S.background]||'in '+S.background); }
+  const ph=[];
+  if (CA.lighting) { const lm2={'自然光':'natural lighting','背光':'backlighting','側光':'side lighting','頂光':'top lighting','黃昏':'golden hour lighting','晨光':'morning light','霓虹燈':'neon lighting','燭光':'candlelight','舞台光':'stage lighting','柔光箱':'softbox lighting'}; ph.push(lm2[CA.lighting]||CA.lighting+' lighting'); }
+  if (CA.colorTone) { const tm2={'暖色':'warm color tones','冷色':'cool color tones','鮮艷':'vibrant colors','柔和':'soft pastel tones','黑白':'black and white','復古':'vintage retro tones','日系':'Japanese soft tones','電影感':'cinematic color grading'}; ph.push(tm2[CA.colorTone]||CA.colorTone+' tones'); }
+  if (CA.lens) { const lm3={'魚眼':'fisheye lens','超廣角':'ultra wide-angle lens','廣角':'wide-angle lens','中距':'medium shot','近距':'close-up shot','特寫':'close-up','超特寫':'extreme close-up','人像鏡頭':'portrait lens'}; ph.push(lm3[CA.lens]||CA.lens+' lens'); }
+  if (CA.composition) { const cm2={'三分法':'rule of thirds composition','導線':'leading lines','大量留白':'negative space composition','中央':'centered composition','框架':'framing composition','對稱':'symmetrical composition','前景模糊':'shallow depth of field','低角度':'low angle shot','高角度':'high angle shot'}; ph.push(cm2[CA.composition]||CA.composition+' composition'); }
+  if (ph.length) parts.push(ph.join(', '));
+  parts.push('highly detailed, photorealistic, 8K quality, professional photography');
+  return parts.join(', ');
+}
+
+function updatePrompt() {
+  const p = buildChinesePrompt();
+  AppState.generation.prompt = p;
+  const el = document.getElementById('promptTextarea');
+  if (el) el.value = p;
+}
+
+async function callImageAPI(prompt) {
+  const sm = {'1:1':'1024x1024','9:16':'768x1365','3:4':'768x1024','2:3':'768x1152','16:9':'1365x768','4:3':'1024x768','3:2':'1152x768'};
+  const size = sm[AppState.generation.aspectRatio] || '1024x1024';
+  const r = await fetch('https://apihub.agnes-ai.com/v1/images/generations', {
+    method:'POST',
+    headers:{'Authorization':'Bearer '+AppState.apiKey,'Content-Type':'application/json'},
+    body:JSON.stringify({model:'agnes-image-2.1-flash',prompt:prompt,size:size,n:1})
+  });
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.error?.message||'圖片生成失敗');
+  if (d.data && d.data[0]) {
+    const url = d.data[0].url || (d.data[0].b64_json ? 'data:image/png;base64,'+d.data[0].b64_json : null);
+    if (url) {
+      AppState.generation.imageUrl = url;
+      document.getElementById('imageResult').innerHTML = '<img src="'+url.replace(/"/g,'&quot;')+'" alt="生成的圖片" loading="lazy">';
+      saveGenerationHistory(prompt, url);
+    } else throw new Error('無法取得圖片');
+  } else throw new Error('無法解析圖片回應');
+}
+
+async function generateImageDirect() {
+  if (!requireApiKey()) return;
+  if (AppState.generation.isGenerating) return;
+  const el = document.getElementById('promptTextarea');
+  const prompt = el ? el.value.trim() : '';
+  if (!prompt) { showError('請輸入提示詞或選擇角色屬性'); return; }
+  AppState.activeMethod = 'direct';
+  AppState.generation.isGenerating = true; updateGenBtns(); hideError();
+  document.getElementById('imageResult').innerHTML = '<div class="spinner"></div>';
+  try { await callImageAPI(prompt); }
+  catch(e) { showError(e.message); document.getElementById('imageResult').innerHTML = '<span>生成失敗，請重試</span>'; }
+  finally { AppState.generation.isGenerating = false; updateGenBtns(); }
+}
+
+async function generateImageTranslated() {
+  if (!requireApiKey()) return;
+  if (AppState.generation.isGenerating) return;
+  const el = document.getElementById('promptTextarea');
+  const chinesePrompt = el ? el.value.trim() : '';
+  if (!chinesePrompt) { showError('請輸入提示詞或選擇角色屬性'); return; }
+
+  AppState.activeMethod = 'translated';
+  AppState.generation.isGenerating = true; updateGenBtns(); hideError();
+  document.getElementById('imageResult').innerHTML = '<div class="spinner"></div>';
+
+  try {
+    const tr = await fetch('https://apihub.agnes-ai.com/v1/chat/completions', {
+      method:'POST',
+      headers:{'Authorization':'Bearer '+AppState.apiKey,'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'agnes-2.0-flash',
+        messages:[
+          {role:'system',content:'You are a professional translator. Translate the following Chinese character portrait description into an English image generation prompt. Keep photography terminology accurate. Return ONLY the English translation, no explanations.'},
+          {role:'user',content:'Translate to English: '+chinesePrompt}
+        ],
+        temperature:0.3,max_tokens:800
+      })
+    });
+    const td = await tr.json();
+    if (!tr.ok) throw new Error(td.error?.message||'翻譯失敗');
+    let englishPrompt = '';
+    if (td.choices && td.choices[0] && td.choices[0].message) {
+      englishPrompt = td.choices[0].message.content.trim();
+    } else throw new Error('無法解析翻譯回應');
+
+    englishPrompt += ', highly detailed, photorealistic, 8K quality, professional photography';
+    await callImageAPI(englishPrompt);
+  } catch(e) { showError(e.message); document.getElementById('imageResult').innerHTML = '<span>生成失敗，請重試</span>'; }
+  finally { AppState.generation.isGenerating = false; updateGenBtns(); }
+}
+
+function updateGenBtns() {
+  const d = document.getElementById('generateDirectBtn');
+  const t = document.getElementById('generateTranslatedBtn');
+  const v = AppState.generation.isGenerating;
+  if (d) { d.disabled = v; d.textContent = v ? '⏳ 生成中...' : '🖼️ 直接生成'; }
+  if (t) { t.disabled = v; t.textContent = v ? '⏳ 翻譯中...' : '🌐 翻譯英文後生成'; }
+}
+
+function showError(m) { const e=document.getElementById('error-message'); if(e){e.textContent=m;e.style.display='block';} }
+function hideError() { const e=document.getElementById('error-message'); if(e)e.style.display='none'; }
+
+// ==========================================
+// 生成歷史記錄（保留最近 10 筆）
+// ==========================================
+
+function saveGenerationHistory(prompt, imageUrl) {
+  const record = {
+    timestamp: Date.now(),
+    prompt: prompt,
+    imageUrl: imageUrl,
+    method: AppState.activeMethod || 'direct',
+    aspectRatio: AppState.generation.aspectRatio,
+    presetStyle: AppState.generation.presetStyle || ''
+  };
+  let history = loadGenerationHistory();
+  history.unshift(record);
+  if (history.length > 10) history = history.slice(0, 10);
+  try { localStorage.setItem('ai_vc_history', JSON.stringify(history)); } catch(e) {}
+  AppState.generationHistory = history;
+  renderGenerationHistory();
+}
+
+function loadGenerationHistory() {
+  try {
+    const stored = localStorage.getItem('ai_vc_history');
+    return stored ? JSON.parse(stored) : [];
+  } catch(e) { return []; }
+}
+
+function renderGenerationHistory() {
+  const container = document.getElementById('generationHistory');
+  if (!container) return;
+  const history = AppState.generationHistory.length ? AppState.generationHistory : loadGenerationHistory();
+  AppState.generationHistory = history;
+  if (!history.length) { container.innerHTML = ''; return; }
+
+  let html = '<div class="history-title">📸 最近生成記錄'
+    + '<button class="history-clear-all-btn" onclick="clearAllHistory()">全部刪除</button></div>';
+  history.forEach((rec, idx) => {
+    const time = new Date(rec.timestamp);
+    const dateStr = time.toLocaleDateString('zh-TW') + ' ' + time.toLocaleTimeString('zh-TW', {hour:'2-digit',minute:'2-digit'});
+    const methodLabel = rec.method === 'translated' ? '🌐 翻譯' : '🖼️ 直出';
+    const styleTag = rec.presetStyle ? '<span class="history-tag">'+rec.presetStyle+'</span>' : '';
+    const ratioTag = '<span class="history-tag">'+rec.aspectRatio+'</span>';
+    const shortPrompt = rec.prompt.length > 60 ? rec.prompt.slice(0, 60)+'…' : rec.prompt;
+    html += '<div class="history-item" onclick="viewHistoryItem('+idx+')">'
+      + '<div class="history-thumb" style="background-image:url('+rec.imageUrl.replace(/"/g,'&quot;')+')"></div>'
+      + '<div class="history-info"><div class="history-prompt">'+shortPrompt.replace(/</g,'&lt;')+'</div>'
+      + '<div class="history-meta">'+methodLabel+' '+ratioTag+' '+styleTag+' <span class="history-time">'+dateStr+'</span></div></div>'
+      + '<button class="history-del-btn" onclick="event.stopPropagation();deleteHistoryItem('+idx+')" title="刪除此記錄">✕</button></div>';
+  });
+  container.innerHTML = html;
+}
+
+function deleteHistoryItem(index) {
+  let history = AppState.generationHistory;
+  if (!history || !history[index]) return;
+  history.splice(index, 1);
+  try { localStorage.setItem('ai_vc_history', JSON.stringify(history)); } catch(e) {}
+  AppState.generationHistory = history;
+  renderGenerationHistory();
+}
+
+function clearAllHistory() {
+  if (!confirm('確定清除所有生成記錄？')) return;
+  try { localStorage.removeItem('ai_vc_history'); } catch(e) {}
+  AppState.generationHistory = [];
+  renderGenerationHistory();
+}
+
+function viewHistoryItem(index) {
+  const history = AppState.generationHistory;
+  if (!history || !history[index]) return;
+  const rec = history[index];
+  const container = document.getElementById('imageResult');
+  if (container) container.innerHTML = '<img src="'+rec.imageUrl.replace(/"/g,'&quot;')+'" alt="歷史生成圖片" loading="lazy">';
+  const textarea = document.getElementById('promptTextarea');
+  if (textarea) textarea.value = rec.prompt;
+  // 跳回生成結果
+  container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function expandPrompt() {
+  if (!requireApiKey()) return;
+  const el = document.getElementById('promptTextarea');
+  const cur = el ? el.value.trim() : '';
+  if (!cur) { showError('請先輸入或選擇角色描述'); return; }
+  const btn = document.getElementById('expandPromptBtn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ 擴展中...'; }
+  try {
+    let systemPrompt = '你是一位專業人像與時尚攝影師。請將以下中文角色描述擴展為更詳細、更具電影感的中文圖片生成提示詞。保持在500字以內。著重於視覺細節、光線、氛圍和構圖。只回傳擴展後的提示詞，不需要解釋。';
+    let userMsg = '請擴展這段角色描述：'+cur;
+
+    // 如果已選風格預設，讓 AI 自然融入而非字串硬接
+    if (AppState.generation.presetStyle) {
+      const styleNames = {'性感':'性感嫵媚','御姐':'成熟優雅','可愛':'活潑可愛','文青':'文藝氣質','溫柔':'溫柔婉約','街拍':'街頭時尚'};
+      const styleHint = styleNames[AppState.generation.presetStyle] || AppState.generation.presetStyle;
+      systemPrompt += ' 請將「'+styleHint+'」的風格特色自然融入擴展後的提示詞中，使其成為整體描述的一部分，而非附加在結尾。';
+    }
+
+    const r = await fetch('https://apihub.agnes-ai.com/v1/chat/completions', {
+      method:'POST',
+      headers:{'Authorization':'Bearer '+AppState.apiKey,'Content-Type':'application/json'},
+      body:JSON.stringify({model:'agnes-2.0-flash',messages:[{role:'system',content:systemPrompt},{role:'user',content:userMsg}],temperature:0.7,max_tokens:800})
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error?.message||'提示詞擴展失敗');
+    if (d.choices && d.choices[0] && d.choices[0].message) { const ex=d.choices[0].message.content.trim(); el.value=ex; AppState.generation.prompt=ex; }
+    else throw new Error('無法解析擴展回應');
+  } catch(e) { showError(e.message); }
+  finally { if(btn){btn.disabled=false;btn.textContent='✨ AI 擴寫提示詞';} }
+}
+
+function applyStylePreset(preset) {
+  const descs = {'性感':'，性感嫵媚姿勢，誘人眼神，曖昧燈光氣氛','御姐':'，成熟優雅，自信從容，高貴氣質','可愛':'，活潑可愛，天真表情，柔和粉彩色調','文青':'，文藝氣質，沉思氛圍，復古懷舊風格','溫柔':'，溫柔婉約，甜美微笑，金色暖光','街拍':'，街頭時尚，都會潮流，自然不經意感'};
+  const d = descs[preset]; if (!d) return;
+  const el = document.getElementById('promptTextarea'); if (!el) return;
+  let c = el.value.trim();
+  Object.values(descs).forEach(x => { const es=x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); c=c.replace(new RegExp(es,'g'),''); });
+  c += d; el.value=c; AppState.generation.prompt=c; AppState.generation.presetStyle=preset;
+  document.querySelectorAll('[data-value]').forEach(b => { if(b.closest('.style-preset-row')) b.classList.remove('selected'); });
+  document.querySelectorAll('.style-preset-row [data-value="'+preset+'"]').forEach(b => b.classList.add('selected'));
+}
+
+function clearStylePreset() {
+  const descs = {'性感':'，性感嫵媚姿勢，誘人眼神，曖昧燈光氣氛','御姐':'，成熟優雅，自信從容，高貴氣質','可愛':'，活潑可愛，天真表情，柔和粉彩色調','文青':'，文藝氣質，沉思氛圍，復古懷舊風格','溫柔':'，溫柔婉約，甜美微笑，金色暖光','街拍':'，街頭時尚，都會潮流，自然不經意感'};
+  const el = document.getElementById('promptTextarea'); if (!el) return;
+  let c = el.value.trim();
+  Object.values(descs).forEach(x => { const es=x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); c=c.replace(new RegExp(es,'g'),''); });
+  el.value = c; AppState.generation.prompt = c; AppState.generation.presetStyle = null;
+  document.querySelectorAll('.style-preset-row .style-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelector('.style-preset-row .style-btn-none')?.classList.add('selected');
+}
+
+function saveCharacter() {
+  const d = {name:'',timestamp:Date.now(),character:{...AppState.character},clothing:{...AppState.clothing},scene:{...AppState.scene},camera:{...AppState.camera}};
+  const name = prompt('請輸入角色名稱：'); if (!name || !name.trim()) return;
+  d.name = name.trim();
+  const saved = loadSaved(); const idx = saved.findIndex(c => c.name === d.name);
+  if (idx >= 0) { if (!confirm('角色「'+d.name+'」已存在，是否覆蓋？')) return; saved[idx]=d; } else saved.push(d);
+  try { localStorage.setItem('ai_vc_saved_characters',JSON.stringify(saved)); AppState.savedCharacters=saved; updateSavedList(); alert('角色「'+d.name+'」已儲存'); } catch(e) { showError('儲存失敗：'+e.message); }
+}
+
+function loadCharacter(name) {
+  const saved = loadSaved(); const d = saved.find(c => c.name === name);
+  if (!d) { showError('找不到角色：'+name); return; }
+  if (d.character) Object.assign(AppState.character, d.character);
+  if (d.clothing) Object.assign(AppState.clothing, d.clothing);
+  if (d.scene) Object.assign(AppState.scene, d.scene);
+  if (d.camera) Object.assign(AppState.camera, d.camera);
+  updateUIFromState(); updatePrompt();
+}
+
+function deleteCharacter(name) {
+  if (!confirm('確定要刪除角色「'+name+'」嗎？')) return;
+  const saved = loadSaved(); const f = saved.filter(c => c.name !== name);
+  try { localStorage.setItem('ai_vc_saved_characters',JSON.stringify(f)); AppState.savedCharacters=f; updateSavedList(); } catch(e) { showError('刪除失敗：'+e.message); }
+}
+
+function loadSaved() { try { const s=localStorage.getItem('ai_vc_saved_characters'); return s?JSON.parse(s):[]; } catch(e){return [];} }
+
+function updateSavedList() {
+  const container = document.getElementById('saved-characters-list'); if (!container) return;
+  const saved = loadSaved();
+  if (!saved.length) { container.innerHTML = '<div class="option-group-title">已儲存角色</div><p style="color:var(--text-light);font-size:0.85rem;">尚無已儲存的角色</p>'; return; }
+  let html = '<div class="option-group-title">已儲存角色</div>';
+  saved.forEach(c => { const dt=new Date(c.timestamp).toLocaleDateString('zh-TW'); const en=c.name.replace(/'/g,"\\'"); html += '<div class="saved-item"><div><strong>'+c.name+'</strong><br><small style="color:var(--text-light)">'+dt+'</small></div><div class="saved-item-actions"><button onclick="loadCharacter(\''+en+'\')">載入</button><button onclick="deleteCharacter(\''+en+'\')">刪除</button></div></div>'; });
+  container.innerHTML = html;
+}
+
+function updateUIFromState() {
+  [{data:AppState.character},{data:AppState.clothing},{data:AppState.scene},{data:AppState.camera}].forEach(({data}) => {
+    Object.entries(data).forEach(([k,v]) => {
+      if (!v) return;
+      const el = document.querySelector('[data-option-group="'+k+'"] [data-option-value="'+v.replace(/"/g,'&quot;')+'"]');
+      if (el) { const g = el.closest('[data-option-group]'); if(g) g.querySelectorAll('.selected').forEach(e=>e.classList.remove('selected')); el.classList.add('selected'); }
+    });
+  });
+  // 載入後清除穿搭衝突，一件式優先於分件式
+  if (AppState.clothing.dress) resolveClothingConflicts('dress', AppState.clothing.dress);
+  if (AppState.clothing.nightgown) resolveClothingConflicts('nightgown', AppState.clothing.nightgown);
+  if (AppState.clothing.top) resolveClothingConflicts('top', AppState.clothing.top);
+  if (AppState.clothing.bottom) resolveClothingConflicts('bottom', AppState.clothing.bottom);
+}
+
+function switchTab(tabName) {
+  document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  const p = document.getElementById('panel-'+tabName); if (p) p.classList.add('active');
+  const b = document.querySelector('[data-tab="'+tabName+'"]'); if (b) b.classList.add('active');
+  AppState.activeTab = tabName;
+}
+
+function setAspectRatio(ratio) {
+  AppState.generation.aspectRatio = ratio;
+  document.querySelectorAll('.aspect-btn').forEach(b => { b.classList.remove('selected'); if(b.getAttribute('data-value')===ratio) b.classList.add('selected'); });
+}
+
+function updateApiKeyStatus() {
+  const dot = document.getElementById('apiKeyStatus');
+  if (dot) {
+    dot.classList.toggle('has-key', !!AppState.apiKey);
+    dot.title = AppState.apiKey ? 'API Key 已設定 ✓' : 'API Key 未設定';
+  }
+  const banner = document.getElementById('apiGuideBanner');
+  if (banner) {
+    banner.classList.toggle('visible', !AppState.apiKey);
+  }
+}
+
+function saveApiKey(key) {
+  AppState.apiKey = key.trim();
+  try { localStorage.setItem('ai_vc_api_key',AppState.apiKey); } catch(e){}
+  updateApiKeyStatus();
+}
+
+function loadApiKey() {
+  try {
+    const s=localStorage.getItem('ai_vc_api_key');
+    if(s) { AppState.apiKey=s; const el=document.querySelector('.api-key-input'); if(el) el.value=s; }
+  } catch(e){}
+  updateApiKeyStatus();
+}
+
+function requireApiKey() {
+  if (AppState.apiKey) return true;
+  showApiKeyGuide();
+  return false;
+}
+
+function showApiKeyGuide() {
+  const banner = document.getElementById('apiGuideBanner');
+  if (banner) {
+    banner.classList.add('visible');
+    banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  const errorEl = document.getElementById('error-message');
+  if (errorEl) {
+    errorEl.innerHTML = '⚠️ 請先輸入 API Key — '
+      + '<a href="https://platform.agnes-ai.com" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">前往 platform.agnes-ai.com 申請免費 Key</a>';
+    errorEl.style.display = 'block';
+  }
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme') || 'light';
+  const next = cur === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('ai_vc_theme', next); } catch(e) {}
+}
+
+function loadTheme() {
+  try { const s=localStorage.getItem('ai_vc_theme'); if(s) document.documentElement.setAttribute('data-theme',s); } catch(e){}
+}
+
+function init() {
+  loadTheme();
+  initOptionGroups();
+  document.querySelectorAll('.tab-btn').forEach(btn => { btn.addEventListener('click', function() { const t=this.getAttribute('data-tab'); if(t) switchTab(t); }); });
+  document.getElementById('generateDirectBtn')?.addEventListener('click', generateImageDirect);
+  document.getElementById('generateTranslatedBtn')?.addEventListener('click', generateImageTranslated);
+  document.getElementById('expandPromptBtn')?.addEventListener('click', expandPrompt);
+  document.getElementById('saveCharacterBtn')?.addEventListener('click', saveCharacter);
+  document.getElementById('apiKeyApplyBtn')?.addEventListener('click', function() {
+    window.open('https://platform.agnes-ai.com', '_blank', 'noopener');
+  });
+  document.querySelector('.theme-toggle')?.addEventListener('click', toggleTheme);
+  document.querySelectorAll('.style-preset-row .style-btn').forEach(btn => { btn.addEventListener('click', function() { const v=this.getAttribute('data-value'); if(v==='無') clearStylePreset(); else if(v) applyStylePreset(v); }); });
+  document.querySelectorAll('.aspect-btn').forEach(btn => { btn.addEventListener('click', function() { const v=this.getAttribute('data-value'); if(v) setAspectRatio(v); }); });
+  const keyInput = document.querySelector('.api-key-input');
+  if (keyInput) {
+    keyInput.addEventListener('change', function() { saveApiKey(this.value); });
+    keyInput.addEventListener('keypress', function(e) { if(e.key==='Enter') { saveApiKey(this.value); this.blur(); } });
+  }
+  loadApiKey();
+  AppState.generationHistory = loadGenerationHistory();
+  renderGenerationHistory();
+  updateSavedList();
+  updatePrompt();
+  switchTab('character');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
