@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T-Shirt 貼圖模擬器</title>
+    <title>T-Shirt 貼圖模擬器 | GenAI Prompt</title>
+    <meta name="description" content="免費 T-Shirt / 衛衣貼圖模擬器：揀款式同底色、加文字同圖案、拖曳排版，一鍵導出 PNG 設計圖。">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D5DZVB73Q9"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-D5DZVB73Q9');</script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Serif+TC:wght@700&family=Zhi+Mang+Xing&family=Roboto+Mono&display=swap');
@@ -23,7 +27,7 @@
             width: 100%;
             max-width: 600px;
             aspect-ratio: 1/1;
-            background: white;
+            background: radial-gradient(circle at 50% 38%, #ffffff 0%, #e6ebf1 80%);
             border-radius: 2rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
             display: flex;
@@ -229,7 +233,7 @@
             <!-- 文字管理 -->
             <div class="control-card space-y-4">
                 <div class="flex items-center justify-between">
-                    <label class="text-xs font-black text-slate-400 uppercase">文字圖層管理</label>
+                    <label class="text-xs font-black text-slate-400 uppercase">文字圖層管理 <span id="layers-view-label" class="text-blue-500">（正面）</span></label>
                     <button id="add-text-btn"
                         class="px-3 py-1 bg-blue-600 text-white text-[10px] font-bold rounded-full hover:bg-blue-700 transition-colors">+
                         新增文字</button>
@@ -310,6 +314,10 @@
                 class="w-full py-5 bg-blue-600 text-white font-black text-lg rounded-2xl shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all active:scale-95">
                 導出設計 (PNG)
             </button>
+            <button id="btn-export-both"
+                class="w-full py-3 bg-slate-800 text-white font-black text-sm rounded-2xl shadow hover:bg-slate-900 transition-all active:scale-95">
+                同時導出正面 + 背面 (PNG)
+            </button>
         </div>
     </div>
 
@@ -332,8 +340,8 @@
                     back: "M140,40 C140,40 170,50 200,50 C230,50 260,40 260,40 L390,150 L350,380 L310,380 L290,160 L290,380 L110,380 L110,160 L90,380 L50,380 L10,150 Z"
                 },
                 hoodie: {
-                    front: "M130,50 C130,-10 270,-10 270,50 L370,110 L330,220 L290,180 L290,380 L110,380 L110,180 L70,220 L30,110 Z",
-                    back: "M130,50 C130,-5 270,-5 270,50 L370,110 L330,220 L290,180 L290,380 L110,380 L110,180 L70,220 L30,110 Z"
+                    front: "M130,50 C130,-10 270,-10 270,50 L390,150 L350,380 L310,380 L290,160 L290,380 L110,380 L110,160 L90,380 L50,380 L10,150 Z",
+                    back: "M130,50 C130,-5 270,-5 270,50 L390,150 L350,380 L310,380 L290,160 L290,380 L110,380 L110,160 L90,380 L50,380 L10,150 Z"
                 }
             };
 
@@ -342,7 +350,7 @@
             if (type === 'mask') content = `<path d="${path}" fill="black" />`;
             else if (type === 'texture') {
                 content = `<defs><filter id="s"><feGaussianBlur stdDeviation="8"/></filter></defs>
-                           <path d="${path}" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="4" />`;
+                           <path d="${path}" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="5" />`;
                 if (style === 'hoodie' && view === 'front') content += `<path d="M150,280 L250,280 L275,350 L125,350 Z" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="3" />`;
             } else if (type === 'highlight') {
                 content = `<path d="M160,80 Q200,75 240,80" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="15" />
@@ -359,8 +367,10 @@
             view: 'front',
             color: '#ffffff',
             activeId: null,
-            elements: []
+            designs: { front: [], back: [] },
+            activeByView: { front: null, back: null }
         };
+        function els() { return state.designs[state.view]; }
 
         const canvasContent = document.getElementById('canvas-content');
         const textLayersList = document.getElementById('text-layers-list');
@@ -378,8 +388,9 @@
         }
 
         function refreshCanvas() {
+            document.getElementById('layers-view-label').textContent = state.view === 'front' ? '（正面）' : '（背面）';
             canvasContent.innerHTML = '';
-            state.elements.forEach(el => {
+            els().forEach(el => {
                 const dom = document.createElement(el.type === 'text' ? 'div' : 'img');
                 dom.className = `draggable-element ${state.activeId === el.id ? 'active' : ''}`;
                 dom.id = `el-${el.id}`;
@@ -408,7 +419,7 @@
 
         function updateLayersUI() {
             textLayersList.innerHTML = '';
-            state.elements.forEach(el => {
+            els().forEach(el => {
                 const item = document.createElement('div');
                 item.className = `layer-item flex items-center justify-between p-2 border border-slate-200 rounded-lg text-xs cursor-pointer hover:bg-slate-50 transition-colors ${state.activeId === el.id ? 'active' : ''}`;
                 item.innerHTML = `
@@ -424,6 +435,7 @@
 
         function selectElement(id) {
             state.activeId = id;
+            state.activeByView[state.view] = id;
             const allElements = document.querySelectorAll('.draggable-element');
             allElements.forEach(el => {
                 if (parseInt(el.dataset.id) === id) el.classList.add('active');
@@ -434,7 +446,7 @@
         }
 
         function updateEditPanel() {
-            const el = state.elements.find(e => e.id === state.activeId);
+            const el = els().find(e => e.id === state.activeId);
             if (!el) {
                 editPanel.classList.add('hidden');
                 return;
@@ -458,6 +470,11 @@
             document.getElementById('num-rotate').value = el.rotate;
         }
 
+
+        function spawnPos() {
+            const r = document.getElementById('design-area').getBoundingClientRect();
+            return { x: Math.round(r.width / 2), y: Math.round(r.height * 0.4) };
+        }
         // --- 事件監聽 ---
 
         document.getElementById('select-style').onchange = (e) => { state.style = e.target.value; renderMockup(); };
@@ -465,14 +482,14 @@
 
         document.getElementById('add-text-btn').onclick = () => {
             const newId = Date.now();
-            state.elements.push({
+            els().push({
                 id: newId,
                 type: 'text',
                 content: '新文字',
                 scale: 150,
                 rotate: 0,
-                x: 200,
-                y: 180,
+                x: spawnPos().x,
+                y: spawnPos().y,
                 font: "'Inter', sans-serif",
                 color: '#000000'
             });
@@ -486,14 +503,14 @@
                 const reader = new FileReader();
                 reader.onload = (f) => {
                     const newId = Date.now();
-                    state.elements.push({
+                    els().push({
                         id: newId,
                         type: 'image',
                         content: f.target.result,
                         scale: 150,
                         rotate: 0,
-                        x: 200,
-                        y: 180
+                        x: spawnPos().x,
+                        y: spawnPos().y
                     });
                     refreshCanvas();
                     selectElement(newId);
@@ -504,7 +521,7 @@
 
         // 修改內容同步
         function updateActiveElementProperty(prop, value) {
-            const el = state.elements.find(i => i.id === state.activeId);
+            const el = els().find(i => i.id === state.activeId);
             if (!el) return;
 
             el[prop] = value;
@@ -558,24 +575,23 @@
         };
 
         document.getElementById('delete-el-btn').onclick = () => {
-            state.elements = state.elements.filter(e => e.id !== state.activeId);
+            state.designs[state.view] = els().filter(e => e.id !== state.activeId); state.activeByView[state.view] = null;
             state.activeId = null;
             refreshCanvas();
         };
 
         // 視角
-        document.getElementById('btn-front').onclick = (e) => {
-            state.view = 'front';
-            document.getElementById('btn-back').classList.remove('btn-active');
-            e.target.classList.add('btn-active');
+        function switchView(view, btn) {
+            state.activeByView[state.view] = state.activeId;
+            state.view = view;
+            state.activeId = state.activeByView[view];
+            document.getElementById('btn-front').classList.toggle('btn-active', view === 'front');
+            document.getElementById('btn-back').classList.toggle('btn-active', view === 'back');
             renderMockup();
-        };
-        document.getElementById('btn-back').onclick = (e) => {
-            state.view = 'back';
-            document.getElementById('btn-front').classList.remove('btn-active');
-            e.target.classList.add('btn-active');
-            renderMockup();
-        };
+            refreshCanvas();
+        }
+        document.getElementById('btn-front').onclick = (e) => switchView('front', e.target);
+        document.getElementById('btn-back').onclick = (e) => switchView('back', e.target);
 
         // 拖曳邏輯
         let dragInfo = { isDragging: false, offset: { x: 0, y: 0 }, targetDom: null };
@@ -605,6 +621,7 @@
 
         function doDrag(e) {
             if (!dragInfo.isDragging || !dragInfo.targetDom) return;
+            if (e.touches) e.preventDefault();
 
             const cx = e.touches ? e.touches[0].clientX : e.clientX;
             const cy = e.touches ? e.touches[0].clientY : e.clientY;
@@ -624,7 +641,7 @@
             dragInfo.targetDom.style.left = nx + 'px';
             dragInfo.targetDom.style.top = ny + 'px';
 
-            const el = state.elements.find(i => i.id === state.activeId);
+            const el = els().find(i => i.id === state.activeId);
             if (el) { el.x = nx; el.y = ny; }
         }
 
@@ -645,59 +662,85 @@
         window.addEventListener('touchmove', doDrag, { passive: false });
         window.addEventListener('touchend', stopDrag);
 
-        // 導出功能
+        // 導出功能：每一面獨立渲染成一張 1000x1000 canvas
+        const loadImg = (s) => new Promise(r => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => r(i); i.src = s; });
+
+        async function renderSideCanvas(view, elements) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1000; canvas.height = 1000;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, 1000, 1000);
+
+            const mI = await loadImg(getSVG(state.style, 'mask', view));
+            const tI = await loadImg(getSVG(state.style, 'texture', view));
+            const hI = await loadImg(getSVG(state.style, 'highlight', view));
+
+            const dW = 800, dH = 1000, dX = 100, dY = 0; // contain fit, same as preview mask
+            const offC = document.createElement('canvas'); offC.width = 1000; offC.height = 1000;
+            const oCtx = offC.getContext('2d');
+            oCtx.drawImage(mI, dX, dY, dW, dH);
+            oCtx.globalCompositeOperation = 'source-in';
+            oCtx.fillStyle = state.color; oCtx.fillRect(0, 0, 1000, 1000);
+            ctx.drawImage(offC, 0, 0);
+
+            ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.8; ctx.drawImage(tI, dX, dY, dW, dH);
+            ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = 0.2; ctx.drawImage(hI, dX, dY, dW, dH);
+            ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+
+            const area = document.getElementById('design-area').getBoundingClientRect();
+            const ratio = 1000 / area.width;
+
+            for (const el of elements) {
+                ctx.save();
+                ctx.translate(el.x * ratio, el.y * ratio);
+                ctx.rotate(el.rotate * Math.PI / 180);
+                if (el.type === 'image') {
+                    const img = await loadImg(el.content);
+                    const fw = el.scale * ratio;
+                    const fh = fw * (img.naturalHeight / img.naturalWidth);
+                    ctx.drawImage(img, -fw / 2, -fh / 2, fw, fh);
+                } else {
+                    ctx.font = `800 ${el.scale * ratio / 5}px ${el.font}`;
+                    ctx.fillStyle = el.color;
+                    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                    ctx.fillText(el.content, 0, 0);
+                }
+                ctx.restore();
+            }
+            return canvas;
+        }
+
+        function downloadCanvas(canvas, name) {
+            const link = document.createElement('a');
+            link.download = name;
+            link.href = canvas.toDataURL(); link.click();
+        }
+
         document.getElementById('btn-export').onclick = async function () {
-            const btn = this;
+            const btn = this; let exported = false;
             btn.disabled = true; btn.textContent = '生成中...';
             try {
-                const canvas = document.createElement('canvas');
-                canvas.width = 1000; canvas.height = 1000;
-                const ctx = canvas.getContext('2d');
-                ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, 1000, 1000);
-
-                const loadImg = (s) => new Promise(r => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => r(i); i.src = s; });
-                const mI = await loadImg(getSVG(state.style, 'mask', state.view));
-                const tI = await loadImg(getSVG(state.style, 'texture', state.view));
-                const hI = await loadImg(getSVG(state.style, 'highlight', state.view));
-
-                const dW = 900, dH = 900, dX = 50, dY = 50;
-                const offC = document.createElement('canvas'); offC.width = 1000; offC.height = 1000;
-                const oCtx = offC.getContext('2d');
-                oCtx.drawImage(mI, dX, dY, dW, dH);
-                oCtx.globalCompositeOperation = 'source-in';
-                oCtx.fillStyle = state.color; oCtx.fillRect(0, 0, 1000, 1000);
-                ctx.drawImage(offC, 0, 0);
-
-                ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.8; ctx.drawImage(tI, dX, dY, dW, dH);
-                ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = 0.2; ctx.drawImage(hI, dX, dY, dW, dH);
-                ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
-
-                const area = document.getElementById('design-area').getBoundingClientRect();
-                const ratio = 1000 / area.width;
-
-                for (const el of state.elements) {
-                    ctx.save();
-                    ctx.translate(el.x * ratio, el.y * ratio);
-                    ctx.rotate(el.rotate * Math.PI / 180);
-                    if (el.type === 'image') {
-                        const img = await loadImg(el.content);
-                        const fw = el.scale * ratio;
-                        const fh = fw * (img.naturalHeight / img.naturalWidth);
-                        ctx.drawImage(img, -fw / 2, -fh / 2, fw, fh);
-                    } else {
-                        ctx.font = `800 ${el.scale * ratio / 5}px ${el.font}`;
-                        ctx.fillStyle = el.color;
-                        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-                        ctx.fillText(el.content, 0, 0);
-                    }
-                    ctx.restore();
-                }
-
-                const link = document.createElement('a');
-                link.download = `TShirt-Design-${Date.now()}.png`;
-                link.href = canvas.toDataURL(); link.click();
+                const canvas = await renderSideCanvas(state.view, els());
+                downloadCanvas(canvas, `TShirt-${state.view === 'front' ? 'Front' : 'Back'}-${Date.now()}.png`);
+                exported = true;
             } catch (e) { console.error(e); alert("導出出錯"); }
-            finally { btn.disabled = false; btn.textContent = '導出設計 (PNG)'; }
+            finally { btn.disabled = false; if (exported) { btn.textContent = '已導出 ✓'; setTimeout(() => btn.textContent = '導出設計 (PNG)', 2500); } else { btn.textContent = '導出設計 (PNG)'; } }
+        };
+
+        document.getElementById('btn-export-both').onclick = async function () {
+            const btn = this; let exported = false;
+            btn.disabled = true; btn.textContent = '生成中...';
+            try {
+                const front = await renderSideCanvas('front', state.designs.front);
+                const back = await renderSideCanvas('back', state.designs.back);
+                const canvas = document.createElement('canvas');
+                canvas.width = 2000; canvas.height = 1000;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(front, 0, 0); ctx.drawImage(back, 1000, 0);
+                downloadCanvas(canvas, `TShirt-FrontBack-${Date.now()}.png`);
+                exported = true;
+            } catch (e) { console.error(e); alert("導出出錯"); }
+            finally { btn.disabled = false; if (exported) { btn.textContent = '已導出 ✓'; setTimeout(() => btn.textContent = '同時導出正面 + 背面 (PNG)', 2500); } else { btn.textContent = '同時導出正面 + 背面 (PNG)'; } }
         };
 
         renderMockup();
