@@ -167,6 +167,11 @@
 </head>
 
 <body class="p-4 md:p-8 lg:p-12 bg-slate-50">
+    <!-- Ava / zijian.artwork 引流橫額：工具頁 -> FB 專頁 -->
+    <div class="max-w-7xl mx-auto mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-900 text-white rounded-2xl px-5 py-4 shadow">
+        <p class="text-sm font-medium text-center sm:text-left">👋 呢個工具由 <strong>Ava / zijian.artwork</strong> 製作 — 追蹤 FB 專頁，每週一款新 Tee 設計，仲有機會俾 Ava 著上你嘅設計。</p>
+        <a href="https://www.facebook.com/profile.php?id=61595388607707" target="_blank" rel="noopener" data-track="follow_fb_top" class="shrink-0 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-full transition-colors">追蹤 Zijian.Artwork</a>
+    </div>
 
     <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
 
@@ -229,6 +234,9 @@
                         class="w-full h-9 rounded-lg cursor-pointer bg-transparent border-none" value="#ffffff">
                 </div>
             </div>
+
+            <!-- Ava 一鍵試款 -->
+            <button id="btn-ava-preset" data-track="ava_preset" class="w-full py-3 bg-white border border-slate-200 text-slate-700 font-bold text-sm rounded-2xl shadow-sm hover:bg-slate-50 transition-all active:scale-95">✨ 一鍵試下 Ava 款：白 Tee + zijian.artwork</button>
 
             <!-- 文字管理 -->
             <div class="control-card space-y-4">
@@ -318,6 +326,17 @@
                 class="w-full py-3 bg-slate-800 text-white font-black text-sm rounded-2xl shadow hover:bg-slate-900 transition-all active:scale-95">
                 同時導出正面 + 背面 (PNG)
             </button>
+
+            <!-- 分享 + 追蹤：設計完成後的回流 -->
+            <div class="control-card space-y-3 bg-blue-50/40 border-blue-100">
+                <p class="text-xs font-black text-slate-700 uppercase">設計好喇？分享俾 Ava 睇</p>
+                <p class="text-xs text-slate-500 leading-relaxed">導出 PNG 後，去 FB 專頁留言貼上你嘅設計，Ava 每週會揀一款著上身。追蹤專頁先唔會錯過結果。</p>
+                <div class="grid grid-cols-2 gap-2">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgenaiprompt.vercel.app%2Ffashion.html" target="_blank" rel="noopener" data-track="share_fb" class="text-center py-2.5 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-700 transition-colors">分享去 Facebook</a>
+                    <button id="btn-copy-link" data-track="copy_link" class="py-2.5 bg-white border border-slate-200 text-slate-700 text-xs font-bold rounded-xl hover:bg-slate-50 transition-colors">複製工具連結</button>
+                </div>
+                <a href="https://www.facebook.com/profile.php?id=61595388607707" target="_blank" rel="noopener" data-track="follow_fb_share" class="block text-center py-2.5 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-slate-800 transition-colors">追蹤 Zijian.Artwork 睇結果</a>
+            </div>
         </div>
     </div>
 
@@ -743,9 +762,47 @@
             finally { btn.disabled = false; if (exported) { btn.textContent = '已導出 ✓'; setTimeout(() => btn.textContent = '同時導出正面 + 背面 (PNG)', 2500); } else { btn.textContent = '同時導出正面 + 背面 (PNG)'; } }
         };
 
+        // Ava 一鍵試款：白 Tee + zijian.artwork 文字
+        document.getElementById('btn-ava-preset').onclick = () => {
+            state.style = 'crew'; state.color = '#ffffff';
+            document.getElementById('select-style').value = 'crew';
+            document.getElementById('input-color').value = '#ffffff';
+            renderMockup();
+            const pos = spawnPos();
+            const newId = Date.now();
+            els().push({ id: newId, type: 'text', content: 'zijian.artwork', scale: 120, rotate: 0, x: pos.x, y: pos.y, font: "'Inter', sans-serif", color: '#1e293b' });
+            refreshCanvas();
+            selectElement(newId);
+        };
+
+        // 複製工具連結
+        document.getElementById('btn-copy-link').onclick = async function () {
+            const url = 'https://genaiprompt.vercel.app/fashion.html';
+            try { await navigator.clipboard.writeText(url); this.textContent = '已複製 ✓'; }
+            catch (e) { prompt('複製呢條連結：', url); return; }
+            setTimeout(() => { this.textContent = '複製工具連結'; }, 2000);
+        };
+
+        // 追蹤點擊（GA 已載入時先送 event，唔會阻擋跳轉）
+        document.querySelectorAll('[data-track]').forEach(el => {
+            el.addEventListener('click', () => {
+                if (typeof gtag === 'function') gtag('event', el.dataset.track, { event_category: 'funnel', event_label: 'fashion_tool' });
+            });
+        });
+
         renderMockup();
         refreshCanvas();
     </script>
+    <div class="max-w-7xl mx-auto text-center pt-8 pb-2">
+        <p class="text-xs text-slate-400 font-medium">由 Ava / zijian.artwork 製作 · 追蹤 Ava：</p>
+        <p class="text-sm font-bold text-slate-600 mt-1">
+            <a href="https://www.facebook.com/profile.php?id=61595388607707" target="_blank" rel="noopener" data-track="follow_fb_footer" class="text-blue-600 hover:underline">Facebook</a>
+            <span class="text-slate-300 mx-1">|</span>
+            <a href="https://www.instagram.com/zijian.artwork/" target="_blank" rel="noopener" class="text-blue-600 hover:underline">Instagram</a>
+            <span class="text-slate-300 mx-1">|</span>
+            <a href="https://www.threads.com/@zijian.artwork" target="_blank" rel="noopener" class="text-blue-600 hover:underline">Threads</a>
+        </p>
+    </div>
     <div style="display:flex; justify-content:center; padding:2.5rem 1rem 1.5rem;">
         <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button"
             data-slug="on9ai" data-color="#ec4899" data-emoji="" data-font="Lato" data-text="Buy Me a Coffee"
